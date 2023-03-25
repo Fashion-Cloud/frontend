@@ -1,0 +1,7 @@
+@charset "utf-8";
+
+/* font */
+@font-face {
+    font-family: "BalooBhaijaan";
+    src: url("./BalooBhaijaan.ttf");
+}
