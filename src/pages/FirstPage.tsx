@@ -4,6 +4,10 @@ import {
 } from '@mui/material';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Header from '../components/common/Header';
+import SearchBar from '../components/Firstpage/SearchBar';
+import SeeAll from '../components/Firstpage/SeeAll';
+import SharePost from '../components/Firstpage/SharePost';
+import ThreeCard from '../components/Firstpage/ThreeCard';
 
 import '../fonts/font.css';
 
@@ -28,6 +32,10 @@ export default function FirstPage(){
                 }}
             >
                 <Header/>
+                <SharePost/>
+                <SearchBar/>
+                <ThreeCard/>
+                <SeeAll/>
             </Container>
         </ThemeProvider>
     )
