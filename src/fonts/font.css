@@ -5,3 +5,7 @@
     font-family: "BalooBhaijaan";
     src: url("./BalooBhaijaan.ttf");
 }
+@font-face {
+    font-family: "Inter";
+    src: url("./Inter.ttf");
+}

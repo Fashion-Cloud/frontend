@@ -10,19 +10,19 @@ import {
 import PlaceIcon from '@mui/icons-material/Place';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-export default function ThreeCard(){
-    const threeCardList = () => {
+export default function ThreeFashion(){
+    const threeFashioinList = () => {
         var array = [];
         
-        for (let index = 0; index < Object.keys(cards).length; index++) {
+        for (let index = 0; index < Object.keys(fashions).length; index++) {
             array.push(
-            <Grid item key={cards[index].id} xs={12} sm={6} md={4} lg={3}>
+            <Grid item key={fashions[index].id} xs={12} sm={6} md={4} lg={3}>
                 <Card sx={{ height: '360px', borderRadius: '10%'}}>
                     <Box sx={{ position: 'relative' }}>
                         <CardMedia
                             component="img"
                             height="360px"
-                            image={cards[index].image}
+                            image={fashions[index].image}
                         />
                         <Box
                         sx={{
@@ -35,16 +35,16 @@ export default function ThreeCard(){
                             padding: '10px',
                         }}
                         >
-                        <Typography variant="h5" sx={{ml: 1}}>{cards[index].name}</Typography>
+                        <Typography variant="h5" sx={{ml: 1}}>{fashions[index].name}</Typography>
                         
                         <Toolbar  sx={{mb: -2.5}}>
                             <Toolbar sx={{ml: -5.2}}>
                                 <PlaceIcon sx={{mr: 0.5}}/>
-                                <Typography variant="body2">{cards[index].location}</Typography>
+                                <Typography variant="body2">{fashions[index].location}</Typography>
                             </Toolbar>
                             <Toolbar sx={{mr: -5}}>
                                 <FavoriteIcon sx={{mr: 0.5}}/>
-                                <Typography variant="body2">{cards[index].count}</Typography>
+                                <Typography variant="body2">{fashions[index].count}</Typography>
                             </Toolbar>
                         </Toolbar>
                         </Box>
@@ -69,13 +69,13 @@ export default function ThreeCard(){
                 direction="row"
                 justifyContent="right"
             >
-                {threeCardList()}
+                {threeFashioinList()}
             </Grid>
         </Box>
     )
 }
 
-const cards = [
+const fashions = [
     {
         id: 1,
         image: "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",

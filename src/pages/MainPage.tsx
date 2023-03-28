@@ -3,13 +3,9 @@ import {
     Container, 
 } from '@mui/material';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 import Header from '../components/common/Header';
-import BigWeather from '../components/Firstpage/BigWeather';
-import SearchBar from '../components/Firstpage/SearchBar';
-import SeeAll from '../components/Firstpage/SeeAll';
-import SharePost from '../components/Firstpage/SharePost';
-import ThreeFashion from '../components/Firstpage/ThreeFashion';
+// import SmallWeather from '../components/Mainpage/SmallWeather';
+import AllFashion from '../components/Mainpage/AllFashion';
 
 const theme = createTheme({
     palette: {
@@ -19,7 +15,7 @@ const theme = createTheme({
     },
 });
 
-export default function FirstPage(){
+export default function MainPage(){
     return(
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -32,11 +28,8 @@ export default function FirstPage(){
                 }}
             >
                 <Header/>
-                <BigWeather/>
-                <SharePost/>
-                <SearchBar/>
-                <ThreeFashion/>
-                <SeeAll/>
+                {/* <SmallWeather/> */}
+                <AllFashion/>
             </Container>
         </ThemeProvider>
     )

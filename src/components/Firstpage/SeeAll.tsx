@@ -15,7 +15,7 @@ export default function SeeAll(){
             <Link href="/main" style={{color: '#FFFFFF'}}>
             <Toolbar>
                 <Typography 
-                    style={{fontWeight: 'bold'}} sx={{mr: 0.5}}>See All</Typography>
+                    style={{fontWeight: 'bold'}} sx={{mr: 0.5}}>올거면 오든가</Typography>
                 <ArrowForwardIcon/>
             </Toolbar>
         </Link>

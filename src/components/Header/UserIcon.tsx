@@ -15,7 +15,7 @@ export default function UserIcon(){
                     "&:hover": {
                     color: "#7673DC"
                     },
-                    fontWeight: "bold", fontSize: "40px"
+                    fontWeight: "bold", fontSize: "33px"
                 }}
                 align="right"
                 variant="h5"
