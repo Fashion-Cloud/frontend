@@ -11,6 +11,8 @@ import SeeAll from '../components/Firstpage/SeeAll';
 import SharePost from '../components/Firstpage/SharePost';
 import ThreeFashion from '../components/Firstpage/ThreeFashion';
 
+import '../fonts/font.css';
+
 const theme = createTheme({
     palette: {
       primary: {
