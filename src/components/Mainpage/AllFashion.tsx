@@ -9,19 +9,28 @@ import {
 import PlaceIcon from '@mui/icons-material/Place';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
+import fashionData1 from '../../assets/fashionData1';
+
 export default function AllFashion(){
     const FashioinList = () => {
         var array = [];
         
-        for (let index = 0; index < Object.keys(fashions).length; index++) {
+        for (let index = 0; index < Object.keys(fashionData1).length; index++) {
             array.push(
-            <Grid item key={fashions[index].id} xs={12} sm={6} md={4} lg={3}>
-                <Card sx={{ width: '270px', borderRadius: '10%'}}>
+            <Grid item key={fashionData1[index].id} style={{ margin: "15px"}}>
+                <Card 
+                    sx={{ 
+                        width: '270px', borderRadius: '10%',
+                        ":hover": { boxShadow: "#807ce6 0px 5px 5px 3px", 
+                        // cursor: 'pointer'
+                        }
+                    }}
+                >
                     <Box sx={{ position: 'relative' }}>
                         <CardMedia
                             component="img"
                             height="360px"
-                            image={fashions[index].image}
+                            image={fashionData1[index].image}
                         />
                         <Box
                         sx={{
@@ -34,18 +43,18 @@ export default function AllFashion(){
                             padding: '10px',
                         }}
                         >
-                        <Typography variant="h5" sx={{ml: 1}}>{fashions[index].name}</Typography>
-                        
-                        <Toolbar  sx={{mb: -2.5}}>
-                            <Toolbar sx={{ml: -5.2}}>
-                                <PlaceIcon sx={{mr: 0.5}}/>
-                                <Typography variant="body2">{fashions[index].location}</Typography>
+                            <Typography variant="h5" sx={{ml: 1}}>{fashionData1[index].name}</Typography>
+                            
+                            <Toolbar  sx={{mb: -2.5}}>
+                                <Toolbar sx={{ml: -5.2}}>
+                                    <PlaceIcon sx={{mr: 0.5}}/>
+                                    <Typography variant="body2">{fashionData1[index].location}</Typography>
+                                </Toolbar>
+                                <Toolbar sx={{mr: -5}}>
+                                    <FavoriteIcon style={{}} sx={{mr: 0.5}}/>
+                                    <Typography variant="body2">{fashionData1[index].count}</Typography>
+                                </Toolbar>
                             </Toolbar>
-                            <Toolbar sx={{mr: -5}}>
-                                <FavoriteIcon sx={{mr: 0.5}}/>
-                                <Typography variant="body2">{fashions[index].count}</Typography>
-                            </Toolbar>
-                        </Toolbar>
                         </Box>
                     </Box>
                 </Card>
@@ -59,12 +68,18 @@ export default function AllFashion(){
             style={{
                 float: 'right',
             }}
-            sx={{mt: '230px', mr: '200px'}}
+            sx={{mr: '20px'}}
         >
             <Grid
-                container
-                spacing={4}
-                direction="row"
+                style={{
+                    margin: "50px",
+                    padding: "50px",
+                    width: "1250px",
+                    display: "grid",
+                    gridTemplateRows: "1fr ",
+                    gridTemplateColumns: "1fr 1fr 1fr 1fr",
+                    // backgroundColor: "gray",
+                }}
                 justifyContent="right"
             >
                 {FashioinList()}
@@ -73,47 +88,3 @@ export default function AllFashion(){
     )
 }
 
-const fashions = [
-    {
-        id: 1,
-        image: "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",
-        name: "봄엔 가디거언~!",
-        location: "Seoul, Korea",
-        count: '5.5k',
-    },
-    {
-        id: 2,
-        image: "https://images.onthelook.co.kr/posts/2023031912037042632161.jpeg?w=420&q=60&f=webp",
-        name: "모던함의 끝.",
-        location: "GwangJu, Korea",
-        count: '10',
-    },
-    {
-        id: 3,
-        image: "https://images.onthelook.co.kr/posts/202303200803738411612980.jpeg?w=420&q=60&f=webp",
-        name: "나.. 좀 이쁠지도?",
-        location: "HongDae, Korea",
-        count: '500',
-    },
-    {
-        id: 4,
-        image: "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",
-        name: "봄엔 가디거언~!",
-        location: "Seoul, Korea",
-        count: '5.5k',
-    },
-    {
-        id: 5,
-        image: "https://images.onthelook.co.kr/posts/2023031912037042632161.jpeg?w=420&q=60&f=webp",
-        name: "모던함의 끝.",
-        location: "GwangJu, Korea",
-        count: '10',
-    },
-    {
-        id: 6,
-        image: "https://images.onthelook.co.kr/posts/202303200803738411612980.jpeg?w=420&q=60&f=webp",
-        name: "나.. 좀 이쁠지도?",
-        location: "HongDae, Korea",
-        count: '500',
-    },
-];

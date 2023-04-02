@@ -7,7 +7,7 @@ import '../../fonts/font.css';
 
 export default function UserIcon(){
     return(
-        <Box sx={{ mb: '-100px', mr: '120px' }}>
+        <Box sx={{ mb: '-90px', mr: '110px' }}>
             <Link
                 fontFamily= 'BalooBhaijaan'
                 sx={{ 

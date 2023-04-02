@@ -6,7 +6,7 @@ import '../../fonts/font.css';
 
 export default function WebLogo(){
     return(
-        <Link href="/">
+        <Link href="/first">
             <Typography 
                 fontFamily='BalooBhaijaan'
                 fontStyle='normal'

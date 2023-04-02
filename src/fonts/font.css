@@ -9,3 +9,21 @@
     font-family: "Inter";
     src: url("./Inter.ttf");
 }
+@font-face {
+    font-family: "SingleDay";
+    src: url("./SingleDay.ttf");
+}
+
+/* Dongle */
+@font-face {
+    font-family: "Dongle-Bold";
+    src: url("./Dongle-Bold.ttf");
+}
+@font-face {
+    font-family: "Dongle-Light";
+    src: url("./Dongle-Light.ttf");
+}
+@font-face {
+    font-family: "Dongle-Regular";
+    src: url("./Dongle-Regular.ttf");
+}

@@ -19,8 +19,7 @@ export default function BigWeather(){
                 top: '200px',
                 left: '150px',
                 width: '650px',
-                height: '800px',
-                // backgroundColor: '#FFFFFF',
+                height: '750px',
                 color: '#FFFFFF'
             }}
             sx={{
