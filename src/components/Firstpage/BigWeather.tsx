@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 
-import weatherIcon from  "../../assets/weather/WeatherIcon_Cloudy.png"
+import weatherIcon from  "../../assets/images/weather/WeatherIcon_Cloudy.png"
 import '../../fonts/font.css';
 
 export default function BigWeather(){

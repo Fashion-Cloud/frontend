@@ -9,7 +9,7 @@ import {
 import PlaceIcon from '@mui/icons-material/Place';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-import fashionData1 from '../../assets/fashionData1';
+import fashionData1 from '../../assets/fashionData';
 
 export default function AllFashion(){
     const FashioinList = () => {
@@ -68,7 +68,7 @@ export default function AllFashion(){
             style={{
                 float: 'right',
             }}
-            sx={{mr: '20px'}}
+            sx={{mr: '20px', mt: '70px'}}
         >
             <Grid
                 style={{

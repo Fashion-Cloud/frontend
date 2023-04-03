@@ -1,5 +1,5 @@
 import {
-    Box, Typography,
+    Box,
 } from '@mui/material';
 import WeatherIcon from './WeatherIcon';
 import WeatherName from './WeatherName';

@@ -1,7 +1,7 @@
 import {
     Box
 } from '@mui/material';
-import cloudyIcon from '../../assets/weather/WeatherIcon_Cloudy.png';
+import cloudyIcon from '../../assets/images/weather/WeatherIcon_Cloudy.png';
 
 export default function Weather(){
     

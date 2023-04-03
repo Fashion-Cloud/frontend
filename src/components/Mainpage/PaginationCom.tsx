@@ -2,7 +2,7 @@ import {
     Pagination
 } from '@mui/material';
 import { useEffect, useState } from "react";
-import fashionData from '../../assets/fashionData1';
+import fashionData from '../../assets/fashionData';
 
 export default function PaginationCom(){
     const [count, setCount] = useState(1);
@@ -28,7 +28,7 @@ export default function PaginationCom(){
 
     return(
         <Pagination
-            style={{ position: 'absolute', margin: "auto", marginTop: '900px', marginLeft: '1090px'}}
+            style={{ position: 'absolute', margin: "auto", marginTop: '960px', marginLeft: '1090px'}}
             count={count}
             page={page}
             onChange={pageChange}
