@@ -45,8 +45,8 @@ const PrettoSlider = styled(Slider)({
 
 export default function WeatherSlider(){
     return (
-        <Box sx={{background: '#FFFFFF', mb: -11, mr: 14, borderRadius: '30px'}}>
-            <Box sx={{ width: 480, ml: 5, mr: 5, mt: 1.5, mb: 0.5}}>
+        <Box sx={{background: '#FFFFFF', mb: -5.5, ml: 6, borderRadius: '30px'}}>
+            <Box sx={{ width: 320, ml: 5, mr: 5, mt: 1, mb: 0}}>
             <PrettoSlider
                 valueLabelDisplay="auto"
                 aria-label="pretto slider"

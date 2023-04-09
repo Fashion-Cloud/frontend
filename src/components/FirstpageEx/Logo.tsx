@@ -8,11 +8,11 @@ export default function Logo(){
             fontFamily='BalooBhaijaan'
             fontStyle='normal'
             fontWeight='bold'
-            fontSize='130px'
+            fontSize='60pt'
             style={{
                 position: 'absolute',
                 left: '200px',
-                top: '320px',
+                top: '250px',
                 color: "#FFFFFF"
             }}
         >

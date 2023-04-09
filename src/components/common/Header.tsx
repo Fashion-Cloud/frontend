@@ -7,8 +7,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SearchBar from '../Header/SearchBar';
 import UserIcon from '../Header/UserIcon';
 import WebLogo from '../Header/WebLogo';
-import WeatherSelect from '../Mainpage/WeatherSelect';
-import WeatherSlider from '../Mainpage/WeatherSlider';
+import WeatherSelect from '../Header/WeatherSelect';
+import WeatherSlider from '../Header/WeatherSlider';
 
 const theme = createTheme({
     palette: {
@@ -29,6 +29,7 @@ export default function Header(){
                 }}
             >
                 <Box
+                    position='absolute'
                     display="flex"
                     justifyContent="space-between"
                     alignItems="flex-end"

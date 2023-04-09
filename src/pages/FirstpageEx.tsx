@@ -38,7 +38,6 @@ export default function FirstpageEx(){
                 {/* <WeatherImage/> */}
                 <StartButton/>
                 <Weather/>
-                <WeatherInfo/>
             </Container>
         </ThemeProvider>
     )

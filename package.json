@@ -51,6 +51,10 @@
     ]
   },
   "devDependencies": {
+    "msw": "^1.2.1",
     "vite": "^4.2.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

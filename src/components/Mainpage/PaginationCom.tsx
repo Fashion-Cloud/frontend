@@ -28,7 +28,7 @@ export default function PaginationCom(){
 
     return(
         <Pagination
-            style={{ position: 'absolute', margin: "auto", marginTop: '960px', marginLeft: '1090px'}}
+            style={{ position: 'absolute', margin: "auto", marginTop: '740px', marginLeft: '950px'}}
             count={count}
             page={page}
             onChange={pageChange}

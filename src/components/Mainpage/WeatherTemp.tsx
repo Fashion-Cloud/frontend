@@ -11,42 +11,42 @@ export default function WeatherTemp(){
 
     return(
         <Box sx={{color: '#FFFFFF', position: 'absolute', ml: '10px', mt: '40px'}}>
-            <PlaceOutlinedIcon fontSize="large" sx={{position: 'absolute', ml: '30px', mt: '15px'}}/>
+            <PlaceOutlinedIcon fontSize="large" sx={{position: 'absolute', ml: '37px', mt: '5px'}}/>
             <Typography
-                fontSize='45px'
+                fontSize='30px'
                 fontFamily='Inter'
                 fontWeight='500'
                 sx={{ml: '75px'}}
-                style={{textAlign: 'center'}}
             >
                 Seoul, Korea
             </Typography>
             <Typography
-                fontSize='130px'
+                fontSize='100px'
                 fontFamily='Inter'
                 fontWeight='300'
                 style={{textAlign: 'center'}}
+                sx={{ml: 4, mt: 3}}
             >
                 26
             <Typography
                 fontSize='50px'
                 fontWeight='500'
-                sx={{ml: '180px', mt: '-190px'}}
+                sx={{ml: '150px', mt: '-150px'}}
             >
                 {Temperature()}
             </Typography>
             <Typography
-                fontSize='40px'
+                fontSize='35px'
                 fontWeight='500'
-                sx={{ml: '230px', mt: '-60px'}}
+                sx={{ml: '200px', mt: '-60px'}}
             >
                 C
             </Typography>
             </Typography>
             <Typography
-                fontSize='45px'
+                fontSize='40px'
                 fontWeight='500'
-                style={{textAlign: 'center', marginTop: '90px'}}
+                style={{textAlign: 'center', marginTop: '70px', marginLeft: 58}}
             >
                 Cloudy
             </Typography>

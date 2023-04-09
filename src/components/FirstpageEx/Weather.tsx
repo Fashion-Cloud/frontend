@@ -2,6 +2,7 @@ import {
     Box
 } from '@mui/material';
 import cloudyIcon from '../../assets/images/weather/WeatherIcon_Cloudy.png';
+import WeatherInfo from './WeatherInfo';
 
 export default function Weather(){
     
@@ -10,22 +11,22 @@ export default function Weather(){
         <div>
             <Box
                 style={{
-                    width: '500px',
-                    height: '520px',
+                    width: '400px',
+                    height: '420px',
                     background: 'rgba(255, 255, 255, 0.75)',
-                    // backdropFilter: 'blur(41.234px)',
+                    backdropFilter: 'blur(41.234px)',
                     borderRadius: '77px',
                 }}
                 sx={{
-                    mt: '-450px', ml: '1120px'
+                    mt: '-330px', ml: '850px'
                 }}
-            />
-            <Box sx={{position: 'absolute', ml: '1170px', mt: '-390px'}}>
+            >
                 <img
-                    style={{ width: "330px"}}
+                    style={{ width: "200px", marginLeft: 70, marginTop: 100}}
                     src={cloudyIcon}
                     alt="weather"
                 />
+                <WeatherInfo/>
             </Box>
         </div>
     )

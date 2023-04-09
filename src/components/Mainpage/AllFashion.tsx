@@ -20,16 +20,15 @@ export default function AllFashion(){
             <Grid item key={fashionData1[index].id} style={{ margin: "15px"}}>
                 <Card 
                     sx={{ 
-                        width: '270px', borderRadius: '10%',
-                        ":hover": { boxShadow: "#807ce6 0px 5px 5px 3px", 
-                        // cursor: 'pointer'
+                        width: '230px', borderRadius: '10%',
+                        ":hover": { boxShadow: "#807ce6 0px 5px 5px 3px",
                         }
                     }}
                 >
                     <Box sx={{ position: 'relative' }}>
                         <CardMedia
                             component="img"
-                            height="360px"
+                            height="280px"
                             image={fashionData1[index].image}
                         />
                         <Box
@@ -65,22 +64,20 @@ export default function AllFashion(){
     }
     return(
         <Box
+            // position='absolute'
             style={{
                 float: 'right',
             }}
-            sx={{mr: '20px', mt: '70px'}}
+            sx={{mr: '-250px', mt: '-110px'}}
         >
             <Grid
                 style={{
                     margin: "50px",
-                    padding: "50px",
-                    width: "1250px",
+                    padding: "240px",
                     display: "grid",
                     gridTemplateRows: "1fr ",
-                    gridTemplateColumns: "1fr 1fr 1fr 1fr",
-                    // backgroundColor: "gray",
+                    gridTemplateColumns: "1fr 1fr 1fr",
                 }}
-                justifyContent="right"
             >
                 {FashioinList()}
             </Grid>

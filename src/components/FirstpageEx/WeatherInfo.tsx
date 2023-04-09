@@ -8,40 +8,40 @@ export default function WeatherInfo(){
     }
 
     return(
-        <Box style={{color: '#343434'}} sx={{position: 'absolute', ml: '1190px', mt: '-450px'}}>
+        <Box style={{color: '#343434'}} sx={{position: 'absolute', ml: 9, mt: -25}}>
             <Typography
-                fontSize='60px'
+                fontSize='30pt'
                 fontFamily='Inter'
                 fontWeight='700'
             >
                 Seoul, Korea
             </Typography>
             <Typography
-                fontSize='170px'
+                fontSize='110px'
                 fontFamily='Inter'
                 fontWeight='500'
-                sx={{ml: '60px', mt: '10px'}}
+                sx={{ml: 6, mt: 1}}
             >
                 26
             </Typography>
             <Typography
-                fontSize='50px'
+                fontSize='40pt'
                 fontWeight='700'
-                sx={{ml: '280px', mt: '-230px'}}
+                sx={{ml: 23, mt: -20}}
             >
                 {Temperature()}
             </Typography>
             <Typography
-                fontSize='45px'
+                fontSize='30pt'
                 fontWeight='700'
-                sx={{ml: '300px', mt: '-60px'}}
+                sx={{ml: 25.5, mt: -7.8}}
             >
                 C
             </Typography>
             <Typography
-                fontSize='45px'
+                fontSize='30pt'
                 fontWeight='500'
-                sx={{ml: '110px', mt: '120px'}}
+                sx={{ml: 7, mt: 8}}
             >
                 Cloudy
             </Typography>

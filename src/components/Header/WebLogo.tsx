@@ -11,13 +11,13 @@ export default function WebLogo(){
                 fontFamily='BalooBhaijaan'
                 fontStyle='normal'
                 fontWeight='bold'
-                fontSize='40px'
+                fontSize='35px'
                 lineHeight='72px'
                 style={{
                     position: 'absolute',
                     width: '307px',
                     left: '150px',
-                    top: '100px',
+                    top: '50px',
                 }}
                 sx={{
                     color: "#FFFFFF",

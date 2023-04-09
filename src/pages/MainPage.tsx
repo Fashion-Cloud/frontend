@@ -24,9 +24,9 @@ export default function MainPage(){
             <CssBaseline />
             <Container
                 style={{
-                    width: '100wh',
-                    maxWidth: "1920px",
-                    height: '100vh',
+                    width: '100vw',
+                    maxWidth: "2560px",
+                    minHeight: '100vh',
                     background: 'linear-gradient(252.44deg, #A8C8ED 0%, #7673DC 100%)'
                 }}
             >

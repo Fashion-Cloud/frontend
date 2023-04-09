@@ -8,11 +8,11 @@ export default function FirstInfo(){
             fontFamily='Dongle-Bold'
             fontStyle='normal'
             fontWeight='bold'
-            fontSize='80px'
+            fontSize='41pt'
             style={{
                 position: 'absolute',
                 left: '200px',
-                top: '480px',
+                top: '340px',
                 color: "#FFFFFF"
             }}
         >
