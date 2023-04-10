@@ -3,25 +3,32 @@ import {
     Divider,
     Typography,
 } from "@mui/material";
+import { useWeatherMockData } from '../../assets/mocks/useWeatherMockData';
 
 export default function WeatherNameInfo(){
+    const {weather, isLoading} = useWeatherMockData();
+
+    if(isLoading){
+        return <div>Loading...</div>;
+    }
+
     return(
         <Box sx={{color: '#FFFFFF', position: 'absolute', mt: '340px', ml: '170px'}}>
             <Divider style={{width: '100px'}}/>
             <Typography fontSize='23px' >
-                11
+                {weather?.hourRainfall}
             </Typography>
             <Divider/>
             <Typography fontSize='23px' >
-                22
+                {weather?.humidity}
             </Typography>
             <Divider/>
             <Typography fontSize='23px'>
-                33
+                {weather?.rainfallType}
             </Typography>
             <Divider/>
             <Typography fontSize='23px'>
-                44
+                {weather?.windSpeed}
             </Typography>
             <Divider/>
         </Box>

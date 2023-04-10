@@ -4,7 +4,15 @@ import {
 } from '@mui/material';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 
+import { useWeatherMockData } from '../../assets/mocks/useWeatherMockData';
+
 export default function WeatherTemp(){
+    const {weather, isLoading} = useWeatherMockData();
+
+    if(isLoading){
+        return <div>Loading...</div>;
+    }
+
     function Temperature(): JSX.Element {
         return <span>&deg;</span>;
     }
@@ -18,6 +26,7 @@ export default function WeatherTemp(){
                 fontWeight='500'
                 sx={{ml: '75px'}}
             >
+                {/* {weather?.place} */}
                 Seoul, Korea
             </Typography>
             <Typography
@@ -27,7 +36,7 @@ export default function WeatherTemp(){
                 style={{textAlign: 'center'}}
                 sx={{ml: 4, mt: 3}}
             >
-                26
+                {weather?.temperature}
             <Typography
                 fontSize='50px'
                 fontWeight='500'
@@ -48,7 +57,7 @@ export default function WeatherTemp(){
                 fontWeight='500'
                 style={{textAlign: 'center', marginTop: '70px', marginLeft: 58}}
             >
-                Cloudy
+                {weather?.sky}
             </Typography>
         </Box>
     )

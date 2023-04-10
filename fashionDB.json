@@ -1,0 +1,22 @@
+{
+  "posts": [
+    {
+      "sky": 1,
+      "temperature": 8.6,
+      "hourRainfall": 0,
+      "humidity": 73,
+      "rainfallType": 0,
+      "windSpeed": 0.8
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

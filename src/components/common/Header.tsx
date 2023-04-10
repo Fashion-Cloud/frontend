@@ -5,7 +5,7 @@ import {
 } from '@mui/material';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SearchBar from '../Header/SearchBar';
-import UserIcon from '../Header/UserIcon';
+// import UserIcon from '../Header/UserIcon';
 import WebLogo from '../Header/WebLogo';
 import WeatherSelect from '../Header/WeatherSelect';
 import WeatherSlider from '../Header/WeatherSlider';

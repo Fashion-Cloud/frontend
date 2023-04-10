@@ -29,13 +29,13 @@ export default function SmallWeather() {
             <WeatherName/>
             <WeatherNameInfo/>
 
-            {/* <Box style={{marginTop: -10}}>
+            <Box style={{marginTop: 500}}>
                 {
                     location.loaded
                         ? JSON.stringify(location)
                     : "Location data not available yet."
                 }
-            </Box> */}
+            </Box>
         </Box> 
     )
 }

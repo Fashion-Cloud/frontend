@@ -14,6 +14,7 @@
     "@types/node": "^16.18.20",
     "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
+    "axios": "^1.3.5",
     "install": "^0.13.0",
     "lottie-react": "^2.4.0",
     "lottie-web": "^5.10.2",
@@ -30,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "mock-api": "json-server --watch fashionDB.json --port 3001"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "json-server": "^0.17.3",
     "msw": "^1.2.1",
     "vite": "^4.2.1"
   },

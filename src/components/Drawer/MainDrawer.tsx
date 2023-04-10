@@ -16,16 +16,16 @@ import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import AddFashionModal from "./AddFashionModal";
+// import AddFashionModal from "./AddFashionModal";
 
 
 type Anchor = "left";
 
 export default function MainDrawer(){
     const [state, setState] = React.useState({ left: false });
-    const [openAdd, setOpenAdd] = React.useState(false);
-    const handleOpenAdd = () => setOpenAdd(true);
-    const handleCloseAdd =  () => setOpenAdd(false);
+    // const [openAdd, setOpenAdd] = React.useState(false);
+    // const handleOpenAdd = () => setOpenAdd(true);
+    // const handleCloseAdd =  () => setOpenAdd(false);
 
     const toggleDrawer = (anchor: Anchor, open: boolean) => (
         event: React.KeyboardEvent | React.MouseEvent

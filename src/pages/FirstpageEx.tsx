@@ -1,6 +1,7 @@
 import {
     CssBaseline, 
-    Container, 
+    Container,
+    Box,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FirstInfo from '../components/FirstpageEx/FirstInfo';
@@ -9,7 +10,7 @@ import StartButton from '../components/FirstpageEx/StartButton';
 import Weather from '../components/FirstpageEx/Weather';
 // import WeatherLottie from '../components/FirstpageEx/WeatherLottie';
 // import WeatherImage from '../components/FirstpageEx/WeatherImage';
-import WeatherInfo from '../components/FirstpageEx/WeatherInfo';
+// import WeatherInfo from '../components/FirstpageEx/WeatherInfo';
 import '../fonts/font.css';
 
 const theme = createTheme({
