@@ -16,16 +16,21 @@ import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-// import AddFashionModal from "./AddFashionModal";
-
+import ListAddFashion from "./ListAddFashion";
 
 type Anchor = "left";
 
+export interface IProps{
+    openAdd: boolean; 
+    handleOpenAdd: void; 
+    handleCloseAdd: void;
+}
+
 export default function MainDrawer(){
     const [state, setState] = React.useState({ left: false });
-    // const [openAdd, setOpenAdd] = React.useState(false);
-    // const handleOpenAdd = () => setOpenAdd(true);
-    // const handleCloseAdd =  () => setOpenAdd(false);
+    const [openAdd, setOpenAdd] = React.useState(false);
+    const handleOpenAdd = () => setOpenAdd(true);
+    const handleCloseAdd =  () => setOpenAdd(false);
 
     const toggleDrawer = (anchor: Anchor, open: boolean) => (
         event: React.KeyboardEvent | React.MouseEvent
@@ -72,16 +77,7 @@ export default function MainDrawer(){
                         </ListItemText>
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <ControlPointIcon/>
-                        </ListItemIcon>
-                        <ListItemText>
-                            Add Fashion
-                        </ListItemText>
-                    </ListItemButton>
-                </ListItem>
+                <ListAddFashion/>
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
@@ -112,7 +108,6 @@ export default function MainDrawer(){
                     {list('left')}
                 </SwipeableDrawer>
             </React.Fragment>
-            {/* <AddFashionModal openAdd={openAdd} handleCloseAdd={handleCloseAdd}/> */}
         </div>
     );
 }

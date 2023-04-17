@@ -1,0 +1,74 @@
+{
+  "weather": [
+    {
+      "sky": 1,
+      "temperature": 8.6,
+      "hourRainfall": 0,
+      "humidity": 73,
+      "rainfallType": 0,
+      "windSpeed": 0.8
+    },
+    {
+      "sky": 1,
+      "temperature": 8.6,
+      "hourRainfall": 0,
+      "humidity": 73,
+      "rainfallType": 0,
+      "windSpeed": 0.8
+    }
+  ],
+  "posts": [
+    {
+      "id": "5fd52d23-9089-49ad-8060-d9097aafda91",
+      "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
+      "name": "봄엔 가디거언~!",
+      "image": "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",
+      "createdAt": null,
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "5fd52d23-9089-49ad-8060-d9097aafda92",
+      "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
+      "name": "모던함의 끝.",
+      "image": "https://images.onthelook.co.kr/posts/2023031912037042632161.jpeg?w=420&q=60&f=webp",
+      "createdAt": null,
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "5fd52d23-9089-49ad-8060-d9097aafda93",
+      "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
+      "name": "나.. 좀 이쁠지도?",
+      "image": "https://images.onthelook.co.kr/posts/202303200803738411612980.jpeg?w=420&q=60&f=webp",
+      "createdAt": null,
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "5fd52d23-9089-49ad-8060-d9097aafda94",
+      "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
+      "name": "아우터 이뿌지!!",
+      "image": "https://shop-phinf.pstatic.net/20221026_136/1666775192616mcXHY_JPEG/67911035283532969_380459201.jpg?type=f296_296",
+      "createdAt": null,
+      "updatedAt": null,
+      "deletedAt": null
+    },
+    {
+      "id": "5fd52d23-9089-49ad-8060-d9097aafda95",
+      "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
+      "name": "이렇게 입어봐!",
+      "image": "https://shop-phinf.pstatic.net/20230310_204/1678432133285TqH1a_JPEG/79567975960091012_1853682088.jpg?type=f296_385",
+      "createdAt": null,
+      "updatedAt": null,
+      "deletedAt": null
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ]
+}

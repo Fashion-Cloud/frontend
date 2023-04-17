@@ -7,19 +7,17 @@ const axiosConfig: AxiosRequestConfig = {
 }
 const client = axios.create(axiosConfig);
 
-export const useWeatherMockData = () => {
-  const [weather, setweather] = useState<type.WeatherType>();
-  const [isLoading, setIsLoading] = useState(true);
+export const usePostGMockData = () => {
+  const [post, setPost] = useState<type.PostType[]>();
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
-      const response = await client.get('/weather');
-      setweather(response.data[0]);
-      setIsLoading(false);
+      const response = await client.get('/posts');
+      console.log("response.data: ", response.data)
+      setPost(response.data);
     };
     fetchData();
   }, []);
 
-  return { weather, isLoading };
+  return post;
 };

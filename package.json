@@ -6,6 +6,7 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.11",
+    "@mui/joy": "^5.0.0-alpha.75",
     "@mui/material": "^5.11.14",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -18,6 +19,7 @@
     "install": "^0.13.0",
     "lottie-react": "^2.4.0",
     "lottie-web": "^5.10.2",
+    "notistack": "^3.0.1",
     "npm": "^9.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -32,7 +34,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "mock-api": "json-server --watch fashionDB.json --port 3001"
+    "mock-api": "json-server --watch FashionCloudDB.json --port 3001"
   },
   "eslintConfig": {
     "extends": [
