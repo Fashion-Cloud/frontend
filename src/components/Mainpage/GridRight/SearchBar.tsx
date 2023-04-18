@@ -22,6 +22,6 @@ export default function SearchBar(){
             <TextField 
                 id="input-with-sx" label="Search" variant="standard" 
                 style={{width: 650}} sx={{mt: -1}}/>
-    </Box> 
+        </Box> 
     )
 }

@@ -4,11 +4,11 @@ import {
     Box,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import SearchBar from '../Header/SearchBar';
+import SearchBar from '../Mainpage/GridRight/SearchBar';
 // import UserIcon from '../Header/UserIcon';
 import WebLogo from '../Header/WebLogo';
-import WeatherSelect from '../Header/WeatherSelect';
-import WeatherSlider from '../Header/WeatherSlider';
+import WeatherSelect from '../Mainpage/GridRight/WeatherSelect';
+import WeatherSlider from '../Mainpage/GridRight/WeatherSlider';
 
 const theme = createTheme({
     palette: {

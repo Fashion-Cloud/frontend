@@ -22,8 +22,8 @@ const fashionData = [
     },
     {
         id: 4,
-        image: "https://shop-phinf.pstatic.net/20221026_136/1666775192616mcXHY_JPEG/67911035283532969_380459201.jpg?type=f296_296",
-        name: "아우터 이뿌지!!",
+        image: "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",
+        name: "봄엔 가디거언~!",
         location: "Seoul, Korea",
         count: '5.5k',
     },

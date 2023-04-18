@@ -1,18 +1,60 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
     Grid,
     Card,
     CardMedia,
     Typography,
     Box,
+    Modal,
+    IconButton
 } from '@mui/material';
+import CloseIcon from "@mui/icons-material/Close";
 // import PlaceIcon from '@mui/icons-material/Place';
 // import FavoriteIcon from '@mui/icons-material/Favorite';
 
-import { usePostGMockData } from '../../assets/mocks/usePostGMockData';
 import { type } from '../../utils/types';
 
+const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    height: 600,
+    width: 400,
+    bgcolor: "#FFF",
+    borderRadius: "25px",
+    boxShadow: 24,
+    p: 4,
+};
+
 export default function AllFashion() {
-    const post: Array<type.PostType> | undefined = usePostGMockData();
+    const [post, setPost] = useState<type.PostType[]>([]);
+    const [openDetail, setOpenDetail] = React.useState(false);
+    const handleOpenDetail = () => setOpenDetail(true);
+    const handleCloseDetail =  () => setOpenDetail(false);
+
+    const fashionAPI = async () => {
+        try {
+            await axios.get<type.PostType[]>('/api/v1/posts',
+            {
+                headers: {
+                    Accept: 'application/json'
+                }
+            }
+        ).then((response) => {
+            const data = response.data;
+            console.log(data)
+            setPost(data)
+        });
+        } catch {
+            console.log("api 불러오기 실패")
+        };
+    }
+
+    useEffect(() => {
+        fashionAPI()
+    }, [])
 
     const FashionList = () => {
         var array = [];
@@ -29,6 +71,7 @@ export default function AllFashion() {
                                     ":hover": { boxShadow: "#807ce6 0px 5px 5px 3px",
                                     }
                                 }}
+                                onClick={handleOpenDetail}
                             >
                                 <Box sx={{ position: 'relative' }}>
                                     <CardMedia
@@ -79,6 +122,24 @@ export default function AllFashion() {
             >
                 {FashionList()}
             </Grid>
+            <React.Fragment>
+                <Modal
+                    open={openDetail}
+                    onClose={handleCloseDetail}
+                    aria-labelledby="modal-title"
+                    aria-describedby="modal-description"
+                    closeAfterTransition
+                    >
+                    <Box sx={style}>
+                        <div style={{ textAlign: "right" }}>
+                            <IconButton onClick={() => {setOpenDetail(false);}}>
+                                <CloseIcon style={{color: '#000'}} fontWeight="300" />
+                            </IconButton>
+                        </div>
+                        {/* <AddFashion/> */}
+                    </Box>
+                </Modal>
+            </React.Fragment>
         </Box>
     )
 }

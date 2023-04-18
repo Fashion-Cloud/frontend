@@ -2,16 +2,55 @@ import {
     Box,
     Typography
 } from '@mui/material';
+import { useEffect, useState } from "react";
+import axios from 'axios';
+import { type } from '../../utils/types';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 
-import { useWeatherMockData } from '../../assets/mocks/useWeatherMockData';
 
 export default function WeatherTemp(){
-    const {weather, isLoading} = useWeatherMockData();
+    const [weather, setWeather] = useState<type.WeatherType>();
+    const [location, setLocation] = useState<type.LocationType>();
 
-    if(isLoading){
-        return <div>Loading...</div>;
+    const tempAPI = async () => {
+        try {
+            await axios.get<type.WeatherType>(`/api/v1/weather?latitude=37&longtitude=126`,
+            {
+                headers: {
+                    Accept: 'application/json'
+                }
+            }
+        ).then((response) => {
+            const data = response.data;
+            console.log(data)
+            setWeather(data)
+        });
+        } catch {
+            console.log("api 불러오기 실패")
+        };
     }
+    const locationAPI = async () => {
+        try {
+            await axios.get<type.LocationType>(`/api/v1/address?latitude=37&longtitude=126`,
+            {
+                headers: {
+                    Accept: 'application/json'
+                }
+            }
+        ).then((response) => {
+            const data = response.data;
+            console.log(data)
+            setLocation(data)
+        });
+        } catch {
+            console.log("api 불러오기 실패")
+        };
+    }
+
+    useEffect(() => {
+        tempAPI()
+        locationAPI()
+    }, [])
 
     function Temperature(): JSX.Element {
         return <span>&deg;</span>;
@@ -24,10 +63,9 @@ export default function WeatherTemp(){
                 fontSize='30px'
                 fontFamily='Inter'
                 fontWeight='500'
-                sx={{ml: '75px'}}
+                sx={{ml: '80px'}}
             >
-                {/* {weather?.place} */}
-                Seoul, Korea
+                {location?.region2depth}
             </Typography>
             <Typography
                 fontSize='100px'
