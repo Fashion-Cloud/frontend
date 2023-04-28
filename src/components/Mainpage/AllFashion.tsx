@@ -14,6 +14,11 @@ import CloseIcon from "@mui/icons-material/Close";
 // import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { type } from '../../utils/types';
+import FashioinDetailModal from './FashionDetail/FashionDetailModal';
+
+import SearchBar from '../Mainpage/GridRight/SearchBar';
+import WeatherSelect from '../Mainpage/GridRight/WeatherSelect';
+import WeatherSlider from '../Mainpage/GridRight/WeatherSlider';
 
 const style = {
     position: "absolute",
@@ -25,14 +30,31 @@ const style = {
     bgcolor: "#FFF",
     borderRadius: "25px",
     boxShadow: 24,
-    p: 4,
+    p: 2,
 };
 
 export default function AllFashion() {
-    const [post, setPost] = useState<type.PostType[]>([]);
+    const [post, setPost] = useState<type.WeatherPostType[]>([]);
+    const [singleId, setSingleId] = useState("");
+
     const [openDetail, setOpenDetail] = React.useState(false);
     const handleOpenDetail = () => setOpenDetail(true);
     const handleCloseDetail =  () => setOpenDetail(false);
+
+    const [searchTemp, setSearchTemp] = useState<number>(26);
+    const [weatherData, setWeatherData] = useState<type.WeatherPostType[]>();
+    
+    function getSingleId(data: string){
+        setSingleId(data)
+    }
+    function getTempData(data: number) {
+        setSearchTemp(data)
+        console.log("[WeatherSlider -> AllFashion] searchTemp: ", data)
+    }
+    function getWeatherData(data: Array<type.WeatherPostType>) {
+        setWeatherData(data)
+        console.log("[WeatherSelect -> AllFashion] weatherData: ", data)
+    }
 
     const fashionAPI = async () => {
         try {
@@ -57,27 +79,36 @@ export default function AllFashion() {
     }, [])
 
     const FashionList = () => {
+        let fashion: type.WeatherPostType[] = [];
         var array = [];
 
-        if (post !== undefined) {
-            for (let index: number = 0; index < Object.keys(post).length; index++) {
+        if (weatherData === undefined){
+            fashion = post;
+        } else {
+            fashion = weatherData
+        }
+        if (fashion !== undefined) {
+            for (let index: number = 0; index < Object.keys(fashion).length; index++) {
                 // eslint-disable-next-line no-lone-blocks
                 {
                     array.push(
-                        <Grid item key={post[index].id} style={{ margin: "15px"}}>
+                        <Grid item key={fashion[index].id} style={{ margin: "15px"}}>
                             <Card 
                                 sx={{    
-                                    width: '230px', borderRadius: '10%',
+                                    width: '230px', borderRadius: '10%', cursor: 'pointer',
                                     ":hover": { boxShadow: "#807ce6 0px 5px 5px 3px",
                                     }
                                 }}
-                                onClick={handleOpenDetail}
+                                onClick={() => {
+                                    handleOpenDetail()
+                                    setSingleId(fashion[index].id)
+                                }}
                             >
                                 <Box sx={{ position: 'relative' }}>
                                     <CardMedia
                                         component="img"
                                         height="280px"
-                                        image={post[index].image}
+                                        image={fashion[index].image}
                                     />
                                     <Box
                                         sx={{
@@ -91,7 +122,7 @@ export default function AllFashion() {
                                             padding: '10px',
                                         }}
                                     >
-                                        <Typography variant="h6" sx={{ml: 1}}>{post[index].name}</Typography>
+                                        <Typography variant="h6" sx={{ml: 1}}>{fashion[index].name}</Typography>
                                     </Box>
                                 </Box>
                             </Card>
@@ -107,11 +138,13 @@ export default function AllFashion() {
     return(
         <Box
             position='absolute'
-            style={{
-                // float: 'right',
-            }}
             sx={{ml: '610px', mt: '180px'}}
         >
+            <Box position='absolute'>
+                <WeatherSelect searchTemp = {searchTemp} getWeatherData={getWeatherData}/>
+                <WeatherSlider getTempData = {getTempData}/>
+                <SearchBar/>
+            </Box>
             <Grid
                 style={{
                     margin: "0px",
@@ -121,25 +154,22 @@ export default function AllFashion() {
                 }}
             >
                 {FashionList()}
+                
             </Grid>
-            <React.Fragment>
-                <Modal
-                    open={openDetail}
-                    onClose={handleCloseDetail}
-                    aria-labelledby="modal-title"
-                    aria-describedby="modal-description"
-                    closeAfterTransition
-                    >
-                    <Box sx={style}>
-                        <div style={{ textAlign: "right" }}>
-                            <IconButton onClick={() => {setOpenDetail(false);}}>
-                                <CloseIcon style={{color: '#000'}} fontWeight="300" />
-                            </IconButton>
-                        </div>
-                        {/* <AddFashion/> */}
-                    </Box>
-                </Modal>
-            </React.Fragment>
+            <Modal
+                open={openDetail}
+                onClose={handleCloseDetail}
+                closeAfterTransition
+                >
+                <Box sx={style}>
+                    <div style={{ textAlign: "right" }}>
+                        <IconButton onClick={() => {setOpenDetail(false);}}>
+                            <CloseIcon style={{color: '#000'}} fontWeight="300" />
+                        </IconButton>
+                    </div>
+                    <FashioinDetailModal singleId={singleId}/>
+                </Box>
+            </Modal>
         </Box>
     )
 }

@@ -4,9 +4,11 @@ import {
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { type } from '../../utils/types';
+import weatherSky from '../../assets/data/weatherSky';
 
 export default function WeatherInfo(){
-    const [weather, setWeather] = useState<type.WeatherType>();
+    const [temp, setTemp] = useState<type.WeatherType>();
+    const [skyName, setSkyName] = useState<string>();
 
     const fashionAPI = async () => {
         try {
@@ -19,7 +21,8 @@ export default function WeatherInfo(){
         ).then((response) => {
             const data = response.data;
             console.log(data)
-            setWeather(data)
+            setTemp(data)
+            setSkyName(weatherSky(data.sky))
         });
         } catch {
             console.log("api 불러오기 실패")
@@ -37,12 +40,12 @@ export default function WeatherInfo(){
     return(
         <Box style={{color: '#343434'}} sx={{position: 'absolute', ml: 10, mt: -25}}>
             <Typography
-                fontSize='30pt'
-                fontFamily='Inter'
-                fontWeight='700'
+                fontSize='27pt'
+                fontFamily='CookieRun-Regular'
+                sx={{ml: 2}}
             >
                 {/* {weather?.place} */}
-                Seoul, Korea
+                성남시 분당구
             </Typography>
             <Typography
                 fontSize='110px'
@@ -50,7 +53,7 @@ export default function WeatherInfo(){
                 fontWeight='500'
                 sx={{ml: 5, mt: 2}}
             >
-                {weather?.temperature}
+                {temp?.temperature}
             </Typography>
             <Typography
                 fontSize='40pt'
@@ -67,12 +70,12 @@ export default function WeatherInfo(){
                 C
             </Typography>
             <Typography
-                fontSize='30pt'
+                fontFamily='CookieRun-Regular'
+                fontSize='25pt'
                 fontWeight='500'
-                sx={{ mt: 8}}
-                // sx={{ml: 7, mt: 8}}
+                sx={{ml: 12, mt: 8}}
             >
-                {weather?.sky}
+                {skyName}
             </Typography>
         </Box>
     )

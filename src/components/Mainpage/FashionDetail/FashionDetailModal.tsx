@@ -1,46 +1,101 @@
-import React from 'react';
-import {
-    Box,
-    IconButton,
-    Modal
-  } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { useEffect, useState } from 'react';
+import axios from 'axios'
+import { type } from '../../../utils/types';
+import '../../../fonts/font.css';
+import weatherSky from '../../../assets/data/weatherSky';
+import rainfallType from '../../../assets/data/rainfallType';
 
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    height: 650,
-    width: 900,
-    bgcolor: "#FFF",
-    borderRadius: "25px",
-    boxShadow: 24,
-    p: 4,
+import {
+    Card,
+    CardMedia,
+    Divider,
+    Typography,
+    Box,
+    Button
+  } from "@mui/material";
+
+import AirIcon from '@mui/icons-material/Air';
+import WbCloudyIcon from '@mui/icons-material/WbCloudy';
+import LightModeIcon from '@mui/icons-material/LightMode';
+
+type FashionDetailProps = {
+    singleId: string;
 };
 
-export default function FashioinDetailModal() {
-    const [openDetail, setOpenDetail] = React.useState(false);
-    const handleOpenDetail = () => setOpenDetail(true);
-    const handleCloseDetail =  () => setOpenDetail(false);
+export default function FashioinDetailModal({singleId}: FashionDetailProps) {
+    const [single, setSingle] = useState<type.SinglePostType>();
     
+    const singlePostAPI = async () => {
+        try {
+            await axios.get<type.SinglePostType>(`/api/v1/posts/${singleId}`,
+            {
+                headers: {
+                    Accept: 'application/json'
+                }
+            }
+        ).then((response) => {
+            const data = response.data;
+            console.log(data)
+            setSingle(data)
+        });
+        } catch {
+            console.log("api 불러오기 실패")
+        };
+    }
+
+    useEffect(() => {
+        singlePostAPI()
+    }, [])
+
     return (
-        <React.Fragment>
-            <Modal
-                open={openDetail}
-                onClose={handleCloseDetail}
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
-                closeAfterTransition
-                >
-                <Box sx={style}>
-                    <div style={{ textAlign: "right" }}>
-                        <IconButton onClick={() => {setOpenDetail(false);}}>
-                            <CloseIcon style={{color: '#000'}} fontWeight="300" />
-                        </IconButton>
+        <div>
+            {
+                single !== undefined
+                ?   <div>
+                        <Card sx={{width: '280px', borderRadius: '5%', ml: 5.5}}>
+                            <CardMedia
+                                component="img"
+                                height="330px"
+                                image={single.image}
+                            />
+                        </Card>
+                        <Typography fontFamily='Dongle-Regular' fontSize='30pt' sx={{ml: 5}}>
+                            {single.name}
+                        </Typography>
+                        <Typography fontFamily='Dongle-Regular' fontSize='20pt' sx={{mt: -1,ml: 5}}>
+                            Review: {single.review}
+                        </Typography>
+
+                        <Divider sx={{width: '310px', ml: 3.5}}/>
+                        
+                        <Box sx={{mt: 1, ml: 4}}>
+                            <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
+                                <AirIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
+                                <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
+                                    풍속 - {single.windChill} km/h
+                                </Typography>
+                            </Button>
+                            <br/>
+                            <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
+                                <LightModeIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
+                                <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
+                                    하늘상태 - {weatherSky(single.skyStatus)}
+                                </Typography>
+                            </Button>
+                            <br/>
+                            <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}}>
+                                <WbCloudyIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
+                                <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
+                                    강우유형 - {rainfallType(single.rainfallType)}
+                                </Typography>
+                            </Button>
+                        </Box>
+                        
                     </div>
-                </Box>
-            </Modal>
-        </React.Fragment>
+                : null
+            }
+        </div>
+        
+        
     )
 }

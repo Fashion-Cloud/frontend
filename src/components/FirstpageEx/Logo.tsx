@@ -5,10 +5,10 @@ import {
 export default function Logo(){
     return(
         <Typography 
-            fontFamily='BalooBhaijaan'
+            fontFamily='CookieRun-Regular'
             fontStyle='normal'
             fontWeight='bold'
-            fontSize='60pt'
+            fontSize='55pt'
             style={{
                 position: 'absolute',
                 left: '200px',

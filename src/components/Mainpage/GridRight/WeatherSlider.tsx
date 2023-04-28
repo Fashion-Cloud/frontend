@@ -2,7 +2,12 @@ import {
   Box,
   Slider
 } from '@mui/material';
+import React from 'react';
 import { styled } from '@mui/material/styles';
+
+type TempProps = {
+  getTempData: Function;
+}
 
 const PrettoSlider = styled(Slider)({
   color: '#7673DC',
@@ -43,15 +48,26 @@ const PrettoSlider = styled(Slider)({
   },
 });
 
-export default function WeatherSlider(){
+export default function WeatherSlider({getTempData}: TempProps){
+  const [tempSlider, setTempSlider] = React.useState<number>(26);
+
+  const handleChange = (event: Event, newValue: number | number[]) => {
+    if (typeof newValue === 'number') {
+      setTempSlider(newValue);
+      getTempData(newValue)
+    }
+  };
+  
   return (
-      <Box sx={{background: '#FFFFFF', mb: -5.5, ml: 6, borderRadius: '30px'}}>
-          <Box sx={{ width: 320, ml: 5, mr: 5, mt: 1, mb: 0}}>
-          <PrettoSlider
-              valueLabelDisplay="auto"
-              aria-label="pretto slider"
-              defaultValue={26}
-          />
+      <Box sx={{width: 400,background: '#FFFFFF', mt: -11, ml: 45, borderRadius: '30px'}}>
+          <Box sx={{ width: 320, ml: 5, mr: 5}}>
+            <PrettoSlider
+                valueLabelDisplay="auto"
+                aria-label="pretto slider"
+                value={tempSlider}
+                onChange={handleChange}
+                sx={{mt: 1}}
+            />
           </Box>
       </Box>
   );

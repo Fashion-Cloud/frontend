@@ -10,9 +10,9 @@ export default function PaginationCom(){
 
     function getFashionData(value : number){
         if (fashionData.length % 8 === 0){
-            setCount(fashionData.length/8);
+            setCount(Math.floor(fashionData.length/8));
         } else {
-            setCount(fashionData.length/8 + 1);
+            setCount(Math.floor(fashionData.length/8) + 1);
         }
     }
 

@@ -3,10 +3,11 @@ import {
     CssBaseline,
     Box,
 } from '@mui/material';
+import React, {useState} from 'react';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import SearchBar from '../Mainpage/GridRight/SearchBar';
 // import UserIcon from '../Header/UserIcon';
 import WebLogo from '../Header/WebLogo';
+import SearchBar from '../Mainpage/GridRight/SearchBar';
 import WeatherSelect from '../Mainpage/GridRight/WeatherSelect';
 import WeatherSlider from '../Mainpage/GridRight/WeatherSlider';
 
@@ -19,6 +20,13 @@ const theme = createTheme({
 });
 
 export default function Header(){
+    const [searchTemp, setSearchTemp] = useState<number>(26);
+    
+    function getTempData(data: number) {
+        setSearchTemp(data)
+        console.log("[WeatherSlider -> Header] searchTemp: ", data)
+    }
+
     return(
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -38,9 +46,9 @@ export default function Header(){
                 >
                     <WebLogo/>
                     {/* <UserIcon/> */}
-                    <WeatherSelect/>
-                    <WeatherSlider/>
-                    <SearchBar/>
+                    {/* <WeatherSelect searchTemp = {searchTemp}/>
+                    <WeatherSlider getTempData = {getTempData}/>
+                    <SearchBar/> */}
                 </Box>
             </Container>
         </ThemeProvider>

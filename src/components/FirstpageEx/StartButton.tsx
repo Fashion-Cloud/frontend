@@ -7,18 +7,20 @@ export default function StartButton(){
         <Button 
             variant="contained" 
             style={{
-                fontFamily: 'Dongle-Bold', 
-                fontSize:'25pt', 
-                color: '#7673DC',
+                fontFamily: 'CookieRun-Regular', 
+                fontSize:'17pt', 
+                fontWeight: 'bold',
                 width: "400px", 
                 height: '43px', 
                 borderRadius: '30px', 
-                backgroundColor:'#FFFFFF',
                 boxShadow: "#807ce6 0px 5px 5px 3px"
             }}
             sx={{
                 mt: '500px',
-                ml: '230px'
+                ml: '230px',
+                color: '#7673DC',
+                backgroundColor:'#FFFFFF',
+                "&:hover": {backgroundColor: "#b0afdd"}
             }}
             href="/main"
         >

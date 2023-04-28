@@ -1,3 +1,7 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios'
+import { type } from '../../../utils/types';
+
 import { 
     Toolbar, 
     Typography,
@@ -6,10 +10,39 @@ import {
 } from "@mui/material";
 import '../../../fonts/font.css'
 
-export default function AddWeatherInfo() {
+type WeatherProps = {
+    getWeatherData: Function;
+}
+
+export default function AddWeatherInfo({getWeatherData}: WeatherProps) {
+    const [weather, setWeather] = useState<type.WeatherType>();
+
     function Temperature(): JSX.Element {
         return <span>&deg;</span>;
     }
+
+    const weatherAPI = async () => {
+        try {
+            await axios.get<type.WeatherType>(`/api/v1/weather?latitude=37&longtitude=126`,
+            {
+                headers: {
+                    Accept: 'application/json'
+                }
+            }
+        ).then((response) => {
+            const data = response.data;
+            console.log(data)
+            setWeather(data)
+            getWeatherData(data)
+        });
+        } catch {
+            console.log("api 불러오기 실패")
+        };
+    }
+
+    useEffect(() => {
+        weatherAPI()
+    }, [])
 
     return(
         <div>
@@ -22,8 +55,9 @@ export default function AddWeatherInfo() {
                     sx={{ ml: 2, p: '2px 4px', display: 'flex', alignItems: 'center', width: 120 }}
                 >
                     <InputBase
+                        disabled
                         sx={{ ml: 1, flex: 1 }}
-                        placeholder="26.5"
+                        value={weather?.temperature}
                         inputProps={{ 'aria-label': 'search google maps' }}
                     />
                     <Typography color="#989898" sx={{mr: 1}}>
@@ -40,9 +74,9 @@ export default function AddWeatherInfo() {
                     sx={{ ml: 2, p: '2px 4px', display: 'flex', alignItems: 'center', width: 120 }}
                 >
                     <InputBase
-                        // disabled
+                        disabled
                         sx={{ ml: 1, flex: 1 }}
-                        placeholder="11"
+                        value={weather?.windSpeed}
                         inputProps={{ 'aria-label': 'search google maps' }}
                     />
                     <Typography color="#989898" sx={{mr: 1}}>

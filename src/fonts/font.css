@@ -14,6 +14,15 @@
     src: url("./SingleDay.ttf");
 }
 
+@font-face {
+    font-family: "HiMelody";
+    src: url("./HiMelody-Regular.ttf");
+}
+@font-face {
+    font-family: "PoorStory";
+    src: url("./PoorStory-Regular.ttf");
+}
+
 /* Dongle */
 @font-face {
     font-family: "Dongle-Bold";
@@ -26,4 +35,42 @@
 @font-face {
     font-family: "Dongle-Regular";
     src: url("./Dongle-Regular.ttf");
+}
+
+/* CookieRun */
+@font-face {
+    font-family: "CookieRun-Black";
+    src: url("./CookieRun-Black.ttf");
+}
+@font-face {
+    font-family: "CookieRun-Bold";
+    src: url("./CookieRun-Bold.ttf");
+}
+@font-face {
+    font-family: "CookieRun-Regular";
+    src: url("./CookieRun-Regular.ttf");
+}
+
+/* SunFlower */
+@font-face {
+    font-family: "Sunflower-Black";
+    src: url("./Sunflower-Bold.ttf");
+}
+@font-face {
+    font-family: "Sunflower-Medium";
+    src: url("./Sunflower-Medium.ttf");
+}
+@font-face {
+    font-family: "Sunflower-Light";
+    src: url("./Sunflower-Light.ttf");
+}
+
+/* Playfair Display */
+@font-face {
+    font-family: "Playfair_Italic";
+    src: url("./Playfair/PlayfairDisplay-Italic.ttf");
+}
+@font-face {
+    font-family: "Playfair";
+    src: url("./Playfair/PlayfairDisplay.ttf");
 }
