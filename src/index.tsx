@@ -7,7 +7,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-worker.start();
+// worker.start();
 
 root.render(
   <React.StrictMode>

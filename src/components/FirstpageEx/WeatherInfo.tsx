@@ -73,7 +73,7 @@ export default function WeatherInfo(){
                 fontFamily='CookieRun-Regular'
                 fontSize='25pt'
                 fontWeight='500'
-                sx={{ml: 12, mt: 8}}
+                sx={{ml: 12, mt: 8, color: '#585858'}}
             >
                 {skyName}
             </Typography>

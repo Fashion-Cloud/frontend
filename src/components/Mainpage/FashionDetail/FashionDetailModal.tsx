@@ -59,10 +59,10 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
                                 image={single.image}
                             />
                         </Card>
-                        <Typography fontFamily='Dongle-Regular' fontSize='30pt' sx={{ml: 5}}>
+                        <Typography fontFamily='CookieRun-Regular' fontSize='20pt' sx={{mt: 0.5, ml: 6}}>
                             {single.name}
                         </Typography>
-                        <Typography fontFamily='Dongle-Regular' fontSize='20pt' sx={{mt: -1,ml: 5}}>
+                        <Typography fontFamily='CookieRun-Regular' fontSize='13pt' sx={{mt: 1, ml: 6.3, mb: 0.3}}>
                             Review: {single.review}
                         </Typography>
 
@@ -72,7 +72,7 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
                             <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
                                 <AirIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
                                 <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
-                                    풍속 - {single.windChill} km/h
+                                    풍속 - {single.windChill} m/s
                                 </Typography>
                             </Button>
                             <br/>

@@ -47,7 +47,7 @@ export default function AddReview({getReviewData}: ReviewProps) {
                 <MenuItem value="">
                     <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>딱 적당했다.</MenuItem>
+                <MenuItem value={10}>딱 좋았다.</MenuItem>
                 <MenuItem value={20}>추웠다.</MenuItem>
                 <MenuItem value={30}>더웠다.</MenuItem>
                 </Select>

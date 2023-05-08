@@ -65,6 +65,9 @@ export namespace type {
     };
     
     export interface ImageUploadType {
-        imageS3URL: string;
+        createdAt: string;
+        updatedAt: string;
+        deletedAt: string;
+        url: string;
     }
 }

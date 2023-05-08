@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { type } from '../utils/types';
 import {
@@ -10,7 +10,6 @@ import {
     Grid,
     Card,
     CardMedia,
-
 } from '@mui/material';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import '../fonts/font.css';

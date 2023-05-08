@@ -19,6 +19,7 @@ import FashioinDetailModal from './FashionDetail/FashionDetailModal';
 import SearchBar from '../Mainpage/GridRight/SearchBar';
 import WeatherSelect from '../Mainpage/GridRight/WeatherSelect';
 import WeatherSlider from '../Mainpage/GridRight/WeatherSlider';
+import PaginationCom from '../../components/Mainpage/PaginationCom';
 
 const style = {
     position: "absolute",
@@ -43,6 +44,9 @@ export default function AllFashion() {
 
     const [searchTemp, setSearchTemp] = useState<number>(26);
     const [weatherData, setWeatherData] = useState<type.WeatherPostType[]>();
+
+    const [pageCom, setPageCom] = useState<number>(1);
+
     
     function getSingleId(data: string){
         setSingleId(data)
@@ -55,10 +59,12 @@ export default function AllFashion() {
         setWeatherData(data)
         console.log("[WeatherSelect -> AllFashion] weatherData: ", data)
     }
+    async function getPageData(data: number) {
+        setPageCom(data)
+        console.log("[PaginatoinCom -> AllFashion] pageCom: ", data)
 
-    const fashionAPI = async () => {
         try {
-            await axios.get<type.PostType[]>('/api/v1/posts',
+            await axios.get<type.PostType[]>(`http://localhost:8080/api/v1/posts/${data}`,
             {
                 headers: {
                     Accept: 'application/json'
@@ -74,9 +80,28 @@ export default function AllFashion() {
         };
     }
 
-    useEffect(() => {
-        fashionAPI()
-    }, [])
+    const fashionAPI = async () => {
+        console.log("[API] pageCom: ", pageCom);
+        try {
+            await axios.get<type.PostType[]>(`/api/v1/posts/${pageCom}`,
+            {
+                headers: {
+                    Accept: 'application/json'
+                }
+            }
+        ).then((response) => {
+            const data = response.data;
+            console.log(data)
+            setPost(data)
+        });
+        } catch {
+            console.log("api 불러오기 실패")
+        };
+    }
+
+    // useEffect(() => {
+    //     fashionAPI()
+    // }, [])
 
     const FashionList = () => {
         let fashion: type.WeatherPostType[] = [];
@@ -156,6 +181,8 @@ export default function AllFashion() {
                 {FashionList()}
                 
             </Grid>
+
+            {/* <PaginationCom getPageData={getPageData}/> */}
             <Modal
                 open={openDetail}
                 onClose={handleCloseDetail}

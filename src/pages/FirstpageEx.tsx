@@ -1,7 +1,6 @@
 import {
     CssBaseline, 
     Container,
-    Box,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FirstInfo from '../components/FirstpageEx/FirstInfo';

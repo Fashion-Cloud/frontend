@@ -9,6 +9,8 @@ import axios from 'axios';
 import { type } from '../../../utils/types';
 import Resizer from "react-image-file-resizer";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type ImageProps = {
   getImageData: Function;
@@ -18,6 +20,9 @@ export default function AddImage({getImageData}: ImageProps) {
   const [imgState, setImgState] = useState(null);
   const [imgURL, setImgURL] = useState("");
   const [respondImg, setRespondImg] = useState(null);
+
+  // toastify 알람 실행 함수 만들기
+  const success = () => toast.success("Success!");
 
   const resizeFile = (file: Blob) =>
     new Promise((resolve) => {
@@ -53,12 +58,13 @@ export default function AddImage({getImageData}: ImageProps) {
     getImageData(imgURL.substring(5))
     console.log("[AddImage] imgURL: ", imgURL)
     try {
-      await axios.post<type.ImageUploadType>('/api/v1/images',
+      await axios.post<type.ImageUploadType>('http://localhost:8080/api/v1/images',
       {
         imageS3URL: imgURL.substring(5)
       }
     ).then((response) => {
-        console.log("sendImage URL response: ", response)
+      success();
+      console.log("sendImage URL response: ", response)
     });
     } catch {
         console.log("api 불러오기 실패")
@@ -111,18 +117,30 @@ export default function AddImage({getImageData}: ImageProps) {
           )}
         </Button>
         <Box>
-        <Button 
-            onClick={onClickImgUpload}
-            variant="contained" 
-            style={{position: 'absolute', textTransform:"none", borderRadius: '20px'}} 
-            sx={{ml: 13, mt: 5, backgroundColor: "#8c79ba", "&:hover": {backgroundColor: "#6e4dbf"}}}
-        >
-            <Typography sx={{ml: 3, mr: 3}}>
-                Image Upload
-            </Typography>
-        </Button>
+          <Button 
+              onClick={() => {onClickImgUpload();}}
+              variant="contained" 
+              style={{position: 'absolute', textTransform:"none", borderRadius: '20px'}} 
+              sx={{ml: 13, mt: 5, backgroundColor: "#8c79ba", "&:hover": {backgroundColor: "#6e4dbf"}}}
+          >
+              <Typography sx={{ml: 3, mr: 3}}>
+                  Image Upload
+              </Typography>
+          </Button>
         </Box>
       </form>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Box>
   );
 }

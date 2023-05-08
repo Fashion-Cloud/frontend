@@ -49,16 +49,27 @@ export default function AddFashion() {
     const postAPI = async () => {
         try {
             await axios.post<type.CreatePostType>('/api/v1/posts',
+            // {
+            //     userId: "f9ad3dee-0782-40ad-a513-0f9e8a26ed84",
+            //     name: postTitle,
+            //     image: postImage,
+            //     review: postReview,
+            //     temperature: postWeather?.temperature,
+            //     skyStatus: postWeather?.sky,
+            //     humidity: postWeather?.humidity,
+            //     rainfallType: postWeather?.rainfallType,
+            //     windSpeed: postWeather?.windSpeed,
+            // }
             {
-                userId: '1',
-                name: postTitle,
-                image: postImage,
-                review: postReview,
-                temperature: postWeather?.temperature,
-                skyStatus: postWeather?.sky,
-                humidity: postWeather?.humidity,
-                rainfallType: postWeather?.rainfallType,
-                windSpeed: postWeather?.windSpeed,
+                userId: "f9ad3dee-0782-40ad-a513-0f9e8a26ed84",
+                name: "",
+                image: "postImage",
+                review: "postReview",
+                temperature: "postWeather?.temperature",
+                skyStatus: "postWeather?.sky",
+                humidity: "postWeather?.humidity",
+                rainfallType: "postWeather?.rainfallType",
+                windSpeed: "postWeather?.windSpeed",
             }
         ).then((response) => {
             console.log(response)

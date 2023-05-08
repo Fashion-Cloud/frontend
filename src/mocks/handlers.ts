@@ -28,76 +28,37 @@ const posts: type.WeatherPostType[] = [
     "id": "5fd52d23-9089-49ad-8060-d9097aafda95",
     "name": "이렇게 입어봐!",
     "image": "https://shop-phinf.pstatic.net/20230310_204/1678432133285TqH1a_JPEG/79567975960091012_1853682088.jpg?type=f296_385",
+  },
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda96",
+    "name": "근본은 스트라이프지!",
+    "image": "https://www.womansense.co.kr/upload/woman/article/201909/thumb/42904-386245-sampleM.jpg"
+  }
+]
+const posts_2: type.WeatherPostType[] = [
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda97",
+    "name": "나란 완벽한 남자... ",
+    "image": "https://images.onthelook.co.kr/posts/2022110405111494883530.jpeg?w=1200&q=75&f=webp",
+  },
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda98",
+    "name": "외출할 땐, 편하게",
+    "image": "https://images.onthelook.co.kr/posts/20230428140495049319860.jpeg?w=1200&q=75&f=webp"
   }
 ]
 
 const weatherPostSunny: type.WeatherPostType[] = [
   {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda91",
-    "name": "봄엔 가디거언~!",
-    "image": "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda00",
+    "name": "오랜만에 함박눈 ㅎㅎ",
+    "image": "https://ak-d.tripcdn.com/images/1mi4a2234ag1tgr1sFF26_R_400_10000_R5_Q90.jpg_.webp?proc=source/trip",
   },
   {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda92",
-    "name": "모던함의 끝.",
-    "image": "https://images.onthelook.co.kr/posts/2023031912037042632161.jpeg?w=420&q=60&f=webp",
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda99",
+    "name": "훈남 그 자체!",
+    "image": "https://images.unsplash.com/photo-1613869810371-3068cc3ac5b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80",
   },
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda95",
-    "name": "이렇게 입어봐!",
-    "image": "https://shop-phinf.pstatic.net/20230310_204/1678432133285TqH1a_JPEG/79567975960091012_1853682088.jpg?type=f296_385",
-  }
-]
-const weatherPostCloud: type.WeatherPostType[] = [
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda91",
-    "name": "봄엔 가디거언~!",
-    "image": "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",
-  },
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda92",
-    "name": "모던함의 끝.",
-    "image": "https://images.onthelook.co.kr/posts/2023031912037042632161.jpeg?w=420&q=60&f=webp",
-  },
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda94",
-    "name": "아우터 이뿌지!!",
-    "image": "https://shop-phinf.pstatic.net/20221026_136/1666775192616mcXHY_JPEG/67911035283532969_380459201.jpg?type=f296_296",
-  },
-]
-const weatherPostRain: type.WeatherPostType[] = [
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda93",
-    "name": "나.. 좀 이쁠지도?",
-    "image": "https://images.onthelook.co.kr/posts/202303200803738411612980.jpeg?w=420&q=60&f=webp",
-  },
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda92",
-    "name": "모던함의 끝.",
-    "image": "https://images.onthelook.co.kr/posts/2023031912037042632161.jpeg?w=420&q=60&f=webp",
-  },
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda95",
-    "name": "이렇게 입어봐!",
-    "image": "https://shop-phinf.pstatic.net/20230310_204/1678432133285TqH1a_JPEG/79567975960091012_1853682088.jpg?type=f296_385",
-  }
-]
-const weatherPostSnow: type.WeatherPostType[] = [
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda91",
-    "name": "봄엔 가디거언~!",
-    "image": "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",
-  },
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda94",
-    "name": "아우터 이뿌지!!",
-    "image": "https://shop-phinf.pstatic.net/20221026_136/1666775192616mcXHY_JPEG/67911035283532969_380459201.jpg?type=f296_296",
-  },
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda95",
-    "name": "이렇게 입어봐!",
-    "image": "https://shop-phinf.pstatic.net/20230310_204/1678432133285TqH1a_JPEG/79567975960091012_1853682088.jpg?type=f296_385",
-  }
 ]
 
 const singlePost1: type.SinglePostType = 
@@ -122,8 +83,8 @@ const singlePost2: type.SinglePostType =
     "name": "모던함의 끝.",
     "image": "https://images.onthelook.co.kr/posts/2023031912037042632161.jpeg?w=420&q=60&f=webp",
     "review": "추웠다",
-    "skyStatus": 3,
-    "rainfallType": 1,
+    "skyStatus": 1,
+    "rainfallType": 3,
     "windChill": 1,
     "createdAt": "2023-04-12T21:37:03.334Z",
     "updatedAt": "2023-04-12T21:37:03.334Z",
@@ -137,8 +98,8 @@ const singlePost3: type.SinglePostType =
     "name": "나.. 좀 이쁠지도?",
     "image": "https://images.onthelook.co.kr/posts/202303200803738411612980.jpeg?w=420&q=60&f=webp",
     "review": "추웠다",
-    "skyStatus": 3,
-    "rainfallType": 7,
+    "skyStatus": 1,
+    "rainfallType": 3,
     "windChill": 5,
     "createdAt": "2023-04-12T21:37:03.334Z",
     "updatedAt": "2023-04-12T21:37:03.334Z",
@@ -151,7 +112,7 @@ const singlePost4: type.SinglePostType =
     "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
     "name": "아우터 이뿌지!!",
     "image": "https://shop-phinf.pstatic.net/20221026_136/1666775192616mcXHY_JPEG/67911035283532969_380459201.jpg?type=f296_296",
-    "review": "적당했다.",
+    "review": "딱 좋았다.",
     "skyStatus": 1,
     "rainfallType": 4,
     "windChill": 3,
@@ -168,8 +129,78 @@ const singlePost5: type.SinglePostType =
     "image": "https://shop-phinf.pstatic.net/20230310_204/1678432133285TqH1a_JPEG/79567975960091012_1853682088.jpg?type=f296_385",
     "review": "추웠다",
     "skyStatus": 1,
-    "rainfallType": 2,
+    "rainfallType": 3,
     "windChill": 2,
+    "createdAt": "2023-04-12T21:37:03.334Z",
+    "updatedAt": "2023-04-12T21:37:03.334Z",
+    "deletedAt": ""
+  }
+  const singlePost6: type.SinglePostType = 
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda96",
+    "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
+    "name": "근본은 스트라이프지!",
+    "image": "https://www.womansense.co.kr/upload/woman/article/201909/thumb/42904-386245-sampleM.jpg",
+    "review": "딱 좋았다",
+    "skyStatus": 1,
+    "rainfallType": 0,
+    "windChill": 2,
+    "createdAt": "2023-04-12T21:37:03.334Z",
+    "updatedAt": "2023-04-12T21:37:03.334Z",
+    "deletedAt": ""
+  }
+  const singlePost7: type.SinglePostType = 
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda97",
+    "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
+    "name": "나란 완벽한 남자...",
+    "image": "https://images.onthelook.co.kr/posts/2022110405111494883530.jpeg?w=1200&q=75&f=webp",
+    "review": "딱 좋았다",
+    "skyStatus": 5,
+    "rainfallType": 0,
+    "windChill": 0.8,
+    "createdAt": "2023-04-12T21:37:03.334Z",
+    "updatedAt": "2023-04-12T21:37:03.334Z",
+    "deletedAt": ""
+  }
+  const singlePost8: type.SinglePostType = 
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda98",
+    "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
+    "name": "외출할 땐, 편하게",
+    "image": "https://images.onthelook.co.kr/posts/20230428140495049319860.jpeg?w=1200&q=75&f=webp",
+    "review": "딱 좋았다",
+    "skyStatus": 1,
+    "rainfallType": 0,
+    "windChill": 0.8,
+    "createdAt": "2023-04-12T21:37:03.334Z",
+    "updatedAt": "2023-04-12T21:37:03.334Z",
+    "deletedAt": ""
+  }
+  const singlePost9: type.SinglePostType = 
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda99",
+    "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
+    "name": "훈남 그 자체!",
+    "image": "https://images.unsplash.com/photo-1613869810371-3068cc3ac5b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&w=1000&q=80",
+    "review": "딱 좋았다",
+    "skyStatus": 5,
+    "rainfallType": 0,
+    "windChill": 0.8,
+    "createdAt": "2023-04-12T21:37:03.334Z",
+    "updatedAt": "2023-04-12T21:37:03.334Z",
+    "deletedAt": ""
+  }
+  const singlePost10: type.SinglePostType = 
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda00",
+    "userId": "07aca204-228b-4e03-ab4b-4ca2b8b0c3f4",
+    "name": "오랜만에 함박눈 ㅎㅎ",
+    "image": "https://ak-d.tripcdn.com/images/1mi4a2234ag1tgr1sFF26_R_400_10000_R5_Q90.jpg_.webp?proc=source/trip",
+    "review": "딱 좋았다",
+    "skyStatus": 5,
+    "rainfallType": 0,
+    "windChill": 0.8,
     "createdAt": "2023-04-12T21:37:03.334Z",
     "updatedAt": "2023-04-12T21:37:03.334Z",
     "deletedAt": ""
@@ -179,7 +210,7 @@ const weather: type.WeatherType =
   {
     "sky": 1,
     "temperature": 8.6,
-    "hourRainfall": 0,
+    "hourRainfall": 2,
     "humidity": 73,
     "rainfallType": 0,
     "windSpeed": 0.8,
@@ -194,7 +225,10 @@ const location: type.LocationType = {
   }
 
 const imageUpload: type.ImageUploadType = {
-  "imageS3URL": "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp"
+  "createdAt": "",
+  "updatedAt": "",
+  "deletedAt": "",
+  "url": "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp"
 }
 
 export const handlers = [
@@ -203,8 +237,11 @@ export const handlers = [
       return res(ctx.status(200), ctx.json(dummy));
     }),
 
-    rest.get("/api/v1/posts", (req, res, ctx) => {
+    rest.get("/api/v1/posts/1", (req, res, ctx) => {
       return res(ctx.status(200), ctx.delay(500), ctx.json(posts))
+    }),
+    rest.get("/api/v1/posts/2", (req, res, ctx) => {
+      return res(ctx.status(200), ctx.delay(500), ctx.json(posts_2))
     }),
 
     rest.post("/api/v1/posts/weather", async (req, res, ctx) => {
@@ -244,5 +281,20 @@ export const handlers = [
     }),
     rest.get(`/api/v1/posts/5fd52d23-9089-49ad-8060-d9097aafda95`, (req, res, ctx) => {
       return res(ctx.status(200), ctx.delay(500), ctx.json(singlePost5))
+    }),
+    rest.get(`/api/v1/posts/5fd52d23-9089-49ad-8060-d9097aafda96`, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.delay(500), ctx.json(singlePost6))
+    }),
+    rest.get(`/api/v1/posts/5fd52d23-9089-49ad-8060-d9097aafda97`, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.delay(500), ctx.json(singlePost7))
+    }),
+    rest.get(`/api/v1/posts/5fd52d23-9089-49ad-8060-d9097aafda98`, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.delay(500), ctx.json(singlePost8))
+    }),
+    rest.get(`/api/v1/posts/5fd52d23-9089-49ad-8060-d9097aafda99`, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.delay(500), ctx.json(singlePost9))
+    }),
+    rest.get(`/api/v1/posts/5fd52d23-9089-49ad-8060-d9097aafda00`, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.delay(500), ctx.json(singlePost10))
     }),
   ];

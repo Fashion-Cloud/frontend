@@ -10,7 +10,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Header from '../components/common/Header';
 import SmallWeather from '../components/Mainpage/SmallWeather';
 import AllFashion from '../components/Mainpage/AllFashion';
-import PaginationCom from '../components/Mainpage/PaginationCom';
 import MainDrawer from '../components/Drawer/MainDrawer';
 // import SearchBar from '../components/Firstpage/SearchBar';
 // import WeatherSelect from '../components/Mainpage/GridRight/WeatherSelect';
@@ -58,7 +57,6 @@ export default function MainPage(){
                 <MainDrawer/>
                 <Header/>
                 <AllFashion/>
-                <PaginationCom/> 
             </Container>
             <SmallWeather/>
         </ThemeProvider>

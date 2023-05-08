@@ -80,7 +80,7 @@ export default function AddWeatherInfo({getWeatherData}: WeatherProps) {
                         inputProps={{ 'aria-label': 'search google maps' }}
                     />
                     <Typography color="#989898" sx={{mr: 1}}>
-                        km/h
+                        m/s
                     </Typography>
                 </Paper>
             </Toolbar>

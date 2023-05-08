@@ -11,6 +11,9 @@ export default function weatherSky(sky: number): string {
         case 4:
             skyName =  '흐림';
             break;
+        case 5:
+            skyName =  '눈';
+            break;
         default:
             skyName = 'none';
     }
