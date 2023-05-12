@@ -19,13 +19,13 @@ export default function AddReview({getReviewData}: ReviewProps) {
         console.log("event.target.value: ", event.target.value)
         switch(Number(event.target.value)) {
             case 10:
-                getReviewData("딱 적당했다.");
+                getReviewData("괜찮았다");
                 break;
             case 20:
-                getReviewData("추웠다.");
+                getReviewData("추웠다");
                 break;
             case 30:
-                getReviewData("더웠다.");
+                getReviewData("더웠다");
                 break;
             default:
                 getReviewData("none");
@@ -47,9 +47,9 @@ export default function AddReview({getReviewData}: ReviewProps) {
                 <MenuItem value="">
                     <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>딱 좋았다.</MenuItem>
-                <MenuItem value={20}>추웠다.</MenuItem>
-                <MenuItem value={30}>더웠다.</MenuItem>
+                <MenuItem value={10}>괜찮았다</MenuItem>
+                <MenuItem value={20}>추웠다</MenuItem>
+                <MenuItem value={30}>더웠다</MenuItem>
                 </Select>
             </FormControl>
         </Toolbar>

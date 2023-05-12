@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import { type } from '../../../utils/types';
+import useGeoLocation from "../../../assets/hooks/useGeoLocation";
 
 import { IconButton, Toolbar, Typography } from "@mui/material";
 import NearMeIcon from '@mui/icons-material/NearMe';
@@ -12,29 +13,42 @@ type LocationProps = {
 
 export default function AddLocation({getLocationData}: LocationProps) {
     const [location, setLocation] = useState<type.LocationType>();
+    const locationData = useGeoLocation();
+    let latitude: number | undefined;
+    let longitude: number | undefined;
 
     const locationAPI = async () => {
-        try {
-            await axios.get<type.LocationType>(`/api/v1/address?latitude=37&longtitude=126`,
-            {
-                headers: {
-                    Accept: 'application/json'
+        if(locationData !== undefined){
+            try {
+                await axios.get(`/api/v1/address?latitude=${latitude}&longitude=${longitude}`,
+                {
+                    headers: {
+                        Accept: 'application/json'
+                    }
                 }
-            }
-        ).then((response) => {
-            const data = response.data;
-            console.log(data)
-            setLocation(data)
-            getLocationData(data)
-        });
-        } catch {
-            console.log("api 불러오기 실패")
-        };
+            ).then((response) => {
+                console.log("response: ", response)
+                const data = response.data.data;
+                console.log("[WeatherTemp] locationAPI: ", data)
+                getLocationData(data)
+                setLocation(data)
+            });
+            } catch {
+                console.log("[AddLocation] locationAPI: api 불러오기 실패")
+            };
+        }
     }
 
     useEffect(() => {
-        locationAPI()
-    }, [])
+        if (locationData !== undefined) {
+            latitude = locationData.coordinates?.lat;
+            longitude = locationData.coordinates?.lng;
+            console.log("[GeoLocation] latitude: " , latitude)
+            console.log("[GeoLocation] longitude: " , longitude)
+
+            locationAPI()
+        }
+    }, [locationData])
 
     return(
         <Toolbar>

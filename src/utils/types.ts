@@ -1,5 +1,5 @@
 export namespace type {
-    export interface PostType {
+    export type PostType = {
         id: string;
         userId: string;
         name: string;
@@ -9,7 +9,7 @@ export namespace type {
         deletedAt: string;
     };
 
-    export interface SinglePostType {
+    export type SinglePostType = {
         id: string;
         userId: string;
         name: string;
@@ -23,7 +23,7 @@ export namespace type {
         deletedAt: string;
     }
 
-    export interface CreatePostType {
+    export type CreatePostType = {
         userId: string;
         name: string;
         image: string;
@@ -35,7 +35,7 @@ export namespace type {
         windSpeed: number;
     }
 
-    export interface WeatherType {
+    export type WeatherType = {
         sky: number;
         temperature: number;
         hourRainfall: number;
@@ -45,26 +45,26 @@ export namespace type {
         windChill: number;
     }
 
-    export interface LocationType {
+    export type LocationType = {
         fullAddress: string;
         region1depth: string;
         region2depth: string;
         region3depth: string;
     }
 
-    export interface SearchWeatherType {
+    export type SearchWeatherType = {
         skyCode: number;
         rainfallCode: number;
         windChill: number;
     }
 
-    export interface WeatherPostType {
+    export type WeatherPostType = {
         id: string;
         name: string;
         image: string;
     };
     
-    export interface ImageUploadType {
+    export type ImageUploadType = {
         createdAt: string;
         updatedAt: string;
         deletedAt: string;

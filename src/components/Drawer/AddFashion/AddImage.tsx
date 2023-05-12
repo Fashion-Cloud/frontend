@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { useRef, useState, useEffect } from 'react'
+import {useState} from 'react'
 import {
   Typography,
   Button,
   Box,
 } from '@mui/material'
 import axios from 'axios';
-import { type } from '../../../utils/types';
 import Resizer from "react-image-file-resizer";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { toast, ToastContainer } from "react-toastify";
@@ -19,6 +18,7 @@ type ImageProps = {
 export default function AddImage({getImageData}: ImageProps) {
   const [imgState, setImgState] = useState(null);
   const [imgURL, setImgURL] = useState("");
+  const [imgName, setImgName] = useState("");
   const [respondImg, setRespondImg] = useState(null);
 
   // toastify 알람 실행 함수 만들기
@@ -42,32 +42,34 @@ export default function AddImage({getImageData}: ImageProps) {
 
   const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      const file: any =
-        event.target.files instanceof FileList ? event.target.files[0] : null;
+      const file: any = event.target.files instanceof FileList ? event.target.files[0] : null;
 
       setRespondImg(file);
-      console.log("respondImg: ", respondImg)
+      console.log("respondImg: ", file)
 
       const img: any = await resizeFile(file);
       setImgState(img);
       setImgURL(URL.createObjectURL(img));
+      setImgName(file.name)
     } catch (err) {}
   };
 
   const sendImage: () => Promise<any> = async () => {
     getImageData(imgURL.substring(5))
     console.log("[AddImage] imgURL: ", imgURL)
+
+    const formData = new FormData();
+    formData.append('image', imgURL.substring(5))
+    // formData.append('image', imgName)
+    
     try {
-      await axios.post<type.ImageUploadType>('http://localhost:8080/api/v1/images',
-      {
-        imageS3URL: imgURL.substring(5)
-      }
+      await axios.post('/api/v1/images', formData
     ).then((response) => {
       success();
       console.log("sendImage URL response: ", response)
     });
     } catch {
-        console.log("api 불러오기 실패")
+        console.log("[AddImage] sendImage: api 불러오기 실패")
         alert("이미지 업로드 실패, 다시 시도해주세요")
     };
   };

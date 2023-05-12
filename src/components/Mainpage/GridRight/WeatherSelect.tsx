@@ -22,7 +22,7 @@ export default function WeatherSelect({searchTemp, getWeatherData}: SkyProps) {
                 console.log("searchSky: ", skyCode)
                 console.log("searchRain: ", rainfallCode)
                 console.log("searchTemp: ", searchTemp)
-                await axios.post<type.SearchWeatherType>('/api/v1/posts/weather',
+                await axios.post('/api/v1/posts/weather',
                 {
                     skyCode: {skyCode},
                     rainfallCode: {rainfallCode},

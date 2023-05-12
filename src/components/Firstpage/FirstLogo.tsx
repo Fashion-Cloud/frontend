@@ -2,7 +2,7 @@ import {
     Typography
 } from '@mui/material';
 
-export default function Logo(){
+export default function FirstLogo(){
     return(
         <Typography 
             fontFamily='CookieRun-Regular'

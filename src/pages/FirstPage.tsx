@@ -1,27 +1,24 @@
 import {
     CssBaseline, 
-    Container, 
+    Container,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import Header from '../components/common/Header';
-import BigWeather from '../components/Firstpage/BigWeather';
-import SearchBar from '../components/Firstpage/SearchBar';
-import SeeAll from '../components/Firstpage/SeeAll';
-import SharePost from '../components/Firstpage/SharePost';
-import ThreeFashion from '../components/Firstpage/ThreeFashion';
-
+import FirstIntro from '../components/Firstpage/FirstIntro';
+import FirstLogo from '../components/Firstpage/FirstLogo';
+import StartButton from '../components/Firstpage/StartButton';
+import WeatherBox from '../components/Firstpage/WeatherBox';
 import '../fonts/font.css';
-
+    
 const theme = createTheme({
     palette: {
-      primary: {
-        main: "# v",
-      },
+      background: {
+        default: "# v",
+      }
     },
 });
 
-export default function FirstPage(){
+export default function Firstpage(){
     return(
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -33,12 +30,11 @@ export default function FirstPage(){
                     background: 'linear-gradient(252.44deg, #A8C8ED 0%, #7673DC 100%)'
                 }}
             >
-                <Header/>
-                <BigWeather/>
-                <SharePost/>
-                <SearchBar/>
-                <ThreeFashion/>
-                <SeeAll/>
+                <FirstLogo/>
+                <FirstIntro/>
+                
+                <StartButton/>
+                <WeatherBox/>
             </Container>
         </ThemeProvider>
     )

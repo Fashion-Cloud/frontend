@@ -27,23 +27,25 @@ export default function WeatherTemp({weather, skyName, locationData}: TempProps)
             >
                 {locationData?.fullAddress}
             </Typography>
-            <Typography
-                fontSize='100px'
-                fontFamily='Inter'
-                fontWeight='300'
-                style={{textAlign: 'center'}}
-                sx={{ml: 4, mt: 3}}
-            >
-                {weather?.temperature}
-            </Typography>
-            <Typography
-                fontSize='35px'
-                fontWeight='500'
-                sx={{ml: '220px', mt: '-150px'}}
-            >
-                {Temperature()}
-                C
-            </Typography>
+            <Box>
+                <Typography
+                    fontSize='100px'
+                    fontFamily='Inter'
+                    fontWeight='300'
+                    style={{textAlign: 'center'}}
+                    sx={{ml: '20px', mt: '40px'}}
+                >
+                    {weather?.temperature}
+                </Typography>
+                <Typography
+                    fontSize='35px'
+                    fontWeight='500'
+                    sx={{ml: '240px', mt: '-150px'}}
+                >
+                    {Temperature()}
+                    C
+                </Typography>
+            </Box>
             <Typography
                 fontFamily='CookieRun-Regular'
                 fontSize='26px'

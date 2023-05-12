@@ -81,9 +81,8 @@ export default function AllFashion() {
     }
 
     const fashionAPI = async () => {
-        console.log("[API] pageCom: ", pageCom);
         try {
-            await axios.get<type.PostType[]>(`/api/v1/posts/${pageCom}`,
+            await axios.get<type.PostType[]>(`/api/v1/posts/weather`,
             {
                 headers: {
                     Accept: 'application/json'
@@ -99,9 +98,9 @@ export default function AllFashion() {
         };
     }
 
-    // useEffect(() => {
-    //     fashionAPI()
-    // }, [])
+    useEffect(() => {
+        fashionAPI()
+    }, [])
 
     const FashionList = () => {
         let fashion: type.WeatherPostType[] = [];

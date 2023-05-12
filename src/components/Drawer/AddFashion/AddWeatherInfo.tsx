@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import { type } from '../../../utils/types';
+import useGeoLocation from "../../../assets/hooks/useGeoLocation";
 
 import { 
     Toolbar, 
@@ -16,33 +17,46 @@ type WeatherProps = {
 
 export default function AddWeatherInfo({getWeatherData}: WeatherProps) {
     const [weather, setWeather] = useState<type.WeatherType>();
+    
+    const location = useGeoLocation();
+    let latitude: number | undefined;
+    let longitude: number | undefined;
 
     function Temperature(): JSX.Element {
         return <span>&deg;</span>;
     }
 
     const weatherAPI = async () => {
-        try {
-            await axios.get<type.WeatherType>(`/api/v1/weather?latitude=37&longtitude=126`,
-            {
-                headers: {
-                    Accept: 'application/json'
+        if(latitude !== undefined){
+            try {
+                await axios.get(`/api/v1/weather?latitude=${latitude}&longitude=${longitude}`,
+                {
+                    headers: {
+                        Accept: 'application/json'
+                    }
                 }
-            }
-        ).then((response) => {
-            const data = response.data;
-            console.log(data)
-            setWeather(data)
-            getWeatherData(data)
-        });
-        } catch {
-            console.log("api 불러오기 실패")
-        };
+            ).then((response) => {
+                const data = response.data.data;
+                console.log(data)
+                setWeather(data)
+                getWeatherData(data)
+            });
+            } catch {
+                console.log("api 불러오기 실패")
+            };
+        }
     }
 
     useEffect(() => {
-        weatherAPI()
-    }, [])
+        if (location !== undefined) {
+            latitude = location.coordinates?.lat;
+            longitude = location.coordinates?.lng;
+            console.log("[GeoLocation] latitude: " , latitude)
+            console.log("[GeoLocation] longitude: " , longitude)
+
+            weatherAPI()
+        }
+    }, [location])
 
     return(
         <div>

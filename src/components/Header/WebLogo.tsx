@@ -11,7 +11,7 @@ import logo from "../../assets/images/logo/Logo_Cloud.png";
 
 export default function WebLogo(){
     return(
-        <Link href="/first">
+        <Link href="/">
             <Typography 
                 fontFamily='BalooBhaijaan'
                 fontStyle='normal'

@@ -4,7 +4,7 @@ import {
 import { useEffect, useState } from 'react';
 
 
-export default function FirstInfo(){
+export default function FirstIntro(){
     const [blogTitle, setBlogTitle] = useState('');
     const [count, setCount] = useState(0);
     const completionWord = '요즘 날씨, 어떤 옷을 입을지 고민된다면?';
@@ -42,7 +42,6 @@ export default function FirstInfo(){
                 color: "#eeeeff"
             }}
         >
-            {/* 요즘 날씨, 어떤 옷을 입을지 고민된다면? */}
             {blogTitle}
         </Typography>
     )
