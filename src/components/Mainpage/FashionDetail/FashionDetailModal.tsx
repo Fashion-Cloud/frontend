@@ -23,11 +23,12 @@ type FashionDetailProps = {
 };
 
 export default function FashioinDetailModal({singleId}: FashionDetailProps) {
-    const [single, setSingle] = useState<type.SinglePostType>();
+    const [singleData, setSingleData] = useState<type.SinglePostType>();
     
     const singlePostAPI = async () => {
+        console.log("singleId: ", singleId)
         try {
-            await axios.get<type.SinglePostType>(`/api/v1/posts/${singleId}`,
+            await axios.get(`/api/v1/posts/${singleId}`,
             {
                 headers: {
                     Accept: 'application/json'
@@ -35,8 +36,8 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
             }
         ).then((response) => {
             const data = response.data;
-            console.log(data)
-            setSingle(data)
+            console.log(data.data)
+            setSingleData(data.data)
         });
         } catch {
             console.log("api 불러오기 실패")
@@ -50,20 +51,20 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
     return (
         <div>
             {
-                single !== undefined
+                singleData !== undefined
                 ?   <div>
                         <Card sx={{width: '280px', borderRadius: '5%', ml: 5.5}}>
                             <CardMedia
                                 component="img"
                                 height="330px"
-                                image={single.image}
+                                image={singleData.image}
                             />
                         </Card>
                         <Typography fontFamily='CookieRun-Regular' fontSize='20pt' sx={{mt: 0.5, ml: 6}}>
-                            {single.name}
+                            {singleData.name}
                         </Typography>
                         <Typography fontFamily='CookieRun-Regular' fontSize='13pt' sx={{mt: 1, ml: 6.3, mb: 0.3}}>
-                            Review: {single.review}
+                            Review: {singleData.review}
                         </Typography>
 
                         <Divider sx={{width: '310px', ml: 3.5}}/>
@@ -72,21 +73,21 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
                             <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
                                 <AirIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
                                 <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
-                                    풍속 - {single.windChill} m/s
+                                    풍속 - {singleData.windChill} m/s
                                 </Typography>
                             </Button>
                             <br/>
                             <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
                                 <LightModeIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
                                 <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
-                                    하늘상태 - {weatherSky(single.skyStatus)}
+                                    하늘상태 - {weatherSky(singleData.skyStatus)}
                                 </Typography>
                             </Button>
                             <br/>
                             <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}}>
                                 <WbCloudyIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
                                 <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
-                                    강우유형 - {rainfallType(single.rainfallType)}
+                                    강우유형 - {rainfallType(singleData.rainfallType)}
                                 </Typography>
                             </Button>
                         </Box>

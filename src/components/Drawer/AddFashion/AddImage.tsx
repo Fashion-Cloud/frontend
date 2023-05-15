@@ -18,11 +18,11 @@ type ImageProps = {
 export default function AddImage({getImageData}: ImageProps) {
   const [imgState, setImgState] = useState(null);
   const [imgURL, setImgURL] = useState("");
-  const [imgName, setImgName] = useState("");
-  const [respondImg, setRespondImg] = useState(null);
+  const [previewImg, setPreviewImg] = useState("");
 
   // toastify 알람 실행 함수 만들기
-  const success = () => toast.success("Success!");
+  const success = () => toast.success("이미지 업로드 성공!");
+  const error = () => toast.error("이미지 업로드 실패!");
 
   const resizeFile = (file: Blob) =>
     new Promise((resolve) => {
@@ -41,37 +41,47 @@ export default function AddImage({getImageData}: ImageProps) {
   });
 
   const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("event: ", event)
     try {
-      const file: any = event.target.files instanceof FileList ? event.target.files[0] : null;
+      if(event.target.files&&event.target.files[0]){
+        const file: any = event.target.files instanceof FileList ? event.target.files[0] : null;
 
-      setRespondImg(file);
-      console.log("respondImg: ", file)
+        setImgURL(file)
+        console.log("new file image: ", file)
 
-      const img: any = await resizeFile(file);
-      setImgState(img);
-      setImgURL(URL.createObjectURL(img));
-      setImgName(file.name)
-    } catch (err) {}
+        const img: any = await resizeFile(file);
+        setImgState(img);
+
+        setPreviewImg(URL.createObjectURL(img));
+      }
+  } catch (err) {}
   };
 
-  const sendImage: () => Promise<any> = async () => {
-    getImageData(imgURL.substring(5))
+  const sendImage = async () => {
     console.log("[AddImage] imgURL: ", imgURL)
 
-    const formData = new FormData();
-    formData.append('image', imgURL.substring(5))
-    // formData.append('image', imgName)
-    
-    try {
-      await axios.post('/api/v1/images', formData
-    ).then((response) => {
-      success();
-      console.log("sendImage URL response: ", response)
-    });
-    } catch {
+    if (imgURL){
+      const formData = new FormData();
+      formData.append('image', imgURL)
+
+      try {
+        await axios.post('/api/v1/images', formData, 
+        {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        }
+      ).then((response) => {
+        success();
+        console.log("sendImage URL response: ", response.data)
+        getImageData(response.data.data.url)
+
+      });
+      } catch {
+        error();
         console.log("[AddImage] sendImage: api 불러오기 실패")
-        alert("이미지 업로드 실패, 다시 시도해주세요")
-    };
+      };
+    }
   };
 
   const onClickImgUpload = () => {
@@ -105,12 +115,13 @@ export default function AddImage({getImageData}: ImageProps) {
           }}
           component="label"
         >
-          <img src={imgURL}/>
+          <img src={previewImg}/>
           <input
             type="file"
+            accept='image/*'
             hidden
             required
-            onChange={(e) => onChangeImage(e)}
+            onChange={(event) => onChangeImage(event)}
           />
           {imgState ? null : (
             <Box>

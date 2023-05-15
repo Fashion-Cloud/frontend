@@ -19,7 +19,7 @@ import FashioinDetailModal from './FashionDetail/FashionDetailModal';
 import SearchBar from '../Mainpage/GridRight/SearchBar';
 import WeatherSelect from '../Mainpage/GridRight/WeatherSelect';
 import WeatherSlider from '../Mainpage/GridRight/WeatherSlider';
-import PaginationCom from '../../components/Mainpage/PaginationCom';
+// import PaginationCom from '../../components/Mainpage/PaginationCom';
 
 const style = {
     position: "absolute",
@@ -42,47 +42,27 @@ export default function AllFashion() {
     const handleOpenDetail = () => setOpenDetail(true);
     const handleCloseDetail =  () => setOpenDetail(false);
 
-    const [searchTemp, setSearchTemp] = useState<number>(26);
-    const [weatherData, setWeatherData] = useState<type.WeatherPostType[]>();
+    const [skyCode, setSkyCode] = useState<number>(1);
+    const [rainfallCode, setRainfallCode] = useState<number>(0);
+    const [windChill, setWindChill] = useState<number>(26);
 
-    const [pageCom, setPageCom] = useState<number>(1);
-
-    
-    function getSingleId(data: string){
-        setSingleId(data)
-    }
     function getTempData(data: number) {
-        setSearchTemp(data)
+        setWindChill(data)
         console.log("[WeatherSlider -> AllFashion] searchTemp: ", data)
     }
-    function getWeatherData(data: Array<type.WeatherPostType>) {
-        setWeatherData(data)
-        console.log("[WeatherSelect -> AllFashion] weatherData: ", data)
-    }
-    async function getPageData(data: number) {
-        setPageCom(data)
-        console.log("[PaginatoinCom -> AllFashion] pageCom: ", data)
-
-        try {
-            await axios.get<type.PostType[]>(`http://localhost:8080/api/v1/posts/${data}`,
-            {
-                headers: {
-                    Accept: 'application/json'
-                }
-            }
-        ).then((response) => {
-            const data = response.data;
-            console.log(data)
-            setPost(data)
-        });
-        } catch {
-            console.log("api 불러오기 실패")
-        };
+    function getWeatherData(sky: number, rain: number) {
+        setSkyCode(sky)
+        setRainfallCode(rain)
+        console.log("[WeatherSelect -> AllFashion] skyCode: ", sky)
+        console.log("[WeatherSelect -> AllFashion] rainfallCode: ", rain)
     }
 
     const fashionAPI = async () => {
+        console.log("skyCode: ", skyCode)
+        console.log("rainfallCode: ", rainfallCode)
+        console.log("windChill: ", windChill)
         try {
-            await axios.get<type.PostType[]>(`/api/v1/posts/weather`,
+            await axios.get(`/api/v1/posts/weather?skyCode=${skyCode}&rainfallCode=${rainfallCode}&windChill=${windChill}`,
             {
                 headers: {
                     Accept: 'application/json'
@@ -90,8 +70,8 @@ export default function AllFashion() {
             }
         ).then((response) => {
             const data = response.data;
-            console.log(data)
-            setPost(data)
+            console.log("data.data: ", data.data)
+            setPost(data.data)
         });
         } catch {
             console.log("api 불러오기 실패")
@@ -100,17 +80,13 @@ export default function AllFashion() {
 
     useEffect(() => {
         fashionAPI()
-    }, [])
+    }, [skyCode, rainfallCode, windChill])
 
     const FashionList = () => {
         let fashion: type.WeatherPostType[] = [];
         var array = [];
 
-        if (weatherData === undefined){
-            fashion = post;
-        } else {
-            fashion = weatherData
-        }
+        fashion = post
         if (fashion !== undefined) {
             for (let index: number = 0; index < Object.keys(fashion).length; index++) {
                 // eslint-disable-next-line no-lone-blocks
@@ -132,7 +108,7 @@ export default function AllFashion() {
                                     <CardMedia
                                         component="img"
                                         height="280px"
-                                        image={fashion[index].image}
+                                        image={fashion[index].imageUrl}
                                     />
                                     <Box
                                         sx={{
@@ -165,7 +141,7 @@ export default function AllFashion() {
             sx={{ml: '610px', mt: '180px'}}
         >
             <Box position='absolute'>
-                <WeatherSelect searchTemp = {searchTemp} getWeatherData={getWeatherData}/>
+                <WeatherSelect getWeatherData={getWeatherData}/>
                 <WeatherSlider getTempData = {getTempData}/>
                 <SearchBar/>
             </Box>

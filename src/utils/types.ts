@@ -61,7 +61,7 @@ export namespace type {
     export type WeatherPostType = {
         id: string;
         name: string;
-        image: string;
+        imageUrl: string;
     };
     
     export type ImageUploadType = {

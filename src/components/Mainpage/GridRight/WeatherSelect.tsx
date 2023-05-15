@@ -11,32 +11,31 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import UmbrellaIcon from '@mui/icons-material/Umbrella';
 
 type SkyProps = {
-    searchTemp: number | undefined;
     getWeatherData: Function;
 }
 
-export default function WeatherSelect({searchTemp, getWeatherData}: SkyProps) {
-    const weatherSearchAPI = async (skyCode: number, rainfallCode: number) => {
-        if (skyCode!==undefined && rainfallCode!==undefined && searchTemp!==undefined){
-            try {
-                console.log("searchSky: ", skyCode)
-                console.log("searchRain: ", rainfallCode)
-                console.log("searchTemp: ", searchTemp)
-                await axios.post('/api/v1/posts/weather',
-                {
-                    skyCode: {skyCode},
-                    rainfallCode: {rainfallCode},
-                    windChill: {searchTemp},
-                }
-            ).then((response) => {
-                console.log("WeatherSearchAPI 결과: ", response)
-                getWeatherData(response.data)
-            });
-            } catch {
-                console.log("api 불러오기 실패")
-            };
-        }
-    }
+export default function WeatherSelect({getWeatherData}: SkyProps) {
+    // const weatherSearchAPI = async (skyCode: number, rainfallCode: number) => {
+    //     if (skyCode!==undefined && rainfallCode!==undefined && searchTemp!==undefined){
+    //         try {
+    //             console.log("searchSky: ", skyCode)
+    //             console.log("searchRain: ", rainfallCode)
+    //             console.log("searchTemp: ", searchTemp)
+    //             await axios.post(`/api/v1/posts/weather?skyCode=${skyCode}&rainfallCode=${rainfallCode}&windChill=${searchTemp}`,
+    //             {
+    //                 headers: {
+    //                     Accept: 'application/json'
+    //                 }
+    //             }
+    //         ).then((response) => {
+    //             console.log("WeatherSearchAPI 결과: ", response.data)
+    //             getWeatherData(response.data.data)
+    //         });
+    //         } catch {
+    //             console.log("api 불러오기 실패")
+    //         };
+    //     }
+    // }
 
     function getSkyData(data: string) {
         let skyCode: number = 0;
@@ -57,7 +56,7 @@ export default function WeatherSelect({searchTemp, getWeatherData}: SkyProps) {
             rainfallCode = 3;
         }
 
-        weatherSearchAPI(skyCode, rainfallCode)
+        getWeatherData(skyCode, rainfallCode)
     }
 
     return(

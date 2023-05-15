@@ -17,9 +17,6 @@ import AddImage from './AddFashion/AddImage';
 
 export default function AddFashion() {
     const [postTitle, setPostTitle] = useState('');
-    const postTitleHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setPostTitle(e.target.value);
-    };
     const [postImage, setPostImage] = React.useState("");
     const [postReview, setPostReview] = React.useState("");
     const [postLocation, setPostLocation] = useState<type.LocationType>();
@@ -27,23 +24,23 @@ export default function AddFashion() {
 
     function getImageData(data: string) {
         setPostImage(data)
-        console.log("[AddFashioin -> AddImage] postImage: ", data)
+        console.log("[AddFashion -> AddImage] postImage: ", data)
     }
     function getReviewData(data: string) {
         setPostReview(data)
-        console.log("[AddFashioin -> AddReview] postReview: ", data)
+        console.log("[AddFashion -> AddReview] postReview: ", data)
     }
     function getTitleData(data: string) {
         setPostTitle(data)
-        console.log("[AddFashioin -> AddTitle] postTitle: ", data)
+        console.log("[AddFashion -> AddTitle] postTitle: ", data)
     }
     function getLocationData(data: type.LocationType) {
         setPostLocation(data)
-        console.log("[AddFashioin -> AddLocation] postLocation: ", data)
+        console.log("[AddFashion -> AddLocation] postLocation: ", data)
     }
     function getWeatherData(data: type.WeatherType) {
         setPostWeather(data)
-        console.log("[AddFashioin -> AddWeatherInfo] postWeather: ", data)
+        console.log("[AddFashion -> AddWeatherInfo] postWeather: ", data)
     }
 
     const postAPI = async () => {
@@ -52,8 +49,7 @@ export default function AddFashion() {
             {
                 userId: "550e8400-e29b-41d4-a716-446655440000",
                 name: postTitle,
-                // image: postImage,
-                image: "",
+                image: postImage,
                 review: postReview,
                 temperature: postWeather?.temperature,
                 skyStatus: postWeather?.sky,

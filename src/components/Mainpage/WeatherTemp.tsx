@@ -18,12 +18,12 @@ export default function WeatherTemp({weather, skyName, locationData}: TempProps)
 
     return(
         <Box sx={{color: '#FFFFFF', position: 'absolute', ml: '10px', mt: '50px'}}>
-            <PlaceOutlinedIcon fontSize="large" sx={{position: 'absolute', ml: '25px', mt: '5px'}}/>
+            <PlaceOutlinedIcon fontSize="large" sx={{position: 'absolute', ml: '25px', mt: '0px'}}/>
             <Typography
-                fontSize='27px'
+                fontSize='25px'
                 fontFamily='CookieRun-Regular'
                 fontWeight='500'
-                sx={{ml: '70px'}}
+                sx={{ml: '60px'}}
             >
                 {locationData?.fullAddress}
             </Typography>
