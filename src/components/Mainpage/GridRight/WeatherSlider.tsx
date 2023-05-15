@@ -67,6 +67,8 @@ export default function WeatherSlider({getTempData}: TempProps){
                 value={tempSlider}
                 onChange={handleChange}
                 sx={{mt: 1}}
+                min={-30}
+                max={50}
             />
           </Box>
       </Box>
