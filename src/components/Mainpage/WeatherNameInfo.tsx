@@ -4,6 +4,7 @@ import {
     Typography,
 } from "@mui/material";
 import { type } from '../../utils/types';
+import rainfallType from '../../assets/data/rainfallType';
 
 type WeatherProps = {
     weather: type.WeatherType | undefined;
@@ -26,7 +27,7 @@ export default function WeatherNameInfo({weather}: WeatherProps){
             </Typography>
             <Divider/>
             <Typography fontSize='23px'>
-                {weather?.rainfallType} .
+                {rainfallType(weather?.rainfallType)}
             </Typography>
             <Divider/>
         </Box>

@@ -1,4 +1,4 @@
-export default function rainfallType(type: number): string {
+export default function rainfallType(type: number | undefined): string {
     let rainType: string;
 
     switch(type) {
