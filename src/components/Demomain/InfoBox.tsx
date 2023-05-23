@@ -1,29 +1,24 @@
-import {
-    Box,
-} from '@mui/material';
-import WeatherIcon from './WeatherIcon';
-import WeatherName from './WeatherName';
-import WeatherNameInfo from './WeatherNameInfo';
-import WeatherTemp from './WeatherTemp';
-
-import useGeoLocation from "../../assets/hooks/useGeoLocation";
-import { useEffect, useState } from "react";
-
+import { 
+    Box 
+} from "@mui/material";
 import axios from 'axios';
 import { type } from '../../utils/types';
-import weatherSky from '../../assets/data/weatherSky';
-import Loading from '../common/Loading';
+import { useEffect, useState } from "react";
 
-export default function SmallWeather() {
-    const [weather, setWeather] = useState<type.WeatherType>();
+import useGeoLocation from "../../assets/hooks/useGeoLocation";
+
+import PlaceBox from "./PlaceBox";
+import WeatherBox from "./WeatherBox";
+
+export default function InfoBox() {
+    const [weatherData, setWeatherData] = useState<type.WeatherType>();
     const [locationData, setLocationData] = useState<type.LocationType>();
-    const [skyName, setSkyName] = useState<string>();
 
     const location = useGeoLocation();
     let latitude: number | undefined
     let longitude: number | undefined
 
-    const tempAPI = async () => {
+    const weatherAPI = async () => {
         if(latitude !== undefined){
             try {
                 await axios.get(`/api/v1/weather?latitude=${latitude}&longitude=${longitude}`,
@@ -36,8 +31,7 @@ export default function SmallWeather() {
             ).then((response) => {
                 const data = response.data.data;
                 console.log("[WexatherTemp] tempAPI: ", data)
-                setWeather(data)
-                setSkyName(weatherSky(data.sky))
+                setWeatherData(data)
             });
             } catch {
                 console.log("[WeatherTemp] tempAPI: api 불러오기 실패")
@@ -73,31 +67,14 @@ export default function SmallWeather() {
             console.log("[GeoLocation] longitude: " , longitude)
 
             locationAPI()
-            tempAPI()
+            weatherAPI()
         }
     }, [location])
 
-    return(
-        <Box 
-            position='absolute'
-            style={{
-                color: '#343434', 
-                width: '350px',
-                height: '500px',
-                background: 'radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 100%)',
-                borderRadius: '77px',
-            }} 
-            sx={{border: 1, borderColor:'#FFFFFF', ml: '150px', mt: '-700px'}}
-        >
-            {/* {
-                latitude === undefined
-                ? <Loading state={true}/>
-                : <Loading state={false}/> 
-            } */}
-            <WeatherIcon/>
-            <WeatherTemp weather={weather} skyName={skyName} locationData={locationData}/>
-            <WeatherName/>
-            <WeatherNameInfo weather={weather}/>
-        </Box> 
+    return (
+        <Box sx={{height: '100vh',backgroundColor: '#FBFEFF', position: 'sticky', top: 0, overflow: 'hidden'}}>
+            <PlaceBox locationData={locationData}/>
+            <WeatherBox weatherData={weatherData}/>
+        </Box>
     )
 }
