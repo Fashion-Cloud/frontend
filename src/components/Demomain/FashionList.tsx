@@ -1,18 +1,36 @@
+import React, { useEffect, useState }  from "react";
+import axios from "axios";
+import { type } from '../../utils/types';
 import { 
     Box, 
     Card, 
     CardMedia, 
     Grid, 
-    Typography 
+    Modal, 
+    Toolbar, 
+    Typography ,
+    IconButton
 } from "@mui/material";
+
 import SearchBox from "./SearchBox";
-
-import { type } from '../../utils/types';
-import { useEffect, useState } from "react";
-import React from "react";
-import axios from "axios";
 import PaginationBox from "./PaginationBox";
+import AddFashionButton from "./AddFashionButton";
 
+import CloseIcon from "@mui/icons-material/Close";
+import FashioinDetailModal from "../Mainpage/FashionDetail/FashionDetailModal";
+
+const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    height: 600,
+    width: 400,
+    bgcolor: "#FFF",
+    borderRadius: "25px",
+    boxShadow: 24,
+    p: 2,
+};
 
 export default function FashionList() {
     let pageIndex: number = 0;
@@ -165,9 +183,13 @@ export default function FashionList() {
         <Box sx={{height: '100vh',backgroundColor: '#F5F8FC'}}>
             <Box height='75px'/>
             <Logo/>
+    
+            <Toolbar>
+                <SearchBox getWeatherData={getWeatherData} getTempData={getTempData} getPageNum={getPageNum}/>
+                
+                <AddFashionButton/>
+            </Toolbar>
 
-            <SearchBox getWeatherData={getWeatherData} getTempData={getTempData} getPageNum={getPageNum}/>
-            
             <Grid
                 container
                 spacing={-3}
@@ -181,6 +203,21 @@ export default function FashionList() {
             </Grid>
 
             <PaginationBox pageCount={pageCount} getPageNum={getPageNum}/>
+
+            <Modal
+                open={openDetail}
+                onClose={handleCloseDetail}
+                closeAfterTransition
+                >
+                <Box sx={style}>
+                    <div style={{ textAlign: "right" }}>
+                        <IconButton onClick={() => {setOpenDetail(false);}}>
+                            <CloseIcon style={{color: '#000'}} fontWeight="300" />
+                        </IconButton>
+                    </div>
+                    <FashioinDetailModal singleId={singleId}/>
+                </Box>
+            </Modal>
         </Box>
     )
 }

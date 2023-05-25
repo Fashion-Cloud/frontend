@@ -9,7 +9,7 @@ export default function weatherSky(sky: number | undefined) {
             skyName =  'Mostly Cloudy';
             break;
         case 4:
-            skyName =  'Cloudy';
+            skyName =  'Rain';
             break;
         case 5:
             skyName =  'Snow';

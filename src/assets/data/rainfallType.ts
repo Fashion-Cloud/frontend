@@ -3,7 +3,7 @@ export default function rainfallType(type: number | undefined): string {
 
     switch(type) {
         case 0: 
-            rainType = 'none'
+            rainType = 'clear'
             break;
         case 1:
             rainType = 'rain';
@@ -24,7 +24,7 @@ export default function rainfallType(type: number | undefined): string {
             rainType =  'snow';
             break;
         default:
-            rainType = 'none';
+            rainType = 'clear';
     }
 
     return rainType

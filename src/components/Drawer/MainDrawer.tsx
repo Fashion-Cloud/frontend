@@ -45,9 +45,9 @@ export default function MainDrawer(){
         }
     
         setState({ ...state, [anchor]: open });
-      };
+    };
 
-      const list = (anchor: Anchor) => (
+    const list = (anchor: Anchor) => (
         <Box
           sx={{ width: 250 }}
           role="presentation"

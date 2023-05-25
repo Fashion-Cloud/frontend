@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { type } from '../../utils/types';
 import { styled } from '@mui/material/styles';
 import { 
     Box,
@@ -18,13 +19,16 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 
+import axios from 'axios';
+import useGeoLocation from "../../assets/hooks/useGeoLocation";
+
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CloudIcon from "@mui/icons-material/Cloud";
 import UmbrellaIcon from "@mui/icons-material/Umbrella";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 
 const IconOptions = [<WbSunnyIcon/>, <CloudIcon/>, <UmbrellaIcon/>, <AcUnitIcon/>];
-const options = ['Sunny', 'Cloudy', 'Rain', 'Snow'];
+const options = ['Sunny', 'Mostly Cloudy', 'Rain', 'Snow'];
 
 const PrettoSlider = styled(Slider)({
     color: '#7DAADB',
@@ -71,7 +75,7 @@ type SearchProps = {
     getPageNum: Function;
 }
 
-export default function SearchBox({getWeatherData, getTempData, getPageNum}: SearchProps) {
+export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
     const [anchorElSelect, setAnchorElSelect] = React.useState<HTMLButtonElement | null>(null);
     const [openSelect, setOpenSelect] = React.useState(false);
     const [placementSelect, setPlacementSelect] = React.useState<PopperPlacementType>();
@@ -82,6 +86,10 @@ export default function SearchBox({getWeatherData, getTempData, getPageNum}: Sea
     const [placementSlider, setPlacementSlider] = React.useState<PopperPlacementType>();
 
     const [tempSlider, setTempSlider] = React.useState<number>(26);
+
+    const location = useGeoLocation();
+    let latitude: number | undefined
+    let longitude: number | undefined
 
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
         if (typeof newValue === 'number') {
@@ -106,6 +114,38 @@ export default function SearchBox({getWeatherData, getTempData, getPageNum}: Sea
         )
     }
 
+    const weatherAPI = async () => {
+        if(latitude !== undefined){
+            try {
+                await axios.get(`/api/v1/weather?latitude=${latitude}&longitude=${longitude}`,
+                {
+                    headers: {
+                        Accept: 'application/json'
+                    },
+                    withCredentials: true
+                }
+            ).then((response) => {
+                const data = response.data.data;
+                console.log("[WexatherTemp] tempAPI: ", data)
+                setTempSlider(data?.temperature)
+            });
+            } catch {
+                console.log("[WeatherTemp] tempAPI: api 불러오기 실패")
+            };
+        }
+    }
+
+    useEffect(() => {
+        if (location !== undefined) {
+            latitude = location.coordinates?.lat;
+            longitude = location.coordinates?.lng;
+            console.log("[GeoLocation] latitude: " , latitude)
+            console.log("[GeoLocation] longitude: " , longitude)
+
+            weatherAPI()
+        }
+    }, [location])
+
     function getSkyData(data: string) {
         let skyCode: number = 0;
         let rainfallCode: number = 0;
@@ -114,14 +154,14 @@ export default function SearchBox({getWeatherData, getTempData, getPageNum}: Sea
         if (data === 'Sunny') {
             skyCode = 1;
             rainfallCode = 0;
-        } else if (data === 'Cloudy'){
+        } else if (data === 'Mostly Cloudy'){
             skyCode = 3;
             rainfallCode = 0;
         } else if (data === 'Rain'){
-            skyCode = 0;
+            skyCode = 4;
             rainfallCode = 1;
         } else if (data === 'Snow'){
-            skyCode = 0;
+            skyCode = 5;
             rainfallCode = 3;
         }
 
@@ -160,7 +200,7 @@ export default function SearchBox({getWeatherData, getTempData, getPageNum}: Sea
 
     return(
         <Box>
-            <Toolbar sx={{ml: '35px'}}>
+            <Toolbar sx={{ml: '13px'}}>
                 <SearchBar/>
 
                 {/* Weather Select */}

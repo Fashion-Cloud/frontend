@@ -19,7 +19,6 @@ export default function PaginationBox({pageCount, getPageNum}: PageProps) {
       
     return (
         <Box display="flex" justifyContent='center' sx={{mt: '300px'}}>
-        {/* <Box position="fixed" sx={{top: 750}}> */}
             <Box sx={{position: "fixed", top: '770px'}}>
                 <Pagination count={pageCount} page={page} onChange={handleChange} shape="rounded"/>
             </Box>

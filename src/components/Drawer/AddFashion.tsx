@@ -18,7 +18,7 @@ import AddImage from './AddFashion/AddImage';
 export default function AddFashion() {
     const [postTitle, setPostTitle] = useState('');
     const [postImage, setPostImage] = React.useState("");
-    const [postReview, setPostReview] = React.useState("");
+    const [postReview, setPostReview] = React.useState(2);
     const [postLocation, setPostLocation] = useState<type.LocationType>();
     const [postWeather, setPostWeather] = useState<type.WeatherType>();
 
@@ -26,7 +26,7 @@ export default function AddFashion() {
         setPostImage(data)
         console.log("[AddFashion -> AddImage] postImage: ", data)
     }
-    function getReviewData(data: string) {
+    function getReviewData(data: number) {
         setPostReview(data)
         console.log("[AddFashion -> AddReview] postReview: ", data)
     }
@@ -53,14 +53,13 @@ export default function AddFashion() {
                 review: postReview,
                 temperature: postWeather?.temperature,
                 skyStatus: postWeather?.sky,
-                humidity: postWeather?.humidity,
                 rainfallType: postWeather?.rainfallType,
                 windSpeed: postWeather?.windSpeed,
             }
         ).then((response) => {
             console.log(response)
             alert("post 완료")
-            window.location.replace("/main");
+            window.location.replace("/demo_main");
         });
         } catch {
             console.log("api 불러오기 실패")
@@ -88,7 +87,7 @@ export default function AddFashion() {
             <Button 
                 variant="contained" 
                 style={{position: 'absolute', textTransform:"none", borderRadius: '20px'}} 
-                sx={{ml: 80, mt: 13, backgroundColor: "#8c79ba","&:hover": {backgroundColor: "#6e4dbf"}}} 
+                sx={{ml: 80, mt: 13, backgroundColor: "#87A9D7","&:hover": {backgroundColor: "#457cc6"}}} 
                 onClick={()=>{
                     postAPI()
                 }}

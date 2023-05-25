@@ -10,16 +10,9 @@ import {
     IconButton
 } from '@mui/material';
 import CloseIcon from "@mui/icons-material/Close";
-// import PlaceIcon from '@mui/icons-material/Place';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
 
 import { type } from '../../utils/types';
 import FashioinDetailModal from './FashionDetail/FashionDetailModal';
-
-import SearchBar from '../Mainpage/GridRight/SearchBar';
-import WeatherSelect from '../Mainpage/GridRight/WeatherSelect';
-import WeatherSlider from '../Mainpage/GridRight/WeatherSlider';
-// import PaginationCom from '../../components/Mainpage/PaginationCom';
 
 const style = {
     position: "absolute",
@@ -141,9 +134,6 @@ export default function AllFashion() {
             sx={{ml: '610px', mt: '180px'}}
         >
             <Box position='absolute'>
-                <WeatherSelect getWeatherData={getWeatherData}/>
-                <WeatherSlider getTempData = {getTempData}/>
-                <SearchBar/>
             </Box>
             <Grid
                 style={{
