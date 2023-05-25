@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { type } from '../../utils/types';
+import React, { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { 
     Box,

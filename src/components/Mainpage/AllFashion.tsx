@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import {
     Grid,
     Card,
@@ -28,58 +27,58 @@ const style = {
 };
 
 export default function AllFashion() {
-    const [post, setPost] = useState<type.WeatherPostType[]>([]);
+    // const [post, setPost] = useState<type.WeatherPostType[]>([]);
     const [singleId, setSingleId] = useState("");
 
     const [openDetail, setOpenDetail] = React.useState(false);
     const handleOpenDetail = () => setOpenDetail(true);
     const handleCloseDetail =  () => setOpenDetail(false);
 
-    const [skyCode, setSkyCode] = useState<number>(1);
-    const [rainfallCode, setRainfallCode] = useState<number>(0);
-    const [windChill, setWindChill] = useState<number>(26);
+    // const [skyCode, setSkyCode] = useState<number>(1);
+    // const [rainfallCode, setRainfallCode] = useState<number>(0);
+    // const [windChill, setWindChill] = useState<number>(26);
 
-    function getTempData(data: number) {
-        setWindChill(data)
-        console.log("[WeatherSlider -> AllFashion] searchTemp: ", data)
-    }
-    function getWeatherData(sky: number, rain: number) {
-        setSkyCode(sky)
-        setRainfallCode(rain)
-        console.log("[WeatherSelect -> AllFashion] skyCode: ", sky)
-        console.log("[WeatherSelect -> AllFashion] rainfallCode: ", rain)
-    }
+    // function getTempData(data: number) {
+    //     setWindChill(data)
+    //     console.log("[WeatherSlider -> AllFashion] searchTemp: ", data)
+    // }
+    // function getWeatherData(sky: number, rain: number) {
+    //     setSkyCode(sky)
+    //     setRainfallCode(rain)
+    //     console.log("[WeatherSelect -> AllFashion] skyCode: ", sky)
+    //     console.log("[WeatherSelect -> AllFashion] rainfallCode: ", rain)
+    // }
 
-    const fashionAPI = async () => {
-        console.log("skyCode: ", skyCode)
-        console.log("rainfallCode: ", rainfallCode)
-        console.log("windChill: ", windChill)
-        try {
-            await axios.get(`/api/v1/posts/weather?skyCode=${skyCode}&rainfallCode=${rainfallCode}&windChill=${windChill}`,
-            {
-                headers: {
-                    Accept: 'application/json'
-                }
-            }
-        ).then((response) => {
-            const data = response.data;
-            console.log("data.data: ", data.data)
-            setPost(data.data)
-        });
-        } catch {
-            console.log("api 불러오기 실패")
-        };
-    }
+    // const fashionAPI = async () => {
+    //     // console.log("skyCode: ", skyCode)
+    //     // console.log("rainfallCode: ", rainfallCode)
+    //     // console.log("windChill: ", windChill)
+    //     try {
+    //         await axios.get(`/api/v1/posts/weather?skyCode=${skyCode}&rainfallCode=${rainfallCode}&windChill=${windChill}`,
+    //         {
+    //             headers: {
+    //                 Accept: 'application/json'
+    //             }
+    //         }
+    //     ).then((response) => {
+    //         const data = response.data;
+    //         console.log("data.data: ", data.data)
+    //         setPost(data.data)
+    //     });
+    //     } catch {
+    //         console.log("api 불러오기 실패")
+    //     };
+    // }
 
-    useEffect(() => {
-        fashionAPI()
-    }, [skyCode, rainfallCode, windChill])
+    // useEffect(() => {
+    //     fashionAPI()
+    // }, [skyCode, rainfallCode, windChill])
 
     const FashionList = () => {
         let fashion: type.WeatherPostType[] = [];
         var array = [];
 
-        fashion = post
+        // fashion = post
         if (fashion !== undefined) {
             for (let index: number = 0; index < Object.keys(fashion).length; index++) {
                 // eslint-disable-next-line no-lone-blocks

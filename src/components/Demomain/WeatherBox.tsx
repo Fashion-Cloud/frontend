@@ -9,9 +9,8 @@ import lottie from 'lottie-web';
 import { type } from '../../utils/types';
 
 import WaterIcon from '@mui/icons-material/Water'; // 습도 아이콘
-import CloudQueueIcon from '@mui/icons-material/CloudQueue';
-import AirIcon from '@mui/icons-material/Air';
-import WaterDropIcon from '@mui/icons-material/WaterDrop';
+import AirIcon from '@mui/icons-material/Air'; // 풍속 아이콘
+import WaterDropIcon from '@mui/icons-material/WaterDrop'; // 강수량 아이콘
 
 import weatherSky from '../../assets/data/weatherSky';
 
@@ -23,19 +22,20 @@ const WeatherSkyLottie = ({weatherData}: WeatherProps) => {
     // weatherData에 따라 다른 애니메이션 데이터를 선택
     const getAnimationData = () => {
         if (weatherData?.sky === 1) {
-          return require('../../assets/lotties/weather/sunny.json');
+          return require('../../assets/lotties/weatherLottie/sunny.json');
         } else if (weatherData?.sky === 3) {
-          return require('../../assets/lotties/weather/cloudy.json');
+          return require('../../assets/lotties/weatherLottie/mostly_cloudy.json');
         } else if (weatherData?.sky === 4) {
-          return require('../../assets/lotties/weather/rainy.json');
+          return require('../../assets/lotties/weatherLottie/rainy.json');
         } else if (weatherData?.sky === 5) {
-            return require('../../assets/lotties/weather/snow.json');
+            return require('../../assets/lotties/weatherLottie/snow.json');
         }
         // 기본값으로 사용할 애니메이션 데이터
-        return require('../../assets/lotties/weather/sunny.json');
+        return require('../../assets/lotties/weatherLottie/sunny.json');
     };
 
     const animationData = getAnimationData();
+    // const animationData = require('../../assets/lotties/allRain.json');
 
     //lottie
     const element = useRef<HTMLDivElement>(null);

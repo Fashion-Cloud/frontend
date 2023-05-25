@@ -138,7 +138,7 @@ export default function AddImage({getImageData}: ImageProps) {
             onClick={() => {onClickImgUpload();}}
             variant="contained" 
             style={{position: 'absolute', textTransform:"none", borderRadius: '20px'}} 
-            sx={{ml: 13, mt: 5, backgroundColor: "#87A9D7", "&:hover": {backgroundColor: "#457cc6"}}}
+            sx={{ml: 13, mt: 5, backgroundColor: "#87A9D7", "&:hover": {backgroundColor: "#1f5091"}}}
           >
               <Typography sx={{ml: 3, mr: 3}}>
                   Image Upload

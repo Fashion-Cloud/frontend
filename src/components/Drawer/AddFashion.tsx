@@ -59,7 +59,7 @@ export default function AddFashion() {
         ).then((response) => {
             console.log(response)
             alert("post 완료")
-            window.location.replace("/demo_main");
+            window.location.replace("/");
         });
         } catch {
             console.log("api 불러오기 실패")
@@ -87,7 +87,7 @@ export default function AddFashion() {
             <Button 
                 variant="contained" 
                 style={{position: 'absolute', textTransform:"none", borderRadius: '20px'}} 
-                sx={{ml: 80, mt: 13, backgroundColor: "#87A9D7","&:hover": {backgroundColor: "#457cc6"}}} 
+                sx={{ml: 80, mt: 13, backgroundColor: "#87A9D7","&:hover": {backgroundColor: "#1f5091"}}} 
                 onClick={()=>{
                     postAPI()
                 }}

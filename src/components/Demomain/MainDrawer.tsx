@@ -1,24 +1,18 @@
-import * as React from 'react';
-import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
+import { styled, Theme, CSSObject } from '@mui/material/styles';
 import {
     CssBaseline,
     Box,
     Drawer,
     List,
     Divider,
-    IconButton,
     ListItem,
     ListItemButton,
     ListItemIcon,
-    Button,
-    ToggleButtonGroup,
-    ToggleButton,
 } from '@mui/material';
 
-import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
-import CloudIcon from '@mui/icons-material/Cloud';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import logo from '../../assets/images/bang.png';
 
@@ -63,14 +57,14 @@ const MiniDrawer = styled(Drawer, { shouldForwardProp: (prop) => prop !== 'open'
   );
 
 export default function MainDrawer() {
-    const [view, setView] = React.useState('list');
-    const [iconColor, setIconColor] = React.useState('#757575');
-    const [backColor, setBackColor] = React.useState('#FFFFFF');
+    // const [view, setView] = React.useState('list');
+    // const [iconColor, setIconColor] = React.useState('#757575');
+    // const [backColor, setBackColor] = React.useState('#FFFFFF');
 
-    const handleChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
-        setView(nextView);
+    // const handleChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
+    //     setView(nextView);
 
-    };
+    // };
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -80,7 +74,6 @@ export default function MainDrawer() {
                     <Box sx={{px: 1.5, my: 1.5}}>
                         <img
                             height="50px"
-                            // style={{position:"absolute"}}
                             src={logo}
                         />
                     </Box>
@@ -95,14 +88,14 @@ export default function MainDrawer() {
                         </ListItemButton>
                         <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
                             <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                                <CloudIcon />
+                                <AccountCircleIcon />
                             </ListItemIcon>
                         </ListItemButton>
-                        <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
+                        {/* <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
                             <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
                                 <AddCircleIcon />
                             </ListItemIcon>
-                        </ListItemButton>
+                        </ListItemButton> */}
                     </ListItem>
                 </List>
                 <Divider/>
@@ -110,21 +103,3 @@ export default function MainDrawer() {
         </Box>
     )
 }
-
-                
-                {/* <ToggleButtonGroup
-                    orientation="vertical"
-                    value={view}
-                    exclusive
-                    onChange={handleChange}
-                >
-                    <ToggleButton value="list" aria-label="list">
-                        <HomeIcon/>
-                    </ToggleButton>
-                    <ToggleButton value="module" aria-label="module">
-                        <CloudIcon />
-                    </ToggleButton>
-                    <ToggleButton value="quilt" aria-label="quilt">
-                        <AddCircleIcon />
-                    </ToggleButton>
-                </ToggleButtonGroup> */}
