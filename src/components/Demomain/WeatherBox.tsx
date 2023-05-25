@@ -34,8 +34,9 @@ const WeatherSkyLottie = ({weatherData}: WeatherProps) => {
         return require('../../assets/lotties/weather/sunny.json');
     };
 
-    const animationData = getAnimationData();
+    // const animationData = getAnimationData();
     // const animationData = require('../../assets/lotties/allRain.json');
+    const animationData = require('../../assets/lotties/weather/rainy.json');
 
     //lottie
     const element = useRef<HTMLDivElement>(null);
@@ -52,7 +53,7 @@ const WeatherSkyLottie = ({weatherData}: WeatherProps) => {
         animation.destroy(); // lottie-web 인스턴스 제거
       };
     }, [weatherData]);
-    return <Tooltip title={weatherSky(weatherData?.sky)} arrow><Box ref={element} style={{ marginTop: 30, height: 180 }}></Box></Tooltip>;
+    return <Tooltip title='Rain' arrow><Box ref={element} style={{ marginTop: 30, height: 180 }}></Box></Tooltip>;
 };
 
 const WeatherInfoBox = ({weatherData}: WeatherProps) => {

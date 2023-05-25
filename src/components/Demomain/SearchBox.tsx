@@ -78,13 +78,13 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
     const [anchorElSelect, setAnchorElSelect] = React.useState<HTMLButtonElement | null>(null);
     const [openSelect, setOpenSelect] = React.useState(false);
     const [placementSelect, setPlacementSelect] = React.useState<PopperPlacementType>();
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [selectedIndex, setSelectedIndex] = React.useState(2);
 
     const [anchorElSlider, setAnchorElSlider] = React.useState<HTMLButtonElement | null>(null);
     const [openSlider, setOpenSlider] = React.useState(false);
     const [placementSlider, setPlacementSlider] = React.useState<PopperPlacementType>();
 
-    const [tempSlider, setTempSlider] = React.useState<number>(26);
+    const [tempSlider, setTempSlider] = React.useState<number>(19);
 
     const location = useGeoLocation();
     let latitude: number | undefined
@@ -136,8 +136,12 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
 
     useEffect(() => {
         if (location !== undefined) {
-            latitude = location.coordinates?.lat;
-            longitude = location.coordinates?.lng;
+            // latitude = location.coordinates?.lat;
+            // longitude = location.coordinates?.lng;
+
+            latitude = 37.385673;
+            longitude = 126.637527;
+
             console.log("[GeoLocation] latitude: " , latitude)
             console.log("[GeoLocation] longitude: " , longitude)
 
@@ -175,7 +179,7 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
             rainfallCode = 0;
         } else if (data === 'Rain'){
             skyCode = 4;
-            rainfallCode = 1;
+            rainfallCode = 0;
         } else if (data === 'Snow'){
             skyCode = 5;
             rainfallCode = 3;

@@ -43,9 +43,9 @@ export default function FashionList() {
     const handleOpenDetail = () => setOpenDetail(true);
     const handleCloseDetail =  () => setOpenDetail(false);
 
-    const [skyCode, setSkyCode] = useState<number>(1);
+    const [skyCode, setSkyCode] = useState<number>(4);
     const [rainfallCode, setRainfallCode] = useState<number>(0);
-    const [windChill, setWindChill] = useState<number>(26);
+    const [windChill, setWindChill] = useState<number>(19);
 
     const [pageCount, setPageCount] = useState<number>(1); // 전체 페이지
     const [page, setPage] = useState<number>(1); // 현재 페이지

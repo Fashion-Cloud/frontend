@@ -31,7 +31,6 @@ export default function AddTitle({getTitleData}: TitleProps) {
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Write Down Your Fashion Title"
                     value={postTitle}
-                    inputProps={{ 'aria-label': 'search google maps' }}
                     onChange={e => postTitleHandler(e)}
                 />
             </Paper>

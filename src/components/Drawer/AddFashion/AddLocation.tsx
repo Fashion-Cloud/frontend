@@ -41,8 +41,10 @@ export default function AddLocation({getLocationData}: LocationProps) {
 
     useEffect(() => {
         if (locationData !== undefined) {
-            latitude = locationData.coordinates?.lat;
-            longitude = locationData.coordinates?.lng;
+            // latitude = locationData.coordinates?.lat;
+            // longitude = locationData.coordinates?.lng;
+            latitude = 37.385673;
+            longitude = 126.637527;
             console.log("[GeoLocation] latitude: " , latitude)
             console.log("[GeoLocation] longitude: " , longitude)
 

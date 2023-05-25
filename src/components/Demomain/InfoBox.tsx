@@ -61,8 +61,12 @@ export default function InfoBox() {
 
     useEffect(() => {
         if (location !== undefined) {
-            latitude = location.coordinates?.lat;
-            longitude = location.coordinates?.lng;
+            // latitude = location.coordinates?.lat;
+            // longitude = location.coordinates?.lng;
+
+            latitude = 37.385673;
+            longitude = 126.637527;
+            
             console.log("[GeoLocation] latitude: " , latitude)
             console.log("[GeoLocation] longitude: " , longitude)
 
