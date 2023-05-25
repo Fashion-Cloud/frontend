@@ -22,16 +22,16 @@ const WeatherSkyLottie = ({weatherData}: WeatherProps) => {
     // weatherData에 따라 다른 애니메이션 데이터를 선택
     const getAnimationData = () => {
         if (weatherData?.sky === 1) {
-          return require('../../assets/lotties/weatherLottie/sunny.json');
+          return require('../../assets/lotties/weather/sunny.json');
         } else if (weatherData?.sky === 3) {
-          return require('../../assets/lotties/weatherLottie/mostly_cloudy.json');
+          return require('../../assets/lotties/weather/cloudy.json');
         } else if (weatherData?.sky === 4) {
-          return require('../../assets/lotties/weatherLottie/rainy.json');
+          return require('../../assets/lotties/weather/rainy.json');
         } else if (weatherData?.sky === 5) {
-            return require('../../assets/lotties/weatherLottie/snow.json');
+            return require('../../assets/lotties/weather/snow.json');
         }
         // 기본값으로 사용할 애니메이션 데이터
-        return require('../../assets/lotties/weatherLottie/sunny.json');
+        return require('../../assets/lotties/weather/sunny.json');
     };
 
     const animationData = getAnimationData();
