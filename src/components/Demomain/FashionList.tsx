@@ -79,7 +79,8 @@ export default function FashionList() {
         console.log("rainfallCode: ", rainfallCode)
         console.log("windChill: ", windChill)
         try {
-            await axios.get(`/api/v1/posts/weather?skyStatus=${skyCode}&rainfallType=${rainfallCode}&windChill=${windChill}`,
+            // await axios.get(`/api/v1/posts/weather?skyStatus=${skyCode}&rainfallType=${rainfallCode}&windChill=${windChill}`,
+            await axios.get(`/api/v1/posts/weather?skyCode=${skyCode}&rainfallCode=${rainfallCode}&windChill=${windChill}`,
             {
                 headers: {
                     Accept: 'application/json'
