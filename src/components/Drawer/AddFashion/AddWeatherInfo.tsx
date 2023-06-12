@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { type } from '../../../utils/types';
+import { WeatherType } from '../../../utils/types';
 import useGeoLocation from "../../../assets/hooks/useGeoLocation";
 
 import { 
@@ -18,7 +18,7 @@ type WeatherProps = {
 }
 
 export default function AddWeatherInfo({getWeatherData}: WeatherProps) {
-    const [weather, setWeather] = useState<type.WeatherType>();
+    const [weather, setWeather] = useState<WeatherType>();
     
     const location = useGeoLocation();
     let latitude: number | undefined;

@@ -2,8 +2,9 @@ import {
     Box 
 } from "@mui/material";
 import axios from 'axios';
-import { type } from '../../utils/types';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import { weatherDataState, locationDataState } from "../../Recoil";
 
 import useGeoLocation from "../../assets/hooks/useGeoLocation";
 
@@ -11,8 +12,8 @@ import PlaceBox from "./PlaceBox";
 import WeatherBox from "./WeatherBox";
 
 export default function InfoBox() {
-    const [weatherData, setWeatherData] = useState<type.WeatherType>();
-    const [locationData, setLocationData] = useState<type.LocationType>();
+    const setWeatherData = useSetRecoilState(weatherDataState);
+    const setLocationData = useSetRecoilState(locationDataState);
 
     const location = useGeoLocation();
     let latitude: number | undefined
@@ -73,8 +74,8 @@ export default function InfoBox() {
 
     return (
         <Box sx={{height: '100vh',backgroundColor: '#FBFEFF', position: 'sticky', top: 0, overflow: 'hidden'}}>
-            <PlaceBox locationData={locationData}/>
-            <WeatherBox weatherData={weatherData}/>
+            <PlaceBox/>
+            <WeatherBox/>
         </Box>
     )
 }

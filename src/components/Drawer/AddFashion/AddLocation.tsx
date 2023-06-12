@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { type } from '../../../utils/types';
+import { LocationType } from '../../../utils/types';
 import useGeoLocation from "../../../assets/hooks/useGeoLocation";
 
 import { IconButton, Toolbar, Typography } from "@mui/material";
@@ -12,7 +12,7 @@ type LocationProps = {
 }
 
 export default function AddLocation({getLocationData}: LocationProps) {
-    const [location, setLocation] = useState<type.LocationType>();
+    const [location, setLocation] = useState<LocationType>();
     const locationData = useGeoLocation();
     let latitude: number | undefined;
     let longitude: number | undefined;

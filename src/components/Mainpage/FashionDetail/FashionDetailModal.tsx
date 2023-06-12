@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { type } from '../../../utils/types';
+import { SinglePostType } from '../../../utils/types';
 import '../../../fonts/font.css';
 import weatherSky from '../../../assets/data/weatherSky';
 import rainfallType from '../../../assets/data/rainfallType';
@@ -23,7 +23,7 @@ type FashionDetailProps = {
 };
 
 export default function FashioinDetailModal({singleId}: FashionDetailProps) {
-    const [singleData, setSingleData] = useState<type.SinglePostType>();
+    const [singleData, setSingleData] = useState<SinglePostType>();
     
     const singlePostAPI = async () => {
         console.log("singleId: ", singleId)

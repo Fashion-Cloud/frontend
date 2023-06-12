@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-import { type } from '@/utils/types';
+import { LocationType, WeatherType } from '@/utils/types';
 import {
     Box,
     Button,
@@ -19,8 +19,8 @@ export default function AddFashion() {
     const [postTitle, setPostTitle] = useState('');
     const [postImage, setPostImage] = React.useState("");
     const [postReview, setPostReview] = React.useState(2);
-    const [postLocation, setPostLocation] = useState<type.LocationType>();
-    const [postWeather, setPostWeather] = useState<type.WeatherType>();
+    const [postLocation, setPostLocation] = useState<LocationType>();
+    const [postWeather, setPostWeather] = useState<WeatherType>();
 
     function getImageData(data: string) {
         setPostImage(data)
@@ -34,11 +34,11 @@ export default function AddFashion() {
         setPostTitle(data)
         console.log("[AddFashion -> AddTitle] postTitle: ", data)
     }
-    function getLocationData(data: type.LocationType) {
+    function getLocationData(data: LocationType) {
         setPostLocation(data)
         console.log("[AddFashion -> AddLocation] postLocation: ", data)
     }
-    function getWeatherData(data: type.WeatherType) {
+    function getWeatherData(data: WeatherType) {
         setPostWeather(data)
         console.log("[AddFashion -> AddWeatherInfo] postWeather: ", data)
     }

@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import CloseIcon from "@mui/icons-material/Close";
 
-import { type } from '../../utils/types';
+import { WeatherPostType } from '../../utils/types';
 import FashioinDetailModal from './FashionDetail/FashionDetailModal';
 
 const style = {
@@ -75,7 +75,7 @@ export default function AllFashion() {
     // }, [skyCode, rainfallCode, windChill])
 
     const FashionList = () => {
-        let fashion: type.WeatherPostType[] = [];
+        let fashion: WeatherPostType[] = [];
         var array = [];
 
         // fashion = post

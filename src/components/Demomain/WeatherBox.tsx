@@ -1,4 +1,6 @@
 import {useRef, useEffect} from 'react';
+import { useRecoilValue } from 'recoil';
+import { weatherDataState } from '../../Recoil';
 import { 
     Box, 
     Toolbar, 
@@ -6,7 +8,7 @@ import {
     Typography 
 } from "@mui/material";
 import lottie from 'lottie-web';
-import { type } from '../../utils/types';
+import { WeatherType } from '../../utils/types';
 
 import WaterIcon from '@mui/icons-material/Water'; // 습도 아이콘
 import AirIcon from '@mui/icons-material/Air'; // 풍속 아이콘
@@ -15,7 +17,7 @@ import WaterDropIcon from '@mui/icons-material/WaterDrop'; // 강수량 아이�
 import weatherSky from '../../assets/data/weatherSky';
 
 type WeatherProps = {
-    weatherData: type.WeatherType | undefined;
+    weatherData: WeatherType | undefined;
 }
 
 const WeatherSkyLottie = ({weatherData}: WeatherProps) => {
@@ -56,6 +58,7 @@ const WeatherSkyLottie = ({weatherData}: WeatherProps) => {
 };
 
 const WeatherInfoBox = ({weatherData}: WeatherProps) => {
+    
     return(
         <Box justifyContent='center' display='grid' sx={{mt: 5}}>
             <Toolbar>
@@ -86,7 +89,9 @@ const WeatherInfoBox = ({weatherData}: WeatherProps) => {
     )
 }
 
-export default function WeatherBox({weatherData}: WeatherProps) {
+export default function WeatherBox() {
+    const weatherData = useRecoilValue(weatherDataState);
+
     return(
         <Box>
             <WeatherSkyLottie weatherData={weatherData}/>

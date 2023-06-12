@@ -1,6 +1,9 @@
 import React, { useEffect, useState }  from "react";
+import { useRecoilState } from 'recoil';
+import { skyCodeState, rainfallCodeState, windChillState,
+    fullPageState, currentPageState } from '../../Recoil';
 import axios from "axios";
-import { type } from '../../utils/types';
+import { WeatherPostType } from '../../utils/types';
 import { 
     Box, 
     Card, 
@@ -36,19 +39,20 @@ export default function FashionList() {
     let pageIndex: number = 0;
     let pageLastIndex: number = 0;
 
-    const [post, setPost] = useState<type.WeatherPostType[]>([]);
-    const [singleId, setSingleId] = useState("");
+    const [post, setPost] = useState<WeatherPostType[]>([]);
 
-    const [openDetail, setOpenDetail] = React.useState(false);
+    const [singleId, setSingleId] = useState<string>('');
+    const [openDetail, setOpenDetail] = useState<boolean>(false);
+
     const handleOpenDetail = () => setOpenDetail(true);
     const handleCloseDetail =  () => setOpenDetail(false);
 
-    const [skyCode, setSkyCode] = useState<number>(1);
-    const [rainfallCode, setRainfallCode] = useState<number>(0);
-    const [windChill, setWindChill] = useState<number>(26);
+    const [skyCode, setSkyCode] = useRecoilState(skyCodeState);
+    const [rainfallCode, setRainfallCode] = useRecoilState(rainfallCodeState);
+    const [windChill, setWindChill] = useRecoilState(windChillState);
 
-    const [pageCount, setPageCount] = useState<number>(1); // 전체 페이지
-    const [page, setPage] = useState<number>(1); // 현재 페이지
+    const [pageCount, setPageCount] = useRecoilState(fullPageState); // 전체 페이지
+    const [page, setPage] = useRecoilState(currentPageState); // 현재 페이지
 
     function getWeatherData(sky: number, rain: number) {
         setSkyCode(sky)
@@ -112,7 +116,7 @@ export default function FashionList() {
     }
 
     const FashionList = () => {
-        let fashion: type.WeatherPostType[] = [];
+        let fashion: WeatherPostType[] = [];
         var array = [];
 
         fashion = post

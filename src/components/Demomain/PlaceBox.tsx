@@ -2,15 +2,14 @@ import {
     Toolbar,
     Typography
 } from "@mui/material";
-import { type } from '../../utils/types';
+import { useRecoilValue } from "recoil";
+import { locationDataState } from "../../Recoil";
 
 import PlaceIcon from '@mui/icons-material/Place';
 
-type LocationProps = {
-    locationData: type.LocationType | undefined;
-}
-
-export default function PlaceBox({locationData}: LocationProps) {
+export default function PlaceBox() {
+    const locationData = useRecoilValue(locationDataState);
+    
     return (
         <Toolbar sx={{justifyContent: 'center', mt: 10}}>
             <PlaceIcon sx={{mr: 0.7}}/>

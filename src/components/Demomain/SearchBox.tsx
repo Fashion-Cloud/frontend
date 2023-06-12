@@ -146,23 +146,6 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
     }, [location])
 
     function getSkyData(data: string) {
-        // let skyCode: string = "";
-        // let rainfallCode: string = "";
-        // console.log("data: ", data)
-
-        // if (data === 'Sunny') {
-        //     skyCode = 'CLEAR';
-        //     rainfallCode = 'CLEAR';
-        // } else if (data === 'Mostly Cloudy'){
-        //     skyCode = 'CLOUDY';
-        //     rainfallCode = 'CLEAR';
-        // } else if (data === 'Rain'){
-        //     skyCode = 'CLEAR';
-        //     rainfallCode = 'RAIN';
-        // } else if (data === 'Snow'){
-        //     skyCode = 'CLEAR';
-        //     rainfallCode = 'SNOW';
-        // }
         let skyCode: number = 0;
         let rainfallCode: number = 0;
         console.log("data: ", data)

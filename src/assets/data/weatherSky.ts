@@ -1,21 +1,16 @@
 export default function weatherSky(sky: number | undefined) {
-    let skyName: string;
+    let skyName: string = 'Clear';
 
     switch(sky) {
         case 1:
-            skyName = 'Sunny';
+            skyName = 'Clear';
             break;
         case 3:
-            skyName =  'Mostly Cloudy';
+            skyName =  'Cloudy';
             break;
         case 4:
-            skyName =  'Rain';
+            skyName =  'Overcast';
             break;
-        case 5:
-            skyName =  'Snow';
-            break;
-        default:
-            skyName = 'none';
     }
 
     return skyName
