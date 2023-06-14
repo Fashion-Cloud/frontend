@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-import { type } from '@/utils/types';
+import { LocationType, WeatherType } from '@/utils/types';
 import {
     Box,
     Button,
@@ -18,15 +18,15 @@ import AddImage from './AddFashion/AddImage';
 export default function AddFashion() {
     const [postTitle, setPostTitle] = useState('');
     const [postImage, setPostImage] = React.useState("");
-    const [postReview, setPostReview] = React.useState("");
-    const [postLocation, setPostLocation] = useState<type.LocationType>();
-    const [postWeather, setPostWeather] = useState<type.WeatherType>();
+    const [postReview, setPostReview] = React.useState(2);
+    const [postLocation, setPostLocation] = useState<LocationType>();
+    const [postWeather, setPostWeather] = useState<WeatherType>();
 
     function getImageData(data: string) {
         setPostImage(data)
         console.log("[AddFashion -> AddImage] postImage: ", data)
     }
-    function getReviewData(data: string) {
+    function getReviewData(data: number) {
         setPostReview(data)
         console.log("[AddFashion -> AddReview] postReview: ", data)
     }
@@ -34,11 +34,11 @@ export default function AddFashion() {
         setPostTitle(data)
         console.log("[AddFashion -> AddTitle] postTitle: ", data)
     }
-    function getLocationData(data: type.LocationType) {
+    function getLocationData(data: LocationType) {
         setPostLocation(data)
         console.log("[AddFashion -> AddLocation] postLocation: ", data)
     }
-    function getWeatherData(data: type.WeatherType) {
+    function getWeatherData(data: WeatherType) {
         setPostWeather(data)
         console.log("[AddFashion -> AddWeatherInfo] postWeather: ", data)
     }
@@ -53,14 +53,13 @@ export default function AddFashion() {
                 review: postReview,
                 temperature: postWeather?.temperature,
                 skyStatus: postWeather?.sky,
-                humidity: postWeather?.humidity,
                 rainfallType: postWeather?.rainfallType,
                 windSpeed: postWeather?.windSpeed,
             }
         ).then((response) => {
             console.log(response)
             alert("post 완료")
-            window.location.replace("/main");
+            window.location.replace("/");
         });
         } catch {
             console.log("api 불러오기 실패")
@@ -88,7 +87,7 @@ export default function AddFashion() {
             <Button 
                 variant="contained" 
                 style={{position: 'absolute', textTransform:"none", borderRadius: '20px'}} 
-                sx={{ml: 80, mt: 13, backgroundColor: "#8c79ba","&:hover": {backgroundColor: "#6e4dbf"}}} 
+                sx={{ml: 80, mt: 13, backgroundColor: "#87A9D7","&:hover": {backgroundColor: "#1f5091"}}} 
                 onClick={()=>{
                     postAPI()
                 }}

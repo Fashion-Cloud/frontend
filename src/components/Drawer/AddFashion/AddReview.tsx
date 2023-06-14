@@ -2,56 +2,83 @@ import React from "react"
 import { 
     Toolbar, 
     Typography,
-    MenuItem,
-    FormControl
+    Slider,
+    Box
 } from "@mui/material";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { styled } from '@mui/material/styles';
 
 type ReviewProps = {
     getReviewData: Function;
 }
 
-export default function AddReview({getReviewData}: ReviewProps) {
-    const [review, setreview] = React.useState("");
+const reviewMarks = [
+    {
+      value: 0,
+      label: '추웠다'
+    },
+    {
+      value: 1,
+      label: '서늘했다'
+    },
+    {
+      value: 2,
+      label: '괜찮았다'
+    },
+    {
+      value: 3,
+      label: '따뜻했다'
+    },
+    {
+      value: 4,
+      label: '더웠다'
+    }
+];
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setreview(event.target.value);
-        console.log("event.target.value: ", event.target.value)
-        switch(Number(event.target.value)) {
-            case 10:
-                getReviewData("괜찮았다");
-                break;
-            case 20:
-                getReviewData("추웠다");
-                break;
-            case 30:
-                getReviewData("더웠다");
-                break;
-            default:
-                getReviewData("none");
+const PrettoSlider = styled(Slider)({
+    color: '#87A9D7',
+    height: 8,
+    '& .MuiSlider-track': {
+      border: 'none',
+    },
+    '& .MuiSlider-thumb': {
+      height: 24,
+      width: 24,
+      backgroundColor: '#fff',
+      border: '2px solid currentColor',
+      '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+        boxShadow: 'inherit',
+      },
+      '&:before': {
+        display: 'none',
+      },
+    },
+});
+
+export default function AddReview({getReviewData}: ReviewProps) {
+    const [reviewSlider, setReviewSlider] = React.useState<number>(2);
+
+    const handleReviewChange = (event: Event, newValue: number | number[]) => {
+        if (typeof newValue === 'number') {
+            setReviewSlider(newValue);
+            getReviewData(newValue);
         }
     };
 
     return(
-        <Toolbar>
+        <Toolbar sx={{mt: '-10px'}}>
             <Typography fontFamily='BalooBhaijaan' fontWeight='700' fontSize='16pt'>
                 Review: 
             </Typography>
-            <FormControl size="small" sx={{ m: 1, minWidth: 120 }}>
-                <Select
-                    value={review}
-                    onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ "aria-label": "Without label" }}
-                >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>괜찮았다</MenuItem>
-                <MenuItem value={20}>추웠다</MenuItem>
-                <MenuItem value={30}>더웠다</MenuItem>
-                </Select>
-            </FormControl>
+            <Box  sx={{ width: 250, ml: '20px', mt: '30px' }}>
+                <PrettoSlider
+                    aria-label="pretto slider"
+                    step={1}
+                    max={4}
+                    marks={reviewMarks}
+                    value={reviewSlider}
+                    onChange={handleReviewChange}
+                />
+            </Box>
         </Toolbar>
     )
 }

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import { SinglePostType } from '../../utils/types';
 import axios from 'axios'
-import { type } from '../../../utils/types';
-import '../../../fonts/font.css';
-import weatherSky from '../../../assets/data/weatherSky';
-import rainfallType from '../../../assets/data/rainfallType';
+import '../../fonts/font.css';
+import weatherSky from '../../assets/data/weatherSky';
+import rainfallType from '../../assets/data/rainfallType';
 
 import {
     Card,
@@ -23,7 +23,7 @@ type FashionDetailProps = {
 };
 
 export default function FashioinDetailModal({singleId}: FashionDetailProps) {
-    const [singleData, setSingleData] = useState<type.SinglePostType>();
+    const [singleData, setSingleData] = useState<SinglePostType>();
     
     const singlePostAPI = async () => {
         console.log("singleId: ", singleId)
@@ -73,7 +73,7 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
                             <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
                                 <AirIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
                                 <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
-                                    풍속 - {singleData.windChill} m/s
+                                    풍속 - {(singleData.windChill).toPrecision(4)} m/s
                                 </Typography>
                             </Button>
                             <br/>

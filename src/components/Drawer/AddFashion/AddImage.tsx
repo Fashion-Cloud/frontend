@@ -20,6 +20,8 @@ export default function AddImage({getImageData}: ImageProps) {
   const [imgURL, setImgURL] = useState("");
   const [previewImg, setPreviewImg] = useState("");
 
+  const [uploadState, setUploadState] = useState(false);
+
   // toastify 알람 실행 함수 만들기
   const success = () => toast.success("이미지 업로드 성공!");
   const error = () => toast.error("이미지 업로드 실패!");
@@ -46,6 +48,7 @@ export default function AddImage({getImageData}: ImageProps) {
       if(event.target.files&&event.target.files[0]){
         const file: any = event.target.files instanceof FileList ? event.target.files[0] : null;
 
+        setUploadState(false)
         setImgURL(file)
         console.log("new file image: ", file)
 
@@ -75,7 +78,7 @@ export default function AddImage({getImageData}: ImageProps) {
         success();
         console.log("sendImage URL response: ", response.data)
         getImageData(response.data.data.url)
-
+        setUploadState(true)
       });
       } catch {
         error();
@@ -131,10 +134,11 @@ export default function AddImage({getImageData}: ImageProps) {
         </Button>
         <Box>
           <Button 
-              onClick={() => {onClickImgUpload();}}
-              variant="contained" 
-              style={{position: 'absolute', textTransform:"none", borderRadius: '20px'}} 
-              sx={{ml: 13, mt: 5, backgroundColor: "#8c79ba", "&:hover": {backgroundColor: "#6e4dbf"}}}
+            disabled={uploadState} 
+            onClick={() => {onClickImgUpload();}}
+            variant="contained" 
+            style={{position: 'absolute', textTransform:"none", borderRadius: '20px'}} 
+            sx={{ml: 13, mt: 5, backgroundColor: "#87A9D7", "&:hover": {backgroundColor: "#1f5091"}}}
           >
               <Typography sx={{ml: 3, mr: 3}}>
                   Image Upload

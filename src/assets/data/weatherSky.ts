@@ -1,21 +1,16 @@
-export default function weatherSky(sky: number): string {
-    let skyName: string;
+export default function weatherSky(sky: number | undefined) {
+    let skyName: string = 'Clear';
 
     switch(sky) {
         case 1:
-            skyName = '맑음';
+            skyName = 'Clear';
             break;
         case 3:
-            skyName =  '구름많음';
+            skyName =  'Cloudy';
             break;
         case 4:
-            skyName =  '흐림';
+            skyName =  'Overcast';
             break;
-        case 5:
-            skyName =  '눈';
-            break;
-        default:
-            skyName = 'none';
     }
 
     return skyName

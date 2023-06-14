@@ -1,30 +1,28 @@
-export default function rainfallType(type: number): string {
-    let rainType: string;
+export default function rainfallType(type: number | undefined): string {
+    let rainType: string = 'Clear';
 
     switch(type) {
         case 0: 
-            rainType = 'none'
+            rainType = 'Clear'
             break;
         case 1:
-            rainType = 'rain';
+            rainType = 'Rain';
             break;
         case 2:
-            rainType = 'rain/snow';
+            rainType = 'Rain/Snow';
             break;
         case 3:
-            rainType =  'snow';
+            rainType =  'Snow';
             break;
         case 5:
-            rainType =  'raindrop';
+            rainType =  'Raindrop';
             break;
         case 6:
-            rainType =  'raindrop/snow';
+            rainType =  'Raindrop/Snow';
             break;
         case 7:
-            rainType =  'snow';
+            rainType =  'Snow';
             break;
-        default:
-            rainType = 'none';
     }
 
     return rainType
