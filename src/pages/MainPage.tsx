@@ -1,35 +1,12 @@
-import {
-    CssBaseline, 
-    Container,
-} from '@mui/material';
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import MainDrawer from "../components/Mainpage/MainDrawer";
+import { Box } from "@mui/material";
+import MainLayout from "../components/Mainpage/MainLayout";
 
-import AllFashion from '../components/Mainpage/AllFashion';
-import MainDrawer from '../components/Drawer/MainDrawer';
-
-const theme = createTheme({
-    palette: {
-        background: {
-            default: "# v",
-        }
-    },
-});
-
-export default function MainPage(){
+export default function DemoMain() {
     return(
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Container
-                style={{
-                    width: '100vw',
-                    maxWidth: "2560px",
-                    minHeight: '100vh',
-                    background: 'linear-gradient(252.44deg, #A8C8ED 0%, #7673DC 100%)'
-                }}
-            >
-                <MainDrawer/>
-                <AllFashion/>
-            </Container>
-        </ThemeProvider>
+        <Box>
+            <MainDrawer/>
+            <MainLayout/>
+        </Box>
     )
 }

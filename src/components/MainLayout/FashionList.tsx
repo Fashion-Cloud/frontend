@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import { useEffect, useState }  from "react";
 import { useRecoilState } from 'recoil';
 import { skyCodeState, rainfallCodeState, windChillState,
     fullPageState, currentPageState } from '../../Recoil';
@@ -20,7 +20,7 @@ import PaginationBox from "./PaginationBox";
 import AddFashionButton from "./AddFashionButton";
 
 import CloseIcon from "@mui/icons-material/Close";
-import FashioinDetailModal from "../Mainpage/FashionDetail/FashionDetailModal";
+import FashioinDetailModal from "./FashionDetailModal";
 
 const style = {
     position: "absolute",

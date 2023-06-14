@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import { SinglePostType } from '../../utils/types';
 import axios from 'axios'
-import { SinglePostType } from '../../../utils/types';
-import '../../../fonts/font.css';
-import weatherSky from '../../../assets/data/weatherSky';
-import rainfallType from '../../../assets/data/rainfallType';
+import '../../fonts/font.css';
+import weatherSky from '../../assets/data/weatherSky';
+import rainfallType from '../../assets/data/rainfallType';
 
 import {
     Card,

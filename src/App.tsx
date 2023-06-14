@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import DemoMain from "./pages/DemoMain";
+import Mainpage from "./pages/Mainpage";
 import {RecoilRoot} from 'recoil';
 
 export default function App() {
@@ -8,7 +8,7 @@ export default function App() {
     <RecoilRoot>
       <Router>
         <Routes>
-          <Route path="/" element={<DemoMain/>}/>
+          <Route path="/" element={<Mainpage/>}/>
         </Routes>
       </Router>
     </RecoilRoot>
