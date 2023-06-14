@@ -26,43 +26,43 @@
 /* Dongle */
 @font-face {
     font-family: "Dongle-Bold";
-    src: url("./Dongle-Bold.ttf");
+    src: url("./Dongle/Dongle-Bold.ttf");
 }
 @font-face {
     font-family: "Dongle-Light";
-    src: url("./Dongle-Light.ttf");
+    src: url("./Dongle/Dongle-Light.ttf");
 }
 @font-face {
     font-family: "Dongle-Regular";
-    src: url("./Dongle-Regular.ttf");
+    src: url("./Dongle/Dongle-Regular.ttf");
 }
 
 /* CookieRun */
 @font-face {
     font-family: "CookieRun-Black";
-    src: url("./CookieRun-Black.ttf");
+    src: url("./CookieRun/CookieRun-Black.ttf");
 }
 @font-face {
     font-family: "CookieRun-Bold";
-    src: url("./CookieRun-Bold.ttf");
+    src: url("./CookieRun/CookieRun-Bold.ttf");
 }
 @font-face {
     font-family: "CookieRun-Regular";
-    src: url("./CookieRun-Regular.ttf");
+    src: url("./CookieRun/CookieRun-Regular.ttf");
 }
 
 /* SunFlower */
 @font-face {
     font-family: "Sunflower-Black";
-    src: url("./Sunflower-Bold.ttf");
+    src: url("./Sunflower/Sunflower-Bold.ttf");
 }
 @font-face {
     font-family: "Sunflower-Medium";
-    src: url("./Sunflower-Medium.ttf");
+    src: url("./Sunflower/Sunflower-Medium.ttf");
 }
 @font-face {
     font-family: "Sunflower-Light";
-    src: url("./Sunflower-Light.ttf");
+    src: url("./Sunflower/Sunflower-Light.ttf");
 }
 
 /* Playfair Display */
