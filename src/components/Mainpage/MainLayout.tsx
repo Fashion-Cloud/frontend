@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import InfoBox from '../MainLayout/InfoBox';
-import FashionList from '../MainLayout/FashionList';
+import FashionListBox from '../MainLayout/FashionListBox';
 
 export default function MainLayout() {
     return(
@@ -9,7 +9,7 @@ export default function MainLayout() {
             <Grid container>
                 <Grid item xs={9}>
                     {/* <Item>xs=9</Item> */}
-                    <FashionList/>
+                    <FashionListBox/>
                 </Grid>
                 <Grid item xs={3}>
                     {/* <Item>xs=3</Item> */}

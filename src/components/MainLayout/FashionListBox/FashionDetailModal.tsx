@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { SinglePostType } from '../../utils/types';
+import { SinglePostType } from '../../../utils/types';
 import axios from 'axios'
-import '../../fonts/font.css';
-import weatherSky from '../../assets/data/weatherSky';
-import rainfallType from '../../assets/data/rainfallType';
+import '../../../fonts/font.css';
+import weatherSky from '../../../assets/data/weatherSky';
+import rainfallType from '../../../assets/data/rainfallType';
 
 import {
     Card,
@@ -14,7 +14,7 @@ import {
     Button
   } from "@mui/material";
 
-import AirIcon from '@mui/icons-material/Air';
+  import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
 import WbCloudyIcon from '@mui/icons-material/WbCloudy';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
@@ -71,9 +71,9 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
                         
                         <Box sx={{mt: 1, ml: 4}}>
                             <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
-                                <AirIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
+                                <DeviceThermostatIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
                                 <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
-                                    풍속 - {(singleData.windChill).toPrecision(4)} m/s
+                                    체감온도 - {singleData.windChill} °C
                                 </Typography>
                             </Button>
                             <br/>

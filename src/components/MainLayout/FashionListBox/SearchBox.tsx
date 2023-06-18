@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
+import axios from 'axios';
+import useGeoLocation from "../../../assets/hooks/useGeoLocation";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { weatherDataState, skyCodeState, rainfallCodeState, windChillState } from "../../../Recoil";
+
 import { 
     Box,
     Grow,
@@ -17,9 +22,6 @@ import {
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
-
-import axios from 'axios';
-import useGeoLocation from "../../assets/hooks/useGeoLocation";
 
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CloudIcon from "@mui/icons-material/Cloud";
@@ -68,13 +70,7 @@ const PrettoSlider = styled(Slider)({
     },
 });
 
-type SearchProps = {
-    getWeatherData: Function;
-    getTempData: Function;
-    getPageNum: Function;
-}
-
-export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
+export default function SearchBox() {
     const [anchorElSelect, setAnchorElSelect] = React.useState<HTMLButtonElement | null>(null);
     const [openSelect, setOpenSelect] = React.useState(false);
     const [placementSelect, setPlacementSelect] = React.useState<PopperPlacementType>();
@@ -84,7 +80,9 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
     const [openSlider, setOpenSlider] = React.useState(false);
     const [placementSlider, setPlacementSlider] = React.useState<PopperPlacementType>();
 
-    const [tempSlider, setTempSlider] = React.useState<number>(26);
+    const setSkyCode = useSetRecoilState(skyCodeState);
+    const setRainfallCode = useSetRecoilState(rainfallCodeState);
+    const [windChill, setWindChill] = useRecoilState(windChillState);
 
     const location = useGeoLocation();
     let latitude: number | undefined
@@ -92,8 +90,9 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
 
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
         if (typeof newValue === 'number') {
-            setTempSlider(newValue);
-            getTempData(newValue);
+            setWindChill(newValue);
+            console.log("[Recoil] windChill: ", newValue);
+            
         }
     };
     
@@ -126,7 +125,8 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
             ).then((response) => {
                 const data = response.data.data;
                 console.log("[WexatherTemp] tempAPI: ", data)
-                setTempSlider(data?.temperature)
+
+                setWindChill(data?.windChill)
             });
             } catch {
                 console.log("[WeatherTemp] tempAPI: api 불러오기 실패")
@@ -146,25 +146,21 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
     }, [location])
 
     function getSkyData(data: string) {
-        let skyCode: number = 0;
-        let rainfallCode: number = 0;
         console.log("data: ", data)
 
         if (data === 'Sunny') {
-            skyCode = 1;
-            rainfallCode = 0;
+            setSkyCode(1); 
+            setRainfallCode(0);
         } else if (data === 'Mostly Cloudy'){
-            skyCode = 3;
-            rainfallCode = 0;
+            setSkyCode(3);
+            setRainfallCode(0);  
         } else if (data === 'Rain'){
-            skyCode = 4;
-            rainfallCode = 1;
+            setSkyCode(0);
+            setRainfallCode(1);  
         } else if (data === 'Snow'){
-            skyCode = 5;
-            rainfallCode = 3;
+            setSkyCode(0);
+            setRainfallCode(7);  
         }
-
-        getWeatherData(skyCode, rainfallCode)
     }
 
     const handleWeatherSelect =
@@ -221,7 +217,7 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
                         <ThermostatIcon sx={{mr: 1}}/>
 
                         <Typography>
-                            {tempSlider} °C
+                            {windChill} °C
                         </Typography>
                     </IconButton>
                 </Paper>
@@ -258,7 +254,7 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
                             <PrettoSlider
                                 valueLabelDisplay="auto"
                                 aria-label="pretto slider"
-                                value={tempSlider}
+                                value={windChill}
                                 onChange={handleSliderChange}
                                 sx={{mt: 1}}
                                 min={-30}

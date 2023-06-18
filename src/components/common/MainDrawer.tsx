@@ -1,4 +1,7 @@
 import { styled, Theme, CSSObject } from '@mui/material/styles';
+import { useRecoilState } from "recoil";
+import { menuState } from "../../Recoil";
+
 import {
     CssBaseline,
     Box,
@@ -11,7 +14,7 @@ import {
 } from '@mui/material';
 
 import HomeIcon from '@mui/icons-material/Home';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CheckroomIcon from '@mui/icons-material/Checkroom';
 // import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import logo from '../../assets/images/bang.png';
@@ -57,14 +60,17 @@ const MiniDrawer = styled(Drawer, { shouldForwardProp: (prop) => prop !== 'open'
   );
 
 export default function MainDrawer() {
-    // const [view, setView] = React.useState('list');
-    // const [iconColor, setIconColor] = React.useState('#757575');
-    // const [backColor, setBackColor] = React.useState('#FFFFFF');
+    const [select, setSelect] = useRecoilState(menuState);
+    console.log("select: ", select);
 
-    // const handleChange = (event: React.MouseEvent<HTMLElement>, nextView: string) => {
-    //     setView(nextView);
+    const Menus = [
+        {title: 'Home', src: '/', icon: <HomeIcon/>},
+        {title: 'Lookbook', src: '/lookbook', icon: <CheckroomIcon/>}
+    ]
 
-    // };
+    const handleClick = (menu: string) => {
+        setSelect(menu);
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -81,21 +87,15 @@ export default function MainDrawer() {
                 <Divider/>
                 <List>
                     <ListItem disablePadding sx={{ display: 'block' }}>
-                        <ListItemButton sx={{ minHeight: 48, px: 2.5, backgroundColor: '#EDF7FC' }}>
-                            <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                                <HomeIcon color="primary" />
-                            </ListItemIcon>
-                        </ListItemButton>
-                        <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
-                            <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                                <AccountCircleIcon />
-                            </ListItemIcon>
-                        </ListItemButton>
-                        {/* <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
-                            <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center' }}>
-                                <AddCircleIcon />
-                            </ListItemIcon>
-                        </ListItemButton> */}
+                        {
+                            Menus.map((menu, index) => (
+                                <ListItemButton key={index} href={menu.src} style={{ backgroundColor: select === menu.title ? '#EDF7FC' : '' }} onClick={() => handleClick(menu.title)} sx={{ minHeight: 48, px: 2.5 }}>
+                                    <ListItemIcon style={{color: select === menu.title ? '#4B9BBF' : ''}} sx={{ minWidth: 0, justifyContent: 'center' }}>
+                                        {menu.icon}
+                                    </ListItemIcon>
+                                </ListItemButton>
+                            ))
+                        }
                     </ListItem>
                 </List>
                 <Divider/>
