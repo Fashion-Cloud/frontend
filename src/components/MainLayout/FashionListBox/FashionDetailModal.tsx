@@ -11,12 +11,18 @@ import {
     Divider,
     Typography,
     Box,
-    Button
+    Button,
+    IconButton,
+    Popover,
   } from "@mui/material";
 
-  import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
+import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
 import WbCloudyIcon from '@mui/icons-material/WbCloudy';
 import LightModeIcon from '@mui/icons-material/LightMode';
+
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'; // 채워지지 않음
+import BookmarkIcon from '@mui/icons-material/Bookmark'; // 채워짐
+import LookbookPopover from './LookbookPopover';
 
 type FashionDetailProps = {
     singleId: string;
@@ -24,6 +30,26 @@ type FashionDetailProps = {
 
 export default function FashioinDetailModal({singleId}: FashionDetailProps) {
     const [singleData, setSingleData] = useState<SinglePostType>();
+    const [bookState, setBookState] = useState<boolean>(false);
+    const handleBookClick = () => {
+        setBookState(!bookState)
+    }
+    const handeLookClick = () => {
+        setBookState(true);
+    }
+
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+    const handleMarkClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+        // setBookState(!bookState)
+    };
+    const handleMarkClose = () => {
+        setAnchorEl(null);
+    };
+    
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
     
     const singlePostAPI = async () => {
         console.log("singleId: ", singleId)
@@ -52,7 +78,7 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
         <div>
             {
                 singleData !== undefined
-                ?   <div>
+                ?   <Box>
                         <Card sx={{width: '280px', borderRadius: '5%', ml: 5.5}}>
                             <CardMedia
                                 component="img"
@@ -60,41 +86,70 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
                                 image={singleData.image}
                             />
                         </Card>
-                        <Typography fontFamily='CookieRun-Regular' fontSize='20pt' sx={{mt: 0.5, ml: 6}}>
-                            {singleData.name}
-                        </Typography>
-                        <Typography fontFamily='CookieRun-Regular' fontSize='13pt' sx={{mt: 1, ml: 6.3, mb: 0.3}}>
-                            Review: {singleData.review}
-                        </Typography>
+                        <Box sx={{display: 'flex', justifyContent: 'flex-end', mr: '45px', mt: '15px',
+                                ":hover": {cursor: 'pointer'}
+                        }}>
+                            {
+                                bookState === false
+                                ? <IconButton onClick={handleMarkClick}>
+                                    <BookmarkBorderIcon/>
+                                  </IconButton>
+                                
+                                : <IconButton onClick={handleBookClick}>
+                                    <BookmarkIcon/>
+                                  </IconButton>
+                            }
+                            
+                        </Box>
 
-                        <Divider sx={{width: '310px', ml: 3.5}}/>
-                        
-                        <Box sx={{mt: 1, ml: 4}}>
-                            <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
-                                <DeviceThermostatIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
-                                <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
-                                    체감온도 - {singleData.windChill} °C
-                                </Typography>
-                            </Button>
-                            <br/>
-                            <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
-                                <LightModeIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
-                                <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
-                                    하늘상태 - {weatherSky(singleData.skyStatus)}
-                                </Typography>
-                            </Button>
-                            <br/>
-                            <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}}>
-                                <WbCloudyIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
-                                <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
-                                    강우유형 - {rainfallType(singleData.rainfallType)}
-                                </Typography>
-                            </Button>
+                        <Box sx={{mt: '-45px'}}>
+                            <Typography fontFamily='CookieRun-Regular' fontSize='20pt' sx={{mt: 0.5, ml: 6}}>
+                                {singleData.name}
+                            </Typography>
+                            <Typography fontFamily='CookieRun-Regular' fontSize='13pt' sx={{mt: 1, ml: 6.3, mb: 0.3}}>
+                                Review: {singleData.review}
+                            </Typography>
+
+                            <Divider sx={{width: '310px', ml: 3.5}}/>
+                            
+                            <Box sx={{mt: 2, ml: 4}}>
+                                <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
+                                    <DeviceThermostatIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
+                                    <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
+                                        체감온도 - {singleData.windChill} °C
+                                    </Typography>
+                                </Button>
+                                <br/>
+                                <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}} sx={{mb: 0.5}}>
+                                    <LightModeIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
+                                    <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
+                                        하늘상태 - {weatherSky(singleData.skyStatus)}
+                                    </Typography>
+                                </Button>
+                                <br/>
+                                <Button disabled size='small' style={{textTransform:"none", height: 28, backgroundColor: '#EEEEEE', borderRadius: '20px'}}>
+                                    <WbCloudyIcon style={{color: '#000', height: 20}} sx={{ml: 1}}/>
+                                    <Typography fontFamily='BalooBhaijaan' fontWeight="700" fontSize='13pt' sx={{color: '#000', ml: 1, mr: 1, mt: 0.5}}>
+                                        강우유형 - {rainfallType(singleData.rainfallType)}
+                                    </Typography>
+                                </Button>
+                            </Box>
                         </Box>
                         
-                    </div>
+                    </Box>
                 : null
             }
+            <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleMarkClose}
+                anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+            }}>
+                <LookbookPopover handeLookClick={handeLookClick} handleMarkClose={handleMarkClose}/>
+            </Popover>
         </div>
         
         

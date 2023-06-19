@@ -1,10 +1,42 @@
-import { atom } from 'recoil';
+import axios from 'axios';
+import { atom, selector } from 'recoil';
 import { WeatherType, LocationType } from './utils/types';
 import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
 
+export const latitudeState = atom<number>({
+    key: 'latitudeState', 
+    default: 0,
+});
+
+export const longitudeState = atom<number>({
+    key: 'longitudeState',
+    default: 0,
+});
+
 // FashionList, SearchBox
+// export const skyCodeState = selector({
+//     key: 'skyCodeState',
+//     get: async ({ get }) => {
+//         const latitude = get(latitudeState);
+//         const longitude = get(longitudeState);
+
+//         if(latitude && longitude) {
+//             try{
+//                 const response = await axios.get(`/api/v1/weather?latitude=${latitude}&longitude=${longitude}`, {
+//                     headers: {
+//                         Accept: 'application/json'
+//                     },
+//                     withCredentials: true
+//                 });
+//                 return response.data.data?.sky;
+//             } catch(error) {
+//                 throw error;
+//             }
+//         }
+//     }
+// })
 export const skyCodeState = atom<number>({
     key: 'skyCodeState',
     default: 1,

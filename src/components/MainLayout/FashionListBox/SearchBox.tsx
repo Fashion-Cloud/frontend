@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import useGeoLocation from "../../../assets/hooks/useGeoLocation";
@@ -29,7 +29,7 @@ import UmbrellaIcon from "@mui/icons-material/Umbrella";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 
 const IconOptions = [<WbSunnyIcon/>, <CloudIcon/>, <UmbrellaIcon/>, <AcUnitIcon/>];
-const options = ['Sunny', 'Mostly Cloudy', 'Rain', 'Snow'];
+const options = ['Sunny', 'Cloudy', 'Rain', 'Snow'];
 
 const PrettoSlider = styled(Slider)({
     color: '#7DAADB',
@@ -71,17 +71,19 @@ const PrettoSlider = styled(Slider)({
 });
 
 export default function SearchBox() {
-    const [anchorElSelect, setAnchorElSelect] = React.useState<HTMLButtonElement | null>(null);
-    const [openSelect, setOpenSelect] = React.useState(false);
-    const [placementSelect, setPlacementSelect] = React.useState<PopperPlacementType>();
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const weatherData = useRecoilValue(weatherDataState)
 
-    const [anchorElSlider, setAnchorElSlider] = React.useState<HTMLButtonElement | null>(null);
-    const [openSlider, setOpenSlider] = React.useState(false);
-    const [placementSlider, setPlacementSlider] = React.useState<PopperPlacementType>();
+    const [anchorElSelect, setAnchorElSelect] = useState<HTMLButtonElement | null>(null);
+    const [openSelect, setOpenSelect] = useState(false);
+    const [placementSelect, setPlacementSelect] = useState<PopperPlacementType>();
+    const [selectedIndex, setSelectedIndex] = useState(searchSky(weatherData.sky, weatherData.rainfallType));
 
-    const setSkyCode = useSetRecoilState(skyCodeState);
-    const setRainfallCode = useSetRecoilState(rainfallCodeState);
+    const [anchorElSlider, setAnchorElSlider] = useState<HTMLButtonElement | null>(null);
+    const [openSlider, setOpenSlider] = useState(false);
+    const [placementSlider, setPlacementSlider] = useState<PopperPlacementType>();
+
+    const [skyCode, setSkyCode] = useRecoilState(skyCodeState);
+    const [rainfallCode, setRainfallCode] = useRecoilState(rainfallCodeState);
     const [windChill, setWindChill] = useRecoilState(windChillState);
 
     const location = useGeoLocation();
@@ -134,6 +136,24 @@ export default function SearchBox() {
         }
     }
 
+    function searchSky(skyCode: number, rainfallCode: number) {
+        let index = 0;
+        console.log("[searchSky] skyCode: ", skyCode);
+        console.log("[searchSky] rainfallCode: ", rainfallCode);
+        
+        if (skyCode === 1 && rainfallCode === 0) {
+            index = 0;
+        } else if (skyCode === 3 && rainfallCode === 0) {
+            index = 1;
+        } else if (skyCode === 0 && (rainfallCode === 1 || rainfallCode === 2 || rainfallCode === 5 || rainfallCode === 6)) {
+            index = 2;
+        } else if (skyCode === 0 && (rainfallCode === 2 || rainfallCode === 3 || rainfallCode === 6 || rainfallCode === 7)) {
+            index = 3;
+        }
+
+        return index;
+    }
+
     useEffect(() => {
         if (location !== undefined) {
             latitude = location.coordinates?.lat;
@@ -143,7 +163,9 @@ export default function SearchBox() {
 
             weatherAPI()
         }
-    }, [location])
+
+        searchSky(skyCode, rainfallCode);
+    }, [location, skyCode, rainfallCode])
 
     function getSkyData(data: string) {
         console.log("data: ", data)
@@ -151,7 +173,7 @@ export default function SearchBox() {
         if (data === 'Sunny') {
             setSkyCode(1); 
             setRainfallCode(0);
-        } else if (data === 'Mostly Cloudy'){
+        } else if (data === 'Cloudy'){
             setSkyCode(3);
             setRainfallCode(0);  
         } else if (data === 'Rain'){

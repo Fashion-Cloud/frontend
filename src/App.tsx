@@ -4,6 +4,7 @@ import Lookbookpage from "./pages/Lookbookpage";
 import {RecoilRoot} from 'recoil';
 
 import MainDrawer from "./components/common/MainDrawer";
+import LookbookDetailpage from "./pages/LookbookDetailpage";
 
 export default function App() {
 
@@ -14,6 +15,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Mainpage/>}/>
           <Route path="/lookbook" element={<Lookbookpage/>}/>
+          <Route path="/lookbookDetail" element={<LookbookDetailpage/>}/>
         </Routes>
       </Router>
     </RecoilRoot>

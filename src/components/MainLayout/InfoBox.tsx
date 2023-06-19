@@ -63,20 +63,15 @@ export default function InfoBox() {
     }
 
     useEffect(() => {
-        // 10분 간격으로 렌더링
-        const interval = setInterval(() => {
-            if (location?.coordinates) {
-                latitude = location.coordinates?.lat;
-                longitude = location.coordinates?.lng;
-                console.log("[GeoLocation] latitude: " , latitude)
-                console.log("[GeoLocation] longitude: " , longitude)
-    
-                locationAPI()
-                weatherAPI()
-            }
-        }, 600000);
-        
-        return () => clearInterval(interval);
+        if (location?.coordinates) {
+            latitude = location.coordinates?.lat;
+            longitude = location.coordinates?.lng;
+            console.log("[GeoLocation] latitude: " , latitude)
+            console.log("[GeoLocation] longitude: " , longitude)
+
+            locationAPI()
+            weatherAPI()
+        }
     }, [location])
 
     return (
