@@ -24,7 +24,7 @@ jobs:
         node: [16]
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: .
         
     steps:
     - name: checkout
