@@ -3,7 +3,7 @@ import {
     Typography
 } from "@mui/material";
 import { useRecoilValue } from "recoil";
-import { locationDataState } from "../../Recoil";
+import { locationDataState } from "../../../Recoil";
 
 import PlaceIcon from '@mui/icons-material/Place';
 

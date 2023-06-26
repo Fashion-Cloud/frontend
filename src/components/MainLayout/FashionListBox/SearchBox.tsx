@@ -1,5 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
+import axios from 'axios';
+import useGeoLocation from "../../../assets/hooks/useGeoLocation";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { weatherDataState, skyCodeState, rainfallCodeState, windChillState } from "../../../Recoil";
+import { BsCloudRainFill, BsCloudSnowFill } from "react-icons/bs";
+
+
 import { 
     Box,
     Grow,
@@ -13,21 +20,17 @@ import {
     Toolbar,
     Typography,
     Slider,
-    Tooltip
+    Tooltip,
+    Divider
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 
-import axios from 'axios';
-import useGeoLocation from "../../assets/hooks/useGeoLocation";
-
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CloudIcon from "@mui/icons-material/Cloud";
-import UmbrellaIcon from "@mui/icons-material/Umbrella";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
 
-const IconOptions = [<WbSunnyIcon/>, <CloudIcon/>, <UmbrellaIcon/>, <AcUnitIcon/>];
-const options = ['Sunny', 'Mostly Cloudy', 'Rain', 'Snow'];
+const IconOptions = [<WbSunnyIcon/>, <CloudIcon/>, <BsCloudRainFill size="25"/>, <Box display='flex' fontSize='25px' sx={{my: '-6px'}}><BsCloudRainFill size="25"/> <Divider orientation="vertical" flexItem sx={{ height: 25, mx: 1}}/> <BsCloudSnowFill size="25"/></Box>, <BsCloudSnowFill size="25"/>];
+const options = ['Sunny', 'Cloudy', 'Rain', 'Rain & Snow','Snow'];
 
 const PrettoSlider = styled(Slider)({
     color: '#7DAADB',
@@ -68,23 +71,23 @@ const PrettoSlider = styled(Slider)({
     },
 });
 
-type SearchProps = {
-    getWeatherData: Function;
-    getTempData: Function;
-    getPageNum: Function;
-}
+export default function SearchBox() {
+    const weatherData = useRecoilValue(weatherDataState)
 
-export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
-    const [anchorElSelect, setAnchorElSelect] = React.useState<HTMLButtonElement | null>(null);
-    const [openSelect, setOpenSelect] = React.useState(false);
-    const [placementSelect, setPlacementSelect] = React.useState<PopperPlacementType>();
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [anchorElSelect, setAnchorElSelect] = useState<HTMLButtonElement | null>(null);
+    const [openSelect, setOpenSelect] = useState(false);
+    const [placementSelect, setPlacementSelect] = useState<PopperPlacementType>();
+    const [selectedIndex, setSelectedIndex] = useState(searchSky(weatherData.sky, weatherData.rainfallType));
 
-    const [anchorElSlider, setAnchorElSlider] = React.useState<HTMLButtonElement | null>(null);
-    const [openSlider, setOpenSlider] = React.useState(false);
-    const [placementSlider, setPlacementSlider] = React.useState<PopperPlacementType>();
+    const [anchorElSlider, setAnchorElSlider] = useState<HTMLButtonElement | null>(null);
+    const [openSlider, setOpenSlider] = useState(false);
+    const [placementSlider, setPlacementSlider] = useState<PopperPlacementType>();
 
-    const [tempSlider, setTempSlider] = React.useState<number>(26);
+    const [skyCode, setSkyCode] = useRecoilState(skyCodeState);
+    const [rainfallCode, setRainfallCode] = useRecoilState(rainfallCodeState);
+    const [windChill, setWindChill] = useRecoilState(windChillState);
+
+    const [snowState, setSnowState] = useState<boolean>(false);
 
     const location = useGeoLocation();
     let latitude: number | undefined
@@ -92,8 +95,9 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
 
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
         if (typeof newValue === 'number') {
-            setTempSlider(newValue);
-            getTempData(newValue);
+            setWindChill(newValue);
+            console.log("[Recoil] windChill: ", newValue);
+            
         }
     };
     
@@ -126,12 +130,33 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
             ).then((response) => {
                 const data = response.data.data;
                 console.log("[WexatherTemp] tempAPI: ", data)
-                setTempSlider(data?.temperature)
+
+                setWindChill(data?.windChill)
             });
             } catch {
                 console.log("[WeatherTemp] tempAPI: api 불러오기 실패")
             };
         }
+    }
+
+    function searchSky(skyCode: number, rainfallCode: number) {
+        let index = 0;
+        console.log("[searchSky] skyCode: ", skyCode);
+        console.log("[searchSky] rainfallCode: ", rainfallCode);
+        
+        if (skyCode === 1 && rainfallCode === 0) {
+            index = 0;
+        } else if ((skyCode === 3 || skyCode === 4) && rainfallCode === 0) {
+            index = 1;
+        } else if (skyCode === 0 && (rainfallCode === 1 || rainfallCode === 5)) {
+            index = 2;
+        } else if (skyCode === 0 && (rainfallCode === 2 || rainfallCode === 6)){
+            index = 3;
+        } else if (skyCode === 0 && (rainfallCode === 3 || rainfallCode === 7)) {
+            index = 4;
+        }
+
+        return index;
     }
 
     useEffect(() => {
@@ -143,28 +168,34 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
 
             weatherAPI()
         }
-    }, [location])
+
+        searchSky(skyCode, rainfallCode);
+    }, [location, skyCode, rainfallCode, windChill])
 
     function getSkyData(data: string) {
-        let skyCode: number = 0;
-        let rainfallCode: number = 0;
         console.log("data: ", data)
 
         if (data === 'Sunny') {
-            skyCode = 1;
-            rainfallCode = 0;
-        } else if (data === 'Mostly Cloudy'){
-            skyCode = 3;
-            rainfallCode = 0;
+            setSkyCode(1); 
+            setRainfallCode(0);
+            setSnowState(false);
+        } else if (data === 'Cloudy'){
+            setSkyCode(3);
+            setRainfallCode(0);  
+            setSnowState(false);
         } else if (data === 'Rain'){
-            skyCode = 4;
-            rainfallCode = 1;
+            setSkyCode(0);
+            setRainfallCode(1);  
+            setSnowState(false);
+        } else if (data === 'Rain & Snow'){
+            setSkyCode(0);
+            setRainfallCode(2); 
+            setSnowState(true);
         } else if (data === 'Snow'){
-            skyCode = 5;
-            rainfallCode = 3;
+            setSkyCode(0);
+            setRainfallCode(7);  
+            setSnowState(false);
         }
-
-        getWeatherData(skyCode, rainfallCode)
     }
 
     const handleWeatherSelect =
@@ -205,7 +236,7 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
                 {/* Weather Select */}
                 <Paper
                     component="form"
-                    sx={{ mt: 2, ml: 1, display: 'flex', justifyContent: 'center', width: '45px', height: '45px', borderRadius: '10px' }}
+                    sx={{ mt: 2, ml: 1, display: 'flex', justifyContent: 'center', width: snowState === false ? '45px' : '90px', height: '45px', borderRadius: '10px' }}
                 >
                     <IconButton onClick={handleWeatherSelect('bottom')} sx={{borderRadius: '10px'}}>
                         {IconOptions[selectedIndex]}
@@ -221,7 +252,7 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
                         <ThermostatIcon sx={{mr: 1}}/>
 
                         <Typography>
-                            {tempSlider} °C
+                            {windChill} °C
                         </Typography>
                     </IconButton>
                 </Paper>
@@ -258,7 +289,7 @@ export default function SearchBox({getWeatherData, getTempData}: SearchProps) {
                             <PrettoSlider
                                 valueLabelDisplay="auto"
                                 aria-label="pretto slider"
-                                value={tempSlider}
+                                value={windChill}
                                 onChange={handleSliderChange}
                                 sx={{mt: 1}}
                                 min={-30}
