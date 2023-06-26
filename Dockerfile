@@ -1,10 +1,8 @@
-FROM node:16
+FROM node:16 as build
 
 WORKDIR /frontend
-RUN npm install
 
-COPY . .
+RUN  npm install
 
-EXPOSE 3000
-
-CMD "npm", "start"
+COPY . /frontend
+RUN npm run build

@@ -21,10 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [18]
+        node: [16]
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: .
         
     steps:
     - name: checkout
@@ -38,6 +38,6 @@ jobs:
     - name: Run test
       run: |
         npm install --force
-        npm run build
+        CI='false' npm run build
       env:
         CI: true

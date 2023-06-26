@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Mainpage from "./pages/MainPage";
 import Lookbookpage from "./pages/Lookbookpage";
@@ -7,7 +8,6 @@ import MainDrawer from "./components/common/MainDrawer";
 import LookbookDetailpage from "./pages/LookbookDetailpage";
 
 export default function App() {
-
   return (
     <RecoilRoot>
       <MainDrawer/>
