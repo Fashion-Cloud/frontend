@@ -63,6 +63,14 @@ export type WeatherPostType = {
     imageUrl: string;
 };
 
+export type LookBookType = {
+    id: string;
+    name: string;
+    imageUrl: string;
+    sky: number;
+    temp: number;
+};
+
 export type ImageUploadType = {
     createdAt: string;
     updatedAt: string;

@@ -11,13 +11,17 @@ import {
     Divider,
 } from "@mui/material";
 import { useEffect, useState } from 'react';
-import { WeatherPostType } from '../../../utils/types';
+import { LookBookType, WeatherPostType } from '../../../utils/types';
 
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
+import { useRecoilValue } from 'recoil';
+import { lookbookIdState } from "../../..//Recoil";
+
 export default function LookbookListBox() {
+    const lookbookId = useRecoilValue(lookbookIdState);
     const [open, setOpen] = useState(false);
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -28,12 +32,12 @@ export default function LookbookListBox() {
     };
     const handleClose = () => {setOpen(false)};
 
-    const [lookbook, setLookbook] = useState<WeatherPostType[]>([]);
+    const [lookbook, setLookbook] = useState<LookBookType[]>([]);
     const fashionAPI = async () => {
         console.log("fashionAPI Start");
         
         try {
-            await axios.get(`/api/v1/books/posts`,
+            await axios.get(`/api/v1/books/posts/${lookbookId}`,
             {
                 headers: {
                     Accept: 'application/json'
@@ -123,15 +127,16 @@ export default function LookbookListBox() {
 
             <Box width="50px"/>
             <Dialog open={open} onClose={handleClose} >
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'left', margin: 1, ml: 3 }}>
+                    <WbSunnyIcon />
+                    {lookbook.length > 0 &&
+                        <Typography variant="h6" sx={{ marginLeft: 2 }}>{lookbook[currentImageIndex].temp} °C</Typography>
+                    }
+                </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     {lookbook.length > 0 &&
                         <img src={lookbook[currentImageIndex].imageUrl} alt={lookbook[currentImageIndex].name} style={{ width: "auto", height: "600px" }} />
                     }
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: 2 }}>
-                        <WbSunnyIcon />
-                        <Typography variant="h6" sx={{ marginLeft: 2 }}>20°C</Typography>
-                    </Box>
-
                 </Box>
                 <Divider/>
                 <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', }}>

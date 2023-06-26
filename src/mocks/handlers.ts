@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { SinglePostType, WeatherType, LocationType, ImageUploadType, WeatherPostType } from '../utils/types';
+import { SinglePostType, WeatherType, LocationType, ImageUploadType, WeatherPostType, LookBookType } from '../utils/types';
 
 // const dummy = "테스트입니다.";
 
@@ -10,47 +10,60 @@ const posts: WeatherPostType[] = [
     "imageUrl": "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",
   },
   {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda94",
-    "name": "여름",
-    "imageUrl": "https://shop-phinf.pstatic.net/20221026_136/1666775192616mcXHY_JPEG/67911035283532969_380459201.jpg?type=f296_296",
-  },
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda95",
-    "name": "가을",
-    "imageUrl": "https://shop-phinf.pstatic.net/20230310_204/1678432133285TqH1a_JPEG/79567975960091012_1853682088.jpg?type=f296_385",
-  },
-]
-
-const posts1: WeatherPostType[] = [
-  {
-    "id": "5fd52d23-9089-49ad-8060-d9097aafda91",
-    "name": "봄엔 가디거언~!",
-    "imageUrl": "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",
-  },
-  {
     "id": "5fd52d23-9089-49ad-8060-d9097aafda92",
-    "name": "모던함의 끝.",
-    "imageUrl": "https://images.onthelook.co.kr/posts/2023031912037042632161.jpeg?w=420&q=60&f=webp",
+    "name": "여름",
+    "imageUrl": "https://images.onthelook.co.kr/posts/2023062215069581850300.jpeg?w=1200&q=75&f=webp",
   },
   {
     "id": "5fd52d23-9089-49ad-8060-d9097aafda93",
-    "name": "나.. 좀 이쁠지도?",
-    "imageUrl": "https://images.onthelook.co.kr/posts/202303200803738411612980.jpeg?w=420&q=60&f=webp",
+    "name": "가을",
+    "imageUrl": "https://images.onthelook.co.kr/posts/202306221506925912683450.jpeg?w=1200&q=75&f=webp",
   },
+]
+
+const posts1: LookBookType[] = [
   {
     "id": "5fd52d23-9089-49ad-8060-d9097aafda94",
-    "name": "아우터 이뿌지!!",
-    "imageUrl": "https://shop-phinf.pstatic.net/20221026_136/1666775192616mcXHY_JPEG/67911035283532969_380459201.jpg?type=f296_296",
+    "name": "봄엔 가디거언~!",
+    "imageUrl": "https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp",
+    "sky": 3,
+    "temp": 20,
+
   },
   {
     "id": "5fd52d23-9089-49ad-8060-d9097aafda95",
-    "name": "이렇게 입어봐!",
-    "imageUrl": "https://shop-phinf.pstatic.net/20230310_204/1678432133285TqH1a_JPEG/79567975960091012_1853682088.jpg?type=f296_385",
+    "name": "모던함의 끝.",
+    "imageUrl": "https://images.onthelook.co.kr/posts/2023031912037042632161.jpeg?w=420&q=60&f=webp",
+    "sky": 3,
+    "temp": 22,
   },
   {
     "id": "5fd52d23-9089-49ad-8060-d9097aafda96",
+    "name": "나.. 좀 이쁠지도?",
+    "imageUrl": "https://images.onthelook.co.kr/posts/202303200803738411612980.jpeg?w=420&q=60&f=webp",
+    "sky": 3,
+    "temp": 26,
+  },
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda97",
+    "name": "아우터 이뿌지!!",
+    "imageUrl": "https://shop-phinf.pstatic.net/20221026_136/1666775192616mcXHY_JPEG/67911035283532969_380459201.jpg?type=f296_296",
+    "sky": 3,
+    "temp": 18,
+  },
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda98",
+    "name": "이렇게 입어봐!",
+    "imageUrl": "https://shop-phinf.pstatic.net/20230310_204/1678432133285TqH1a_JPEG/79567975960091012_1853682088.jpg?type=f296_385",
+    "sky": 3,
+    "temp": 21,
+  },
+  {
+    "id": "5fd52d23-9089-49ad-8060-d9097aafda99",
     "name": "근본은 스트라이프지!",
-    "imageUrl": "https://www.womansense.co.kr/upload/woman/article/201909/thumb/42904-386245-sampleM.jpg"
+    "imageUrl": "https://www.womansense.co.kr/upload/woman/article/201909/thumb/42904-386245-sampleM.jpg",
+    "sky": 3,
+    "temp": 20,
   },
 ]
 
@@ -337,5 +350,15 @@ export const handlers = [
     }),
     rest.get("/api/v1/books/posts", (req, res, ctx) => {
       return res(ctx.status(200), ctx.json(posts1))
+    }),
+
+    rest.get(`/api/v1/books/posts/5fd52d23-9089-49ad-8060-d9097aafda91`, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.delay(500), ctx.json(posts1))
+    }),
+    rest.get(`/api/v1/books/posts/5fd52d23-9089-49ad-8060-d9097aafda92`, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.delay(500), ctx.json(posts1))
+    }),
+    rest.get(`/api/v1/books/posts/5fd52d23-9089-49ad-8060-d9097aafda93`, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.delay(500), ctx.json(posts1))
     }),
   ];

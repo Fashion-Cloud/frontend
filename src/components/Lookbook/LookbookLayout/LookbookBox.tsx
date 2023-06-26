@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useSetRecoilState } from 'recoil';
 import { 
     Box,
     Grid,
@@ -8,12 +9,15 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from 'react';
 import { WeatherPostType } from '../../../utils/types';
-import LookbookDetailpage from '../../../pages/LookbookDetailpage';
+import { lookbookIdState, lookbookNameState } from '../../..//Recoil';
 
 export default function LookbookBox() {
     // const [lookSelected, setLookSelected] = useState<string>('');
-    const handleLookClick = (id: string) => {
-        <LookbookDetailpage/>
+    const setLookBookId = useSetRecoilState(lookbookIdState);
+    const setLookbookName = useSetRecoilState(lookbookNameState);
+
+    const handleLookClick = () => {
+        window.location.href="/lookbookdetail";
     }
 
     const [lookbook, setLookbook] = useState<WeatherPostType[]>([]);
@@ -51,7 +55,9 @@ export default function LookbookBox() {
                     <Grid item key={index} xs={4} >
                         <Card sx={{ borderRadius: '10px', cursor: 'pointer'}} 
                             onClick={() => {
-                                handleLookClick(lookbook.id)
+                                setLookBookId(lookbook.id)
+                                setLookbookName(lookbook.name)
+                                handleLookClick()
                             }}
                         >
                             <Box sx={{ position: 'relative' }}>

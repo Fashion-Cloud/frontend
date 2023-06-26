@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import useGeoLocation from "../../../assets/hooks/useGeoLocation";
-import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { weatherDataState, skyCodeState, rainfallCodeState, windChillState } from "../../../Recoil";
+import { BsCloudRainFill, BsCloudSnowFill } from "react-icons/bs";
+
 
 import { 
     Box,
@@ -18,18 +20,17 @@ import {
     Toolbar,
     Typography,
     Slider,
-    Tooltip
+    Tooltip,
+    Divider
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import CloudIcon from "@mui/icons-material/Cloud";
-import UmbrellaIcon from "@mui/icons-material/Umbrella";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
 
-const IconOptions = [<WbSunnyIcon/>, <CloudIcon/>, <UmbrellaIcon/>, <AcUnitIcon/>];
-const options = ['Sunny', 'Cloudy', 'Rain', 'Snow'];
+const IconOptions = [<WbSunnyIcon/>, <CloudIcon/>, <BsCloudRainFill size="25"/>, <Box display='flex' fontSize='25px' sx={{my: '-6px'}}><BsCloudRainFill size="25"/> <Divider orientation="vertical" flexItem sx={{ height: 25, mx: 1}}/> <BsCloudSnowFill size="25"/></Box>, <BsCloudSnowFill size="25"/>];
+const options = ['Sunny', 'Cloudy', 'Rain', 'Rain & Snow','Snow'];
 
 const PrettoSlider = styled(Slider)({
     color: '#7DAADB',
@@ -85,6 +86,8 @@ export default function SearchBox() {
     const [skyCode, setSkyCode] = useRecoilState(skyCodeState);
     const [rainfallCode, setRainfallCode] = useRecoilState(rainfallCodeState);
     const [windChill, setWindChill] = useRecoilState(windChillState);
+
+    const [snowState, setSnowState] = useState<boolean>(false);
 
     const location = useGeoLocation();
     let latitude: number | undefined
@@ -143,12 +146,14 @@ export default function SearchBox() {
         
         if (skyCode === 1 && rainfallCode === 0) {
             index = 0;
-        } else if (skyCode === 3 && rainfallCode === 0) {
+        } else if ((skyCode === 3 || skyCode === 4) && rainfallCode === 0) {
             index = 1;
-        } else if (skyCode === 0 && (rainfallCode === 1 || rainfallCode === 2 || rainfallCode === 5 || rainfallCode === 6)) {
+        } else if (skyCode === 0 && (rainfallCode === 1 || rainfallCode === 5)) {
             index = 2;
-        } else if (skyCode === 0 && (rainfallCode === 2 || rainfallCode === 3 || rainfallCode === 6 || rainfallCode === 7)) {
+        } else if (skyCode === 0 && (rainfallCode === 2 || rainfallCode === 6)){
             index = 3;
+        } else if (skyCode === 0 && (rainfallCode === 3 || rainfallCode === 7)) {
+            index = 4;
         }
 
         return index;
@@ -165,7 +170,7 @@ export default function SearchBox() {
         }
 
         searchSky(skyCode, rainfallCode);
-    }, [location, skyCode, rainfallCode])
+    }, [location, skyCode, rainfallCode, windChill])
 
     function getSkyData(data: string) {
         console.log("data: ", data)
@@ -173,15 +178,23 @@ export default function SearchBox() {
         if (data === 'Sunny') {
             setSkyCode(1); 
             setRainfallCode(0);
+            setSnowState(false);
         } else if (data === 'Cloudy'){
             setSkyCode(3);
             setRainfallCode(0);  
+            setSnowState(false);
         } else if (data === 'Rain'){
             setSkyCode(0);
             setRainfallCode(1);  
+            setSnowState(false);
+        } else if (data === 'Rain & Snow'){
+            setSkyCode(0);
+            setRainfallCode(2); 
+            setSnowState(true);
         } else if (data === 'Snow'){
             setSkyCode(0);
             setRainfallCode(7);  
+            setSnowState(false);
         }
     }
 
@@ -223,7 +236,7 @@ export default function SearchBox() {
                 {/* Weather Select */}
                 <Paper
                     component="form"
-                    sx={{ mt: 2, ml: 1, display: 'flex', justifyContent: 'center', width: '45px', height: '45px', borderRadius: '10px' }}
+                    sx={{ mt: 2, ml: 1, display: 'flex', justifyContent: 'center', width: snowState === false ? '45px' : '90px', height: '45px', borderRadius: '10px' }}
                 >
                     <IconButton onClick={handleWeatherSelect('bottom')} sx={{borderRadius: '10px'}}>
                         {IconOptions[selectedIndex]}

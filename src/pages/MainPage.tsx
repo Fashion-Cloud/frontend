@@ -5,13 +5,13 @@ import { menuState } from "../Recoil";
 
 import MainLayout from "../components/Mainpage/MainLayout";
 
-export default function Mainpage() {
+export default function MainPage() {
     const setSelect = useSetRecoilState(menuState);
 
     useEffect(() => {
         setSelect('Home')
     }, [])
-    
+
     return(
         <Box>
             <MainLayout/>

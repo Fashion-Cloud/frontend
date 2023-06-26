@@ -84,3 +84,12 @@ export const locationDataState = atom<LocationType>({
     default: initialLocationInfo,
     effects_UNSTABLE: [persistAtom],
 })
+
+export const lookbookIdState = atom({
+    key: 'lookbookState',
+    default: '',
+})
+export const lookbookNameState = atom({
+    key: 'lookbookNameState',
+    default: '봄',
+})
