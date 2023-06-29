@@ -1,5 +1,5 @@
 import { useEffect, useState }  from "react";
-import { useRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { skyCodeState, rainfallCodeState, windChillState,
     fullPageState, currentPageState } from '../../Recoil';
 import axios from "axios";
@@ -15,12 +15,12 @@ import {
     IconButton
 } from "@mui/material";
 
-import SearchBox from "./SearchBox";
-import PaginationBox from "./PaginationBox";
-import AddFashionButton from "./AddFashionButton";
+import SearchBox from "./FashionListBox/SearchBox";
+import PaginationBox from "./FashionListBox/PaginationBox";
+import AddFashionButton from "./FashionListBox/AddFashionButton";
 
 import CloseIcon from "@mui/icons-material/Close";
-import FashioinDetailModal from "./FashionDetailModal";
+import FashioinDetailModal from "./FashionListBox/FashionDetailModal";
 
 const style = {
     position: "absolute",
@@ -35,7 +35,7 @@ const style = {
     p: 2,
 };
 
-export default function FashionList() {
+export default function FashionListBox() {
     let pageIndex: number = 0;
     let pageLastIndex: number = 0;
 
@@ -47,23 +47,12 @@ export default function FashionList() {
     const handleOpenDetail = () => setOpenDetail(true);
     const handleCloseDetail =  () => setOpenDetail(false);
 
-    const [skyCode, setSkyCode] = useRecoilState(skyCodeState);
-    const [rainfallCode, setRainfallCode] = useRecoilState(rainfallCodeState);
-    const [windChill, setWindChill] = useRecoilState(windChillState);
+    const skyCode = useRecoilValue(skyCodeState);
+    const rainfallCode = useRecoilValue(rainfallCodeState);
+    const windChill = useRecoilValue(windChillState);
 
     const [pageCount, setPageCount] = useRecoilState(fullPageState); // 전체 페이지
     const [page, setPage] = useRecoilState(currentPageState); // 현재 페이지
-
-    function getWeatherData(sky: number, rain: number) {
-        setSkyCode(sky)
-        setRainfallCode(rain)
-        // console.log("[SearchBox -> FashionList] skyCode: ", sky)
-        // console.log("[SearchBox -> FashionList] rainfallCode: ", rain)
-    }
-    function getTempData(temp: number) {
-        setWindChill(temp)
-        // console.log("[SearchBox -> FashionList] windChill: ", temp)
-    }
 
     function getPageNum(page: number) {
         setPage(page)
@@ -79,11 +68,10 @@ export default function FashionList() {
     }
 
     const fashionAPI = async () => {
-        console.log("skyCode: ", skyCode)
-        console.log("rainfallCode: ", rainfallCode)
-        console.log("windChill: ", windChill)
+        console.log("[Recoil] skyCode: ", skyCode)
+        console.log("[Recoil] rainfallCode: ", rainfallCode)
+        console.log("[Recoil] windChill: ", windChill)
         try {
-            // await axios.get(`/api/v1/posts/weather?skyStatus=${skyCode}&rainfallType=${rainfallCode}&windChill=${windChill}`,
             await axios.get(`/api/v1/posts/weather?skyCode=${skyCode}&rainfallCode=${rainfallCode}&windChill=${windChill}`,
             {
                 headers: {
@@ -190,7 +178,7 @@ export default function FashionList() {
             <Logo/>
     
             <Toolbar>
-                <SearchBox getWeatherData={getWeatherData} getTempData={getTempData} getPageNum={getPageNum}/>
+                <SearchBox />
                 
                 <AddFashionButton/>
             </Toolbar>

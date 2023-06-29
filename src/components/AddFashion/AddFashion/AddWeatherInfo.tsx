@@ -3,6 +3,9 @@ import axios from 'axios'
 import { WeatherType } from '../../../utils/types';
 import useGeoLocation from "../../../assets/hooks/useGeoLocation";
 
+import { useRecoilValue } from "recoil";
+import { weatherDataState } from "../../../Recoil";
+
 import { 
     Toolbar, 
     Typography,
@@ -18,44 +21,8 @@ type WeatherProps = {
 }
 
 export default function AddWeatherInfo({getWeatherData}: WeatherProps) {
-    const [weather, setWeather] = useState<WeatherType>();
+    const weatherData = useRecoilValue(weatherDataState);
     
-    const location = useGeoLocation();
-    let latitude: number | undefined;
-    let longitude: number | undefined;
-    
-    const weatherAPI = async () => {
-        if(latitude !== undefined){
-            try {
-                await axios.get(`/api/v1/weather?latitude=${latitude}&longitude=${longitude}`,
-                {
-                    headers: {
-                        Accept: 'application/json'
-                    }
-                }
-            ).then((response) => {
-                const data = response.data.data;
-                console.log(data)
-                setWeather(data)
-                getWeatherData(data)
-            });
-            } catch {
-                console.log("api 불러오기 실패")
-            };
-        }
-    }
-
-    useEffect(() => {
-        if (location !== undefined) {
-            latitude = location.coordinates?.lat;
-            longitude = location.coordinates?.lng;
-            console.log("[GeoLocation] latitude: " , latitude)
-            console.log("[GeoLocation] longitude: " , longitude)
-
-            weatherAPI()
-        }
-    }, [location])
-
     return(
         <Box>
             <Toolbar sx={{mt: -1}}>
@@ -69,7 +36,7 @@ export default function AddWeatherInfo({getWeatherData}: WeatherProps) {
                     <InputBase
                         disabled
                         sx={{ mt: 0.3, ml: 1, flex: 1 }}
-                        value={weatherSky(weather?.sky) || ""}
+                        value={weatherSky(weatherData.sky) || ""}
                     />
                 </Paper>
             </Toolbar>
@@ -84,7 +51,7 @@ export default function AddWeatherInfo({getWeatherData}: WeatherProps) {
                     <InputBase
                         disabled
                         sx={{ mt: 0.3, ml: 1, flex: 1}}
-                        value={weather?.temperature || ""}
+                        value={weatherData.temperature || ""}
                     />
                     <Typography color="#989898" sx={{mr: 1, mt: 0.5}}>
                         °C
@@ -102,7 +69,7 @@ export default function AddWeatherInfo({getWeatherData}: WeatherProps) {
                     <InputBase
                         disabled
                         sx={{ mt: 0.3, ml: 1, flex: 1 }}
-                        value={weather?.windSpeed || 0}
+                        value={weatherData.windSpeed || 0}
                     />
                     <Typography color="#989898" sx={{mr: 1}}>
                         m/s

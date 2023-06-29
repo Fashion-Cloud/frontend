@@ -1,6 +1,6 @@
 import {useRef, useEffect} from 'react';
 import { useRecoilValue } from 'recoil';
-import { weatherDataState } from '../../Recoil';
+import { weatherDataState } from '../../../Recoil';
 import { 
     Box, 
     Toolbar, 
@@ -8,13 +8,13 @@ import {
     Typography 
 } from "@mui/material";
 import lottie from 'lottie-web';
-import { WeatherType } from '../../utils/types';
+import { WeatherType } from '../../../utils/types';
 
 import WaterIcon from '@mui/icons-material/Water'; // 습도 아이콘
 import AirIcon from '@mui/icons-material/Air'; // 풍속 아이콘
 import WaterDropIcon from '@mui/icons-material/WaterDrop'; // 강수량 아이콘
 
-import weatherSky from '../../assets/data/weatherSky';
+import weatherSky from '../../../assets/data/weatherSky';
 
 type WeatherProps = {
     weatherData: WeatherType | undefined;
@@ -24,16 +24,16 @@ const WeatherSkyLottie = ({weatherData}: WeatherProps) => {
     // weatherData에 따라 다른 애니메이션 데이터를 선택
     const getAnimationData = () => {
         if (weatherData?.sky === 1) {
-          return require('../../assets/lotties/weather/sunny.json');
+          return require('../../../assets/lotties/weather/sunny.json');
         } else if (weatherData?.sky === 3) {
-          return require('../../assets/lotties/weather/cloudy.json');
+          return require('../../../assets/lotties/weather/cloudy.json');
         } else if (weatherData?.sky === 4) {
-          return require('../../assets/lotties/weather/rainy.json');
+          return require('../../../assets/lotties/weather/rainy.json');
         } else if (weatherData?.sky === 5) {
-            return require('../../assets/lotties/weather/snow.json');
+            return require('../../../assets/lotties/weather/snow.json');
         }
         // 기본값으로 사용할 애니메이션 데이터
-        return require('../../assets/lotties/weather/sunny.json');
+        return require('../../../assets/lotties/weather/sunny.json');
     };
 
     const animationData = getAnimationData();
@@ -96,7 +96,7 @@ export default function WeatherBox() {
         <Box>
             <WeatherSkyLottie weatherData={weatherData}/>
             <Typography display='flex' justifyContent='center' fontSize='25pt' sx={{mt: 5}}>
-                {weatherData?.temperature} °C
+                {weatherData?.windChill} °C
             </Typography>
 
             <WeatherInfoBox weatherData={weatherData}/>

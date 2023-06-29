@@ -3,7 +3,7 @@ import {
 } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import CloseIcon from '@mui/icons-material/Close';
-import AddFashion from "../Drawer/AddFashion";
+import AddFashion from "../../AddFashion/AddFashion";
 import React from "react";
 
 const style = {

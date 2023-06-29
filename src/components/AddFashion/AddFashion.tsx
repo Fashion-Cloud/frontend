@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+
+import { useRecoilValue } from "recoil";
+import { weatherDataState } from "../../Recoil";
 import { LocationType, WeatherType } from '@/utils/types';
 import {
     Box,
@@ -9,7 +12,7 @@ import {
     Typography,
 } from '@mui/material';
 
-import AddLocation from './AddFashion/AddLocation';
+// import AddLocation from './AddFashion/AddLocation';
 import AddReview from './AddFashion/AddReview';
 import AddTitle from './AddFashion/AddTitle';
 import AddWeatherInfo from './AddFashion/AddWeatherInfo';
@@ -21,6 +24,8 @@ export default function AddFashion() {
     const [postReview, setPostReview] = React.useState(2);
     const [postLocation, setPostLocation] = useState<LocationType>();
     const [postWeather, setPostWeather] = useState<WeatherType>();
+
+    const weatherData = useRecoilValue(weatherDataState);
 
     function getImageData(data: string) {
         setPostImage(data)
@@ -34,10 +39,10 @@ export default function AddFashion() {
         setPostTitle(data)
         console.log("[AddFashion -> AddTitle] postTitle: ", data)
     }
-    function getLocationData(data: LocationType) {
-        setPostLocation(data)
-        console.log("[AddFashion -> AddLocation] postLocation: ", data)
-    }
+    // function getLocationData(data: LocationType) {
+    //     setPostLocation(data)
+    //     console.log("[AddFashion -> AddLocation] postLocation: ", data)
+    // }
     function getWeatherData(data: WeatherType) {
         setPostWeather(data)
         console.log("[AddFashion -> AddWeatherInfo] postWeather: ", data)
@@ -51,10 +56,10 @@ export default function AddFashion() {
                 name: postTitle,
                 image: postImage,
                 review: postReview,
-                temperature: postWeather?.temperature,
-                skyStatus: postWeather?.sky,
-                rainfallType: postWeather?.rainfallType,
-                windSpeed: postWeather?.windSpeed,
+                temperature: weatherData.temperature,
+                skyStatus: weatherData.sky,
+                rainfallType: weatherData.rainfallType,
+                windSpeed: weatherData.windSpeed,
             }
         ).then((response) => {
             console.log(response)
@@ -79,7 +84,7 @@ export default function AddFashion() {
 
                         <Divider sx={{mt: 2, mb: 2}}/>
 
-                        <AddLocation getLocationData={getLocationData}/>
+                        {/* <AddLocation getLocationData={getLocationData}/> */}
                         <AddWeatherInfo getWeatherData={getWeatherData}/>
                     </Grid>
                 </Grid>
