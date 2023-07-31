@@ -4,7 +4,7 @@ import { WeatherType } from '../../../utils/types';
 import useGeoLocation from "../../../assets/hooks/useGeoLocation";
 
 import { useRecoilValue } from "recoil";
-import { weatherDataState } from "../../../Recoil";
+import { weatherDataState } from "../../../utils/Recoil";
 
 import { 
     Toolbar, 

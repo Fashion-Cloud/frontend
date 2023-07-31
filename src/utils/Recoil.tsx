@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { WeatherType, LocationType } from './utils/types';
+import { WeatherType, LocationType } from './types';
 import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();

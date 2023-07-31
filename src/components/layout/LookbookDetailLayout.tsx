@@ -1,7 +1,7 @@
 import { Box, Divider } from "@mui/material";
 
-import LookbookListBox from "./LookbookDetailLayout/LookbookListBox";
-import TopBox from "./LookbookDetailLayout/TopBox";
+import LookbookListBox from "../Lookbook/LookbookDetailLayout/LookbookListBox";
+import TopBox from "../Lookbook/LookbookDetailLayout/TopBox";
 
 export default function LookbookDetailLayout() {
     return(

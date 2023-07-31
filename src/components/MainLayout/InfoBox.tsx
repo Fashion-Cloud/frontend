@@ -4,7 +4,7 @@ import {
 import axios from 'axios';
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { weatherDataState, locationDataState } from "../../Recoil";
+import { weatherDataState, locationDataState } from "../../utils/Recoil";
 
 import useGeoLocation from "../../assets/hooks/useGeoLocation";
 

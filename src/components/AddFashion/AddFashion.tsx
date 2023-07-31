@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import { useRecoilValue } from "recoil";
-import { weatherDataState } from "../../Recoil";
+import { weatherDataState } from "../../utils/Recoil";
 import { WeatherType } from '@/utils/types';
 import {
     Box,

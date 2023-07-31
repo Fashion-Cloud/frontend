@@ -2,7 +2,7 @@
 import { useEffect, useState }  from "react";
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { skyCodeState, rainfallCodeState, windChillState,
-    fullPageState, currentPageState } from '../../Recoil';
+    fullPageState, currentPageState } from '../../utils/Recoil';
 import axios from "axios";
 import { WeatherPostType } from '../../utils/types';
 import { 

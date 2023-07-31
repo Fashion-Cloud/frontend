@@ -1,6 +1,6 @@
 import {useRef, useEffect} from 'react';
 import { useRecoilValue } from 'recoil';
-import { weatherDataState } from '../../../Recoil';
+import { weatherDataState } from '../../../utils/Recoil';
 import { 
     Box, 
     Toolbar, 

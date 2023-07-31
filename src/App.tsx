@@ -1,10 +1,10 @@
 
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Mainpage from "./pages/MainPage";
-import Lookbookpage from "./pages/Lookbookpage";
 import {RecoilRoot} from 'recoil';
 
 import MainDrawer from "./components/common/MainDrawer";
+import Mainpage from "./pages/MainPage";
+import MyPage from "./pages/MyPage";
 import LookbookDetailpage from "./pages/LookbookDetailpage";
 
 export default function App() {
@@ -14,7 +14,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Mainpage/>}/>
-          <Route path="/lookbook" element={<Lookbookpage/>}/>
+          <Route path="/mypage" element={<MyPage/>}/>
           <Route path="/lookbookdetail/:id" element={<LookbookDetailpage/>}/>
         </Routes>
       </Router>

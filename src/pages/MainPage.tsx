@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { menuState } from "../Recoil";
+import { menuState } from "../utils/Recoil";
 
-import MainLayout from "../components/Mainpage/MainLayout";
+import MainLayout from "../components/layout/MainLayout";
 
 export default function MainPage() {
     const setSelect = useSetRecoilState(menuState);

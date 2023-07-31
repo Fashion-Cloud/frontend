@@ -128,13 +128,11 @@ export default function LookbookListBox() {
 
 
     return(
-        <Box display='flex'>
+        <Box sx={{ maxWidth: '1200px', margin: '0 auto' }}>
             <Box width="50px"/>
 
             {lookbookList()}
             
-            
-
             <Box width="50px"/>
             <Dialog open={open} onClose={handleClose} >
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'left', margin: 1, ml: 3 }}>

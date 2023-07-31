@@ -60,7 +60,7 @@ export default function AddLookbookButton() {
         ).then((response) => {
             console.log(response)
             alert("post 완료")
-            window.location.replace("/lookbook");
+            window.location.replace("/mypage");
         });
         } catch {
             console.log("api 불러오기 실패")

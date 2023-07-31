@@ -1,6 +1,6 @@
 import { styled, Theme, CSSObject } from '@mui/material/styles';
 import { useRecoilState } from "recoil";
-import { menuState } from "../../Recoil";
+import { menuState } from "../../utils/Recoil";
 
 import {
     CssBaseline,
@@ -15,7 +15,7 @@ import {
 
 import HomeIcon from '@mui/icons-material/Home';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
-// import AddCircleIcon from '@mui/icons-material/AddCircle';
+import PersonIcon from '@mui/icons-material/Person';
 
 import logo from '../../assets/images/bang.png';
 
@@ -65,7 +65,7 @@ export default function MainDrawer() {
 
     const Menus = [
         {title: 'Home', src: '/', icon: <HomeIcon/>},
-        {title: 'Lookbook', src: '/lookbook', icon: <CheckroomIcon/>}
+        {title: 'MyPage', src: '/mypage', icon: <PersonIcon/>}
     ]
 
     const handleClick = (menu: string) => {
@@ -81,6 +81,7 @@ export default function MainDrawer() {
                         <img
                             height="50px"
                             src={logo}
+                            alt='logo'
                         />
                     </Box>
                 </ListItem>

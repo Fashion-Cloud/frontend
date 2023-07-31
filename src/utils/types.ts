@@ -50,3 +50,16 @@ export type LookBookBoxType = {
     updatedAt: string;
     deletedAt: string;
 };
+export type UserPostListType = {
+    id: string;
+    userId: string;
+    name: string;
+    image: string;
+    review: string;
+    skyStatus: number;
+    rainfallType: number;
+    windChill: number;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string;
+}

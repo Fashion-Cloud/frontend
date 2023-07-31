@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import useGeoLocation from "../../../assets/hooks/useGeoLocation";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { weatherDataState, skyCodeState, rainfallCodeState, windChillState } from "../../../Recoil";
+import { weatherDataState, skyCodeState, rainfallCodeState, windChillState } from "../../../utils/Recoil";
 import { BsCloudRainFill, BsCloudSnowFill } from "react-icons/bs";
 
 import lottie from 'lottie-web';

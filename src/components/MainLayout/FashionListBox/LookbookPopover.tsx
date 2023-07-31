@@ -13,7 +13,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useRecoilValue } from 'recoil';
-import { userIdState } from '../../../Recoil';
+import { userIdState } from '../../../utils/Recoil';
 
 const paperStyle = {
     height: 300,
