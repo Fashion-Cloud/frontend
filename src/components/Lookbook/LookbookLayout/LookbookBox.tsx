@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { 
     Box,
     Grid,
@@ -8,31 +9,27 @@ import {
     Typography,
 } from "@mui/material";
 import { useEffect, useState } from 'react';
-import { WeatherPostType } from '../../../utils/types';
-import { lookbookIdState, lookbookNameState } from '../../..//Recoil';
+import { useNavigate } from 'react-router-dom';
+import { LookBookBoxType } from '../../../utils/types';
+import { lookbookNameState, userIdState } from '../../..//Recoil';
 
 export default function LookbookBox() {
-    // const [lookSelected, setLookSelected] = useState<string>('');
-    const setLookBookId = useSetRecoilState(lookbookIdState);
     const setLookbookName = useSetRecoilState(lookbookNameState);
+    const userId = useRecoilValue(userIdState);
 
-    const handleLookClick = () => {
-        window.location.href="/lookbookdetail";
-    }
+    const navigate = useNavigate();
 
-    const [lookbook, setLookbook] = useState<WeatherPostType[]>([]);
+    const [lookbook, setLookbook] = useState<LookBookBoxType[]>([]);
     const fashionAPI = async () => {
-        console.log("fashionAPI Start");
-        
         try {
-            await axios.get(`/api/v1/books`,
+            await axios.get(`/api/v1/books/${userId}`,
             {
                 headers: {
                     Accept: 'application/json'
                 }
             }
         ).then((response) => {
-            const data = response.data;
+            const data = response.data.data;
             console.log("data: ", data)
 
             setLookbook(data);
@@ -51,19 +48,18 @@ export default function LookbookBox() {
             <Box width="50px"/>
 
             <Grid container spacing={3}>
-                {lookbook.map((lookbook, index) => (
+                {Array.isArray(lookbook)&&lookbook.map((lookbook, index) => (
                     <Grid item key={index} xs={4} >
                         <Card sx={{ borderRadius: '10px', cursor: 'pointer'}} 
                             onClick={() => {
-                                setLookBookId(lookbook.id)
-                                setLookbookName(lookbook.name)
-                                handleLookClick()
+                                setLookbookName(lookbook.title)
+                                navigate(`/lookbookdetail/${lookbook.id}`)
                             }}
                         >
                             <Box sx={{ position: 'relative' }}>
                                 <CardMedia
                                     component="img"
-                                    image={lookbook.imageUrl}
+                                    image={lookbook.image}
                                     sx={{
                                         height: '350px',
                                         width: '100%',
@@ -87,7 +83,7 @@ export default function LookbookBox() {
                                         },
                                     }}
                                 >
-                                    <Typography variant="h6" sx={{mt: 5,ml: 1}}>{lookbook.name}</Typography>
+                                    <Typography variant="h6" sx={{mt: 5,ml: 1}}>{lookbook.title}</Typography>
                                 </Box>
                             </Box>
                         </Card>

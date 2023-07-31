@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import axios from 'axios';
 import { 
     Box,
@@ -11,20 +12,20 @@ import {
     Divider,
 } from "@mui/material";
 import { useEffect, useState } from 'react';
-import { LookBookType, WeatherPostType } from '../../../utils/types';
+import { LookBookListType} from '../../../utils/types';
 
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-import { useRecoilValue } from 'recoil';
-import { lookbookIdState } from "../../..//Recoil";
+import { useParams } from 'react-router-dom';
 
 export default function LookbookListBox() {
-    const lookbookId = useRecoilValue(lookbookIdState);
     const [open, setOpen] = useState(false);
 
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const { id } = useParams();
 
     const handleOpen = (index: number) => {
         setCurrentImageIndex(index);
@@ -32,19 +33,20 @@ export default function LookbookListBox() {
     };
     const handleClose = () => {setOpen(false)};
 
-    const [lookbook, setLookbook] = useState<LookBookType[]>([]);
+    const [lookbook, setLookbook] = useState<LookBookListType[]>([]);
     const fashionAPI = async () => {
         console.log("fashionAPI Start");
+        console.log("id: ", id);
         
         try {
-            await axios.get(`/api/v1/books/posts/${lookbookId}`,
+            await axios.get(`/api/v1/books/posts/${id}`,
             {
                 headers: {
                     Accept: 'application/json'
                 }
             }
         ).then((response) => {
-            const data = response.data;
+            const data = response.data.data;
             console.log("data: ", data)
 
             setLookbook(data);
@@ -71,19 +73,25 @@ export default function LookbookListBox() {
     }
 
     function lookbookList() {
+        if (!lookbook || !Array.isArray(lookbook)){
+            return <div>Loading...</div>;
+        }
+        if (!Array.isArray(lookbook)) {
+            return <div>lookbook is not an array</div>;
+        }
+
         return(
             <Grid container spacing={3}>
-                {lookbook && lookbook.map((lookbook, index) => (
-
+                {lookbook && lookbook.map((item, index) => (
                     <Grid item key={index} xs={4} >
                         <Card sx={{ borderRadius: '10px', cursor: 'pointer'}} onClick={() => {
                             handleOpen(index);
                         }}>
                             <Box sx={{ position: 'relative' }}>
-                                {lookbook.imageUrl &&
+                                {item.image &&
                                     <CardMedia
                                         component="img"
-                                        image={lookbook.imageUrl}
+                                        image={item.image}
                                         sx={{
                                             height: '350px',
                                             width: '100%',
@@ -108,7 +116,7 @@ export default function LookbookListBox() {
                                         },
                                     }}
                                 >
-                                    <Typography variant="h6" sx={{mt: 5,ml: 1}}>{lookbook.name}</Typography>
+                                    <Typography variant="h6" sx={{mt: 5,ml: 1}}>{item.name}</Typography>
                                 </Box>
                             </Box>
                         </Card>
@@ -124,18 +132,20 @@ export default function LookbookListBox() {
             <Box width="50px"/>
 
             {lookbookList()}
+            
+            
 
             <Box width="50px"/>
             <Dialog open={open} onClose={handleClose} >
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'left', margin: 1, ml: 3 }}>
                     <WbSunnyIcon />
                     {lookbook.length > 0 &&
-                        <Typography variant="h6" sx={{ marginLeft: 2 }}>{lookbook[currentImageIndex].temp} °C</Typography>
+                        <Typography variant="h6" sx={{ marginLeft: 2 }}>°C</Typography>
                     }
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     {lookbook.length > 0 &&
-                        <img src={lookbook[currentImageIndex].imageUrl} alt={lookbook[currentImageIndex].name} style={{ width: "auto", height: "600px" }} />
+                        <img src={lookbook[currentImageIndex].image} alt={lookbook[currentImageIndex].name} style={{ width: "auto", height: "600px" }} />
                     }
                 </Box>
                 <Divider/>

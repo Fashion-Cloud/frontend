@@ -1,9 +1,14 @@
-import axios from 'axios';
-import { atom, selector } from 'recoil';
+import { atom } from 'recoil';
 import { WeatherType, LocationType } from './utils/types';
 import { recoilPersist } from 'recoil-persist';
 
 const { persistAtom } = recoilPersist();
+
+export const userIdState = atom<string>({
+    key: 'userIdState',
+    default: '550e8400-e29b-41d4-a716-446655440000',
+    effects_UNSTABLE: [persistAtom],
+})
 
 export const latitudeState = atom<number>({
     key: 'latitudeState', 

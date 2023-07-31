@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { useRecoilValue } from "recoil";
 import { weatherDataState } from "../../Recoil";
-import { LocationType, WeatherType } from '@/utils/types';
+import { WeatherType } from '@/utils/types';
 import {
     Box,
     Button,
@@ -22,8 +22,8 @@ export default function AddFashion() {
     const [postTitle, setPostTitle] = useState('');
     const [postImage, setPostImage] = React.useState("");
     const [postReview, setPostReview] = React.useState(2);
-    const [postLocation, setPostLocation] = useState<LocationType>();
-    const [postWeather, setPostWeather] = useState<WeatherType>();
+    // const [postLocation, setPostLocation] = useState<LocationType>();
+    // const [postWeather, setPostWeather] = useState<WeatherType>();
 
     const weatherData = useRecoilValue(weatherDataState);
 
@@ -44,7 +44,7 @@ export default function AddFashion() {
     //     console.log("[AddFashion -> AddLocation] postLocation: ", data)
     // }
     function getWeatherData(data: WeatherType) {
-        setPostWeather(data)
+        // setPostWeather(data)
         console.log("[AddFashion -> AddWeatherInfo] postWeather: ", data)
     }
 

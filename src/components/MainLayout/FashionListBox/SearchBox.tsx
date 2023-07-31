@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect, useRef } from 'react';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
 import useGeoLocation from "../../../assets/hooks/useGeoLocation";
@@ -6,6 +7,7 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import { weatherDataState, skyCodeState, rainfallCodeState, windChillState } from "../../../Recoil";
 import { BsCloudRainFill, BsCloudSnowFill } from "react-icons/bs";
 
+import lottie from 'lottie-web';
 
 import { 
     Box,
@@ -21,7 +23,8 @@ import {
     Typography,
     Slider,
     Tooltip,
-    Divider
+    Divider,
+    Backdrop
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
@@ -72,6 +75,8 @@ const PrettoSlider = styled(Slider)({
 });
 
 export default function SearchBox() {
+    const [isLoading, setIsLoading] = useState(true);
+    
     const weatherData = useRecoilValue(weatherDataState)
 
     const [anchorElSelect, setAnchorElSelect] = useState<HTMLButtonElement | null>(null);
@@ -132,9 +137,11 @@ export default function SearchBox() {
                 console.log("[WexatherTemp] tempAPI: ", data)
 
                 setWindChill(data?.windChill)
+                setIsLoading(false);
             });
             } catch {
                 console.log("[WeatherTemp] tempAPI: api 불러오기 실패")
+                setIsLoading(false);
             };
         }
     }
@@ -170,7 +177,7 @@ export default function SearchBox() {
         }
 
         searchSky(skyCode, rainfallCode);
-    }, [location, skyCode, rainfallCode, windChill])
+    }, [location, skyCode, rainfallCode])
 
     function getSkyData(data: string) {
         console.log("data: ", data)
@@ -228,8 +235,40 @@ export default function SearchBox() {
         setOpenSlider(false);
     };
 
+    const LoadingLottie = () => {
+        // weatherData에 따라 다른 애니메이션 데이터를 선택
+        const getAnimationData = () => {
+            return require('../../../assets/lotties/salesman.json');
+        };
+    
+        const animationData = getAnimationData();
+        // const animationData = require('../../assets/lotties/allRain.json');
+    
+        //lottie
+        const element = useRef<HTMLDivElement>(null);
+        useEffect(() => {
+          const animation = lottie.loadAnimation({
+            container: element.current as HTMLDivElement,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            animationData: animationData,
+          });
+    
+          return () => {
+            animation.destroy(); // lottie-web 인스턴스 제거
+          };
+        }, []);
+        return <Box ref={element} style={{ marginTop: 30, height: 300 }}></Box>;
+    };
+
     return(
         <Box>
+            <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={isLoading}>
+                <LoadingLottie/>
+            </Backdrop>
+
             <Toolbar sx={{ml: '13px'}}>
                 <SearchBar/>
 

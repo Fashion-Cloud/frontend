@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import axios from 'axios';
 import { 
     Box, 
     Button, 
@@ -13,7 +13,8 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 
 import AddIcon from '@mui/icons-material/Add';
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
+import AddImage from "../../../components/AddFashion/AddFashion/AddImage";
 
 const style = {
     position: 'absolute',
@@ -28,9 +29,43 @@ const style = {
 };
 
 export default function AddLookbookButton() {
+    const [title, setTitle] = useState<string>('');
+    const [postImage, setPostImage] = useState<string>('');
     const [open, setOpen] = useState<boolean>(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const lookbookTitleHandler = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setTitle(e.target.value);
+    };
+
+    function getImageData(data: string) {
+        setPostImage(data)
+        console.log("[AddFashion -> AddImage] postImage: ", data)
+    }
+
+    const postLookbookAPI = async () => {
+        if (title==='' || postImage === ''){
+            alert("제목과 이미지를 입력해주세요!")
+            return;
+        }
+
+        try {
+            await axios.post('/api/v1/books',
+            {
+                userId: '550e8400-e29b-41d4-a716-446655440000',
+                title: title,
+                image: postImage
+            }
+        ).then((response) => {
+            console.log(response)
+            alert("post 완료")
+            window.location.replace("/lookbook");
+        });
+        } catch {
+            console.log("api 불러오기 실패")
+        };
+    }
     
     return(
         <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
@@ -59,21 +94,27 @@ export default function AddLookbookButton() {
                     <Box sx={{display: 'flex', justifyContent: 'center'}}>
                         <Paper
                             component="form"
-                            sx={{ backgroundColor: '#EFEFEF', mt: 2, p: '2px 4px', display: 'flex', alignItems: 'center', width: '400px', height: '45px', borderRadius: '5px' }}
+                            sx={{ mt: 4, p: '2px 4px', display: 'flex', alignItems: 'center', width: '350px', height: '45px', borderRadius: '5px' }}
                         >
-                            <SearchIcon sx={{color: '#949494', mr: '4px'}}/>
+                            {/* <SearchIcon sx={{color: '#949494', mr: '4px'}}/> */}
                             <InputBase
-                                style={{width: '350px'}}
-                                placeholder="룩북 이름"
+                                style={{width: '350px', padding: '10px', marginTop: '3px'}}
+                                value={title}
+                                placeholder="룩북 이름을 입력해주세요"
+                                onChange={e => lookbookTitleHandler(e)}
                             />
                         </Paper>
+                    </Box>
+
+                    <Box style={{height: '500px',  display: 'flex', justifyContent: 'center', marginTop: '10px'}}>
+                        <AddImage getImageData={getImageData}/>
                     </Box>
 
                     <Divider sx={{mt: 3}}/>
 
                     <Box sx={{ mb: '-25px'}}>
-                        <Button color="primary" fullWidth sx={{ textAlign: 'center' }}>
-                            확인
+                        <Button color="primary" fullWidth sx={{ textAlign: 'center' }} onClick={() => postLookbookAPI()}>
+                            만들기
                         </Button>
                     </Box>
                 </Box>

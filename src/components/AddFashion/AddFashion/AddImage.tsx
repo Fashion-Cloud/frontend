@@ -57,7 +57,7 @@ export default function AddImage({getImageData}: ImageProps) {
 
         setPreviewImg(URL.createObjectURL(img));
       }
-  } catch (err) {}
+    } catch (err) {}
   };
 
   const sendImage = async () => {
@@ -95,7 +95,7 @@ export default function AddImage({getImageData}: ImageProps) {
   };
 
   return (
-    <Box>
+    <Box  style={{display: 'flex', justifyContent: 'center'}}>
       <form>
         <Button
           variant="outlined"
@@ -107,7 +107,7 @@ export default function AddImage({getImageData}: ImageProps) {
             width: 350,
             height: 400,
             mt: 0,
-            ml: 3,
+            // ml: 3,
             "&:hover": {
               backgroundColor: "#f8f5ff",
               borderColor: "#FFF",
@@ -132,17 +132,17 @@ export default function AddImage({getImageData}: ImageProps) {
             </Box>
           )}
         </Button>
-        <Box>
+        <Box style={{display: 'flex', justifyContent: 'center'}}>
           <Button 
             disabled={uploadState} 
             onClick={() => {onClickImgUpload();}}
             variant="contained" 
             style={{position: 'absolute', textTransform:"none", borderRadius: '20px'}} 
-            sx={{ml: 13, mt: 5, backgroundColor: "#87A9D7", "&:hover": {backgroundColor: "#1f5091"}}}
+            sx={{mt: 5, backgroundColor: "#87A9D7", "&:hover": {backgroundColor: "#1f5091"}}}
           >
-              <Typography sx={{ml: 3, mr: 3}}>
-                  Image Upload
-              </Typography>
+            <Typography sx={{mx: 3}}>
+              Image Upload
+            </Typography>
           </Button>
         </Box>
       </form>

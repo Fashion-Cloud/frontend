@@ -15,7 +15,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Mainpage/>}/>
           <Route path="/lookbook" element={<Lookbookpage/>}/>
-          <Route path="/lookbookdetail" element={<LookbookDetailpage/>}/>
+          <Route path="/lookbookdetail/:id" element={<LookbookDetailpage/>}/>
         </Routes>
       </Router>
     </RecoilRoot>

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { LookBookBoxType } from "../../../utils/types";
 import {
     Box,
     List,
@@ -5,8 +7,13 @@ import {
     ListItemText,
     Paper
 } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { useRecoilValue } from 'recoil';
+import { userIdState } from '../../../Recoil';
 
 const paperStyle = {
     height: 300,
@@ -20,25 +27,6 @@ const style = {
     maxWidth: 400,
     bgcolor: 'background.paper',
 };
-const primaryText = [
-    {
-        'name': '봄',
-        'imgUrl': 'https://images.onthelook.co.kr/posts/20230317110373751537090.jpeg?w=1200&q=75&f=webp',
-    },
-    {
-        'name': '여름',
-        'imgUrl': 'https://images.onthelook.co.kr/posts/2023031912037042632161.jpeg?w=420&q=60&f=webp',
-    },
-    {
-        'name': '가을',
-        'imgUrl': 'https://www.womansense.co.kr/upload/woman/article/201909/thumb/42904-386245-sampleM.jpg',
-    },
-    {
-        'name': '겨울',
-        'imgUrl': 'https://shop-phinf.pstatic.net/20221026_136/1666775192616mcXHY_JPEG/67911035283532969_380459201.jpg?type=f296_296',
-    },
-
-];
 
 type LookbookProps = {
     handeLookClick: Function;
@@ -48,7 +36,32 @@ type LookbookProps = {
 export default function LookbookPopover({handeLookClick, handleMarkClose}: LookbookProps) {
     // toastify 알람 실행 함수 만들기
     const success = () => toast.success("이미지 업로드 성공!");
-    const error = () => toast.error("이미지 업로드 실패!");
+    
+    const userId = useRecoilValue(userIdState);
+    const [lookbook, setLookbook] = useState<LookBookBoxType[]>([]);
+
+    const lookbookListAPI = async () => {
+        try {
+            await axios.get(`/api/v1/books/${userId}`,
+            {
+                headers: {
+                    Accept: 'application/json'
+                }
+            }
+        ).then((response) => {
+            const data = response.data.data;
+            console.log("data: ", data)
+
+            setLookbook(data);
+        });
+        } catch {
+            console.log("api 불러오기 실패")
+        };
+    }
+
+    useEffect(() => {
+        lookbookListAPI()   
+    }, [])
     
     return(
         <Paper sx={paperStyle}>
@@ -57,17 +70,17 @@ export default function LookbookPopover({handeLookClick, handleMarkClose}: Lookb
                     <ListItemText primary="룩북"/>
                 </ListItem>
 
-                {primaryText.map((text, index) => (
+                {Array.isArray(lookbook)&&lookbook.map((lookbook, index) => (
                     <ListItem key={index} button onClick={() => {
-                        handeLookClick()
+                        handeLookClick(lookbook.id)
                         handleMarkClose()
                         success()
                     }}>
                         <Box sx={{mr: '10px'}}>
-                            <img height="40px" width="40px" src={text.imgUrl}/>
+                            <img height="40px" width="40px" src={lookbook.image} alt={lookbook.title}/>
                         </Box>
 
-                        <ListItemText primary={text.name} sx={{mt: '-3px'}}/>
+                        <ListItemText primary={lookbook.title} sx={{mt: '-3px'}}/>
                     </ListItem>
                 ))}
             </List>

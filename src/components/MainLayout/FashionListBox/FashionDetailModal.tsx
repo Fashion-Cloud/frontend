@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { SinglePostType } from '../../../utils/types';
 import axios from 'axios'
@@ -24,18 +25,25 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'; // 채워�
 import BookmarkIcon from '@mui/icons-material/Bookmark'; // 채워짐
 import LookbookPopover from './LookbookPopover';
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 type FashionDetailProps = {
     singleId: string;
 };
 
 export default function FashioinDetailModal({singleId}: FashionDetailProps) {
+    const success = () => toast.success("이미지 업로드 성공!");
+
+
     const [singleData, setSingleData] = useState<SinglePostType>();
     const [bookState, setBookState] = useState<boolean>(false);
     const handleBookClick = () => {
         setBookState(!bookState)
     }
-    const handeLookClick = () => {
+    const handeLookClick = (data: string) => {
         setBookState(true);
+        lookbookPostAPI(data)
     }
 
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -64,6 +72,22 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
             const data = response.data;
             console.log(data.data)
             setSingleData(data.data)
+        });
+        } catch {
+            console.log("api 불러오기 실패")
+        };
+    }
+
+    const lookbookPostAPI = async (lookbookId: string) => {
+        try {
+            await axios.post(`/api/v1/books/posts`,
+            {
+                lookBookId: lookbookId,
+                postId: singleId,
+            }
+        ).then((response) => {
+            console.log(response)
+            success()
         });
         } catch {
             console.log("api 불러오기 실패")
