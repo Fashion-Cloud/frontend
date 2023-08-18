@@ -1,3 +1,5 @@
+import "react-toastify/dist/ReactToastify.css";
+
 import {
     Box,
     List,
@@ -6,7 +8,6 @@ import {
     Paper
 } from "@mui/material";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const paperStyle = {
     height: 300,

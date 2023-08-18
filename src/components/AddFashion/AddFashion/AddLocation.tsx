@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios'
-import { LocationType } from '../../../utils/types';
-import useGeoLocation from "../../../assets/hooks/useGeoLocation";
-
-import { IconButton, Toolbar, Typography } from "@mui/material";
-import NearMeIcon from '@mui/icons-material/NearMe';
 import '../../../fonts/font.css'
+
+import NearMeIcon from '@mui/icons-material/NearMe';
+import { IconButton, Toolbar, Typography } from "@mui/material";
+import axios from 'axios'
+import { useEffect, useState } from 'react';
+
+import useGeoLocation from "../../../assets/hooks/useGeoLocation";
+import { LocationType } from '../../../utils/types';
 
 type LocationProps = {
     getLocationData: Function;
@@ -35,7 +36,7 @@ export default function AddLocation({getLocationData}: LocationProps) {
             });
             } catch {
                 console.log("[AddLocation] locationAPI: api 불러오기 실패")
-            };
+            }
         }
     }
 

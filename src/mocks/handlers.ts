@@ -1,5 +1,6 @@
 import { rest } from "msw";
-import { SinglePostType, WeatherType, LocationType, ImageUploadType, WeatherPostType, LookBookType } from '../utils/types';
+
+import { LookBookType, WeatherPostType } from '../utils/types';
 
 // const dummy = "테스트입니다.";
 

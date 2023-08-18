@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { atom, selector } from 'recoil';
-import { WeatherType, LocationType } from './utils/types';
+import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
+
+import { LocationType,WeatherType } from './utils/types';
 
 const { persistAtom } = recoilPersist();
 

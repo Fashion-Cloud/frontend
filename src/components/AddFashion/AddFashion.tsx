@@ -1,9 +1,3 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-
-import { useRecoilValue } from "recoil";
-import { weatherDataState } from "../../Recoil";
-import { LocationType, WeatherType } from '@/utils/types';
 import {
     Box,
     Button,
@@ -11,12 +5,18 @@ import {
     Grid,
     Typography,
 } from '@mui/material';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useRecoilValue } from "recoil";
 
+import { LocationType, WeatherType } from '@/utils/types';
+
+import { weatherDataState } from "../../Recoil";
+import AddImage from './AddFashion/AddImage';
 // import AddLocation from './AddFashion/AddLocation';
 import AddReview from './AddFashion/AddReview';
 import AddTitle from './AddFashion/AddTitle';
 import AddWeatherInfo from './AddFashion/AddWeatherInfo';
-import AddImage from './AddFashion/AddImage';
 
 export default function AddFashion() {
     const [postTitle, setPostTitle] = useState('');
@@ -68,7 +68,7 @@ export default function AddFashion() {
         });
         } catch {
             console.log("api 불러오기 실패")
-        };
+        }
     }
 
     return(

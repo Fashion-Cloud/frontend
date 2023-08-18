@@ -1,15 +1,16 @@
-import axios from 'axios';
-import { useSetRecoilState } from 'recoil';
 import { 
     Box,
-    Grid,
     Card,
     CardMedia,
+    Grid,
     Typography,
 } from "@mui/material";
+import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { WeatherPostType } from '../../../utils/types';
+import { useSetRecoilState } from 'recoil';
+
 import { lookbookIdState, lookbookNameState } from '../../..//Recoil';
+import { WeatherPostType } from '../../../utils/types';
 
 export default function LookbookBox() {
     // const [lookSelected, setLookSelected] = useState<string>('');
@@ -39,7 +40,7 @@ export default function LookbookBox() {
         });
         } catch {
             console.log("api 불러오기 실패")
-        };
+        }
     }
 
     useEffect(() => {

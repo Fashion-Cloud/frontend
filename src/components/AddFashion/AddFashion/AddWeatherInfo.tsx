@@ -1,20 +1,15 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios'
-import { WeatherType } from '../../../utils/types';
-import useGeoLocation from "../../../assets/hooks/useGeoLocation";
-
-import { useRecoilValue } from "recoil";
-import { weatherDataState } from "../../../Recoil";
+import '../../../fonts/font.css'
 
 import { 
-    Toolbar, 
-    Typography,
-    Paper,
+    Box,
     InputBase,
-    Box
-} from "@mui/material";
-import '../../../fonts/font.css'
+    Paper,
+    Toolbar, 
+    Typography} from "@mui/material";
+import { useRecoilValue } from "recoil";
+
 import weatherSky from '../../../assets/data/weatherSky';
+import { weatherDataState } from "../../../Recoil";
 
 type WeatherProps = {
     getWeatherData: Function;

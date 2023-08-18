@@ -1,11 +1,11 @@
-import { 
-    Toolbar,
-    Typography,
-    Paper,
-    InputBase
-} from "@mui/material";
-import { useState } from "react";
 import '../../../fonts/font.css';
+
+import { 
+    InputBase,
+    Paper,
+    Toolbar,
+    Typography} from "@mui/material";
+import { useState } from "react";
 
 type TitleProps = {
     getTitleData: Function;

@@ -1,11 +1,10 @@
-import React from "react"
 import { 
-    Toolbar, 
-    Typography,
+    Box,
     Slider,
-    Box
-} from "@mui/material";
+    Toolbar, 
+    Typography} from "@mui/material";
 import { styled } from '@mui/material/styles';
+import React from "react"
 
 type ReviewProps = {
     getReviewData: Function;

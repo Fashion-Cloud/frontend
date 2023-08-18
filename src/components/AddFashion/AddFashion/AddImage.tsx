@@ -1,15 +1,16 @@
 /* eslint-disable jsx-a11y/alt-text */
-import {useState} from 'react'
+import "react-toastify/dist/ReactToastify.css";
+
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import {
-  Typography,
-  Button,
   Box,
+  Button,
+  Typography,
 } from '@mui/material'
 import axios from 'axios';
+import {useState} from 'react'
 import Resizer from "react-image-file-resizer";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 type ImageProps = {
   getImageData: Function;
@@ -83,7 +84,7 @@ export default function AddImage({getImageData}: ImageProps) {
       } catch {
         error();
         console.log("[AddImage] sendImage: api 불러오기 실패")
-      };
+      }
     }
   };
 

@@ -1,10 +1,11 @@
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import CloseIcon from '@mui/icons-material/Close';
 import { 
     Box, IconButton, Modal 
 } from "@mui/material";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import CloseIcon from '@mui/icons-material/Close';
-import AddFashion from "../../AddFashion/AddFashion";
 import React from "react";
+
+import AddFashion from "../../AddFashion/AddFashion";
 
 const style = {
     position: "absolute",
