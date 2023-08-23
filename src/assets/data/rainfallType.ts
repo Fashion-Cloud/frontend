@@ -1,5 +1,5 @@
 export default function rainfallType(type: number | undefined): string {
-    let rainType: string = 'Clear';
+    let rainType = 'Clear';
 
     switch(type) {
         case 0: 

@@ -1,27 +1,26 @@
-import { useEffect, useState } from 'react';
-import { SinglePostType } from '../../../utils/types';
-import axios from 'axios'
 import '../../../fonts/font.css';
-import weatherSky from '../../../assets/data/weatherSky';
-import rainfallType from '../../../assets/data/rainfallType';
 
+import BookmarkIcon from '@mui/icons-material/Bookmark'; // 채워짐
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'; // 채워지지 않음
+import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import WbCloudyIcon from '@mui/icons-material/WbCloudy';
 import {
+    Box,
+    Button,
     Card,
     CardMedia,
     Divider,
-    Typography,
-    Box,
-    Button,
     IconButton,
     Popover,
+    Typography,
   } from "@mui/material";
+import axios from 'axios'
+import { useEffect, useState } from 'react';
 
-import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
-import WbCloudyIcon from '@mui/icons-material/WbCloudy';
-import LightModeIcon from '@mui/icons-material/LightMode';
-
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'; // 채워지지 않음
-import BookmarkIcon from '@mui/icons-material/Bookmark'; // 채워짐
+import rainfallType from '../../../assets/data/rainfallType';
+import weatherSky from '../../../assets/data/weatherSky';
+import { SinglePostType } from '../../../utils/types';
 import LookbookPopover from './LookbookPopover';
 
 type FashionDetailProps = {
@@ -67,7 +66,7 @@ export default function FashioinDetailModal({singleId}: FashionDetailProps) {
         });
         } catch {
             console.log("api 불러오기 실패")
-        };
+        }
     }
 
     useEffect(() => {

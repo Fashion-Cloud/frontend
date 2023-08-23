@@ -1,24 +1,23 @@
-import axios from 'axios';
-import { 
-    Box,
-    Grid,
-    Card,
-    CardMedia,
-    Typography,
-    Dialog,
-    IconButton,
-    Toolbar,
-    Divider,
-} from "@mui/material";
-import { useEffect, useState } from 'react';
-import { LookBookType, WeatherPostType } from '../../../utils/types';
-
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import { 
+    Box,
+    Card,
+    CardMedia,
+    Dialog,
+    Divider,
+    Grid,
+    IconButton,
+    Toolbar,
+    Typography,
+} from "@mui/material";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+
 import { lookbookIdState } from "../../..//Recoil";
+import { LookBookType } from '../../../utils/types';
 
 export default function LookbookListBox() {
     const lookbookId = useRecoilValue(lookbookIdState);
@@ -51,7 +50,7 @@ export default function LookbookListBox() {
         });
         } catch {
             console.log("api 불러오기 실패")
-        };
+        }
     }
 
     useEffect(() => {

@@ -1,9 +1,9 @@
-import React from 'react'
-import { VariantType, useSnackbar } from 'notistack';
 import {
     Button,
     Typography
 } from '@mui/material'
+import { useSnackbar,VariantType } from 'notistack';
+import React from 'react'
 
 type PostProps = {
     postAPI: Function

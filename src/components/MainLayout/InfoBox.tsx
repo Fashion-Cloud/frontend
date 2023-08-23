@@ -4,10 +4,9 @@ import {
 import axios from 'axios';
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { weatherDataState, locationDataState } from "../../Recoil";
 
 import useGeoLocation from "../../assets/hooks/useGeoLocation";
-
+import { locationDataState,weatherDataState } from "../../Recoil";
 import PlaceBox from "./InfoBox/PlaceBox";
 import WeatherBox from "./InfoBox/WeatherBox";
 
@@ -38,7 +37,7 @@ export default function InfoBox() {
             });
             } catch {
                 console.log("[WeatherTemp] tempAPI: api 불러오기 실패")
-            };
+            }
         }
     }
     const locationAPI = async () => {
@@ -58,7 +57,7 @@ export default function InfoBox() {
             });
             } catch {
                 console.log("[WeatherTemp] locationAPI: api 불러오기 실패")
-            };
+            }
         }
     }
 

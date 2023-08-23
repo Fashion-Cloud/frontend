@@ -1,6 +1,6 @@
-import {useRef, useEffect} from 'react';
-import { useRecoilValue } from 'recoil';
-import { weatherDataState } from '../../../Recoil';
+import AirIcon from '@mui/icons-material/Air'; // 풍속 아이콘
+import WaterIcon from '@mui/icons-material/Water'; // 습도 아이콘
+import WaterDropIcon from '@mui/icons-material/WaterDrop'; // 강수량 아이콘
 import { 
     Box, 
     Toolbar, 
@@ -8,13 +8,12 @@ import {
     Typography 
 } from "@mui/material";
 import lottie from 'lottie-web';
-import { WeatherType } from '../../../utils/types';
-
-import WaterIcon from '@mui/icons-material/Water'; // 습도 아이콘
-import AirIcon from '@mui/icons-material/Air'; // 풍속 아이콘
-import WaterDropIcon from '@mui/icons-material/WaterDrop'; // 강수량 아이콘
+import {useEffect,useRef} from 'react';
+import { useRecoilValue } from 'recoil';
 
 import weatherSky from '../../../assets/data/weatherSky';
+import { weatherDataState } from '../../../Recoil';
+import { WeatherType } from '../../../utils/types';
 
 type WeatherProps = {
     weatherData: WeatherType | undefined;

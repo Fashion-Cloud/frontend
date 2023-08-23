@@ -1,33 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import axios from 'axios';
-import useGeoLocation from "../../../assets/hooks/useGeoLocation";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { weatherDataState, skyCodeState, rainfallCodeState, windChillState } from "../../../Recoil";
-import { BsCloudRainFill, BsCloudSnowFill } from "react-icons/bs";
-
-
+import CloudIcon from "@mui/icons-material/Cloud";
+import SearchIcon from '@mui/icons-material/Search';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import { 
     Box,
+    Divider,
     Grow,
     IconButton,
     InputBase, 
     Paper, 
     Popper, 
     PopperPlacementType, 
+    Slider,
     ToggleButton, 
     ToggleButtonGroup, 
     Toolbar,
-    Typography,
-    Slider,
     Tooltip,
-    Divider
-} from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
-import ThermostatIcon from '@mui/icons-material/Thermostat';
+    Typography} from "@mui/material";
+import { styled } from '@mui/material/styles';
+import axios from 'axios';
+import React, { useEffect,useState } from 'react';
+import { BsCloudRainFill, BsCloudSnowFill } from "react-icons/bs";
+import { useRecoilState,useRecoilValue } from "recoil";
 
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import CloudIcon from "@mui/icons-material/Cloud";
+import useGeoLocation from "../../../assets/hooks/useGeoLocation";
+import { rainfallCodeState, skyCodeState, weatherDataState, windChillState } from "../../../Recoil";
 
 const IconOptions = [<WbSunnyIcon/>, <CloudIcon/>, <BsCloudRainFill size="25"/>, <Box display='flex' fontSize='25px' sx={{my: '-6px'}}><BsCloudRainFill size="25"/> <Divider orientation="vertical" flexItem sx={{ height: 25, mx: 1}}/> <BsCloudSnowFill size="25"/></Box>, <BsCloudSnowFill size="25"/>];
 const options = ['Sunny', 'Cloudy', 'Rain', 'Rain & Snow','Snow'];
@@ -135,7 +132,7 @@ export default function SearchBox() {
             });
             } catch {
                 console.log("[WeatherTemp] tempAPI: api 불러오기 실패")
-            };
+            }
         }
     }
 

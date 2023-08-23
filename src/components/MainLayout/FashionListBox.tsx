@@ -1,26 +1,23 @@
-import { useEffect, useState }  from "react";
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { skyCodeState, rainfallCodeState, windChillState,
-    fullPageState, currentPageState } from '../../Recoil';
-import axios from "axios";
-import { WeatherPostType } from '../../utils/types';
+import CloseIcon from "@mui/icons-material/Close";
 import { 
     Box, 
     Card, 
     CardMedia, 
     Grid, 
+    IconButton,
     Modal, 
     Toolbar, 
-    Typography ,
-    IconButton
-} from "@mui/material";
+    Typography } from "@mui/material";
+import axios from "axios";
+import { useEffect, useState }  from "react";
+import { useRecoilState,useRecoilValue } from 'recoil';
 
-import SearchBox from "./FashionListBox/SearchBox";
-import PaginationBox from "./FashionListBox/PaginationBox";
+import { currentPageState,    fullPageState, rainfallCodeState, skyCodeState, windChillState } from '../../Recoil';
+import { WeatherPostType } from '../../utils/types';
 import AddFashionButton from "./FashionListBox/AddFashionButton";
-
-import CloseIcon from "@mui/icons-material/Close";
 import FashioinDetailModal from "./FashionListBox/FashionDetailModal";
+import PaginationBox from "./FashionListBox/PaginationBox";
+import SearchBox from "./FashionListBox/SearchBox";
 
 const style = {
     position: "absolute",
@@ -36,8 +33,8 @@ const style = {
 };
 
 export default function FashionListBox() {
-    let pageIndex: number = 0;
-    let pageLastIndex: number = 0;
+    let pageIndex = 0;
+    let pageLastIndex = 0;
 
     const [post, setPost] = useState<WeatherPostType[]>([]);
 
@@ -100,12 +97,12 @@ export default function FashionListBox() {
         });
         } catch {
             console.log("api 불러오기 실패")
-        };
+        }
     }
 
     const FashionList = () => {
         let fashion: WeatherPostType[] = [];
-        var array = [];
+        const array = [];
 
         fashion = post
         if (fashion !== undefined && fashion.length !== 0) {

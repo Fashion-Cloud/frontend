@@ -1,7 +1,8 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import InfoBox from '../MainLayout/InfoBox';
+
 import FashionListBox from '../MainLayout/FashionListBox';
+import InfoBox from '../MainLayout/InfoBox';
 
 export default function MainLayout() {
     return(

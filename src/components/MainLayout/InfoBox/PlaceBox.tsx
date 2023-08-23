@@ -1,11 +1,11 @@
+import PlaceIcon from '@mui/icons-material/Place';
 import {
     Toolbar,
     Typography
 } from "@mui/material";
 import { useRecoilValue } from "recoil";
-import { locationDataState } from "../../../Recoil";
 
-import PlaceIcon from '@mui/icons-material/Place';
+import { locationDataState } from "../../../Recoil";
 
 export default function PlaceBox() {
     const locationData = useRecoilValue(locationDataState);

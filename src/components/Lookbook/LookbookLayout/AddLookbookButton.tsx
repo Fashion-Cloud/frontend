@@ -1,5 +1,6 @@
-import { useState } from "react";
-
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
+import SearchIcon from '@mui/icons-material/Search';
 import { 
     Box, 
     Button, 
@@ -7,13 +8,9 @@ import {
     IconButton, 
     InputBase, 
     Modal,
-    Typography,
-    Paper
-} from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
-
-import AddIcon from '@mui/icons-material/Add';
-import SearchIcon from '@mui/icons-material/Search';
+    Paper,
+    Typography} from "@mui/material";
+import { useState } from "react";
 
 const style = {
     position: 'absolute',
