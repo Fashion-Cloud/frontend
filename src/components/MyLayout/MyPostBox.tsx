@@ -1,23 +1,38 @@
 import { Box, Card, CardMedia, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
-import { lookbookNameState, userIdState } from '../../../utils/Recoil';
-import { LookBookBoxType } from '../../../utils/types';
+import { UserPostListType } from '@/utils/types';
 
-export default function LookbookBox() {
-  const setLookbookName = useSetRecoilState(lookbookNameState);
+import { userIdState } from '../../utils/Recoil';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  height: 600,
+  width: 400,
+  bgcolor: '#FFF',
+  borderRadius: '25px',
+  boxShadow: 24,
+  p: 2,
+};
+
+export default function MyPostBox() {
   const userId = useRecoilValue(userIdState);
+  const [postList, setPostList] = useState<UserPostListType[]>([]);
+  const [singleId, setSingleId] = useState<string>('');
+  const [openDetail, setOpenDetail] = useState<boolean>(false);
 
-  const navigate = useNavigate();
+  const handleOpenDetail = () => setOpenDetail(true);
+  const handleCloseDetail = () => setOpenDetail(false);
 
-  const [lookbook, setLookbook] = useState<LookBookBoxType[]>([]);
-  const lookbookListAPI = async () => {
+  const userPostListAPI = async () => {
     try {
       await axios
-        .get(`/api/v1/books/${userId}`, {
+        .get(`/api/v1/posts/user/${userId}`, {
           headers: {
             Accept: 'application/json',
           },
@@ -26,7 +41,7 @@ export default function LookbookBox() {
           const data = response.data.data;
           console.log('data: ', data);
 
-          setLookbook(data);
+          setPostList(data);
         });
     } catch {
       console.log('api 불러오기 실패');
@@ -34,28 +49,25 @@ export default function LookbookBox() {
   };
 
   useEffect(() => {
-    lookbookListAPI();
+    userPostListAPI();
   }, []);
-
   return (
     <Box sx={{ maxWidth: '1200px', margin: '0 auto' }}>
       <Box width="50px" />
-
       <Grid container spacing={3}>
-        {Array.isArray(lookbook) &&
-          lookbook.map((lookbook, index) => (
+        {Array.isArray(postList) &&
+          postList.map((postList, index) => (
             <Grid item key={index} xs={4}>
               <Card
-                sx={{ borderRadius: '10px', cursor: 'pointer' }}
-                onClick={() => {
-                  setLookbookName(lookbook.title);
-                  navigate(`/lookbookdetail/${lookbook.id}`);
-                }}
+                sx={{ cursor: 'pointer' }}
+                // onClick={() => {
+                //     navigate(`/lookbookdetail/${lookbook.id}`)
+                // }}
               >
                 <Box sx={{ position: 'relative' }}>
                   <CardMedia
                     component="img"
-                    image={lookbook.image}
+                    image={postList.image}
                     sx={{
                       height: '350px',
                       width: '100%',
@@ -83,7 +95,7 @@ export default function LookbookBox() {
                     }}
                   >
                     <Typography variant="h6" sx={{ mt: 5, ml: 1 }}>
-                      {lookbook.title}
+                      {postList.name}
                     </Typography>
                   </Box>
                 </Box>

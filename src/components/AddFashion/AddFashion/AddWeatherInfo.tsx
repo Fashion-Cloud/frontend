@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { WeatherType } from '@/utils/types';
 
 import weatherSky from '../../../assets/data/weatherSky';
-import { weatherDataState } from '../../../Recoil';
+import { weatherDataState } from '../../../utils/Recoil';
 
 type WeatherProps = {
   getWeatherData: (data: WeatherType) => void;

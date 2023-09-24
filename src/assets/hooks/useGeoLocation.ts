@@ -46,7 +46,6 @@ const useGeoLocation = () => {
   if (location.coordinates?.lat !== 0){
     return location;
   }
-  // return location;
 }
 
 export default useGeoLocation;

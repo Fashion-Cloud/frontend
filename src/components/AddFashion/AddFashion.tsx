@@ -3,9 +3,9 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { LocationType, WeatherType } from '@/utils/types';
+import { WeatherType } from '@/utils/types';
 
-import { weatherDataState } from '../../Recoil';
+import { weatherDataState } from '../../utils/Recoil';
 import AddImage from './AddFashion/AddImage';
 // import AddLocation from './AddFashion/AddLocation';
 import AddReview from './AddFashion/AddReview';
@@ -16,8 +16,8 @@ export default function AddFashion() {
   const [postTitle, setPostTitle] = useState('');
   const [postImage, setPostImage] = React.useState('');
   const [postReview, setPostReview] = React.useState(2);
-  const [postLocation, setPostLocation] = useState<LocationType>();
-  const [postWeather, setPostWeather] = useState<WeatherType>();
+  // const [postLocation, setPostLocation] = useState<LocationType>();
+  // const [postWeather, setPostWeather] = useState<WeatherType>();
 
   const weatherData = useRecoilValue(weatherDataState);
 
@@ -38,7 +38,7 @@ export default function AddFashion() {
   //     console.log("[AddFashion -> AddLocation] postLocation: ", data)
   // }
   function getWeatherData(data: WeatherType) {
-    setPostWeather(data);
+    // setPostWeather(data)
     console.log('[AddFashion -> AddWeatherInfo] postWeather: ', data);
   }
 
