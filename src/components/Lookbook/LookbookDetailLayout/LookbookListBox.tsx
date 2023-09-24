@@ -137,9 +137,9 @@ export default function LookbookListBox() {
             <Dialog open={open} onClose={handleClose} >
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'left', margin: 1, ml: 3 }}>
                     <WbSunnyIcon />
-                    {lookbook.length > 0 &&
+                    {/* {lookbook.length > 0 &&
                         <Typography variant="h6" sx={{ marginLeft: 2 }}>°C</Typography>
-                    }
+                    } */}
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     {lookbook.length > 0 &&

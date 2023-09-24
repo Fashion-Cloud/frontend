@@ -1,15 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { UserPostListType } from "@/utils/types";
-import { Box, Card, CardMedia, Grid, Typography } from "@mui/material";
+import { Box, Card, CardMedia, Grid, IconButton, Modal, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 import { useRecoilValue } from "recoil";
 import { userIdState } from "../../utils/Recoil";
+import FashioinDetailModal from "../MainLayout/FashionListBox/FashionDetailModal";
+import CloseIcon from "@mui/icons-material/Close";
+
+const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    height: 600,
+    width: 400,
+    bgcolor: "#FFF",
+    borderRadius: "25px",
+    boxShadow: 24,
+    p: 2,
+};
 
 export default function MyPostBox() {
     const userId = useRecoilValue(userIdState);
     const [postList, setPostList] = useState<UserPostListType[]>([]);
+
+    const [singleId, setSingleId] = useState<string>('');
+    const [openDetail, setOpenDetail] = useState<boolean>(false);
+
+    const handleOpenDetail = () => setOpenDetail(true);
+    const handleCloseDetail =  () => setOpenDetail(false);
 
     const userPostListAPI = async () => {
         try {
@@ -41,9 +62,10 @@ export default function MyPostBox() {
                 {Array.isArray(postList)&&postList.map((postList, index) => (
                     <Grid item key={index} xs={4} >
                         <Card sx={{ cursor: 'pointer'}} 
-                            // onClick={() => {
-                            //     navigate(`/lookbookdetail/${lookbook.id}`)
-                            // }}
+                            onClick={() => {
+                                handleOpenDetail()
+                                setSingleId(postList.id)
+                            }}
                         >
                             <Box sx={{ position: 'relative' }}>
                                 <CardMedia
@@ -80,6 +102,20 @@ export default function MyPostBox() {
                 ))}
             </Grid>
             <Box width="50px"/>
+            <Modal
+                open={openDetail}
+                onClose={handleCloseDetail}
+                closeAfterTransition
+                >
+                <Box sx={style}>
+                    <div style={{ textAlign: "right" }}>
+                        <IconButton onClick={() => {setOpenDetail(false);}}>
+                            <CloseIcon style={{color: '#000'}} fontWeight="300" />
+                        </IconButton>
+                    </div>
+                    <FashioinDetailModal singleId={singleId}/>
+                </Box>
+            </Modal>
         </Box>
     )
 }
