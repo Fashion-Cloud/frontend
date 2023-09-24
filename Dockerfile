@@ -1,8 +1,9 @@
-FROM node:16 as build
-
+FROM node:16 as builder
 WORKDIR /frontend
+COPY ./package.json .
 
-RUN  npm install
+RUN npm i --force
+RUN npm cache clear --force
 
-COPY . /frontend
+COPY ./ ./
 RUN npm run build

@@ -1,4 +1,5 @@
 import { Box} from "@mui/material";
+
 import MyPostBox from "../MyLayout/MyPostBox";
 
 export default function MyPostLayout() {

@@ -1,4 +1,5 @@
 import { Box } from "@mui/material"
+
 import MyLayout from "../components/layout/MyLayout"
 
 export default function MyPage() {

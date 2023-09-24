@@ -1,5 +1,5 @@
-import { Box, Avatar, Typography } from "@mui/material";
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import { Avatar, Box, Typography } from "@mui/material";
 
 export default function UserInfoBox() {
     return (

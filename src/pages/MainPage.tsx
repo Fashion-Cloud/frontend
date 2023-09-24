@@ -1,21 +1,20 @@
-import { Box } from "@mui/material";
-import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
-import { menuState } from "../utils/Recoil";
+import { Box } from '@mui/material';
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 
-import MainLayout from "../components/layout/MainLayout";
+import MainLayout from '../components/layout/MainLayout';
+import { menuState } from '../utils/Recoil';
 
 export default function MainPage() {
-    const setSelect = useSetRecoilState(menuState);
+  const setSelect = useSetRecoilState(menuState);
 
-    useEffect(() => {
-        setSelect('Home')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+  useEffect(() => {
+    setSelect('Home');
+  }, []);
 
-    return(
-        <Box>
-            <MainLayout/>
-        </Box>
-    )
+  return (
+    <Box>
+      <MainLayout />
+    </Box>
+  );
 }
