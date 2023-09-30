@@ -1,8 +1,7 @@
 import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
 
-import { userIdState } from '@/utils/Recoil';
-
+import { userIdState } from '../../utils/Recoil';
 import { BookService } from '../service/BookService';
 
 export const useFindAllBooks = () => {

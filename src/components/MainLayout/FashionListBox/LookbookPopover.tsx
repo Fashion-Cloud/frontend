@@ -1,12 +1,10 @@
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Box, List, ListItem, ListItemText, Paper } from '@mui/material';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { useRecoilValue } from 'recoil';
 
-import { userIdState } from '../../../utils/Recoil';
+import { useFindAllBooks } from '../../../api/hook/BookHook';
 import { LookBookBoxType } from '../../../utils/types';
 
 const paperStyle = {
@@ -34,31 +32,38 @@ export default function LookbookPopover({
   // toastify 알람 실행 함수 만들기
   const success = () => toast.success('이미지 업로드 성공!');
 
-  const userId = useRecoilValue(userIdState);
   const [lookbook, setLookbook] = useState<LookBookBoxType[]>([]);
 
-  const lookbookListAPI = async () => {
-    try {
-      await axios
-        .get(`/api/v1/books/${userId}`, {
-          headers: {
-            Accept: 'application/json',
-          },
-        })
-        .then((response) => {
-          const data = response.data.data;
-          console.log('data: ', data);
+  // const lookbookListAPI = async () => {
+  //   try {
+  //     await axios
+  //       .get(`/api/v1/books/${userId}`, {
+  //         headers: {
+  //           Accept: 'application/json',
+  //         },
+  //       })
+  //       .then((response) => {
+  //         const data = response.data.data;
+  //         console.log('data: ', data);
 
-          setLookbook(data);
-        });
-    } catch {
-      console.log('api 불러오기 실패');
-    }
-  };
+  //         setLookbook(data);
+  //       });
+  //   } catch {
+  //     console.log('api 불러오기 실패');
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   lookbookListAPI();
+  // }, []);
+  const { data: lookBookData } = useFindAllBooks();
 
   useEffect(() => {
-    lookbookListAPI();
-  }, []);
+    // lookbookListAPI();
+    if (lookBookData?.data) {
+      setLookbook(lookBookData?.data);
+    }
+  }, [lookBookData]);
 
   return (
     <Paper sx={paperStyle}>
