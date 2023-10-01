@@ -3,9 +3,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { UserPostListType } from '@/utils/types';
-
 import { userIdState } from '../../utils/Recoil';
+import { UserPostListType } from '../../utils/types';
 
 const style = {
   position: 'absolute',

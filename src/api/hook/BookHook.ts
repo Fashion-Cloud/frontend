@@ -6,6 +6,7 @@ import { BookService } from '../service/BookService';
 
 export const useFindAllBooks = () => {
   const userId = useRecoilValue(userIdState);
+  console.log('test : ', userId);
 
   return useQuery({
     queryFn: () => BookService.getAllBooks({ userId }),

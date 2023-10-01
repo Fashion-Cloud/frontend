@@ -34,34 +34,12 @@ export default function LookbookPopover({
 
   const [lookbook, setLookbook] = useState<LookBookBoxType[]>([]);
 
-  // const lookbookListAPI = async () => {
-  //   try {
-  //     await axios
-  //       .get(`/api/v1/books/${userId}`, {
-  //         headers: {
-  //           Accept: 'application/json',
-  //         },
-  //       })
-  //       .then((response) => {
-  //         const data = response.data.data;
-  //         console.log('data: ', data);
-
-  //         setLookbook(data);
-  //       });
-  //   } catch {
-  //     console.log('api 불러오기 실패');
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   lookbookListAPI();
-  // }, []);
   const { data: lookBookData } = useFindAllBooks();
 
   useEffect(() => {
     // lookbookListAPI();
     if (lookBookData?.data) {
-      setLookbook(lookBookData?.data);
+      setLookbook(lookBookData?.data.data);
     }
   }, [lookBookData]);
 

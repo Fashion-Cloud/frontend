@@ -1,47 +1,27 @@
 import { Box, Card, CardMedia, Grid, Typography } from '@mui/material';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useFindAllBooks } from 'src/api/hook/BookHook';
 
-import { useFindAllBooks } from '../../../api/hook/BookHook';
-import { lookbookNameState } from '../../../utils/Recoil';
+import { lookbookNameState, userIdState } from '../../../utils/Recoil';
 import { LookBookBoxType } from '../../../utils/types';
 
 export default function LookbookBox() {
   const setLookbookName = useSetRecoilState(lookbookNameState);
 
   const navigate = useNavigate();
+  const userId = useRecoilValue(userIdState);
 
   const [lookbook, setLookbook] = useState<LookBookBoxType[]>([]);
-  // const lookbookListAPI = async () => {
-  //   try {
-  //     await axios
-  //       .get(`/api/v1/books/${userId}`, {
-  //         headers: {
-  //           Accept: 'application/json',
-  //         },
-  //       })
-  //       .then((response) => {
-  //         const data = response.data.data;
-  //         console.log('data: ', data);
-
-  //         setLookbook(data);
-  //       });
-  //   } catch {
-  //     console.log('api 불러오기 실패');
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   lookbookListAPI();
-  // }, []);
 
   const { data: lookBookData } = useFindAllBooks();
 
   useEffect(() => {
     // lookbookListAPI();
     if (lookBookData?.data) {
-      setLookbook(lookBookData?.data);
+      setLookbook(lookBookData?.data.data);
     }
   }, [lookBookData]);
 
