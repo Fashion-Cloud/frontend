@@ -20,12 +20,11 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
-import React, { useEffect, useState } from 'react';
+import lottie from 'lottie-web';
+import React, { useEffect, useRef, useState } from 'react';
 import { BsCloudRainFill, BsCloudSnowFill } from 'react-icons/bs';
-import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
-
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
 import {
   rainfallCodeState,
@@ -33,6 +32,7 @@ import {
   weatherDataState,
   windChillState,
 } from '../../../utils/Recoil';
+
 const IconOptions = [
   <WbSunnyIcon />,
   <CloudIcon />,
@@ -59,7 +59,6 @@ const PrettoSlider = styled(Slider)({
     border: '2px solid currentColor',
     '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
       boxShadow: 'inherit',
-
     },
     '&:before': {
       display: 'none',
