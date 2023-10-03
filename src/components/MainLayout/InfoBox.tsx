@@ -52,7 +52,7 @@ export default function InfoBox() {
     }
 
     if (windChillData?.data) {
-      setWeatherData(windChillData?.data);
+      setWeatherData(windChillData?.data?.data);
     }
   }, [location, windChillData]);
 
