@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import {
+  Backdrop,
   Box,
   Divider,
   Grow,
@@ -19,17 +20,19 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+
 import React, { useEffect, useState } from 'react';
 import { BsCloudRainFill, BsCloudSnowFill } from 'react-icons/bs';
-import { useRecoilState, useRecoilValue } from 'recoil';
 import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
+
+import { useRecoilState, useRecoilValue } from 'recoil';
+
 import {
   rainfallCodeState,
   skyCodeState,
   weatherDataState,
   windChillState,
-} from 'src/Recoil';
-
+} from '../../../utils/Recoil';
 const IconOptions = [
   <WbSunnyIcon />,
   <CloudIcon />,
@@ -56,6 +59,7 @@ const PrettoSlider = styled(Slider)({
     border: '2px solid currentColor',
     '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
       boxShadow: 'inherit',
+
     },
     '&:before': {
       display: 'none',
@@ -83,9 +87,9 @@ const PrettoSlider = styled(Slider)({
 });
 
 export default function SearchBox() {
-  const weatherData = useRecoilValue(weatherDataState);
+  const [isLoading, setIsLoading] = useState(true);
 
-  console.log('weatherData:', weatherData);
+  const weatherData = useRecoilValue(weatherDataState);
 
   const [anchorElSelect, setAnchorElSelect] =
     useState<HTMLButtonElement | null>(null);
@@ -100,7 +104,7 @@ export default function SearchBox() {
   const [openSlider, setOpenSlider] = useState(false);
   const [placementSlider, setPlacementSlider] = useState<PopperPlacementType>();
 
-  const [skyCode, setSkyCode] = useRecoilState(skyCodeState);
+  const [skyCode, setSkyCode] = useRecoilState<number>(skyCodeState);
   const [rainfallCode, setRainfallCode] = useRecoilState(rainfallCodeState);
   const [windChill, setWindChill] = useRecoilState(windChillState);
 
@@ -225,8 +229,42 @@ export default function SearchBox() {
     setOpenSlider(false);
   };
 
+  const LoadingLottie = () => {
+    // weatherData에 따라 다른 애니메이션 데이터를 선택
+    const getAnimationData = () => {
+      return require('../../../assets/lotties/salesman.json');
+    };
+
+    const animationData = getAnimationData();
+    // const animationData = require('../../assets/lotties/allRain.json');
+
+    //lottie
+    const element = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+      const animation = lottie.loadAnimation({
+        container: element.current as HTMLDivElement,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+      });
+
+      return () => {
+        animation.destroy(); // lottie-web 인스턴스 제거
+      };
+    }, []);
+    return <Box ref={element} style={{ marginTop: 30, height: 300 }}></Box>;
+  };
+
   return (
     <Box>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isLoading}
+      >
+        <LoadingLottie />
+      </Backdrop>
+
       <Toolbar sx={{ ml: '13px' }}>
         <SearchBar />
 

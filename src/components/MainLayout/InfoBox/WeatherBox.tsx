@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import weatherSky from '../../../assets/data/weatherSky';
-import { weatherDataState } from '../../../Recoil';
+import { weatherDataState } from '../../../utils/Recoil';
 import { WeatherType } from '../../../utils/types';
 
 type WeatherProps = {

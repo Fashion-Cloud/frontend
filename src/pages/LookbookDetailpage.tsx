@@ -2,7 +2,7 @@ import {
     Box, 
 } from "@mui/material";
 
-import LookbookDetailLayout from "../components/Lookbook/LookbookDetailLayout";
+import LookbookDetailLayout from "../components/layout/LookbookDetailLayout";
 
 export default function LookbookDetailpage() {
     return(

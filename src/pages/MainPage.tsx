@@ -1,20 +1,20 @@
-import { Box } from "@mui/material";
-import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import { Box } from '@mui/material';
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 
-import MainLayout from "../components/Mainpage/MainLayout";
-import { menuState } from "../Recoil";
+import MainLayout from '../components/layout/MainLayout';
+import { menuState } from '../utils/Recoil';
 
 export default function MainPage() {
-    const setSelect = useSetRecoilState(menuState);
+  const setSelect = useSetRecoilState(menuState);
 
-    useEffect(() => {
-        setSelect('Home')
-    }, [])
+  useEffect(() => {
+    setSelect('Home');
+  }, []);
 
-    return(
-        <Box>
-            <MainLayout/>
-        </Box>
-    )
+  return (
+    <Box>
+      <MainLayout />
+    </Box>
+  );
 }

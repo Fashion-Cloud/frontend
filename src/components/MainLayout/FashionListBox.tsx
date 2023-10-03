@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+
 import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
@@ -19,7 +20,7 @@ import {
   rainfallCodeState,
   skyCodeState,
   windChillState,
-} from '../../Recoil';
+} from '../../utils/Recoil';
 import { WeatherPostType } from '../../utils/types';
 import AddFashionButton from './FashionListBox/AddFashionButton';
 import FashioinDetailModal from './FashionListBox/FashionDetailModal';

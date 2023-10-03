@@ -3,9 +3,9 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
-import { locationDataState, weatherDataState } from 'src/Recoil';
 
 import useGeoLocation from '../../assets/hooks/useGeoLocation';
+import { locationDataState, weatherDataState } from '../../utils/Recoil';
 import PlaceBox from './InfoBox/PlaceBox';
 import WeatherBox from './InfoBox/WeatherBox';
 

@@ -1,21 +1,18 @@
 import PlaceIcon from '@mui/icons-material/Place';
-import {
-    Toolbar,
-    Typography
-} from "@mui/material";
-import { useRecoilValue } from "recoil";
+import { Toolbar, Typography } from '@mui/material';
+import { useRecoilValue } from 'recoil';
 
-import { locationDataState } from "../../../Recoil";
+import { locationDataState } from '../../../utils/Recoil';
 
 export default function PlaceBox() {
-    const locationData = useRecoilValue(locationDataState);
-    
-    return (
-        <Toolbar sx={{justifyContent: 'center', mt: 10}}>
-            <PlaceIcon sx={{mr: 0.7}}/>
-            <Typography sx={{fontSize: '16pt'}}>
-                {locationData?.fullAddress}
-            </Typography>
-        </Toolbar>
-    )
+  const locationData = useRecoilValue(locationDataState);
+
+  return (
+    <Toolbar sx={{ justifyContent: 'center', mt: 10 }}>
+      <PlaceIcon sx={{ mr: 0.7 }} />
+      <Typography sx={{ fontSize: '16pt' }}>
+        {locationData?.fullAddress}
+      </Typography>
+    </Toolbar>
+  );
 }
