@@ -141,8 +141,8 @@ export default function SearchBox() {
 
   function searchSky(skyCode: number, rainfallCode: number) {
     let index = 0;
-    console.log('[searchSky] skyCode: ', skyCode);
-    console.log('[searchSky] rainfallCode: ', rainfallCode);
+    // console.log('[searchSky] skyCode: ', skyCode);
+    // console.log('[searchSky] rainfallCode: ', rainfallCode);
 
     if (skyCode === 1 && rainfallCode === 0) {
       index = 0;
@@ -160,10 +160,11 @@ export default function SearchBox() {
   }
 
   useEffect(() => {
-    if (windChillData) {
-      console.log(windChillData);
-      setWindChill(windChillData?.data?.windChill);
-    }
+    // 일단 이부분 API 호출할 때, windChill이 undefined로 떠서 주석해둡니다.
+    // if (windChillData) {
+    //   console.log(windChillData);
+    //   setWindChill(windChillData?.data?.windChill);
+    // }
 
     searchSky(skyCode, rainfallCode);
   }, [skyCode, rainfallCode, windChillData]);
