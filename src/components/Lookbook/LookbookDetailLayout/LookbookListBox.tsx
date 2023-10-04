@@ -12,10 +12,11 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useFindSomeBooks } from 'src/api/hook/SomeBookHook';
 
+// import { useParams } from 'react-router-dom';
 import { LookBookListType } from '../../../utils/types';
 
 export default function LookbookListBox() {
@@ -23,7 +24,7 @@ export default function LookbookListBox() {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const { id } = useParams();
+  // const { id } = useParams();
 
   const handleOpen = (index: number) => {
     setCurrentImageIndex(index);
@@ -34,30 +35,13 @@ export default function LookbookListBox() {
   };
 
   const [lookbook, setLookbook] = useState<LookBookListType[]>([]);
-  const fashionAPI = async () => {
-    console.log('fashionAPI Start');
-    console.log('id: ', id);
 
-    try {
-      await axios
-        .get(`/api/v1/books/posts/${id}`, {
-          headers: {
-            Accept: 'application/json',
-          },
-        })
-        .then((response) => {
-          const data = response.data.data;
-          console.log('data: ', data);
-
-          setLookbook(data);
-        });
-    } catch {
-      console.log('api 불러오기 실패');
-    }
-  };
+  const { data: someLookBookData } = useFindSomeBooks();
 
   useEffect(() => {
-    fashionAPI();
+    if (someLookBookData?.data) {
+      setLookbook(someLookBookData?.data.data);
+    }
   }, []);
 
   const handlePrev = () => {
