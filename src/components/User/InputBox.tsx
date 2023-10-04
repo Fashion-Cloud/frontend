@@ -18,7 +18,7 @@ export default function InputBox({ type }: { type: string }) {
       <InputBase
         fullWidth
         type={type}
-        sx={{ fontSize: '1rem', fontWeight: 'bold' }} // 텍스트 필드의 스타일
+        sx={{ fontSize: '0.9rem', fontWeight: 'bold' }} // 텍스트 필드의 스타일
       />
     </Paper>
   );
