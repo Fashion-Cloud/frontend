@@ -2,10 +2,10 @@ import '../../../fonts/font.css';
 
 import { Box, InputBase, Paper, Toolbar, Typography } from '@mui/material';
 import { useRecoilValue } from 'recoil';
+import { WeatherType } from 'src/utils/types';
 
 import weatherSky from '../../../assets/data/weatherSky';
 import { weatherDataState } from '../../../utils/Recoil';
-import { WeatherType } from '../../../utils/types';
 
 type WeatherProps = {
   getWeatherData: (data: WeatherType) => void;

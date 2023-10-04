@@ -20,13 +20,12 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import axios from 'axios';
 import lottie from 'lottie-web';
 import React, { useEffect, useRef, useState } from 'react';
 import { BsCloudRainFill, BsCloudSnowFill } from 'react-icons/bs';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
-import useGeoLocation from '../../../assets/hooks/useGeoLocation';
 import {
   rainfallCodeState,
   skyCodeState,
@@ -96,7 +95,7 @@ export default function SearchBox() {
   const [openSelect, setOpenSelect] = useState(false);
   const [placementSelect, setPlacementSelect] = useState<PopperPlacementType>();
   const [selectedIndex, setSelectedIndex] = useState(
-    searchSky(weatherData.sky, weatherData.rainfallType)
+    searchSky(weatherData?.sky, weatherData?.rainfallType)
   );
 
   const [anchorElSlider, setAnchorElSlider] =
@@ -109,10 +108,6 @@ export default function SearchBox() {
   const [windChill, setWindChill] = useRecoilState(windChillState);
 
   const [snowState, setSnowState] = useState<boolean>(false);
-
-  const location = useGeoLocation();
-  let latitude: number | undefined;
-  let longitude: number | undefined;
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     if (typeof newValue === 'number') {
@@ -145,34 +140,12 @@ export default function SearchBox() {
     );
   };
 
-  const weatherAPI = async () => {
-    if (latitude !== undefined) {
-      try {
-        await axios
-          .get(`/api/v1/weather?latitude=${latitude}&longitude=${longitude}`, {
-            headers: {
-              Accept: 'application/json',
-            },
-            withCredentials: true,
-          })
-          .then((response) => {
-            const data = response.data.data;
-            console.log('[WexatherTemp] tempAPI: ', data);
-
-            setWindChill(data?.windChill);
-            setIsLoading(false);
-          });
-      } catch {
-        console.log('[WeatherTemp] tempAPI: api 불러오기 실패');
-        setIsLoading(false);
-      }
-    }
-  };
+  const { data: windChillData } = useFindAllWeathers();
 
   function searchSky(skyCode: number, rainfallCode: number) {
     let index = 0;
-    console.log('[searchSky] skyCode: ', skyCode);
-    console.log('[searchSky] rainfallCode: ', rainfallCode);
+    // console.log('[searchSky] skyCode: ', skyCode);
+    // console.log('[searchSky] rainfallCode: ', rainfallCode);
 
     if (skyCode === 1 && rainfallCode === 0) {
       index = 0;
@@ -190,17 +163,14 @@ export default function SearchBox() {
   }
 
   useEffect(() => {
-    if (location !== undefined) {
-      latitude = location.coordinates?.lat;
-      longitude = location.coordinates?.lng;
-      console.log('[GeoLocation] latitude: ', latitude);
-      console.log('[GeoLocation] longitude: ', longitude);
-
-      weatherAPI();
-    }
+    // 일단 이부분 API 호출할 때, windChill이 undefined로 떠서 주석해둡니다.
+    // if (windChillData) {
+    //   console.log(windChillData);
+    //   setWindChill(windChillData?.data?.windChill);
+    // }
 
     searchSky(skyCode, rainfallCode);
-  }, [location, skyCode, rainfallCode]);
+  }, [skyCode, rainfallCode, windChillData]);
 
   function getSkyData(data: string) {
     console.log('data: ', data);
@@ -231,7 +201,7 @@ export default function SearchBox() {
   const handleWeatherSelect =
     (newPlacement: PopperPlacementType) =>
     (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (openSlider === true) {
+      if (openSlider) {
         setOpenSlider(false);
       }
       setAnchorElSelect(event.currentTarget);
@@ -247,7 +217,7 @@ export default function SearchBox() {
   const handleWeatherSlider =
     (newPlacement: PopperPlacementType) =>
     (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (openSelect === true) {
+      if (openSelect) {
         setOpenSelect(false);
       }
       setAnchorElSlider(event.currentTarget);
@@ -305,7 +275,7 @@ export default function SearchBox() {
             ml: 1,
             display: 'flex',
             justifyContent: 'center',
-            width: snowState === false ? '45px' : '90px',
+            width: !snowState ? '45px' : '90px',
             height: '45px',
             borderRadius: '10px',
           }}

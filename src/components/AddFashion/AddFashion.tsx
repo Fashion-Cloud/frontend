@@ -2,9 +2,9 @@ import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { WeatherType } from 'src/utils/types';
 
 import { weatherDataState } from '../../utils/Recoil';
-import { WeatherType } from '../../utils/types';
 import AddImage from './AddFashion/AddImage';
 // import AddLocation from './AddFashion/AddLocation';
 import AddReview from './AddFashion/AddReview';

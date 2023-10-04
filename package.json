@@ -77,7 +77,7 @@
     "msw": "^1.2.1",
     "openapi-typescript-codegen": "^0.23.0",
     "prettier": "^2.6.2",
-    "vite": "^4.2.1"
+    "vite": "4.3.9"
   },
   "msw": {
     "workerDirectory": "public"
