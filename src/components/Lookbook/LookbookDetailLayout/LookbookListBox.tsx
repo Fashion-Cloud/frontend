@@ -14,17 +14,14 @@ import {
 } from '@mui/material';
 // import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useFindSomeBooks } from 'src/api/hook/SomeBookHook';
+import { useFindSomeBooks } from 'src/api/hook/BookHook';
 
-// import { useParams } from 'react-router-dom';
 import { LookBookListType } from '../../../utils/types';
 
 export default function LookbookListBox() {
   const [open, setOpen] = useState(false);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // const { id } = useParams();
 
   const handleOpen = (index: number) => {
     setCurrentImageIndex(index);
