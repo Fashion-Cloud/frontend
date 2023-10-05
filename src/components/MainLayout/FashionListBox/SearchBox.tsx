@@ -86,7 +86,7 @@ const PrettoSlider = styled(Slider)({
 });
 
 export default function SearchBox() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const weatherData = useRecoilValue(weatherDataState);
 
@@ -235,7 +235,6 @@ export default function SearchBox() {
     };
 
     const animationData = getAnimationData();
-    // const animationData = require('../../assets/lotties/allRain.json');
 
     //lottie
     const element = useRef<HTMLDivElement>(null);
