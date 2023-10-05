@@ -2,6 +2,7 @@ import { Box, Card, CardMedia, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { token } from 'src/assets/data/token';
 
 import { userIdState } from '../../utils/Recoil';
 import { UserPostListType } from '../../utils/types';
@@ -34,6 +35,7 @@ export default function MyPostBox() {
         .get(`/api/v1/posts/user/${userId}`, {
           headers: {
             Accept: 'application/json',
+            Authorization: `Bearer ${token}`
           },
         })
         .then((response) => {
@@ -94,7 +96,7 @@ export default function MyPostBox() {
                     }}
                   >
                     <Typography variant="h6" sx={{ mt: 5, ml: 1 }}>
-                      {postList.name}
+                      {postList.title}
                     </Typography>
                   </Box>
                 </Box>

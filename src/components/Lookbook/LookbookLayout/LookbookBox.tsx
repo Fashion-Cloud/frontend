@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { token } from 'src/assets/data/token';
 
 import { lookbookNameState, userIdState } from '../../../utils/Recoil';
 import { LookBookBoxType } from '../../../utils/types';
@@ -17,9 +18,10 @@ export default function LookbookBox() {
   const lookbookListAPI = async () => {
     try {
       await axios
-        .get(`/api/v1/books/${userId}`, {
+        .get(`/api/v1/lookbooks/${userId}`, {
           headers: {
             Accept: 'application/json',
+            Authorization: `Bearer ${token}`
           },
         })
         .then((response) => {

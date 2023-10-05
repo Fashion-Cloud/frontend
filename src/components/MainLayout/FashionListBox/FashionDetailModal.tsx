@@ -19,6 +19,7 @@ import {
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { token } from 'src/assets/data/token';
 
 import rainfallType from '../../../assets/data/rainfallType';
 import weatherSky from '../../../assets/data/weatherSky';
@@ -61,6 +62,7 @@ export default function FashioinDetailModal({ singleId }: FashionDetailProps) {
         .get(`/api/v1/posts/${singleId}`, {
           headers: {
             Accept: 'application/json',
+            Authorization: `Bearer ${token}`
           },
         })
         .then((response) => {
@@ -76,9 +78,10 @@ export default function FashioinDetailModal({ singleId }: FashionDetailProps) {
   const lookbookPostAPI = async (lookbookId: string) => {
     try {
       await axios
-        .post(`/api/v1/books/posts`, {
-          lookBookId: lookbookId,
-          postId: singleId,
+        .post(`/api/v1/lookbooks/posts/${lookbookId}?postId=${singleId}`, {}, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
         })
         .then((response) => {
           console.log(response);
@@ -130,7 +133,7 @@ export default function FashioinDetailModal({ singleId }: FashionDetailProps) {
               fontSize="20pt"
               sx={{ mt: 0.5, ml: 6 }}
             >
-              {singleData.name}
+              {singleData.title}
             </Typography>
             <Typography
               fontFamily="CookieRun-Regular"
