@@ -38,8 +38,8 @@ export default function UserInfoBox() {
                         variant='contained' 
                         sx={{
                             px: 5, 
-                            backgroundColor: follow ? 'grey' : '#7DAADB', 
-                            '&:hover': {backgroundColor: follow ? '#9e9e9e' : '#1f5091'}
+                            backgroundColor: follow ? '#9e9e9e' : '#7DAADB', 
+                            '&:hover': {backgroundColor: follow ? 'grey' : '#1f5091'}
                         }} 
                         onClick={handleFollowChange}
                     >
