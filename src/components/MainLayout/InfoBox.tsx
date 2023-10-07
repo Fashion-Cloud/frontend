@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
+import {token} from 'src/assets/data/token';
 
 import useGeoLocation from '../../assets/hooks/useGeoLocation';
 import { locationDataState, weatherDataState } from '../../utils/Recoil';
@@ -27,6 +28,7 @@ export default function InfoBox() {
           .get(`/api/v1/address?latitude=${latitude}&longitude=${longitude}`, {
             headers: {
               Accept: 'application/json',
+              Authorization: `Bearer ${token}`
             },
           })
           .then((response) => {
