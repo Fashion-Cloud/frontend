@@ -3,8 +3,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Box, List, ListItem, ListItemText, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { useRecoilValue } from 'recoil';
-import { token } from 'src/assets/data/token';
 
 import { useFindAllBooks } from '../../../api/hook/BookHook';
 import { LookBookBoxType } from '../../../utils/types';

@@ -2,7 +2,7 @@ import apiV1Instance from '../api-instance';
 
 export class BookService {
   //전체 룩북
-  public static getAllBooks = async (options: { userId?: string }) => {
+  public static getAllBooks = async (options: { userId?: number }) => {
     return apiV1Instance.get(`/books/${options.userId}`);
   };
 
