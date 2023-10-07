@@ -3,6 +3,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Box, List, ListItem, ListItemText, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
+import { useRecoilValue } from 'recoil';
+import { token } from 'src/assets/data/token';
 
 import { useFindAllBooks } from '../../../api/hook/BookHook';
 import { LookBookBoxType } from '../../../utils/types';
@@ -33,11 +35,9 @@ export default function LookbookPopover({
   const success = () => toast.success('이미지 업로드 성공!');
 
   const [lookbook, setLookbook] = useState<LookBookBoxType[]>([]);
-
   const { data: lookBookData } = useFindAllBooks();
 
   useEffect(() => {
-    // lookbookListAPI();
     if (lookBookData?.data) {
       setLookbook(lookBookData?.data.data);
     }

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useFindAllBooks } from 'src/api/hook/BookHook';
+import { token } from 'src/assets/data/token';
 
 import { lookbookNameState, userIdState } from '../../../utils/Recoil';
 import { LookBookBoxType } from '../../../utils/types';
@@ -19,7 +20,6 @@ export default function LookbookBox() {
   const { data: lookBookData } = useFindAllBooks();
 
   useEffect(() => {
-    // lookbookListAPI();
     if (lookBookData?.data) {
       setLookbook(lookBookData?.data.data);
     }

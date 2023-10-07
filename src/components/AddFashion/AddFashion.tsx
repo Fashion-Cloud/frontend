@@ -2,6 +2,9 @@ import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import rainfallType from 'src/assets/data/rainfallType';
+import {token} from 'src/assets/data/token';
+import weatherSky from 'src/assets/data/weatherSky';
 import { WeatherType } from 'src/utils/types';
 
 import { weatherDataState } from '../../utils/Recoil';
@@ -10,6 +13,7 @@ import AddImage from './AddFashion/AddImage';
 import AddReview from './AddFashion/AddReview';
 import AddTitle from './AddFashion/AddTitle';
 import AddWeatherInfo from './AddFashion/AddWeatherInfo';
+
 
 export default function AddFashion() {
   const [postTitle, setPostTitle] = useState('');
@@ -45,14 +49,17 @@ export default function AddFashion() {
     try {
       await axios
         .post('/api/v1/posts', {
-          userId: '550e8400-e29b-41d4-a716-446655440000',
-          name: postTitle,
+          title: postTitle,
           image: postImage,
           review: postReview,
           temperature: weatherData.temperature,
-          skyStatus: weatherData.sky,
-          rainfallType: weatherData.rainfallType,
+          skyStatus: weatherSky(weatherData.sky),
+          rainfallType: rainfallType(weatherData.rainfallType),
           windSpeed: weatherData.windSpeed,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
         })
         .then((response) => {
           console.log(response);

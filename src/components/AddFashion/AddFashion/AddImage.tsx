@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import Resizer from 'react-image-file-resizer';
 import { toast, ToastContainer } from 'react-toastify';
+import {token} from 'src/assets/data/token';
 
 type ImageProps = {
   getImageData: (data: string) => void;
@@ -69,6 +70,7 @@ export default function AddImage({ getImageData }: ImageProps) {
           .post('/api/v1/images', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
+              Authorization: `Bearer ${token}`
             },
           })
           .then((response) => {

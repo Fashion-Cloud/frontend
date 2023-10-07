@@ -32,7 +32,7 @@ export default function LookbookListBox() {
   };
 
   const [lookbook, setLookbook] = useState<LookBookListType[]>([]);
-
+  
   const { data: someLookBookData } = useFindSomeBooks();
 
   useEffect(() => {
@@ -105,7 +105,7 @@ export default function LookbookListBox() {
                     }}
                   >
                     <Typography variant="h6" sx={{ mt: 5, ml: 1 }}>
-                      {item.name}
+                      {item.title}
                     </Typography>
                   </Box>
                 </Box>
@@ -150,7 +150,7 @@ export default function LookbookListBox() {
           {lookbook.length > 0 && (
             <img
               src={lookbook[currentImageIndex].image}
-              alt={lookbook[currentImageIndex].name}
+              alt={lookbook[currentImageIndex].title}
               style={{ width: 'auto', height: '600px' }}
             />
           )}
