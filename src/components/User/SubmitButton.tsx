@@ -11,7 +11,7 @@ export default function SubmitButton({ sign }: { sign: string }) {
         height: '2.5rem',
         fontSize: '1.3rem',
         fontFamily: 'Dongle-Bold',
-        marginTop: '1.2rem',
+        marginTop: '1.6rem',
         marginBottom: '0.4rem',
       }}
     >

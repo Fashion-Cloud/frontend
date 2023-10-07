@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 
 import MainDrawer from './components/common/MainDrawer';
+import LoginPage from './pages/LoginPage';
 import LookbookDetailpage from './pages/LookbookDetailpage';
 import Mainpage from './pages/MainPage';
 import MyPage from './pages/MyPage';
@@ -20,6 +21,7 @@ export default function App() {
             <Route path="/" element={<Mainpage />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route
               path="/lookbookdetail/:id"
               element={<LookbookDetailpage />}
