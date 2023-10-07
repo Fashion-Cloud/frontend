@@ -11,6 +11,7 @@ import {
   ListItemIcon,
 } from '@mui/material';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
+import Image from 'next/image';
 import { useRecoilState } from 'recoil';
 
 import logo from '../../assets/images/bang.png';
@@ -75,7 +76,7 @@ export default function MainDrawer() {
       <MiniDrawer variant="permanent">
         <ListItem disablePadding sx={{ display: 'block' }}>
           <Box sx={{ px: 1.5, my: 1.5 }}>
-            <img height="50px" src={logo} alt="logo" />
+            <Image height={50} src={logo} alt="logo" />
           </Box>
         </ListItem>
         <Divider />

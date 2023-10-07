@@ -1,4 +1,5 @@
 import { Box, Card } from '@mui/material';
+import Image from 'next/image';
 
 import logo from '../../assets/images/bang.png';
 import InputBox from './InputBox';
@@ -21,7 +22,7 @@ export default function LoginBox() {
       }}
     >
       <Box sx={{ px: 1.5 }}>
-        <img height="50px" src={logo} alt="logo" />
+        <Image height={50} src={logo} alt="logo" />
       </Box>
       <div
         style={{

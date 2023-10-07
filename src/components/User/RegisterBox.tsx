@@ -1,6 +1,7 @@
-import { Avatar, Card } from '@mui/material';
-import userImage from 'src/assets/images/user.png';
+import { Card } from '@mui/material';
+import Image from 'next/image';
 
+import userImage from '../../assets/images/user.png';
 import InputBox from './InputBox';
 import QuestionLink from './QuestionLink';
 import SubmitButton from './SubmitButton';
@@ -28,13 +29,11 @@ export default function RegisterBox() {
         Fashion Cloud
       </div>
       <div style={{ position: 'relative' }}>
-        <Avatar
+        <Image
           alt="사용자 프로필 사진"
           src={userImage}
-          sx={{
-            width: 120,
-            height: 120,
-          }}
+          width={120}
+          height={120}
         />
         <button
           style={{
