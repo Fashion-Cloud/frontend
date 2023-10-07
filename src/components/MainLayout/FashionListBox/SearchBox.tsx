@@ -235,7 +235,6 @@ export default function SearchBox() {
     };
 
     const animationData = getAnimationData();
-    // const animationData = require('../../assets/lotties/allRain.json');
 
     //lottie
     const element = useRef<HTMLDivElement>(null);

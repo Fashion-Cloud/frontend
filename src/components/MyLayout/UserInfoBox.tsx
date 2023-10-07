@@ -1,7 +1,17 @@
-import AccessibilityIcon from '@mui/icons-material/Accessibility';
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Button, Typography } from "@mui/material";
+import { useState } from 'react';
 
 export default function UserInfoBox() {
+    const [follow, setFollow] = useState<boolean>(false);
+
+    const handleFollowChange = () => {
+        if (follow) {
+            setFollow(false);
+        } else {
+            setFollow(true);
+        }
+    }
+
     return (
         <Box display="flex" alignItems="start" gap={2}>
             {/* 왼쪽 컬럼: Avatar와 아래의 텍스트 */}
@@ -11,23 +21,36 @@ export default function UserInfoBox() {
                     alt="User's avatar" 
                     sx={{ width: 100, height: 100, ml: -10 }} 
                 />
-                <Typography sx={{mt: 3, ml: 16}}>
+                <Typography sx={{mt: 3, ml: 16, mb: 5}}>
                     나만의 패션을 찾고 있는 난 미래의 패셔니스타.
-                </Typography>
-                <Typography sx={{mt: 1, mb: 3, ml: -10}}>
-                    <AccessibilityIcon sx={{mb: -1, mr: 1}}/>
-                    163 cm
                 </Typography>
             </Box>
 
             <Box ml={-23} mt={2}>
-                <Typography variant="h6">g.3un</Typography>
+                <Box display='flex' gap={5}>
+                    <Typography variant="h6">g.3un</Typography>
+                    <Button 
+                        variant='contained' 
+                        sx={{
+                            px: 5, 
+                            backgroundColor: follow ? '#9e9e9e' : '#7DAADB', 
+                            '&:hover': {backgroundColor: follow ? 'grey' : '#1f5091'}
+                        }} 
+                        onClick={handleFollowChange}
+                    >
+                        {follow ? 'Unfollow' : 'follow'}
+                    </Button>
+                </Box>
 
-                <Box display="flex" alignItems="center" gap={2} mt={1}>
+                <Box display="flex" alignItems="center" gap={1} mt={1}>
                     <Typography variant="body1">게시글</Typography>
-                    <Typography variant="body1" sx={{fontWeight: 700}}>2</Typography>
-                    <Typography variant="body1">게시글</Typography>
-                    <Typography variant="body1" sx={{fontWeight: 700}}>20</Typography>
+                    <Typography variant="body1" sx={{fontWeight: 700, mr: 1}}>2</Typography>
+
+                    <Typography variant="body1">팔로워</Typography>
+                    <Typography variant="body1" sx={{fontWeight: 700, mr: 1}}>10</Typography>
+
+                    <Typography variant="body1">팔로잉</Typography>
+                    <Typography variant="body1" sx={{fontWeight: 700, mr: 1}}>20</Typography>
                 </Box>
             </Box>
         </Box>
