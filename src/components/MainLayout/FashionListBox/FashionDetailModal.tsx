@@ -1,6 +1,3 @@
-import '../../../fonts/font.css';
-import 'react-toastify/dist/ReactToastify.css';
-
 import BookmarkIcon from '@mui/icons-material/Bookmark'; // 채워짐
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'; // 채워지지 않음
 import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
@@ -62,7 +59,7 @@ export default function FashioinDetailModal({ singleId }: FashionDetailProps) {
         .get(`/api/v1/posts/${singleId}`, {
           headers: {
             Accept: 'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {
@@ -78,11 +75,15 @@ export default function FashioinDetailModal({ singleId }: FashionDetailProps) {
   const lookbookPostAPI = async (lookbookId: string) => {
     try {
       await axios
-        .post(`/api/v1/lookbooks/posts/${lookbookId}?postId=${singleId}`, {}, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-        })
+        .post(
+          `/api/v1/lookbooks/posts/${lookbookId}?postId=${singleId}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((response) => {
           console.log(response);
           success();

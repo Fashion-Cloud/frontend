@@ -1,5 +1,3 @@
-import '../../../fonts/font.css';
-
 import { InputBase, Paper, Toolbar, Typography } from '@mui/material';
 import { useState } from 'react';
 

@@ -1,4 +1,4 @@
-import '../../../fonts/font.css';
+import '../../../../public/fonts/font.css';
 
 import NearMeIcon from '@mui/icons-material/NearMe';
 import { IconButton, Toolbar, Typography } from '@mui/material';

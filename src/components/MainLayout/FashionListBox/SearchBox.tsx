@@ -20,11 +20,11 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useFindAllWeathers } from 'api/hook/WeatherHook';
 import lottie from 'lottie-web';
 import React, { useEffect, useRef, useState } from 'react';
 import { BsCloudRainFill, BsCloudSnowFill } from 'react-icons/bs';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
 import {
   rainfallTypeState,
@@ -149,13 +149,25 @@ export default function SearchBox() {
 
     if (skyStatus === 'SUNNY' && rainfallType === 'NONE') {
       index = 0;
-    } else if ((skyStatus === 'CLOUDY' || skyStatus === 'OVERCAST') && rainfallType === 'NONE') {
+    } else if (
+      (skyStatus === 'CLOUDY' || skyStatus === 'OVERCAST') &&
+      rainfallType === 'NONE'
+    ) {
       index = 1;
-    } else if (skyStatus === 'NONE' && (rainfallType === 'CLEAR' || rainfallType === 'RAINDROP')) {
+    } else if (
+      skyStatus === 'NONE' &&
+      (rainfallType === 'CLEAR' || rainfallType === 'RAINDROP')
+    ) {
       index = 2;
-    } else if (skyStatus === 'NONE' && (rainfallType === 'RAIN' || rainfallType === 'RAINDROP_FLURRY')) {
+    } else if (
+      skyStatus === 'NONE' &&
+      (rainfallType === 'RAIN' || rainfallType === 'RAINDROP_FLURRY')
+    ) {
       index = 3;
-    } else if (skyStatus === 'NONE' && (rainfallType === 'SNOW' || rainfallType === 'FLURRY')) {
+    } else if (
+      skyStatus === 'NONE' &&
+      (rainfallType === 'SNOW' || rainfallType === 'FLURRY')
+    ) {
       index = 4;
     }
 
