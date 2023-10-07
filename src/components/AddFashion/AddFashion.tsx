@@ -1,12 +1,11 @@
 import { Box, Button, Divider, Grid, Typography } from '@mui/material';
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { useAddPost } from 'src/api/hook/PostHook';
 import { WeatherType } from 'src/utils/types';
 
 import { weatherDataState } from '../../utils/Recoil';
 import AddImage from './AddFashion/AddImage';
-// import AddLocation from './AddFashion/AddLocation';
 import AddReview from './AddFashion/AddReview';
 import AddTitle from './AddFashion/AddTitle';
 import AddWeatherInfo from './AddFashion/AddWeatherInfo';
@@ -15,7 +14,6 @@ export default function AddFashion() {
   const [postTitle, setPostTitle] = useState('');
   const [postImage, setPostImage] = React.useState('');
   const [postReview, setPostReview] = React.useState(2);
-  // const [postLocation, setPostLocation] = useState<LocationType>();
   // const [postWeather, setPostWeather] = useState<WeatherType>();
 
   const weatherData = useRecoilValue(weatherDataState);
@@ -41,28 +39,20 @@ export default function AddFashion() {
     console.log('[AddFashion -> AddWeatherInfo] postWeather: ', data);
   }
 
-  const postAPI = async () => {
-    try {
-      await axios
-        .post('/api/v1/posts', {
-          userId: '550e8400-e29b-41d4-a716-446655440000',
-          name: postTitle,
-          image: postImage,
-          review: postReview,
-          temperature: weatherData.temperature,
-          skyStatus: weatherData.sky,
-          rainfallType: weatherData.rainfallType,
-          windSpeed: weatherData.windSpeed,
-        })
-        .then((response) => {
-          console.log(response);
-          alert('post 완료');
-          window.location.replace('/');
-        });
-    } catch {
-      console.log('api 불러오기 실패');
+  const { mutate: addPost } = useAddPost(
+    '550e8400-e29b-41d4-a716-446655440000',
+    postTitle,
+    postImage,
+    weatherData.sky,
+    weatherData.temperature,
+    weatherData.rainfallType,
+    weatherData.windSpeed,
+    postReview,
+    () => {
+      alert('새 포스트 등록을 성공하였습니다.');
+      window.location.replace('/');
     }
-  };
+  );
 
   return (
     <div>
@@ -96,7 +86,7 @@ export default function AddFashion() {
           '&:hover': { backgroundColor: '#1f5091' },
         }}
         onClick={() => {
-          postAPI();
+          addPost();
         }}
       >
         <Typography sx={{ ml: 7, mr: 7 }}>Post</Typography>

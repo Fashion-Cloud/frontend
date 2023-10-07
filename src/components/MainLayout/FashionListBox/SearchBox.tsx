@@ -27,8 +27,8 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
 import {
-  rainfallCodeState,
-  skyCodeState,
+  rainfallTypeState,
+  skyStatusState,
   weatherDataState,
   windChillState,
 } from '../../../utils/Recoil';
@@ -86,7 +86,7 @@ const PrettoSlider = styled(Slider)({
 });
 
 export default function SearchBox() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const weatherData = useRecoilValue(weatherDataState);
 
@@ -103,8 +103,8 @@ export default function SearchBox() {
   const [openSlider, setOpenSlider] = useState(false);
   const [placementSlider, setPlacementSlider] = useState<PopperPlacementType>();
 
-  const [skyCode, setSkyCode] = useRecoilState<number>(skyCodeState);
-  const [rainfallCode, setRainfallCode] = useRecoilState(rainfallCodeState);
+  const [skyStatus, setSkyStatus] = useRecoilState<string>(skyStatusState);
+  const [rainfallType, setRainfallType] = useRecoilState(rainfallTypeState);
   const [windChill, setWindChill] = useRecoilState(windChillState);
 
   const [snowState, setSnowState] = useState<boolean>(false);
@@ -142,20 +142,20 @@ export default function SearchBox() {
 
   const { data: windChillData } = useFindAllWeathers();
 
-  function searchSky(skyCode: number, rainfallCode: number) {
+  function searchSky(skyStatus: string, rainfallType: string) {
     let index = 0;
-    // console.log('[searchSky] skyCode: ', skyCode);
+    // console.log('[searchSky] skyStatus: ', skyStatus);
     // console.log('[searchSky] rainfallCode: ', rainfallCode);
 
-    if (skyCode === 1 && rainfallCode === 0) {
+    if (skyStatus === 'SUNNY' && rainfallType === 'NONE') {
       index = 0;
-    } else if ((skyCode === 3 || skyCode === 4) && rainfallCode === 0) {
+    } else if ((skyStatus === 'CLOUDY' || skyStatus === 'OVERCAST') && rainfallType === 'NONE') {
       index = 1;
-    } else if (skyCode === 0 && (rainfallCode === 1 || rainfallCode === 5)) {
+    } else if (skyStatus === 'NONE' && (rainfallType === 'CLEAR' || rainfallType === 'RAINDROP')) {
       index = 2;
-    } else if (skyCode === 0 && (rainfallCode === 2 || rainfallCode === 6)) {
+    } else if (skyStatus === 'NONE' && (rainfallType === 'RAIN' || rainfallType === 'RAINDROP_FLURRY')) {
       index = 3;
-    } else if (skyCode === 0 && (rainfallCode === 3 || rainfallCode === 7)) {
+    } else if (skyStatus === 'NONE' && (rainfallType === 'SNOW' || rainfallType === 'FLURRY')) {
       index = 4;
     }
 
@@ -169,31 +169,31 @@ export default function SearchBox() {
     //   setWindChill(windChillData?.data?.windChill);
     // }
 
-    searchSky(skyCode, rainfallCode);
-  }, [skyCode, rainfallCode, windChillData]);
+    searchSky(skyStatus, rainfallType);
+  }, [skyStatus, rainfallType, windChillData]);
 
   function getSkyData(data: string) {
     console.log('data: ', data);
 
     if (data === 'Sunny') {
-      setSkyCode(1);
-      setRainfallCode(0);
+      setSkyStatus('SUNNY');
+      setRainfallType('NONE');
       setSnowState(false);
     } else if (data === 'Cloudy') {
-      setSkyCode(3);
-      setRainfallCode(0);
+      setSkyStatus('CLOUDY');
+      setRainfallType('NONE');
       setSnowState(false);
     } else if (data === 'Rain') {
-      setSkyCode(0);
-      setRainfallCode(1);
+      setSkyStatus('NONE');
+      setRainfallType('CLEAR');
       setSnowState(false);
     } else if (data === 'Rain & Snow') {
-      setSkyCode(0);
-      setRainfallCode(2);
+      setSkyStatus('NONE');
+      setRainfallType('RAIN');
       setSnowState(true);
     } else if (data === 'Snow') {
-      setSkyCode(0);
-      setRainfallCode(7);
+      setSkyStatus('NONE');
+      setRainfallType('FLURRY');
       setSnowState(false);
     }
   }
