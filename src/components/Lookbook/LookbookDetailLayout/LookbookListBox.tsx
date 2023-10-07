@@ -40,7 +40,7 @@ export default function LookbookListBox() {
 
     try {
       await axios
-        .get(`/api/v1/books/posts/${id}`, {
+        .get(`/api/v1/lookbooks/${id}`, {
           headers: {
             Accept: 'application/json',
           },
