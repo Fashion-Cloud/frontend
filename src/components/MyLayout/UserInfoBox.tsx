@@ -1,4 +1,3 @@
-import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import { useState } from 'react';
 
@@ -22,12 +21,8 @@ export default function UserInfoBox() {
                     alt="User's avatar" 
                     sx={{ width: 100, height: 100, ml: -10 }} 
                 />
-                <Typography sx={{mt: 3, ml: 16}}>
+                <Typography sx={{mt: 3, ml: 16, mb: 5}}>
                     나만의 패션을 찾고 있는 난 미래의 패셔니스타.
-                </Typography>
-                <Typography sx={{mt: 1, mb: 3, ml: -10}}>
-                    <AccessibilityIcon sx={{mb: -1, mr: 1}}/>
-                    163 cm
                 </Typography>
             </Box>
 

@@ -6,27 +6,27 @@ import { useRecoilValue } from 'recoil';
 import { userIdState } from '../../utils/Recoil';
 import { UserPostListType } from '../../utils/types';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  height: 600,
-  width: 400,
-  bgcolor: '#FFF',
-  borderRadius: '25px',
-  boxShadow: 24,
-  p: 2,
-};
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   height: 600,
+//   width: 400,
+//   bgcolor: '#FFF',
+//   borderRadius: '25px',
+//   boxShadow: 24,
+//   p: 2,
+// };
 
 export default function MyPostBox() {
   const userId = useRecoilValue(userIdState);
   const [postList, setPostList] = useState<UserPostListType[]>([]);
-  const [singleId, setSingleId] = useState<string>('');
-  const [openDetail, setOpenDetail] = useState<boolean>(false);
+  // const [singleId, setSingleId] = useState<string>('');
+  // const [openDetail, setOpenDetail] = useState<boolean>(false);
 
-  const handleOpenDetail = () => setOpenDetail(true);
-  const handleCloseDetail = () => setOpenDetail(false);
+  // const handleOpenDetail = () => setOpenDetail(true);
+  // const handleCloseDetail = () => setOpenDetail(false);
 
   const userPostListAPI = async () => {
     try {
