@@ -1,7 +1,7 @@
 import { Box, Button, Divider, Grid, Typography } from '@mui/material';
-import { useAddPost } from 'api/hook/PostHook';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { useAddPost } from 'src/api/hook/PostHook';
 import { WeatherType } from 'src/utils/types';
 
 import { weatherDataState } from '../../utils/Recoil';

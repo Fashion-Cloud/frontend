@@ -1,7 +1,7 @@
 import PlaceIcon from '@mui/icons-material/Place';
 import { Toolbar, Typography } from '@mui/material';
-import { useFindAllLocations } from 'api/hook/LocationHook';
 import { useEffect, useState } from 'react';
+import { useFindAllLocations } from 'src/api/hook/LocationHook';
 import { LocationType } from 'src/utils/types';
 
 export default function PlaceBox() {

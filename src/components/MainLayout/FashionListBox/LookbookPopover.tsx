@@ -4,7 +4,7 @@ import { Box, List, ListItem, ListItemText, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
-import { useFindAllBooks } from '../../../../api/hook/BookHook';
+import { useFindAllBooks } from '../../../api/hook/BookHook';
 import { LookBookBoxType } from '../../../utils/types';
 
 const paperStyle = {

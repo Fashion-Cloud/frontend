@@ -1,17 +1,17 @@
 import { Box, Card, CardMedia, Grid, Typography } from '@mui/material';
-import { useFindAllBooks } from 'api/hook/BookHook';
+import { useRouter } from 'next/router';
 // import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useFindAllBooks } from 'src/api/hook/BookHook';
 
 import { lookbookNameState, userIdState } from '../../../utils/Recoil';
 import { LookBookBoxType } from '../../../utils/types';
 
 export default function LookbookBox() {
-  const setLookbookName = useSetRecoilState(lookbookNameState);
+  const router = useRouter();
 
-  const navigate = useNavigate();
+  const setLookbookName = useSetRecoilState(lookbookNameState);
   const userId = useRecoilValue(userIdState);
 
   const [lookbook, setLookbook] = useState<LookBookBoxType[]>([]);
@@ -36,7 +36,7 @@ export default function LookbookBox() {
                 sx={{ borderRadius: '10px', cursor: 'pointer' }}
                 onClick={() => {
                   setLookbookName(lookbook.title);
-                  navigate(`/lookbookdetail/${lookbook.id}`);
+                  router.push(`/lookbookdetail/${lookbook.id}`);
                 }}
               >
                 <Box sx={{ position: 'relative' }}>

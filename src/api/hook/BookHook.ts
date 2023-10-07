@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-import { userIdState } from '../../src/utils/Recoil';
+import { userIdState } from '../../utils/Recoil';
 import { BookService } from '../service/BookService';
 
 export const useFindAllBooks = () => {

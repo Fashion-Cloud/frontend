@@ -20,11 +20,11 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useFindAllWeathers } from 'api/hook/WeatherHook';
 import lottie from 'lottie-web';
 import React, { useEffect, useRef, useState } from 'react';
 import { BsCloudRainFill, BsCloudSnowFill } from 'react-icons/bs';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
 import {
   rainfallTypeState,

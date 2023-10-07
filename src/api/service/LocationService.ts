@@ -1,4 +1,4 @@
-import apiV1Instance from 'api/api-instance';
+import apiV1Instance from 'src/api/api-instance';
 
 export class LocationService {
   public static getAllLocations = async (options: {
