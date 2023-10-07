@@ -12,9 +12,9 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useFindSomeBooks } from 'src/api/hook/BookHook';
 
 import { LookBookListType } from '../../../utils/types';
 
@@ -22,8 +22,6 @@ export default function LookbookListBox() {
   const [open, setOpen] = useState(false);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const { id } = useParams();
 
   const handleOpen = (index: number) => {
     setCurrentImageIndex(index);
@@ -34,30 +32,13 @@ export default function LookbookListBox() {
   };
 
   const [lookbook, setLookbook] = useState<LookBookListType[]>([]);
-  const fashionAPI = async () => {
-    console.log('fashionAPI Start');
-    console.log('id: ', id);
-
-    try {
-      await axios
-        .get(`/api/v1/books/posts/${id}`, {
-          headers: {
-            Accept: 'application/json',
-          },
-        })
-        .then((response) => {
-          const data = response.data.data;
-          console.log('data: ', data);
-
-          setLookbook(data);
-        });
-    } catch {
-      console.log('api 불러오기 실패');
-    }
-  };
+  
+  const { data: someLookBookData } = useFindSomeBooks();
 
   useEffect(() => {
-    fashionAPI();
+    if (someLookBookData?.data) {
+      setLookbook(someLookBookData?.data.data);
+    }
   }, []);
 
   const handlePrev = () => {
@@ -124,7 +105,7 @@ export default function LookbookListBox() {
                     }}
                   >
                     <Typography variant="h6" sx={{ mt: 5, ml: 1 }}>
-                      {item.name}
+                      {item.title}
                     </Typography>
                   </Box>
                 </Box>
@@ -169,7 +150,7 @@ export default function LookbookListBox() {
           {lookbook.length > 0 && (
             <img
               src={lookbook[currentImageIndex].image}
-              alt={lookbook[currentImageIndex].name}
+              alt={lookbook[currentImageIndex].title}
               style={{ width: 'auto', height: '600px' }}
             />
           )}

@@ -1,11 +1,11 @@
 export type SinglePostType = {
     id: string;
     userId: string;
-    name: string;
+    title: string;
     image: string;
     review: string;
-    skyStatus: number;
-    rainfallType: number;
+    skyStatus: string;
+    rainfallType: string;
     windChill: number;
     createdAt: string;
     updatedAt: string;
@@ -13,11 +13,11 @@ export type SinglePostType = {
 }
 
 export type WeatherType = {
-    sky: number;
+    sky: string;
     temperature: number;
     hourRainfall: number;
     humidity: number;
-    rainfallType: number;
+    rainfallType: string;
     windSpeed: number;
     windChill: number;
 }
@@ -31,13 +31,13 @@ export type LocationType = {
 
 export type WeatherPostType = {
     id: string;
-    name: string;
+    title: string;
     imageUrl: string;
 };
 
 export type LookBookListType = {
     id: string;
-    name: string;
+    title: string;
     image: string;
     userId: string;
 };
@@ -53,7 +53,7 @@ export type LookBookBoxType = {
 export type UserPostListType = {
     id: string;
     userId: string;
-    name: string;
+    title: string;
     image: string;
     review: string;
     skyStatus: number;

@@ -1,18 +1,17 @@
-import { Box} from "@mui/material";
+import { Box } from '@mui/material';
 
-import AddLookbookButton from "../Lookbook/LookbookLayout/AddLookbookButton";
-import LookbookBox from "../Lookbook/LookbookLayout/LookbookBox";
+import AddLookbookButton from '../Lookbook/LookbookLayout/AddLookbookButton';
+import LookbookBox from '../Lookbook/LookbookLayout/LookbookBox';
 
 export default function LookbookLayout() {
-    return(
-        <Box sx={{ '&::-webkit-scrollbar': {display: 'none'}, overflow: 'auto'}}>
-            <Box height='10px'/>
-            <AddLookbookButton/>
+  return (
+    <Box sx={{ '&::-webkit-scrollbar': { display: 'none' }, overflow: 'auto' }}>
+      <Box height="10px" />
+      <AddLookbookButton />
 
+      <Box height="10px" />
 
-            <Box height='10px'/>
-            
-            <LookbookBox/>
-        </Box>
-    )
+      <LookbookBox />
+    </Box>
+  );
 }

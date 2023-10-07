@@ -5,9 +5,9 @@ import { LocationType, WeatherType } from './types';
 
 const { persistAtom } = recoilPersist();
 
-export const userIdState = atom<string>({
+export const userIdState = atom<number>({
   key: 'userIdState',
-  default: '550e8400-e29b-41d4-a716-446655440000',
+  default: 2,
   effects_UNSTABLE: [persistAtom],
 });
 
@@ -21,35 +21,13 @@ export const longitudeState = atom<number>({
   default: 0,
 });
 
-// FashionList, SearchBox
-// export const skyCodeState = selector({
-//     key: 'skyCodeState',
-//     get: async ({ get }) => {
-//         const latitude = get(latitudeState);
-//         const longitude = get(longitudeState);
-
-//         if(latitude && longitude) {
-//             try{
-//                 const response = await axios.get(`/api/v1/weather?latitude=${latitude}&longitude=${longitude}`, {
-//                     headers: {
-//                         Accept: 'application/json'
-//                     },
-//                     withCredentials: true
-//                 });
-//                 return response.data.data?.sky;
-//             } catch(error) {
-//                 throw error;
-//             }
-//         }
-//     }
-// })
-export const skyCodeState = atom<number>({
-  key: 'skyCodeState',
-  default: 1,
+export const skyStatusState = atom<string>({
+  key: 'skyStatusState',
+  default: 'NONE',
 });
-export const rainfallCodeState = atom<number>({
-  key: 'rainfallCodeState',
-  default: 0,
+export const rainfallTypeState = atom<string>({
+  key: 'rainfallTypeState',
+  default: 'NONE',
 });
 export const windChillState = atom<number>({
   key: 'windChillState',
@@ -74,11 +52,11 @@ export const menuState = atom<string>({
 
 // InfoBox에서 Weather Data
 const initialWeatherInfo: WeatherType = {
-  sky: 1,
+  sky: 'SUNNY',
   temperature: 0,
   hourRainfall: 0,
   humidity: 0,
-  rainfallType: 0,
+  rainfallType: 'NONE',
   windSpeed: 0,
   windChill: 0,
 };

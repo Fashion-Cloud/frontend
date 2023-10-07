@@ -1,15 +1,21 @@
 import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
+
 import { useAddPost } from 'src/api/hook/PostHook';
 
 import { WeatherType } from '@/utils/types';
+import rainfallType from 'src/assets/data/rainfallType';
+import {token} from 'src/assets/data/token';
+import weatherSky from 'src/assets/data/weatherSky';
+import { WeatherType } from 'src/utils/types';
 
 import { weatherDataState } from '../../utils/Recoil';
 import AddImage from './AddFashion/AddImage';
 import AddReview from './AddFashion/AddReview';
 import AddTitle from './AddFashion/AddTitle';
 import AddWeatherInfo from './AddFashion/AddWeatherInfo';
+
 
 export default function AddFashion() {
   const [postTitle, setPostTitle] = useState('');

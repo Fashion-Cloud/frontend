@@ -2,39 +2,40 @@ import { Box, Card, CardMedia, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-
-import { UserPostListType } from '@/utils/types';
+import { token } from 'src/assets/data/token';
 
 import { userIdState } from '../../utils/Recoil';
+import { UserPostListType } from '../../utils/types';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  height: 600,
-  width: 400,
-  bgcolor: '#FFF',
-  borderRadius: '25px',
-  boxShadow: 24,
-  p: 2,
-};
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   height: 600,
+//   width: 400,
+//   bgcolor: '#FFF',
+//   borderRadius: '25px',
+//   boxShadow: 24,
+//   p: 2,
+// };
 
 export default function MyPostBox() {
   const userId = useRecoilValue(userIdState);
   const [postList, setPostList] = useState<UserPostListType[]>([]);
-  const [singleId, setSingleId] = useState<string>('');
-  const [openDetail, setOpenDetail] = useState<boolean>(false);
+  // const [singleId, setSingleId] = useState<string>('');
+  // const [openDetail, setOpenDetail] = useState<boolean>(false);
 
-  const handleOpenDetail = () => setOpenDetail(true);
-  const handleCloseDetail = () => setOpenDetail(false);
+  // const handleOpenDetail = () => setOpenDetail(true);
+  // const handleCloseDetail = () => setOpenDetail(false);
 
   const userPostListAPI = async () => {
     try {
       await axios
-        .get(`/api/v1/posts/user/${userId}`, {
+        .get(`/api/v1/posts/users/${userId}`, {
           headers: {
             Accept: 'application/json',
+            Authorization: `Bearer ${token}`
           },
         })
         .then((response) => {
@@ -95,7 +96,7 @@ export default function MyPostBox() {
                     }}
                   >
                     <Typography variant="h6" sx={{ mt: 5, ml: 1 }}>
-                      {postList.name}
+                      {postList.title}
                     </Typography>
                   </Box>
                 </Box>

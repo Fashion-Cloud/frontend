@@ -10,14 +10,15 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import {token} from 'src/assets/data/token';
 
 import {
   currentPageState,
   fullPageState,
-  rainfallCodeState,
-  skyCodeState,
+  rainfallTypeState,
+  skyStatusState,
   windChillState,
 } from '../../utils/Recoil';
 import { WeatherPostType } from '../../utils/types';
@@ -51,8 +52,8 @@ export default function FashionListBox() {
   const handleOpenDetail = () => setOpenDetail(true);
   const handleCloseDetail = () => setOpenDetail(false);
 
-  const skyCode = useRecoilValue(skyCodeState);
-  const rainfallCode = useRecoilValue(rainfallCodeState);
+  const skyStatus = useRecoilValue(skyStatusState);
+  const rainfallType = useRecoilValue(rainfallTypeState);
   const windChill = useRecoilValue(windChillState);
 
   const [pageCount, setPageCount] = useRecoilState(fullPageState); // 전체 페이지
@@ -73,16 +74,17 @@ export default function FashionListBox() {
   };
 
   const fashionAPI = async () => {
-    console.log('[Recoil] skyCode: ', skyCode);
-    console.log('[Recoil] rainfallCode: ', rainfallCode);
+    console.log('[Recoil] skyCode: ', skyStatus);
+    console.log('[Recoil] rainfallCode: ', rainfallType);
     console.log('[Recoil] windChill: ', windChill);
     try {
       await axios
         .get(
-          `/api/v1/posts/weather?skyCode=${skyCode}&rainfallCode=${rainfallCode}&windChill=${windChill}`,
+          `/api/v1/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&windChill=${windChill}`,
           {
             headers: {
               Accept: 'application/json',
+              Authorization: `Bearer ${token}`
             },
           }
         )
@@ -175,7 +177,7 @@ export default function FashionListBox() {
                     }}
                   >
                     <Typography variant="h6" sx={{ ml: 1 }}>
-                      {fashion[index].name}
+                      {fashion[index].title}
                     </Typography>
                   </Box>
                 </Box>
@@ -191,7 +193,7 @@ export default function FashionListBox() {
 
   useEffect(() => {
     fashionAPI();
-  }, [skyCode, rainfallCode, windChill]);
+  }, [skyStatus, rainfallType, windChill]);
 
   return (
     <Box sx={{ height: '100vh', backgroundColor: '#F5F8FC' }}>

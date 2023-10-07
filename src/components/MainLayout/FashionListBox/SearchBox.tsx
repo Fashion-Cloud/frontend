@@ -20,16 +20,15 @@ import {
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import axios from 'axios';
 import lottie from 'lottie-web';
 import React, { useEffect, useRef, useState } from 'react';
 import { BsCloudRainFill, BsCloudSnowFill } from 'react-icons/bs';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
-import useGeoLocation from '../../../assets/hooks/useGeoLocation';
 import {
-  rainfallCodeState,
-  skyCodeState,
+  rainfallTypeState,
+  skyStatusState,
   weatherDataState,
   windChillState,
 } from '../../../utils/Recoil';
@@ -87,7 +86,7 @@ const PrettoSlider = styled(Slider)({
 });
 
 export default function SearchBox() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const weatherData = useRecoilValue(weatherDataState);
 
@@ -96,7 +95,7 @@ export default function SearchBox() {
   const [openSelect, setOpenSelect] = useState(false);
   const [placementSelect, setPlacementSelect] = useState<PopperPlacementType>();
   const [selectedIndex, setSelectedIndex] = useState(
-    searchSky(weatherData.sky, weatherData.rainfallType)
+    searchSky(weatherData?.sky, weatherData?.rainfallType)
   );
 
   const [anchorElSlider, setAnchorElSlider] =
@@ -104,15 +103,11 @@ export default function SearchBox() {
   const [openSlider, setOpenSlider] = useState(false);
   const [placementSlider, setPlacementSlider] = useState<PopperPlacementType>();
 
-  const [skyCode, setSkyCode] = useRecoilState<number>(skyCodeState);
-  const [rainfallCode, setRainfallCode] = useRecoilState(rainfallCodeState);
+  const [skyStatus, setSkyStatus] = useRecoilState<string>(skyStatusState);
+  const [rainfallType, setRainfallType] = useRecoilState(rainfallTypeState);
   const [windChill, setWindChill] = useRecoilState(windChillState);
 
   const [snowState, setSnowState] = useState<boolean>(false);
-
-  const location = useGeoLocation();
-  let latitude: number | undefined;
-  let longitude: number | undefined;
 
   const handleSliderChange = (event: Event, newValue: number | number[]) => {
     if (typeof newValue === 'number') {
@@ -145,44 +140,22 @@ export default function SearchBox() {
     );
   };
 
-  const weatherAPI = async () => {
-    if (latitude !== undefined) {
-      try {
-        await axios
-          .get(`/api/v1/weather?latitude=${latitude}&longitude=${longitude}`, {
-            headers: {
-              Accept: 'application/json',
-            },
-            withCredentials: true,
-          })
-          .then((response) => {
-            const data = response.data.data;
-            console.log('[WexatherTemp] tempAPI: ', data);
+  const { data: windChillData } = useFindAllWeathers();
 
-            setWindChill(data?.windChill);
-            setIsLoading(false);
-          });
-      } catch {
-        console.log('[WeatherTemp] tempAPI: api 불러오기 실패');
-        setIsLoading(false);
-      }
-    }
-  };
-
-  function searchSky(skyCode: number, rainfallCode: number) {
+  function searchSky(skyStatus: string, rainfallType: string) {
     let index = 0;
-    console.log('[searchSky] skyCode: ', skyCode);
-    console.log('[searchSky] rainfallCode: ', rainfallCode);
+    // console.log('[searchSky] skyStatus: ', skyStatus);
+    // console.log('[searchSky] rainfallCode: ', rainfallCode);
 
-    if (skyCode === 1 && rainfallCode === 0) {
+    if (skyStatus === 'SUNNY' && rainfallType === 'NONE') {
       index = 0;
-    } else if ((skyCode === 3 || skyCode === 4) && rainfallCode === 0) {
+    } else if ((skyStatus === 'CLOUDY' || skyStatus === 'OVERCAST') && rainfallType === 'NONE') {
       index = 1;
-    } else if (skyCode === 0 && (rainfallCode === 1 || rainfallCode === 5)) {
+    } else if (skyStatus === 'NONE' && (rainfallType === 'CLEAR' || rainfallType === 'RAINDROP')) {
       index = 2;
-    } else if (skyCode === 0 && (rainfallCode === 2 || rainfallCode === 6)) {
+    } else if (skyStatus === 'NONE' && (rainfallType === 'RAIN' || rainfallType === 'RAINDROP_FLURRY')) {
       index = 3;
-    } else if (skyCode === 0 && (rainfallCode === 3 || rainfallCode === 7)) {
+    } else if (skyStatus === 'NONE' && (rainfallType === 'SNOW' || rainfallType === 'FLURRY')) {
       index = 4;
     }
 
@@ -190,40 +163,37 @@ export default function SearchBox() {
   }
 
   useEffect(() => {
-    if (location !== undefined) {
-      latitude = location.coordinates?.lat;
-      longitude = location.coordinates?.lng;
-      console.log('[GeoLocation] latitude: ', latitude);
-      console.log('[GeoLocation] longitude: ', longitude);
+    // 일단 이부분 API 호출할 때, windChill이 undefined로 떠서 주석해둡니다.
+    // if (windChillData) {
+    //   console.log(windChillData);
+    //   setWindChill(windChillData?.data?.windChill);
+    // }
 
-      weatherAPI();
-    }
-
-    searchSky(skyCode, rainfallCode);
-  }, [location, skyCode, rainfallCode]);
+    searchSky(skyStatus, rainfallType);
+  }, [skyStatus, rainfallType, windChillData]);
 
   function getSkyData(data: string) {
     console.log('data: ', data);
 
     if (data === 'Sunny') {
-      setSkyCode(1);
-      setRainfallCode(0);
+      setSkyStatus('SUNNY');
+      setRainfallType('NONE');
       setSnowState(false);
     } else if (data === 'Cloudy') {
-      setSkyCode(3);
-      setRainfallCode(0);
+      setSkyStatus('CLOUDY');
+      setRainfallType('NONE');
       setSnowState(false);
     } else if (data === 'Rain') {
-      setSkyCode(0);
-      setRainfallCode(1);
+      setSkyStatus('NONE');
+      setRainfallType('CLEAR');
       setSnowState(false);
     } else if (data === 'Rain & Snow') {
-      setSkyCode(0);
-      setRainfallCode(2);
+      setSkyStatus('NONE');
+      setRainfallType('RAIN');
       setSnowState(true);
     } else if (data === 'Snow') {
-      setSkyCode(0);
-      setRainfallCode(7);
+      setSkyStatus('NONE');
+      setRainfallType('FLURRY');
       setSnowState(false);
     }
   }
@@ -231,7 +201,7 @@ export default function SearchBox() {
   const handleWeatherSelect =
     (newPlacement: PopperPlacementType) =>
     (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (openSlider === true) {
+      if (openSlider) {
         setOpenSlider(false);
       }
       setAnchorElSelect(event.currentTarget);
@@ -247,7 +217,7 @@ export default function SearchBox() {
   const handleWeatherSlider =
     (newPlacement: PopperPlacementType) =>
     (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (openSelect === true) {
+      if (openSelect) {
         setOpenSelect(false);
       }
       setAnchorElSlider(event.currentTarget);
@@ -305,7 +275,7 @@ export default function SearchBox() {
             ml: 1,
             display: 'flex',
             justifyContent: 'center',
-            width: snowState === false ? '45px' : '90px',
+            width: !snowState ? '45px' : '90px',
             height: '45px',
             borderRadius: '10px',
           }}

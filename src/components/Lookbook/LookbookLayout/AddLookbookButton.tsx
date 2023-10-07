@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { useState } from 'react';
+import { token } from 'src/assets/data/token';
 
 // import SearchIcon from '@mui/icons-material/Search';
 import AddImage from '../../../components/AddFashion/AddFashion/AddImage';
@@ -54,10 +55,14 @@ export default function AddLookbookButton() {
 
     try {
       await axios
-        .post('/api/v1/books', {
+        .post('/api/v1/lookbooks', {
           userId: '550e8400-e29b-41d4-a716-446655440000',
           title: title,
           image: postImage,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
         })
         .then((response) => {
           console.log(response);
