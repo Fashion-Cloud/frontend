@@ -5,9 +5,9 @@ export class PostService {
     userId: string,
     name: string,
     image: string,
-    skyStatus: number,
+    skyStatus: string,
     temperature: number,
-    rainfallType: number,
+    rainfallType: string,
     windSpeed: number,
     review: number
   ): Promise<void> => {

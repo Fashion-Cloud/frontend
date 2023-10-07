@@ -6,12 +6,12 @@ export const useAddPost = (
   userId: string,
   name: string,
   image: string,
-  skyStatus: number,
+  skyStatus: string,
   temperature: number,
-  rainfallType: number,
+  rainfallType: string,
   windSpeed: number,
   review: number,
-  onSuccess: () => void,
+  onSuccess: () => void
 ) => {
   return useMutation({
     mutationFn: () =>
@@ -23,7 +23,7 @@ export const useAddPost = (
         temperature,
         rainfallType,
         windSpeed,
-        review,
+        review
       ),
     onSuccess: onSuccess,
     onError: () => alert('새 포스트 등록에 실패했습니다.'),
