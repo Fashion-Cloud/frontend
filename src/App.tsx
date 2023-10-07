@@ -6,6 +6,7 @@ import MainDrawer from './components/common/MainDrawer';
 import LookbookDetailpage from './pages/LookbookDetailpage';
 import Mainpage from './pages/MainPage';
 import MyPage from './pages/MyPage';
+import RegisterPage from './pages/RegisterPage';
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -18,6 +19,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Mainpage />} />
             <Route path="/mypage" element={<MyPage />} />
+            <Route path="/register" element={<RegisterPage />} />
             <Route
               path="/lookbookdetail/:id"
               element={<LookbookDetailpage />}
