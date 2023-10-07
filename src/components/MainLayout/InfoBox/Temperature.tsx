@@ -1,6 +1,6 @@
 import { Box, Tooltip, Typography } from '@mui/material';
 import lottie from 'lottie-web';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import weatherSky from '../../../assets/data/weatherSky';
@@ -55,6 +55,12 @@ const WeatherSkyLottie = ({ weatherData }: WeatherProps) => {
 export default function TemperatureBox() {
   const weatherData = useRecoilValue(weatherDataState);
 
+  const [windChill, setWindChill] = useState<number>(0);
+
+  useEffect(() => {
+    setWindChill(weatherData.windChill | 0);
+  }, [weatherData]);
+
   return (
     <Box sx={{ marginLeft: 11, marginBottom: 10, marginRight: 16 }}>
       <WeatherSkyLottie weatherData={weatherData} />
@@ -64,7 +70,7 @@ export default function TemperatureBox() {
         fontSize="25pt"
         sx={{ mt: 1 }}
       >
-        {weatherData?.windChill} °C
+        {windChill} °C
       </Typography>
     </Box>
   );
