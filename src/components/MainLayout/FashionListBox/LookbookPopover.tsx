@@ -1,6 +1,7 @@
 import 'react-toastify/dist/ReactToastify.css';
 
 import { Box, List, ListItem, ListItemText, Paper } from '@mui/material';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -60,9 +61,9 @@ export default function LookbookPopover({
               }}
             >
               <Box sx={{ mr: '10px' }}>
-                <img
-                  height="40px"
-                  width="40px"
+                <Image
+                  height={40}
+                  width={40}
                   src={lookbook.image}
                   alt={lookbook.title}
                 />

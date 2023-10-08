@@ -34,15 +34,15 @@ import {
 } from '../../../utils/Recoil';
 
 const IconOptions = [
-  <WbSunnyIcon />,
-  <CloudIcon />,
-  <BsCloudRainFill size="25" />,
-  <Box display="flex" fontSize="25px" sx={{ my: '-6px' }}>
+  <WbSunnyIcon key="sunnyIcon" />,
+  <CloudIcon key="cloudIcon" />,
+  <BsCloudRainFill size="25" key="rainFillIcon" />,
+  <Box display="flex" fontSize="25px" sx={{ my: '-6px' }} key="weatherIconBox">
     <BsCloudRainFill size="25" />{' '}
     <Divider orientation="vertical" flexItem sx={{ height: 25, mx: 1 }} />{' '}
     <BsCloudSnowFill size="25" />
   </Box>,
-  <BsCloudSnowFill size="25" />,
+  <BsCloudSnowFill size="25" key="snowFill" />,
 ];
 const options = ['Sunny', 'Cloudy', 'Rain', 'Rain & Snow', 'Snow'];
 
