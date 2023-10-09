@@ -76,7 +76,7 @@ export default function FashioinDetailModal({ singleId }: FashionDetailProps) {
     try {
       await axios
         .post(
-          `/api/v1/lookbooks/posts/${lookbookId}?postId=${singleId}`,
+          `/api/v1/lookbooks/${lookbookId}/posts?postId=${singleId}`,
           {},
           {
             headers: {
