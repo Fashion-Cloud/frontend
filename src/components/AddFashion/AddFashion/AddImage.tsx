@@ -118,7 +118,7 @@ export default function AddImage({ getImageData }: ImageProps) {
           }}
           component="label"
         >
-          <Image src={previewImg} alt="previewImg" />
+          <Image width={330} height={380} src={previewImg} alt="previewImg" />
           <input
             type="file"
             accept="image/*"

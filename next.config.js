@@ -3,6 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 
+  images: {
+    domains: ['fashion-cloud.s3.ap-northeast-2.amazonaws.com'],
+  },
+
   webpack(config) {
     config.module.rules.push({
       loader: '@svgr/webpack',
