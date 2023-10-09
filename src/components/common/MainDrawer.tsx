@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 
 import logo from '../../assets/images/bang.png';
@@ -61,6 +62,8 @@ export default function MainDrawer() {
   const [select, setSelect] = useRecoilState(menuState);
   console.log('select: ', select);
 
+  const { pathname } = useRouter();
+
   const Menus = [
     { title: 'Home', src: '/', icon: <HomeIcon /> },
     { title: 'MyPage', src: '/mypage', icon: <PersonIcon /> },
@@ -87,13 +90,13 @@ export default function MainDrawer() {
                 key={index}
                 href={menu.src}
                 style={{
-                  backgroundColor: select === menu.title ? '#EDF7FC' : '',
+                  backgroundColor: pathname === menu.src ? '#EDF7FC' : '',
                 }}
                 onClick={() => handleClick(menu.title)}
                 sx={{ minHeight: 48, px: 2.5 }}
               >
                 <ListItemIcon
-                  style={{ color: select === menu.title ? '#4B9BBF' : '' }}
+                  style={{ color: pathname === menu.src ? '#4B9BBF' : '' }}
                   sx={{ minWidth: 0, justifyContent: 'center' }}
                 >
                   {menu.icon}
