@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
 import { userIdState } from '../../utils/Recoil';
-import { BookService } from '../service/BookService';
+import { BookService } from '../service/LookbookService';
 
 export const useFindAllBooks = () => {
   const userId = useRecoilValue(userIdState);

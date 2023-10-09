@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import React from 'react';
 
-import LookbookDetailLayout from '../../../src/components/layout/LookbookDetailLayout';
+import LookbookDetailLayout from '../../src/components/layout/LookbookDetailLayout';
 
 export default function LookbookDetailpage() {
   return (

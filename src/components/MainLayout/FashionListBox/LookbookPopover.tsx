@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
-import { useFindAllBooks } from '../../../api/hook/BookHook';
+import { useFindAllBooks } from '../../../api/hook/LookbookHook';
 import { LookBookBoxType } from '../../../utils/types';
 
 const paperStyle = {
