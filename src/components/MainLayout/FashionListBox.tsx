@@ -12,7 +12,7 @@ import {
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import {token} from 'src/assets/data/token';
+import { token } from 'src/assets/data/token';
 
 import {
   currentPageState,
@@ -84,7 +84,7 @@ export default function FashionListBox() {
           {
             headers: {
               Accept: 'application/json',
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             },
           }
         )

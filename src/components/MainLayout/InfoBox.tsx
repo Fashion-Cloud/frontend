@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 

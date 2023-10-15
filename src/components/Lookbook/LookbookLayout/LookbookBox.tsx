@@ -1,18 +1,18 @@
 import { Box, Card, CardMedia, Grid, Typography } from '@mui/material';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 // import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { useFindAllBooks } from 'src/api/hook/BookHook';
+import { useSetRecoilState } from 'recoil';
+import { useFindAllBooks } from 'src/api/hook/LookbookHook';
 
-import { lookbookNameState, userIdState } from '../../../utils/Recoil';
+import { lookbookNameState } from '../../../utils/Recoil';
 import { LookBookBoxType } from '../../../utils/types';
 
 export default function LookbookBox() {
-  const setLookbookName = useSetRecoilState(lookbookNameState);
+  const router = useRouter();
 
-  const navigate = useNavigate();
-  const userId = useRecoilValue(userIdState);
+  const setLookbookName = useSetRecoilState(lookbookNameState);
 
   const [lookbook, setLookbook] = useState<LookBookBoxType[]>([]);
 
@@ -32,49 +32,50 @@ export default function LookbookBox() {
         {Array.isArray(lookbook) &&
           lookbook.map((lookbook, index) => (
             <Grid item key={index} xs={4}>
-              <Card
-                sx={{ borderRadius: '10px', cursor: 'pointer' }}
-                onClick={() => {
-                  setLookbookName(lookbook.title);
-                  navigate(`/lookbookdetail/${lookbook.id}`);
-                }}
-              >
-                <Box sx={{ position: 'relative' }}>
-                  <CardMedia
-                    component="img"
-                    image={lookbook.image}
-                    sx={{
-                      height: '350px',
-                      width: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100px',
-                      bgcolor: 'transparent',
-                      backgroundImage:
-                        'linear-gradient(to top, rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0))', // Apply gradient
-                      color: 'white',
-                      padding: '10px',
-                      transition: 'background-image 0.3s', // Change transition property to background-image
-                      '&:hover': {
-                        // Change gradient on hover
+              <Link href={{ pathname: '/lookbookdetail/[id]', query: { id: lookbook.id }}}>
+                <Card
+                  sx={{ borderRadius: '10px', cursor: 'pointer' }}
+                  onClick={() => {
+                    setLookbookName(lookbook.title);
+                  }}
+                >
+                  <Box sx={{ position: 'relative' }}>
+                    <CardMedia
+                      component="img"
+                      image={lookbook.image}
+                      sx={{
+                        height: '350px',
+                        width: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100px',
+                        bgcolor: 'transparent',
                         backgroundImage:
-                          'linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0))',
-                      },
-                    }}
-                  >
-                    <Typography variant="h6" sx={{ mt: 5, ml: 1 }}>
-                      {lookbook.title}
-                    </Typography>
+                          'linear-gradient(to top, rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0))', // Apply gradient
+                        color: 'white',
+                        padding: '10px',
+                        transition: 'background-image 0.3s', // Change transition property to background-image
+                        '&:hover': {
+                          // Change gradient on hover
+                          backgroundImage:
+                            'linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0))',
+                        },
+                      }}
+                    >
+                      <Typography variant="h6" sx={{ mt: 5, ml: 1 }}>
+                        {lookbook.title}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </Card>
+                </Card>
+              </Link>
             </Grid>
           ))}
       </Grid>

@@ -1,5 +1,3 @@
-import '../../../fonts/font.css';
-
 import { Box, InputBase, Paper, Toolbar, Typography } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { WeatherType } from 'src/utils/types';

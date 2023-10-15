@@ -2,8 +2,7 @@ import apiV1Instance from 'src/api/api-instance';
 
 export class PostService {
   public static addPost = async (
-    userId: string,
-    name: string,
+    title: string,
     image: string,
     skyStatus: string,
     temperature: number,
@@ -12,8 +11,7 @@ export class PostService {
     review: number
   ): Promise<void> => {
     await apiV1Instance.post('/posts', {
-      userId,
-      name,
+      title,
       image,
       skyStatus,
       temperature,

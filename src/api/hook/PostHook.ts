@@ -3,8 +3,7 @@ import { useMutation } from 'react-query';
 import { PostService } from '../service/PostService';
 
 export const useAddPost = (
-  userId: string,
-  name: string,
+  title: string,
   image: string,
   skyStatus: string,
   temperature: number,
@@ -16,8 +15,7 @@ export const useAddPost = (
   return useMutation({
     mutationFn: () =>
       PostService.addPost(
-        userId,
-        name,
+        title,
         image,
         skyStatus,
         temperature,

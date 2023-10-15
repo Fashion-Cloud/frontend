@@ -34,15 +34,15 @@ import {
 } from '../../../utils/Recoil';
 
 const IconOptions = [
-  <WbSunnyIcon />,
-  <CloudIcon />,
-  <BsCloudRainFill size="25" />,
-  <Box display="flex" fontSize="25px" sx={{ my: '-6px' }}>
+  <WbSunnyIcon key="sunnyIcon" />,
+  <CloudIcon key="cloudIcon" />,
+  <BsCloudRainFill size="25" key="rainFillIcon" />,
+  <Box display="flex" fontSize="25px" sx={{ my: '-6px' }} key="weatherIconBox">
     <BsCloudRainFill size="25" />{' '}
     <Divider orientation="vertical" flexItem sx={{ height: 25, mx: 1 }} />{' '}
     <BsCloudSnowFill size="25" />
   </Box>,
-  <BsCloudSnowFill size="25" />,
+  <BsCloudSnowFill size="25" key="snowFill" />,
 ];
 const options = ['Sunny', 'Cloudy', 'Rain', 'Rain & Snow', 'Snow'];
 
@@ -149,13 +149,25 @@ export default function SearchBox() {
 
     if (skyStatus === 'SUNNY' && rainfallType === 'NONE') {
       index = 0;
-    } else if ((skyStatus === 'CLOUDY' || skyStatus === 'OVERCAST') && rainfallType === 'NONE') {
+    } else if (
+      (skyStatus === 'CLOUDY' || skyStatus === 'OVERCAST') &&
+      rainfallType === 'NONE'
+    ) {
       index = 1;
-    } else if (skyStatus === 'NONE' && (rainfallType === 'CLEAR' || rainfallType === 'RAINDROP')) {
+    } else if (
+      skyStatus === 'NONE' &&
+      (rainfallType === 'CLEAR' || rainfallType === 'RAINDROP')
+    ) {
       index = 2;
-    } else if (skyStatus === 'NONE' && (rainfallType === 'RAIN' || rainfallType === 'RAINDROP_FLURRY')) {
+    } else if (
+      skyStatus === 'NONE' &&
+      (rainfallType === 'RAIN' || rainfallType === 'RAINDROP_FLURRY')
+    ) {
       index = 3;
-    } else if (skyStatus === 'NONE' && (rainfallType === 'SNOW' || rainfallType === 'FLURRY')) {
+    } else if (
+      skyStatus === 'NONE' &&
+      (rainfallType === 'SNOW' || rainfallType === 'FLURRY')
+    ) {
       index = 4;
     }
 

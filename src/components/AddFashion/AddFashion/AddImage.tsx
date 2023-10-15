@@ -3,10 +3,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Box, Button, Typography } from '@mui/material';
 import axios from 'axios';
-import { useState } from 'react';
+import Image from 'next/image';
+import React, { useState } from 'react';
 import Resizer from 'react-image-file-resizer';
 import { toast, ToastContainer } from 'react-toastify';
-import {token} from 'src/assets/data/token';
+import { token } from 'src/assets/data/token';
 
 type ImageProps = {
   getImageData: (data: string) => void;
@@ -70,7 +71,7 @@ export default function AddImage({ getImageData }: ImageProps) {
           .post('/api/v1/images', formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             },
           })
           .then((response) => {
@@ -117,7 +118,7 @@ export default function AddImage({ getImageData }: ImageProps) {
           }}
           component="label"
         >
-          <img src={previewImg} />
+          <Image width={330} height={380} src={previewImg} alt="previewImg" />
           <input
             type="file"
             accept="image/*"

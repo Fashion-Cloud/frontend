@@ -3,7 +3,7 @@ import WaterIcon from '@mui/icons-material/Water'; // 습도 아이콘
 import WaterDropIcon from '@mui/icons-material/WaterDrop'; // 강수량 아이콘
 import { Box, Toolbar, Tooltip, Typography } from '@mui/material';
 import lottie from 'lottie-web';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 
 import weatherSky from '../../../assets/data/weatherSky';
@@ -12,6 +12,12 @@ import { WeatherType } from '../../../utils/types';
 
 type WeatherProps = {
   weatherData: WeatherType | undefined;
+};
+
+type WeatherInfoProps = {
+  humidity: number;
+  windSpeed: number;
+  hourRainfall: number;
 };
 
 const WeatherSkyLottie = ({ weatherData }: WeatherProps) => {
@@ -55,31 +61,29 @@ const WeatherSkyLottie = ({ weatherData }: WeatherProps) => {
   );
 };
 
-const WeatherInfoBox = ({ weatherData }: WeatherProps) => {
+const WeatherInfoBox = ({
+  humidity,
+  windSpeed,
+  hourRainfall,
+}: WeatherInfoProps) => {
   return (
     <Box justifyContent="center" display="grid" sx={{ mt: 5 }}>
       <Toolbar>
         <WaterIcon sx={{ color: '#D5D5D5', mr: 3, fontSize: '23pt' }} />
         <Tooltip title="Humidity" arrow>
-          <Typography sx={{ fontSize: '17pt' }}>
-            {weatherData?.humidity} %
-          </Typography>
+          <Typography sx={{ fontSize: '17pt' }}>{humidity} %</Typography>
         </Tooltip>
       </Toolbar>
       <Toolbar sx={{ my: -1 }}>
         <AirIcon sx={{ color: '#D5D5D5', mr: 3, fontSize: '23pt' }} />
         <Tooltip title="Wind Speed" arrow>
-          <Typography sx={{ fontSize: '17pt' }}>
-            {weatherData?.windSpeed} m/s
-          </Typography>
+          <Typography sx={{ fontSize: '17pt' }}>{windSpeed} m/s</Typography>
         </Tooltip>
       </Toolbar>
       <Toolbar>
         <WaterDropIcon sx={{ color: '#B4C4FA', mr: 3, fontSize: '23pt' }} />
         <Tooltip title="Rainfall" arrow>
-          <Typography sx={{ fontSize: '17pt' }}>
-            {weatherData?.hourRainfall} mm
-          </Typography>
+          <Typography sx={{ fontSize: '17pt' }}>{hourRainfall} mm</Typography>
         </Tooltip>
       </Toolbar>
     </Box>
@@ -88,6 +92,18 @@ const WeatherInfoBox = ({ weatherData }: WeatherProps) => {
 
 export default function WeatherBox() {
   const weatherData = useRecoilValue(weatherDataState);
+
+  const [windChill, setWindChill] = useState<number>(0);
+  const [humidity, setHumidity] = useState<number>(0);
+  const [windSpeed, setWindSpeed] = useState<number>(0);
+  const [hourRainfall, setHourRainfall] = useState<number>(0);
+
+  useEffect(() => {
+    setWindChill(weatherData?.windChill || 0);
+    setHumidity(weatherData?.humidity || 0);
+    setWindSpeed(weatherData?.windSpeed || 0);
+    setHourRainfall(weatherData?.hourRainfall || 0);
+  }, [weatherData]);
 
   return (
     <Box>
@@ -98,10 +114,14 @@ export default function WeatherBox() {
         fontSize="25pt"
         sx={{ mt: 5 }}
       >
-        {weatherData?.windChill} °C
+        {windChill} °C
       </Typography>
 
-      <WeatherInfoBox weatherData={weatherData} />
+      <WeatherInfoBox
+        humidity={humidity}
+        windSpeed={windSpeed}
+        hourRainfall={hourRainfall}
+      />
     </Box>
   );
 }

@@ -5,7 +5,11 @@
     "node": true
   },
   "plugins": ["@typescript-eslint", "unused-imports", "simple-import-sort"],
-  "extends": ["prettier", "plugin:@typescript-eslint/recommended"],
+  "extends": ["prettier", "plugin:@typescript-eslint/recommended","next"],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
+  },
   "overrides": [
     {
       "files": "",

@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+/* font */
+@font-face {
+    font-family: "Inter";
+    src: url("Inter.ttf");
+}
+
+/* CookieRun */
+@font-face {
+    font-family: "CookieRun-Black";
+    src: url("./CookieRun/CookieRun-Black.ttf");
+}
+@font-face {
+    font-family: "CookieRun-Bold";
+    src: url("./CookieRun/CookieRun-Bold.ttf");
+}
+@font-face {
+    font-family: "CookieRun-Regular";
+    src: url("./CookieRun/CookieRun-Regular.ttf");
+}

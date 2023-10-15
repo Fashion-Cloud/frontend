@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 // import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useFindSomeBooks } from 'src/api/hook/BookHook';
+import { useFindSomeBooks } from 'src/api/hook/LookbookHook';
 
 import { LookBookListType } from '../../../utils/types';
 
@@ -32,7 +32,7 @@ export default function LookbookListBox() {
   };
 
   const [lookbook, setLookbook] = useState<LookBookListType[]>([]);
-  
+
   const { data: someLookBookData } = useFindSomeBooks();
 
   useEffect(() => {
