@@ -1,11 +1,10 @@
 import { Box, Card, CardMedia, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import { token } from 'src/assets/data/token';
 
-import { userIdState } from '../../utils/Recoil';
 import { UserPostListType } from '../../utils/types';
+import useUserIdStore from '../../utils/zustand/user/UserIdStore';
 
 // const style = {
 //   position: 'absolute',
@@ -21,7 +20,7 @@ import { UserPostListType } from '../../utils/types';
 // };
 
 export default function MyPostBox() {
-  const userId = useRecoilValue(userIdState);
+  const { userId } = useUserIdStore();
   const [postList, setPostList] = useState<UserPostListType[]>([]);
   // const [singleId, setSingleId] = useState<string>('');
   // const [openDetail, setOpenDetail] = useState<boolean>(false);
@@ -35,7 +34,7 @@ export default function MyPostBox() {
         .get(`/api/v1/posts/users/${userId}`, {
           headers: {
             Accept: 'application/json',
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
         })
         .then((response) => {

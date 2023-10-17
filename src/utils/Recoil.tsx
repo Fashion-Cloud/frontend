@@ -5,12 +5,6 @@ import { LocationType, WeatherType } from './types';
 
 const { persistAtom } = recoilPersist();
 
-export const userIdState = atom<number>({
-  key: 'userIdState',
-  default: 1,
-  effects_UNSTABLE: [persistAtom],
-});
-
 export const latitudeState = atom<number>({
   key: 'latitudeState',
   default: 0,
