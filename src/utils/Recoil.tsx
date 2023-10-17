@@ -5,16 +5,6 @@ import { LocationType, WeatherType } from './types';
 
 const { persistAtom } = recoilPersist();
 
-export const latitudeState = atom<number>({
-  key: 'latitudeState',
-  default: 0,
-});
-
-export const longitudeState = atom<number>({
-  key: 'longitudeState',
-  default: 0,
-});
-
 export const skyStatusState = atom<string>({
   key: 'skyStatusState',
   default: 'NONE',
@@ -35,13 +25,6 @@ export const fullPageState = atom<number>({
 export const currentPageState = atom<number>({
   key: 'currentPageState',
   default: 1,
-});
-
-// MainDrawer에서 Home or Lookbook
-export const menuState = atom<string>({
-  key: 'menuState',
-  default: 'Home',
-  effects_UNSTABLE: [persistAtom],
 });
 
 // InfoBox에서 Weather Data
