@@ -1,9 +1,4 @@
 import { atom } from 'recoil';
-import { recoilPersist } from 'recoil-persist';
-
-import { LocationType } from './types';
-
-const { persistAtom } = recoilPersist();
 
 export const fullPageState = atom<number>({
   key: 'fullPageState',
@@ -12,20 +7,6 @@ export const fullPageState = atom<number>({
 export const currentPageState = atom<number>({
   key: 'currentPageState',
   default: 1,
-});
-
-// InfoBox에서 Location Data
-const initialLocationInfo: LocationType = {
-  fullAddress: '',
-  region1depth: '',
-  region2depth: '',
-  region3depth: '',
-};
-
-export const locationDataState = atom<LocationType>({
-  key: 'locationDataState',
-  default: initialLocationInfo,
-  effects_UNSTABLE: [persistAtom],
 });
 
 export const lookbookIdState = atom({
