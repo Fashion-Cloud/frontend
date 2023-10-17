@@ -26,11 +26,8 @@ import { BsCloudRainFill, BsCloudSnowFill } from 'react-icons/bs';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
-import {
-  rainfallTypeState,
-  weatherDataState,
-  windChillState,
-} from '../../../utils/Recoil';
+import { weatherDataState, windChillState } from '../../../utils/Recoil';
+import useRainfallTypeStore from '../../../utils/zustand/weather/RainfallTypeStore';
 import useSkyStatusStore from '../../../utils/zustand/weather/SkyStatusStore';
 
 const IconOptions = [
@@ -104,7 +101,7 @@ export default function SearchBox() {
   const [placementSlider, setPlacementSlider] = useState<PopperPlacementType>();
 
   const { skyStatus, setSkyStatus } = useSkyStatusStore();
-  const [rainfallType, setRainfallType] = useRecoilState(rainfallTypeState);
+  const { rainfallType, setRainfallType } = useRainfallTypeStore();
   const [windChill, setWindChill] = useRecoilState(windChillState);
 
   const [snowState, setSnowState] = useState<boolean>(false);

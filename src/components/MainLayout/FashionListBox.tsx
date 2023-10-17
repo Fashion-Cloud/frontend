@@ -17,10 +17,10 @@ import { token } from 'src/assets/data/token';
 import {
   currentPageState,
   fullPageState,
-  rainfallTypeState,
   windChillState,
 } from '../../utils/Recoil';
 import { WeatherPostType } from '../../utils/types';
+import useRainfallTypeStore from '../../utils/zustand/weather/RainfallTypeStore';
 import useSkyStatusStore from '../../utils/zustand/weather/SkyStatusStore';
 import AddFashionButton from './FashionListBox/AddFashionButton';
 import FashioinDetailModal from './FashionListBox/FashionDetailModal';
@@ -53,7 +53,7 @@ export default function FashionListBox() {
   const handleCloseDetail = () => setOpenDetail(false);
 
   const { skyStatus } = useSkyStatusStore();
-  const rainfallType = useRecoilValue(rainfallTypeState);
+  const { rainfallType } = useRainfallTypeStore();
   const windChill = useRecoilValue(windChillState);
 
   const [pageCount, setPageCount] = useRecoilState(fullPageState); // 전체 페이지
