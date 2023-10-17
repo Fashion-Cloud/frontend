@@ -5,10 +5,6 @@ import { LocationType, WeatherType } from './types';
 
 const { persistAtom } = recoilPersist();
 
-export const skyStatusState = atom<string>({
-  key: 'skyStatusState',
-  default: 'NONE',
-});
 export const rainfallTypeState = atom<string>({
   key: 'rainfallTypeState',
   default: 'NONE',

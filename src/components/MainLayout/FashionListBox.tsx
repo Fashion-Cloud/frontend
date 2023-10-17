@@ -18,10 +18,10 @@ import {
   currentPageState,
   fullPageState,
   rainfallTypeState,
-  skyStatusState,
   windChillState,
 } from '../../utils/Recoil';
 import { WeatherPostType } from '../../utils/types';
+import useSkyStatusStore from '../../utils/zustand/weather/SkyStatusStore';
 import AddFashionButton from './FashionListBox/AddFashionButton';
 import FashioinDetailModal from './FashionListBox/FashionDetailModal';
 import PaginationBox from './FashionListBox/PaginationBox';
@@ -52,7 +52,7 @@ export default function FashionListBox() {
   const handleOpenDetail = () => setOpenDetail(true);
   const handleCloseDetail = () => setOpenDetail(false);
 
-  const skyStatus = useRecoilValue(skyStatusState);
+  const { skyStatus } = useSkyStatusStore();
   const rainfallType = useRecoilValue(rainfallTypeState);
   const windChill = useRecoilValue(windChillState);
 

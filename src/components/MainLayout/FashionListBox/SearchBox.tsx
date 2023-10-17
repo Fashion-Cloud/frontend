@@ -28,10 +28,10 @@ import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
 import {
   rainfallTypeState,
-  skyStatusState,
   weatherDataState,
   windChillState,
 } from '../../../utils/Recoil';
+import useSkyStatusStore from '../../../utils/zustand/weather/SkyStatusStore';
 
 const IconOptions = [
   <WbSunnyIcon key="sunnyIcon" />,
@@ -103,7 +103,7 @@ export default function SearchBox() {
   const [openSlider, setOpenSlider] = useState(false);
   const [placementSlider, setPlacementSlider] = useState<PopperPlacementType>();
 
-  const [skyStatus, setSkyStatus] = useRecoilState<string>(skyStatusState);
+  const { skyStatus, setSkyStatus } = useSkyStatusStore();
   const [rainfallType, setRainfallType] = useRecoilState(rainfallTypeState);
   const [windChill, setWindChill] = useRecoilState(windChillState);
 
