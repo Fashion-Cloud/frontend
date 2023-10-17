@@ -8,8 +8,3 @@ export const currentPageState = atom<number>({
   key: 'currentPageState',
   default: 1,
 });
-
-export const lookbookNameState = atom({
-  key: 'lookbookNameState',
-  default: '봄',
-});
