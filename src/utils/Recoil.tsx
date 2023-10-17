@@ -5,11 +5,6 @@ import { LocationType, WeatherType } from './types';
 
 const { persistAtom } = recoilPersist();
 
-export const windChillState = atom<number>({
-  key: 'windChillState',
-  default: 26,
-});
-
 export const fullPageState = atom<number>({
   key: 'fullPageState',
   default: 1,

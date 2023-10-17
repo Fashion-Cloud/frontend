@@ -11,17 +11,14 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { token } from 'src/assets/data/token';
 
-import {
-  currentPageState,
-  fullPageState,
-  windChillState,
-} from '../../utils/Recoil';
+import { currentPageState, fullPageState } from '../../utils/Recoil';
 import { WeatherPostType } from '../../utils/types';
 import useRainfallTypeStore from '../../utils/zustand/weather/RainfallTypeStore';
 import useSkyStatusStore from '../../utils/zustand/weather/SkyStatusStore';
+import useWindChillStore from '../../utils/zustand/weather/WindChillStore';
 import AddFashionButton from './FashionListBox/AddFashionButton';
 import FashioinDetailModal from './FashionListBox/FashionDetailModal';
 import PaginationBox from './FashionListBox/PaginationBox';
@@ -54,7 +51,7 @@ export default function FashionListBox() {
 
   const { skyStatus } = useSkyStatusStore();
   const { rainfallType } = useRainfallTypeStore();
-  const windChill = useRecoilValue(windChillState);
+  const { windChill } = useWindChillStore();
 
   const [pageCount, setPageCount] = useRecoilState(fullPageState); // 전체 페이지
   const [page, setPage] = useRecoilState(currentPageState); // 현재 페이지

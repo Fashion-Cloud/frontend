@@ -23,12 +23,13 @@ import { styled } from '@mui/material/styles';
 import lottie from 'lottie-web';
 import React, { useEffect, useRef, useState } from 'react';
 import { BsCloudRainFill, BsCloudSnowFill } from 'react-icons/bs';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
-import { weatherDataState, windChillState } from '../../../utils/Recoil';
+import { weatherDataState } from '../../../utils/Recoil';
 import useRainfallTypeStore from '../../../utils/zustand/weather/RainfallTypeStore';
 import useSkyStatusStore from '../../../utils/zustand/weather/SkyStatusStore';
+import useWindChillStore from '../../../utils/zustand/weather/WindChillStore';
 
 const IconOptions = [
   <WbSunnyIcon key="sunnyIcon" />,
@@ -102,7 +103,7 @@ export default function SearchBox() {
 
   const { skyStatus, setSkyStatus } = useSkyStatusStore();
   const { rainfallType, setRainfallType } = useRainfallTypeStore();
-  const [windChill, setWindChill] = useRecoilState(windChillState);
+  const { windChill, setWindChill } = useWindChillStore();
 
   const [snowState, setSnowState] = useState<boolean>(false);
 
