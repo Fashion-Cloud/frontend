@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 
-import { LocationType, WeatherType } from './types';
+import { LocationType } from './types';
 
 const { persistAtom } = recoilPersist();
 
@@ -12,23 +12,6 @@ export const fullPageState = atom<number>({
 export const currentPageState = atom<number>({
   key: 'currentPageState',
   default: 1,
-});
-
-// InfoBox에서 Weather Data
-const initialWeatherInfo: WeatherType = {
-  sky: 'SUNNY',
-  temperature: 0,
-  hourRainfall: 0,
-  humidity: 0,
-  rainfallType: 'NONE',
-  windSpeed: 0,
-  windChill: 0,
-};
-
-export const weatherDataState = atom<WeatherType>({
-  key: 'weatherDataState',
-  default: initialWeatherInfo,
-  effects_UNSTABLE: [persistAtom],
 });
 
 // InfoBox에서 Location Data

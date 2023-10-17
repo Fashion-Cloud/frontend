@@ -23,12 +23,11 @@ import { styled } from '@mui/material/styles';
 import lottie from 'lottie-web';
 import React, { useEffect, useRef, useState } from 'react';
 import { BsCloudRainFill, BsCloudSnowFill } from 'react-icons/bs';
-import { useRecoilValue } from 'recoil';
 import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
-import { weatherDataState } from '../../../utils/Recoil';
 import useRainfallTypeStore from '../../../utils/zustand/weather/RainfallTypeStore';
 import useSkyStatusStore from '../../../utils/zustand/weather/SkyStatusStore';
+import useWeatherDataStore from '../../../utils/zustand/weather/WeatherDataStore';
 import useWindChillStore from '../../../utils/zustand/weather/WindChillStore';
 
 const IconOptions = [
@@ -86,7 +85,7 @@ const PrettoSlider = styled(Slider)({
 export default function SearchBox() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const weatherData = useRecoilValue(weatherDataState);
+  const { weatherData } = useWeatherDataStore();
 
   const [anchorElSelect, setAnchorElSelect] =
     useState<HTMLButtonElement | null>(null);
