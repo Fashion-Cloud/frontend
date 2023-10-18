@@ -1,6 +1,12 @@
 import { InputBase, Paper } from '@mui/material';
 
-export default function InputBox({ type }: { type: string }) {
+type Props = {
+  type: string;
+  value: string;
+  onChange: any;
+};
+
+export default function InputBox({ type, value, onChange }: Props) {
   return (
     <Paper
       elevation={0}
@@ -18,6 +24,8 @@ export default function InputBox({ type }: { type: string }) {
       <InputBase
         fullWidth
         type={type}
+        value={value}
+        onChange={onChange}
         sx={{ fontSize: '0.9rem', fontWeight: 'bold' }} // 텍스트 필드의 스타일
       />
     </Paper>
