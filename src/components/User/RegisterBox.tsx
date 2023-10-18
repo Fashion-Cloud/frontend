@@ -2,7 +2,6 @@ import { Card } from '@mui/material';
 import Image from 'next/image';
 import router from 'next/router';
 import { useState } from 'react';
-import useCheckAuth from 'src/api/hook/CheckAuthHook';
 import { useSignup } from 'src/api/hook/UserHook';
 
 import userImage from '../../assets/images/user.png';
@@ -15,8 +14,6 @@ export default function RegisterBox() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
-
-  useCheckAuth();
 
   const { mutate: signup } = useSignup(email, pw, name, () => {
     alert('회원가입이 성공적으로 되었습니다.');
@@ -31,6 +28,11 @@ export default function RegisterBox() {
       return;
     }
     signup();
+  };
+  const handleOnKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
   };
 
   return (
@@ -81,19 +83,28 @@ export default function RegisterBox() {
       <UserLabel label="이름*" />
       <InputBox
         value={name}
-        onChange={(e: any) => setName(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setName(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
         type="text"
       />
       <UserLabel label="이메일*" />
       <InputBox
         value={email}
-        onChange={(e: any) => setEmail(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setEmail(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
         type="text"
       />
       <UserLabel label="비밀번호*" />
       <InputBox
         value={pw}
-        onChange={(e: any) => setPw(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setPw(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
         type="password"
       />
       <SubmitButton onClick={handleSubmit} sign="Sign Up" />

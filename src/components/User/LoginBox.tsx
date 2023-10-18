@@ -31,6 +31,11 @@ export default function LoginBox() {
     }
     login();
   };
+  const handleOnKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
 
   return (
     <Card
@@ -59,13 +64,19 @@ export default function LoginBox() {
       <UserLabel label="이메일*" />
       <InputBox
         value={email}
-        onChange={(e: any) => setEmail(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setEmail(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
         type="text"
       />
       <UserLabel label="비밀번호*" />
       <InputBox
         value={pw}
-        onChange={(e: any) => setPw(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setPw(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
         type="password"
       />
       <SubmitButton onClick={handleSubmit} sign="Login" />
