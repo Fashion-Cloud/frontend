@@ -2,6 +2,7 @@ import { Card } from '@mui/material';
 import Image from 'next/image';
 import router from 'next/router';
 import { useState } from 'react';
+import useCheckAuth from 'src/api/hook/CheckAuthHook';
 import { useSignup } from 'src/api/hook/UserHook';
 
 import userImage from '../../assets/images/user.png';
@@ -14,6 +15,8 @@ export default function RegisterBox() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
+
+  useCheckAuth();
 
   const { mutate: signup } = useSignup(email, pw, name, () => {
     alert('회원가입이 성공적으로 되었습니다.');

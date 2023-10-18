@@ -12,6 +12,7 @@ import {
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
+import useCheckAuth from 'src/api/hook/CheckAuthHook';
 import { token } from 'src/assets/data/token';
 
 import { currentPageState, fullPageState } from '../../utils/Recoil';
@@ -191,6 +192,8 @@ export default function FashionListBox() {
   useEffect(() => {
     fashionAPI();
   }, [skyStatus, rainfallType, windChill]);
+
+  useCheckAuth();
 
   return (
     <Box sx={{ height: '100vh', backgroundColor: '#F5F8FC' }}>
