@@ -1,14 +1,13 @@
 import { Box } from '@mui/material';
 import React, { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 
-import { weatherDataState } from '../../utils/Recoil';
+import useWeatherDataStore from '../../utils/zustand/weather/WeatherDataStore';
 import PlaceBox from './InfoBox/PlaceBox';
 import WeatherBox from './InfoBox/WeatherBox';
 
 export default function InfoBox() {
-  const setWeatherData = useSetRecoilState(weatherDataState);
+  const { setWeatherData } = useWeatherDataStore();
 
   const { data: windChillData } = useFindAllWeathers();
 

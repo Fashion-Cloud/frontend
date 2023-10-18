@@ -1,18 +1,14 @@
 import { Box, Card, CardMedia, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 // import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
 import { useFindAllBooks } from 'src/api/hook/LookbookHook';
 
-import { lookbookNameState } from '../../../utils/Recoil';
 import { LookBookBoxType } from '../../../utils/types';
+import useLookbookNameStore from '../../../utils/zustand/lookbook/LookbookNameStore';
 
 export default function LookbookBox() {
-  const router = useRouter();
-
-  const setLookbookName = useSetRecoilState(lookbookNameState);
+  const { setLookbookName } = useLookbookNameStore();
 
   const [lookbook, setLookbook] = useState<LookBookBoxType[]>([]);
 
@@ -32,7 +28,12 @@ export default function LookbookBox() {
         {Array.isArray(lookbook) &&
           lookbook.map((lookbook, index) => (
             <Grid item key={index} xs={4}>
-              <Link href={{ pathname: '/lookbookdetail/[id]', query: { id: lookbook.id }}}>
+              <Link
+                href={{
+                  pathname: '/lookbookdetail/[id]',
+                  query: { id: lookbook.id },
+                }}
+              >
                 <Card
                   sx={{ borderRadius: '10px', cursor: 'pointer' }}
                   onClick={() => {

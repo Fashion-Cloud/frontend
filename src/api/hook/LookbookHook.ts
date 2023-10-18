@@ -1,12 +1,11 @@
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 
-import { userIdState } from '../../utils/Recoil';
+import useUserIdStore from '../../utils/zustand/user/UserIdStore';
 import { BookService } from '../service/LookbookService';
 
 export const useFindAllBooks = () => {
-  const userId = useRecoilValue(userIdState);
+  const { userId } = useUserIdStore();
 
   return useQuery({
     queryFn: () => BookService.getAllBooks({ userId }),

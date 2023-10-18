@@ -1,10 +1,9 @@
 import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import { useAddPost } from 'src/api/hook/PostHook';
 import { WeatherType } from 'src/utils/types';
 
-import { weatherDataState } from '../../utils/Recoil';
+import useWeatherDataStore from '../../utils/zustand/weather/WeatherDataStore';
 import AddImage from './AddFashion/AddImage';
 import AddReview from './AddFashion/AddReview';
 import AddTitle from './AddFashion/AddTitle';
@@ -16,7 +15,7 @@ export default function AddFashion() {
   const [postReview, setPostReview] = React.useState(2);
   // const [postWeather, setPostWeather] = useState<WeatherType>();
 
-  const weatherData = useRecoilValue(weatherDataState);
+  const { weatherData } = useWeatherDataStore();
 
   function getImageData(data: string) {
     setPostImage(data);

@@ -1,11 +1,10 @@
 import { Box, Tooltip, Typography } from '@mui/material';
 import lottie from 'lottie-web';
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilValue } from 'recoil';
 
 import weatherSky from '../../../assets/data/weatherSky';
-import { weatherDataState } from '../../../utils/Recoil';
 import { WeatherType } from '../../../utils/types';
+import useWeatherDataStore from '../../../utils/zustand/weather/WeatherDataStore';
 
 type WeatherProps = {
   weatherData: WeatherType | undefined;
@@ -53,7 +52,7 @@ const WeatherSkyLottie = ({ weatherData }: WeatherProps) => {
 };
 
 export default function TemperatureBox() {
-  const weatherData = useRecoilValue(weatherDataState);
+  const { weatherData } = useWeatherDataStore();
 
   const [windChill, setWindChill] = useState<number>(0);
 
