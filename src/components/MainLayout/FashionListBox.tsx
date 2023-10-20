@@ -1,6 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import {
-  Box,
+  Box, Button,
   Card,
   CardMedia,
   Grid,
@@ -23,6 +23,7 @@ import AddFashionButton from './FashionListBox/AddFashionButton';
 import FashioinDetailModal from './FashionListBox/FashionDetailModal';
 import PaginationBox from './FashionListBox/PaginationBox';
 import SearchBox from './FashionListBox/SearchBox';
+import useWindChillSearchStore from "../../utils/zustand/weather/WindChillSearchStore";
 
 const style = {
   position: 'absolute',
@@ -51,7 +52,7 @@ export default function FashionListBox() {
 
   const { skyStatus } = useSkyStatusStore();
   const { rainfallType } = useRainfallTypeStore();
-  const { windChill } = useWindChillStore();
+  const { windChillSearch } = useWindChillSearchStore();
 
   const [pageCount, setPageCount] = useRecoilState(fullPageState); // 전체 페이지
   const [page, setPage] = useRecoilState(currentPageState); // 현재 페이지
@@ -73,11 +74,11 @@ export default function FashionListBox() {
   const fashionAPI = async () => {
     console.log('[Recoil] skyCode: ', skyStatus);
     console.log('[Recoil] rainfallCode: ', rainfallType);
-    console.log('[Recoil] windChill: ', windChill);
+    console.log('[Recoil] windChillSearch: ', windChillSearch);
     try {
       await axios
         .get(
-          `/api/v1/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&windChill=${windChill}`,
+          `/api/v1/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&minWindChill=${windChillSearch[0]}&maxWindChill=${windChillSearch[1]}`,
           {
             headers: {
               Accept: 'application/json',
@@ -90,6 +91,7 @@ export default function FashionListBox() {
 
           const data = response.data;
           console.log('data.data: ', data.data);
+          setPost(data.data);
 
           const pageLen = data.data.length / 8;
           console.log('pageLen: ', pageLen);
@@ -103,7 +105,6 @@ export default function FashionListBox() {
               console.log("It's a floating-point number!");
             }
           }
-          setPost(data.data);
         });
     } catch {
       console.log('api 불러오기 실패');
@@ -190,7 +191,7 @@ export default function FashionListBox() {
 
   useEffect(() => {
     fashionAPI();
-  }, [skyStatus, rainfallType, windChill]);
+  }, []);
 
   return (
     <Box sx={{ height: '100vh', backgroundColor: '#F5F8FC' }}>
@@ -199,6 +200,12 @@ export default function FashionListBox() {
 
       <Toolbar>
         <SearchBox />
+
+        <Button variant="contained" onClick={() => fashionAPI()}  sx={{width: '100px', height: '40px', mt: 2, mr: 12, backgroundColor: '#87A9D7', borderRadius: 10, '&:hover': { backgroundColor: '#1f5091' }}}>
+          <Typography sx={{ fontSize: '12pt', textTransform: 'none' }}>
+            Search
+          </Typography>
+        </Button>
 
         <AddFashionButton />
       </Toolbar>
