@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import {createJSONStorage, persist} from 'zustand/middleware';
 
 interface WindChillSearchState {
   windChillSearch: number[];
@@ -13,7 +13,7 @@ const useWindChillSearchStore = create<WindChillSearchState>()(
       setWindChillSearch: (windChillSearch: number[]) =>
         set(() => ({ windChillSearch: windChillSearch })),
     }),
-    { name: 'windChillSearchStore' }
+    { name: 'windChillSearchStore', storage: createJSONStorage(() => sessionStorage) }
   )
 );
 

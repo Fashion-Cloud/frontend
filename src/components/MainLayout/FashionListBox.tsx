@@ -1,24 +1,22 @@
 import CloseIcon from '@mui/icons-material/Close';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
-  Box, Button,
+  Box, Button, ButtonGroup,
   Card,
-  CardMedia,
-  Grid,
-  IconButton,
-  Modal,
+  CardMedia, ClickAwayListener,
+  Grid, Grow,
+  IconButton, MenuItem, MenuList,
+  Modal, Paper, Popper,
   Toolbar,
   Typography,
 } from '@mui/material';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import React, {useEffect, useRef, useState} from 'react';
 import { token } from 'src/assets/data/token';
 
-import { currentPageState, fullPageState } from '../../utils/Recoil';
 import { WeatherPostType } from '../../utils/types';
 import useRainfallTypeStore from '../../utils/zustand/weather/RainfallTypeStore';
 import useSkyStatusStore from '../../utils/zustand/weather/SkyStatusStore';
-import useWindChillStore from '../../utils/zustand/weather/WindChillStore';
 import AddFashionButton from './FashionListBox/AddFashionButton';
 import FashioinDetailModal from './FashionListBox/FashionDetailModal';
 import PaginationBox from './FashionListBox/PaginationBox';
@@ -38,10 +36,9 @@ const style = {
   p: 2,
 };
 
-export default function FashionListBox() {
-  let pageIndex = 0;
-  let pageLastIndex = 0;
+const options = ['전체', '팔로우']
 
+export default function FashionListBox() {
   const [post, setPost] = useState<WeatherPostType[]>([]);
 
   const [singleId, setSingleId] = useState<string>('');
@@ -54,8 +51,35 @@ export default function FashionListBox() {
   const { rainfallType } = useRainfallTypeStore();
   const { windChillSearch } = useWindChillSearchStore();
 
-  const [pageCount, setPageCount] = useRecoilState(fullPageState); // 전체 페이지
-  const [page, setPage] = useRecoilState(currentPageState); // 현재 페이지
+  const [pageCount, setPageCount] = useState<number>(1); // 전체 페이지
+  const [page, setPage] = useState<number>(1); // 현재 페이지
+
+  const [openFiltering, setOpenFiltering] = useState(false);
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const [selectedIndex, setSelectedIndex] = useState(1);
+
+  const handleClickFilter = () => {
+    setOpenFiltering((prevOpen) => !prevOpen);
+  }
+
+  const handleFilterMenuItemClick = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    index: number
+  ) => {
+    setSelectedIndex(index);
+    setOpenFiltering(false);
+  }
+
+  const handleCloseFiltering = (event: Event) => {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(event.target as HTMLElement)
+    ) {
+      return;
+    }
+
+    setOpenFiltering(false);
+  }
 
   function getPageNum(page: number) {
     setPage(page);
@@ -78,7 +102,7 @@ export default function FashionListBox() {
     try {
       await axios
         .get(
-          `/api/v1/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&minWindChill=${windChillSearch[0]}&maxWindChill=${windChillSearch[1]}`,
+          `/api/v1/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&minWindChill=${windChillSearch[0]}&maxWindChill=${windChillSearch[1]}&page=${page}`,
           {
             headers: {
               Accept: 'application/json',
@@ -87,24 +111,12 @@ export default function FashionListBox() {
           }
         )
         .then((response) => {
-          setPage(1);
-
           const data = response.data;
           console.log('data.data: ', data.data);
-          setPost(data.data);
 
-          const pageLen = data.data.length / 8;
-          console.log('pageLen: ', pageLen);
-
-          if (pageLen >= 1) {
-            if (Number.isInteger(pageLen)) {
-              setPageCount(pageLen);
-              console.log("It's an integer!");
-            } else {
-              setPageCount(Math.ceil(pageLen));
-              console.log("It's a floating-point number!");
-            }
-          }
+          setPost(data.data.content);
+          setPageCount(data.data.totalPages);
+          // setPage(1);
         });
     } catch {
       console.log('api 불러오기 실패');
@@ -116,19 +128,8 @@ export default function FashionListBox() {
     const array = [];
 
     fashion = post;
-    if (fashion !== undefined && fashion.length !== 0) {
-      if (page === 1) {
-        pageIndex = 0;
-      } else {
-        pageIndex = 8 * (page - 1);
-      }
-
-      if (page === pageCount) {
-        pageLastIndex = pageIndex + (fashion.length % 8);
-      } else {
-        pageLastIndex = 8 + pageIndex;
-      }
-      for (let index: number = pageIndex; index < pageLastIndex; index++) {
+    if (fashion !== undefined) {
+        for (let index: number = 0; index < fashion.length; index++) {
         // eslint-disable-next-line no-lone-blocks
         {
           array.push(
@@ -160,7 +161,7 @@ export default function FashionListBox() {
                   <CardMedia
                     component="img"
                     height="260px"
-                    image={fashion[index].imageUrl}
+                    image={fashion[index].image}
                   />
                   <Box
                     sx={{
@@ -169,7 +170,7 @@ export default function FashionListBox() {
                       left: 0,
                       width: '100%',
                       height: '80px',
-                      bgcolor: 'rgba(0, 0, 0, 0.54)',
+                      backgroundColor: 'rgba(0, 0, 0, 0.54)',
                       color: 'white',
                       padding: '10px',
                     }}
@@ -191,7 +192,7 @@ export default function FashionListBox() {
 
   useEffect(() => {
     fashionAPI();
-  }, []);
+  }, [page]);
 
   return (
     <Box sx={{ height: '100vh', backgroundColor: '#F5F8FC' }}>
@@ -201,11 +202,30 @@ export default function FashionListBox() {
       <Toolbar>
         <SearchBox />
 
-        <Button variant="contained" onClick={() => fashionAPI()}  sx={{width: '100px', height: '40px', mt: 2, mr: 12, backgroundColor: '#87A9D7', borderRadius: 10, '&:hover': { backgroundColor: '#1f5091' }}}>
+        <Button
+          variant="contained"
+          onClick={() => fashionAPI()}
+          sx={{
+            width: '100px',
+            height: '40px',
+            mt: 2,
+            mr: 12,
+            borderRadius: 10,
+            backgroundColor: '#87A9D7',
+            '&:hover': { backgroundColor: '#1f5091' },
+          }}
+        >
           <Typography sx={{ fontSize: '12pt', textTransform: 'none' }}>
             Search
           </Typography>
         </Button>
+
+        <ButtonGroup variant="contained" ref={anchorRef} sx={{mt: 2}}>
+          <Button sx={{color: 'black', backgroundColor: 'white', '&:hover': { backgroundColor: '#e8e8e8' }}} onClick={handleClickFilter}>
+            {options[selectedIndex]}
+            <ExpandMoreIcon/>
+          </Button>
+        </ButtonGroup>
 
         <AddFashionButton />
       </Toolbar>
@@ -238,6 +258,42 @@ export default function FashionListBox() {
           <FashioinDetailModal singleId={singleId} />
         </Box>
       </Modal>
+
+      <Popper
+        open={openFiltering}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin:
+                placement === 'bottom' ? 'center top' : 'center bottom',
+            }}
+          >
+            <Paper>
+              <ClickAwayListener onClickAway={handleCloseFiltering}>
+                <MenuList id="split-button-menu" autoFocusItem>
+                  {options.map((option, index) => (
+                    <MenuItem
+                      key={option}
+                      selected={index === selectedIndex}
+                      onClick={(event) =>
+                        handleFilterMenuItemClick(event, index)
+                      }
+                    >
+                      {option}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
     </Box>
   );
 }

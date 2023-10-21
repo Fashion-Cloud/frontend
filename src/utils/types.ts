@@ -32,7 +32,7 @@ export type LocationType = {
 export type WeatherPostType = {
     id: string;
     title: string;
-    imageUrl: string;
+    image: string;
 };
 
 export type LookBookListType = {
