@@ -56,7 +56,7 @@ export default function FashionListBox() {
 
   const [openFiltering, setOpenFiltering] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleClickFilter = () => {
     setOpenFiltering((prevOpen) => !prevOpen);
@@ -67,6 +67,13 @@ export default function FashionListBox() {
     index: number
   ) => {
     setSelectedIndex(index);
+    if (index === 0) {
+      fashionAPI();
+      console.log('전체 보기');
+    } else if (index === 1) {
+      followTimelineAPI();
+      console.log('팔로우 보기');
+    }
     setOpenFiltering(false);
   }
 
@@ -102,7 +109,32 @@ export default function FashionListBox() {
     try {
       await axios
         .get(
-          `/api/v1/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&minWindChill=${windChillSearch[0]}&maxWindChill=${windChillSearch[1]}&page=${page}`,
+          `/api/v1/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&minWindChill=${windChillSearch[0]}&maxWindChill=${windChillSearch[1]}&page=${page}&size=8`,
+          {
+            headers: {
+              Accept: 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          const data = response.data;
+          console.log('data.data: ', data.data);
+
+          setPost(data.data.content);
+          setPageCount(data.data.totalPages);
+          // setPage(1);
+        });
+    } catch {
+      console.log('api 불러오기 실패');
+    }
+  };
+
+  const followTimelineAPI = async () => {
+    try {
+      await axios
+        .get(
+          `/api/v1/posts/follow/timeline?page=${page}&size=8`,
           {
             headers: {
               Accept: 'application/json',
