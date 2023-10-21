@@ -4,7 +4,7 @@ import ThermostatIcon from '@mui/icons-material/Thermostat';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import {
   Backdrop,
-  Box, Button,
+  Box,
   Divider,
   Grow,
   IconButton,
