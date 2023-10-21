@@ -17,11 +17,11 @@ import { token } from 'src/assets/data/token';
 import { WeatherPostType } from '../../utils/types';
 import useRainfallTypeStore from '../../utils/zustand/weather/RainfallTypeStore';
 import useSkyStatusStore from '../../utils/zustand/weather/SkyStatusStore';
+import useWindChillSearchStore from "../../utils/zustand/weather/WindChillSearchStore";
 import AddFashionButton from './FashionListBox/AddFashionButton';
 import FashioinDetailModal from './FashionListBox/FashionDetailModal';
 import PaginationBox from './FashionListBox/PaginationBox';
 import SearchBox from './FashionListBox/SearchBox';
-import useWindChillSearchStore from "../../utils/zustand/weather/WindChillSearchStore";
 
 const style = {
   position: 'absolute',
@@ -161,7 +161,7 @@ export default function FashionListBox() {
 
     fashion = post;
     if (fashion !== undefined) {
-        for (let index: number = 0; index < fashion.length; index++) {
+        for (let index = 0; index < fashion.length; index++) {
         // eslint-disable-next-line no-lone-blocks
         {
           array.push(
