@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogContent } from '@mui/material';
+import { Button, Dialog, DialogContent, Divider } from '@mui/material';
 import React, { useState } from 'react';
 
 interface AvatarModalProps {
@@ -26,6 +26,11 @@ function AvatarModal({ open, onClose }: AvatarModalProps) {
     setSettingsOpen(false);
   };
 
+  const dividerStyle: React.CSSProperties = {
+    width: '100%',
+    margin: '8px 0',
+  };
+
   return (
     <Dialog
       open={open}
@@ -48,7 +53,7 @@ function AvatarModal({ open, onClose }: AvatarModalProps) {
                 style={{
                   width: '20px',
                   height: '20px',
-                  marginRight: '5px',
+                  marginRight: '7px',
                   marginBottom: '2px',
                 }}
               />
@@ -56,6 +61,7 @@ function AvatarModal({ open, onClose }: AvatarModalProps) {
             </span>
           </Button>
         </div>
+        <Divider style={dividerStyle} />
         <div>
           <Button
             size="small"
@@ -67,7 +73,7 @@ function AvatarModal({ open, onClose }: AvatarModalProps) {
               <img
                 src="https://i.ibb.co/FsPtsc3/setting.png"
                 alt="Settings"
-                style={{ width: '20px', height: '20px', marginRight: '5px' }}
+                style={{ width: '20px', height: '20px', marginRight: '7px' }}
               />
               Settings
             </span>
