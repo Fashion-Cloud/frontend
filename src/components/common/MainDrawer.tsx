@@ -116,6 +116,7 @@ export default function MainDrawer() {
             >
               <ListItemIcon sx={{ minWidth: 0, justifyContent: 'flex-end' }}>
                 <Avatar
+                  style={{ top: '500px' }}
                   src={'https://avatars.githubusercontent.com/u/83361012?v=4'}
                   alt="User's avatar"
                   sx={{ width: 32, height: 32, ml: -0.5 }}
