@@ -31,10 +31,18 @@ function AvatarModal({ open, onClose }: AvatarModalProps) {
     margin: '8px 0',
   };
 
+  const modalStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-130%, 25%)',
+  };
+
   return (
     <Dialog
       open={open}
       onClose={onClose}
+      style={modalStyle}
       PaperProps={{ elevation: 1 }}
       BackdropProps={{ style: { backgroundColor: 'transparent' } }}
     >
