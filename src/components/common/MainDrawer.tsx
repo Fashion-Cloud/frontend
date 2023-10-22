@@ -1,6 +1,7 @@
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import {
+  Avatar,
   Box,
   CssBaseline,
   Divider,
@@ -96,6 +97,19 @@ export default function MainDrawer() {
           </ListItem>
         </List>
         <Divider />
+        <List>
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
+              <ListItemIcon sx={{ minWidth: 0, justifyContent: 'flex-end' }}>
+                <Avatar
+                  src={'https://avatars.githubusercontent.com/u/83361012?v=4'}
+                  alt="User's avatar"
+                  sx={{ width: 32, height: 32, ml: -0.5 }}
+                />
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
+        </List>
       </MiniDrawer>
     </Box>
   );
