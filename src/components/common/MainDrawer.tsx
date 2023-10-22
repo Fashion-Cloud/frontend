@@ -14,8 +14,10 @@ import {
 import { CSSObject, styled, Theme } from '@mui/material/styles';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
 import logo from '../../assets/images/bang.png';
+import AvatarModal from './AvatarModal';
 
 const drawerWidth = 240;
 
@@ -59,11 +61,20 @@ const MiniDrawer = styled(Drawer, {
 
 export default function MainDrawer() {
   const { pathname } = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
 
   const Menus = [
     { title: 'Home', src: '/', icon: <HomeIcon /> },
     { title: 'MyPage', src: '/mypage', icon: <PersonIcon /> },
   ];
+
+  const handleAvatarClick = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -99,7 +110,10 @@ export default function MainDrawer() {
         <Divider />
         <List>
           <ListItem disablePadding sx={{ display: 'block' }}>
-            <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
+            <ListItemButton
+              sx={{ minHeight: 48, px: 2.5 }}
+              onClick={handleAvatarClick}
+            >
               <ListItemIcon sx={{ minWidth: 0, justifyContent: 'flex-end' }}>
                 <Avatar
                   src={'https://avatars.githubusercontent.com/u/83361012?v=4'}
@@ -111,6 +125,7 @@ export default function MainDrawer() {
           </ListItem>
         </List>
       </MiniDrawer>
+      <AvatarModal open={modalOpen} onClose={handleCloseModal} />
     </Box>
   );
 }
