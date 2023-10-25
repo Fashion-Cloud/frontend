@@ -1,5 +1,9 @@
 import { Box, Card } from '@mui/material';
 import Image from 'next/image';
+import router from 'next/router';
+import { useState } from 'react';
+import useCheckAuth from 'src/api/hook/CheckAuthHook';
+import { useLogin } from 'src/api/hook/UserHook';
 
 import logo from '../../assets/images/bang.png';
 import InputBox from './InputBox';
@@ -8,6 +12,31 @@ import SubmitButton from './SubmitButton';
 import UserLabel from './UserLabel';
 
 export default function LoginBox() {
+  const [email, setEmail] = useState<string>('');
+  const [pw, setPw] = useState<string>('');
+
+  useCheckAuth();
+
+  const { mutate: login } = useLogin(email, pw, (response) => {
+    document.cookie = `token = ${response.data.accessToken}`;
+    router.push('/');
+  });
+
+  const handleSubmit = async () => {
+    // @ts-ignore
+    event.preventDefault();
+    if (!email || !pw) {
+      alert('모든 필수 항목들을 입력해주세요.');
+      return;
+    }
+    login();
+  };
+  const handleOnKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+
   return (
     <Card
       sx={{
@@ -27,17 +56,31 @@ export default function LoginBox() {
       <div
         style={{
           fontSize: '2rem',
-          fontFamily: 'Dongle-Bold',
           marginBottom: '3.5rem',
         }}
       >
         Fashion Cloud
       </div>
       <UserLabel label="이메일*" />
-      <InputBox type="text" />
+      <InputBox
+        value={email}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setEmail(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
+        type="text"
+      />
       <UserLabel label="비밀번호*" />
-      <InputBox type="password" />
-      <SubmitButton sign="Login" />
+      <InputBox
+        value={pw}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setPw(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
+        type="password"
+      />
+      <SubmitButton onClick={handleSubmit} sign="Login" />
+
       <QuestionLink sign="가입하기" way="/register" />
     </Card>
   );
