@@ -13,6 +13,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import useCheckAuth from 'src/api/hook/CheckAuthHook';
+import { useLogout } from 'src/api/hook/UserHook';
 import { token } from 'src/assets/data/token';
 
 import { currentPageState, fullPageState } from '../../utils/Recoil';
@@ -195,6 +196,8 @@ export default function FashionListBox() {
 
   useCheckAuth();
 
+  const { mutate: logout } = useLogout();
+
   return (
     <Box sx={{ height: '100vh', backgroundColor: '#F5F8FC' }}>
       <Box height="75px" />
@@ -204,6 +207,13 @@ export default function FashionListBox() {
         <SearchBox />
 
         <AddFashionButton />
+        <button
+          onClick={() => {
+            logout();
+          }}
+        >
+          로그아웃
+        </button>
       </Toolbar>
 
       <Grid

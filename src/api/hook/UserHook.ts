@@ -26,3 +26,19 @@ export const useSignup = (
     onError: () => alert('다시 회원가입 해주세요.'),
   });
 };
+
+export const useLogout = () => {
+  return useMutation({
+    mutationFn: () => UserService.logout(),
+    onSuccess: () => {
+      deleteCookie('token');
+      window.location.reload();
+    },
+    onError: () => alert('다시 로그아웃 해주세요.'),
+  });
+};
+
+function deleteCookie(name: string) {
+  // 쿠키 만료일을 현재 시간보다 이전으로 설정하여 삭제
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+}

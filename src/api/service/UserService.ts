@@ -1,3 +1,4 @@
+import apiV1Instance from '../api-instance';
 import baseInstance from '../baseInstance';
 
 export class UserService {
@@ -18,5 +19,9 @@ export class UserService {
     username: string
   ): Promise<void> => {
     await baseInstance.post('/auth/signup', { email, password, username });
+  };
+
+  public static logout = async (): Promise<void> => {
+    await apiV1Instance.post('/auth/logout');
   };
 }
