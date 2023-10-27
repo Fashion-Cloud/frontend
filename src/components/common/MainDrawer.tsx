@@ -10,10 +10,7 @@ import {
   ListItemIcon,
 } from '@mui/material';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
-
-import logo from '../../assets/images/bang.png';
 
 const drawerWidth = 240;
 
@@ -71,12 +68,7 @@ export default function MainDrawer() {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <MiniDrawer variant="permanent">
-        <ListItem disablePadding sx={{ display: 'block' }}>
-          <Box sx={{ px: 1.5, my: 1.5 }}>
-            <Image height={50} src={logo} alt="logo" />
-          </Box>
-        </ListItem>
-        <List>
+        <List sx={{ marginTop: '50px' }}>
           <ListItem disablePadding sx={{ display: 'block' }}>
             {Menus.map((menu, index) => (
               <ListItemButton
