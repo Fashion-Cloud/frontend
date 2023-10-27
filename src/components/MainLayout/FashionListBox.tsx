@@ -11,7 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
-import React, {useEffect, useRef, useState} from 'react
+import React, {useEffect, useRef, useState} from 'react';
 import useCheckAuth from 'src/api/hook/CheckAuthHook';
 import { token } from 'src/assets/data/token';
 
