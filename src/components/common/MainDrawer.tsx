@@ -3,7 +3,6 @@ import PersonIcon from '@mui/icons-material/Person';
 import {
   Box,
   CssBaseline,
-  Divider,
   Drawer,
   List,
   ListItem,
@@ -60,8 +59,12 @@ export default function MainDrawer() {
   const { pathname } = useRouter();
 
   const Menus = [
-    { title: 'Home', src: '/', icon: <HomeIcon /> },
-    { title: 'MyPage', src: '/mypage', icon: <PersonIcon /> },
+    { title: 'Home', src: '/', icon: <HomeIcon style={{ fontSize: 30 }} /> },
+    {
+      title: 'MyPage',
+      src: '/mypage',
+      icon: <PersonIcon style={{ fontSize: 30 }} />,
+    },
   ];
 
   return (
@@ -73,7 +76,6 @@ export default function MainDrawer() {
             <Image height={50} src={logo} alt="logo" />
           </Box>
         </ListItem>
-        <Divider />
         <List>
           <ListItem disablePadding sx={{ display: 'block' }}>
             {Menus.map((menu, index) => (
@@ -81,12 +83,16 @@ export default function MainDrawer() {
                 key={index}
                 href={menu.src}
                 style={{
+                  width: '50px',
+                  height: '50px',
+                  margin: '9px',
+                  padding: '11px',
+                  borderRadius: '10px',
                   backgroundColor: pathname === menu.src ? '#EDF7FC' : '',
                 }}
-                sx={{ minHeight: 48, px: 2.5 }}
               >
                 <ListItemIcon
-                  style={{ color: pathname === menu.src ? '#4B9BBF' : '' }}
+                  style={{ color: pathname === menu.src ? '#71B4DC' : '' }}
                   sx={{ minWidth: 0, justifyContent: 'center' }}
                 >
                   {menu.icon}
@@ -95,7 +101,6 @@ export default function MainDrawer() {
             ))}
           </ListItem>
         </List>
-        <Divider />
       </MiniDrawer>
     </Box>
   );
