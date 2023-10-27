@@ -1,8 +1,12 @@
 import { Button } from '@mui/material';
-
-export default function SubmitButton({ sign }: { sign: string }) {
+type Props = {
+  sign: string;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void | Promise<void>;
+};
+export default function SubmitButton({ sign, onClick }: Props) {
   return (
     <Button
+      onClick={onClick}
       variant="contained"
       color="info"
       sx={{
