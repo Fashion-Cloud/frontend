@@ -79,12 +79,13 @@ export default function PlaceBox() {
         maxWeight: '360px',
         marginTop: '250px',
         padding: '30px',
+        boxShadow: 3,
       }}
     >
       <Toolbar sx={{ justifyContent: 'center' }}>
         <PlaceIcon sx={{ mr: 0.7, color: '#7D7D7D' }} />
         <Typography sx={{ fontSize: '15pt', color: '#7D7D7D' }}>
-          {/*{location?.fullAddress}*/}경기도 시흥시 정왕동
+          {location?.fullAddress}
         </Typography>
       </Toolbar>
 
@@ -97,8 +98,7 @@ export default function PlaceBox() {
         fontFamily="Stardos-Stencil"
         sx={{ marginLeft: '15px' }}
       >
-        {/*{windChill} */}
-        22°
+        {windChill}°
       </Typography>
     </Box>
   );

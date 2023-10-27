@@ -18,24 +18,43 @@ const WeatherInfoBox = ({
   hourRainfall,
 }: WeatherInfoProps) => {
   return (
-    <Box display="flex" sx={{ borderColor: '#000000', border: '10px' }}>
-      <Toolbar>
-        <WaterIcon sx={{ color: '#D5D5D5', mr: 3, fontSize: '26pt' }} />
-        <Tooltip title="Humidity" arrow>
-          <Typography sx={{ fontSize: '14pt' }}>{humidity} %</Typography>
-        </Tooltip>
-      </Toolbar>
-      <Toolbar sx={{ my: -1 }}>
-        <AirIcon sx={{ color: '#D5D5D5', mr: 3, fontSize: '26pt' }} />
-        <Tooltip title="Wind Speed" arrow>
-          <Typography sx={{ fontSize: '14pt' }}>{windSpeed} m/s</Typography>
-        </Tooltip>
-      </Toolbar>
-      <Toolbar>
-        <WaterDropIcon sx={{ color: '#B4C4FA', mr: 3, fontSize: '26pt' }} />
-        <Tooltip title="Rainfall" arrow>
-          <Typography sx={{ fontSize: '14pt' }}>{hourRainfall} mm</Typography>
-        </Tooltip>
+    <Box
+      display="flex"
+      sx={{
+        backgroundColor: '#FFFFFF',
+        marginTop: '30px',
+        borderRadius: '30px',
+        boxShadow: 3,
+      }}
+    >
+      <Toolbar
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <div style={{ display: 'flex' }}>
+          <WaterIcon sx={{ color: '#D5D5D5', mr: 1, fontSize: '18pt' }} />
+          <Tooltip title="Humidity" arrow>
+            <Typography sx={{ fontSize: '14pt' }}>{humidity} %</Typography>
+          </Tooltip>
+        </div>
+        <div style={{ display: 'flex' }}>
+          <AirIcon sx={{ color: '#D5D5D5', mr: 1, fontSize: '18pt' }} />
+          <Tooltip title="Wind Speed" arrow>
+            <Typography sx={{ fontSize: '14pt' }}>{windSpeed} m/s</Typography>
+          </Tooltip>
+        </div>
+        <div style={{ display: 'flex' }}>
+          <WaterDropIcon sx={{ color: '#B4C4FA', mr: 1, fontSize: '18pt' }} />
+          <Tooltip title="Rainfall" arrow>
+            <Typography sx={{ fontSize: '14pt' }}>{hourRainfall} mm</Typography>
+          </Tooltip>
+        </div>
       </Toolbar>
     </Box>
   );

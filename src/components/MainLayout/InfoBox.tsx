@@ -20,10 +20,7 @@ export default function InfoBox() {
   return (
     <Box
       sx={{
-        height: '100vh',
         backgroundColor: '#F5F8FC',
-        top: 0,
-        overflow: 'hidden',
       }}
     >
       <Box sx={{ marginRight: '40px', maxWeight: '360px' }}>
