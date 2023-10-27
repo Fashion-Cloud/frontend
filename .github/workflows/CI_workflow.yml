@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [16]
+        node: [20]
     defaults:
       run:
         working-directory: .
@@ -34,7 +34,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node }}
-    
+
+    - name: Create env file
+      run: |
+        touch .env
+        echo NEXT_PUBLIC_API=${{ secrets.NEXT_PUBLIC_API }} >> .env
+
     - name: Run test
       run: |
         npm install --force
