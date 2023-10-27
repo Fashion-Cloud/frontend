@@ -1,4 +1,5 @@
 import { Head, Html, Main, NextScript } from 'next/document';
+import React from 'react';
 
 export default function Document() {
   return (
@@ -15,6 +16,10 @@ export default function Document() {
         />
         <link
           href="https://fonts.googleapis.com/css2?family=Tinos:wght@100;200;300;400;500;600;700;800;900&family=Roboto&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Stardos+Stencil&display=swap"
           rel="stylesheet"
         />
       </Head>

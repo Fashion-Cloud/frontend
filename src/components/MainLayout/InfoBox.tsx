@@ -15,20 +15,21 @@ export default function InfoBox() {
     if (windChillData?.data) {
       setWeatherData(windChillData?.data?.data);
     }
-  }, [windChillData]);
+  }, [setWeatherData, windChillData]);
 
   return (
     <Box
       sx={{
         height: '100vh',
-        backgroundColor: '#FBFEFF',
-        position: 'sticky',
+        backgroundColor: '#F5F8FC',
         top: 0,
         overflow: 'hidden',
       }}
     >
-      <PlaceBox />
-      <WeatherBox />
+      <Box sx={{ marginRight: '40px', maxWeight: '360px' }}>
+        <PlaceBox />
+        <WeatherBox />
+      </Box>
     </Box>
   );
 }
