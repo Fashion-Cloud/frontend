@@ -19,9 +19,12 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
+import useCheckAuth from 'src/api/hook/CheckAuthHook';
 import { token } from 'src/assets/data/token';
 
+import logoUrl from '../../../public/title-logo.png';
 import { WeatherPostType } from '../../utils/types';
 import useRainfallTypeStore from '../../utils/zustand/weather/RainfallTypeStore';
 import useSkyStatusStore from '../../utils/zustand/weather/SkyStatusStore';
@@ -231,12 +234,12 @@ export default function FashionListBox() {
     fashionAPI();
   }, [page]);
 
-  // useCheckAuth();
+  useCheckAuth();
 
   return (
     <Box sx={{ height: '100vh', backgroundColor: '#F5F8FC' }}>
       <Box height="75px" />
-      <Logo />
+      <Image src={logoUrl} alt="logo" style={{ marginLeft: 60 }} />
 
       <Toolbar>
         <SearchBox />
