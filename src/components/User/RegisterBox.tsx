@@ -1,5 +1,8 @@
 import { Card } from '@mui/material';
 import Image from 'next/image';
+import router from 'next/router';
+import { useState } from 'react';
+import { useSignup } from 'src/api/hook/UserHook';
 
 import userImage from '../../assets/images/user.png';
 import InputBox from './InputBox';
@@ -8,6 +11,30 @@ import SubmitButton from './SubmitButton';
 import UserLabel from './UserLabel';
 
 export default function RegisterBox() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [pw, setPw] = useState('');
+
+  const { mutate: signup } = useSignup(email, pw, name, () => {
+    alert('회원가입이 성공적으로 되었습니다.');
+    router.push('/login');
+  });
+
+  const handleSubmit = async () => {
+    // @ts-ignore
+    event.preventDefault();
+    if (!email || !pw || !name) {
+      alert('모든 필수 항목들을 입력해주세요.');
+      return;
+    }
+    signup();
+  };
+  const handleOnKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+
   return (
     <Card
       sx={{
@@ -23,7 +50,6 @@ export default function RegisterBox() {
       <div
         style={{
           fontSize: '2rem',
-          fontFamily: 'Dongle-Bold',
         }}
       >
         Fashion Cloud
@@ -55,12 +81,33 @@ export default function RegisterBox() {
       </div>
 
       <UserLabel label="이름*" />
-      <InputBox type="text" />
+      <InputBox
+        value={name}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setName(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
+        type="text"
+      />
       <UserLabel label="이메일*" />
-      <InputBox type="text" />
+      <InputBox
+        value={email}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setEmail(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
+        type="text"
+      />
       <UserLabel label="비밀번호*" />
-      <InputBox type="password" />
-      <SubmitButton sign="Sign Up" />
+      <InputBox
+        value={pw}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setPw(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
+        type="password"
+      />
+      <SubmitButton onClick={handleSubmit} sign="Sign Up" />
       <QuestionLink sign="로그인" way="/login" />
     </Card>
   );

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { token } from 'src/assets/data/token';
 
 const apiV1Instance = axios.create({
-  baseURL: 'http://localhost:8080/api/v1',
+  baseURL: process.env.NEXT_PUBLIC_API,
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${token}`,
