@@ -63,3 +63,13 @@ export type UserPostListType = {
     updatedAt: string;
     deletedAt: string;
 }
+
+export type UserInfoType = {
+    id: string;
+    email: string;
+    username: string;
+    image: string;
+    address: string;
+    createdAt: string;
+    updatedAt: string;
+}

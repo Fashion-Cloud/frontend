@@ -1,5 +1,7 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import { useState } from 'react';
+import axios from "axios";
+import {token} from "../../assets/data/token";
 
 export default function UserInfoBox() {
     const [follow, setFollow] = useState<boolean>(false);
@@ -11,6 +13,27 @@ export default function UserInfoBox() {
             setFollow(true);
         }
     }
+
+    const myInfoAPI = async () => {
+        try {
+            await axios
+                .get(`/api/v1/posts/users/${userId}`, {
+                    headers: {
+                        Accept: 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                .then((response) => {
+                    const data = response.data.data;
+                    console.log('data: ', data);
+
+                    setPostList(data);
+                });
+        } catch {
+            console.log('api 불러오기 실패');
+        }
+    };
+
 
     return (
         <Box display="flex" alignItems="start" gap={2}>
