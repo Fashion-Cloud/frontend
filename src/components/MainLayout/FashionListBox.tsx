@@ -207,13 +207,6 @@ export default function FashionListBox() {
         <SearchBox />
 
         <AddFashionButton />
-        <button
-          onClick={() => {
-            logout();
-          }}
-        >
-          로그아웃
-        </button>
       </Toolbar>
 
       <Grid
