@@ -31,7 +31,7 @@ export default function MyPostBox() {
   const userPostListAPI = async () => {
     try {
       await axios
-        .get(`/api/v1/posts/users/${userId}`, {
+        .get(`${process.env.NEXT_PUBLIC_API}/posts/users/${userId}`, {
           headers: {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`,
