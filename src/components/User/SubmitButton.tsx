@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+
 type Props = {
   sign: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void | Promise<void>;
@@ -8,7 +9,6 @@ export default function SubmitButton({ sign, onClick }: Props) {
     <Button
       onClick={onClick}
       variant="contained"
-      color="info"
       sx={{
         borderRadius: '0.4rem',
         width: '73%',
@@ -17,6 +17,7 @@ export default function SubmitButton({ sign, onClick }: Props) {
         fontFamily: 'Dongle-Bold',
         marginTop: '1.6rem',
         marginBottom: '0.4rem',
+        backgroundColor: '#71B4DC',
       }}
     >
       {sign}

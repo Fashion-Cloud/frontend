@@ -6,7 +6,6 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import React, { ReactElement, ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { RecoilRoot } from 'recoil';
 
 import MainDrawer from '../src/components/common/MainDrawer';
 
@@ -25,16 +24,13 @@ function App({ Component, pageProps }: Props) {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <RecoilRoot>
-          <div className="flex flex-1 flex-col text-main-1 font-montserrat min-h-screen bg-white tablet:px-10">
-            <Head>
-              <title>Fashion Cloud</title>
-            </Head>
-            {getLayout(<Component {...pageProps} />)}
-          </div>
-
-          <MainDrawer />
-        </RecoilRoot>
+        <div className="flex flex-1 flex-col text-main-1 font-montserrat min-h-screen bg-white tablet:px-10">
+          <Head>
+            <title>Fashion Cloud</title>
+          </Head>
+          {getLayout(<Component {...pageProps} />)}
+        </div>
+        <MainDrawer />
       </QueryClientProvider>
     </>
   );
