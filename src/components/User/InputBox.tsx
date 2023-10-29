@@ -14,8 +14,8 @@ export default function InputBox({ type, value, onChange, onKeyPress }: Props) {
       sx={{
         border: '1px solid #ccc',
         borderRadius: '0.4rem',
-        width: '73%',
-        height: '2.5rem',
+        width: '65%',
+        height: '0.4rem',
         display: 'flex',
         alignItems: 'center',
         padding: '1rem', // 내부 여백

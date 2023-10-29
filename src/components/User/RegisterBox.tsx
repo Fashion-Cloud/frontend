@@ -4,6 +4,7 @@ import router from 'next/router';
 import { useState } from 'react';
 import { useSignup } from 'src/api/hook/UserHook';
 
+import logoUrl from '../../../public/title-logo.png';
 import userImage from '../../assets/images/user.png';
 import InputBox from './InputBox';
 import QuestionLink from './QuestionLink';
@@ -45,21 +46,30 @@ export default function RegisterBox() {
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
+        zIndex: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
       }}
     >
+      <Image
+        style={{
+          width: '19rem',
+          height: '4rem',
+          marginBottom: '1rem',
+          marginTop: '1rem',
+        }}
+        src={logoUrl}
+        alt="logo"
+      />
       <div
         style={{
-          fontSize: '2rem',
+          position: 'relative',
         }}
       >
-        Fashion Cloud
-      </div>
-      <div style={{ position: 'relative' }}>
         <Image
           alt="사용자 프로필 사진"
           src={userImage}
-          width={120}
-          height={120}
+          width={115}
+          height={110}
         />
         <button
           style={{
@@ -68,7 +78,7 @@ export default function RegisterBox() {
             cursor: 'pointer',
             width: '28px',
             height: '28px',
-            bottom: '18px',
+            bottom: '9px',
             right: '18px',
             border: 'none',
             color: 'white',
