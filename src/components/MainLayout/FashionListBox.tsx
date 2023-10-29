@@ -179,7 +179,7 @@ export default function FashionListBox() {
               <Card
                 sx={{
                   width: '220px',
-                  borderRadius: '10%',
+                  borderRadius: '5%',
                   cursor: 'pointer',
                   ':hover': {
                     boxShadow:
@@ -203,7 +203,7 @@ export default function FashionListBox() {
                       bottom: 0,
                       left: 0,
                       width: '100%',
-                      height: '80px',
+                      height: '70px',
                       backgroundColor: 'rgba(0, 0, 0, 0.54)',
                       color: 'white',
                       padding: '10px',
