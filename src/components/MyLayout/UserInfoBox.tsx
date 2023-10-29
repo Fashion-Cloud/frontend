@@ -38,7 +38,7 @@ export default function UserInfoBox() {
                         }} 
                         onClick={handleFollowChange}
                     >
-                        {follow ? 'Unfollow' : 'follow'}
+                        {follow ? 'Unfollow' : 'edit'}
                     </Button>
                 </Box>
 
