@@ -1,23 +1,32 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
-  Box, Button, ButtonGroup,
+  Box,
+  Button,
+  ButtonGroup,
   Card,
-  CardMedia, ClickAwayListener,
-  Grid, Grow,
-  MenuItem, MenuList,
-  Modal, Paper, Popper,
+  CardMedia,
+  ClickAwayListener,
+  Grid,
+  Grow,
+  MenuItem,
+  MenuList,
+  Modal,
+  Paper,
+  Popper,
   Toolbar,
   Typography,
 } from '@mui/material';
 import axios from 'axios';
-import React, {useEffect, useRef, useState} from 'react';
+import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
 import useCheckAuth from 'src/api/hook/CheckAuthHook';
 import { token } from 'src/assets/data/token';
 
+import logoUrl from '../../../public/title-logo.png';
 import { WeatherPostType } from '../../utils/types';
 import useRainfallTypeStore from '../../utils/zustand/weather/RainfallTypeStore';
 import useSkyStatusStore from '../../utils/zustand/weather/SkyStatusStore';
-import useWindChillSearchStore from "../../utils/zustand/weather/WindChillSearchStore";
+import useWindChillSearchStore from '../../utils/zustand/weather/WindChillSearchStore';
 import AddFashionButton from './FashionListBox/AddFashionButton';
 import FashionModal from "./FashionListBox/FashionModal";
 import PaginationBox from './FashionListBox/PaginationBox';
@@ -32,7 +41,7 @@ const style = {
   width: 550,
 };
 
-const options = ['전체', '팔로우']
+const options = ['전체', '팔로우'];
 
 export default function FashionListBox() {
   const [post, setPost] = useState<WeatherPostType[]>([]);
@@ -56,7 +65,7 @@ export default function FashionListBox() {
 
   const handleClickFilter = () => {
     setOpenFiltering((prevOpen) => !prevOpen);
-  }
+  };
 
   const handleFilterMenuItemClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
@@ -71,7 +80,7 @@ export default function FashionListBox() {
       console.log('팔로우 보기');
     }
     setOpenFiltering(false);
-  }
+  };
 
   const handleCloseFiltering = (event: Event) => {
     if (
@@ -82,7 +91,7 @@ export default function FashionListBox() {
     }
 
     setOpenFiltering(false);
-  }
+  };
 
   function getPageNum(page: number) {
     setPage(page);
@@ -129,15 +138,12 @@ export default function FashionListBox() {
   const followTimelineAPI = async () => {
     try {
       await axios
-        .get(
-          `/api/v1/posts/follow/timeline?page=${page}&size=8`,
-          {
-            headers: {
-              Accept: 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
+        .get(`/api/v1/posts/follow/timeline?page=${page}&size=8`, {
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           const data = response.data;
           console.log('data.data: ', data.data);
@@ -156,7 +162,7 @@ export default function FashionListBox() {
 
     fashion = post;
     if (fashion !== undefined) {
-        for (let index = 0; index < fashion.length; index++) {
+      for (let index = 0; index < fashion.length; index++) {
         // eslint-disable-next-line no-lone-blocks
         {
           array.push(
@@ -226,7 +232,7 @@ export default function FashionListBox() {
   return (
     <Box sx={{ height: '100vh', backgroundColor: '#F5F8FC' }}>
       <Box height="75px" />
-      <Logo />
+      <Image src={logoUrl} alt="logo" style={{ marginLeft: 60 }} />
 
       <Toolbar>
         <SearchBox />
@@ -240,7 +246,7 @@ export default function FashionListBox() {
             mt: 2,
             mr: 12,
             borderRadius: 10,
-            backgroundColor: '#87A9D7',
+            backgroundColor: '#71B4DC',
             '&:hover': { backgroundColor: '#1f5091' },
           }}
         >
@@ -249,10 +255,17 @@ export default function FashionListBox() {
           </Typography>
         </Button>
 
-        <ButtonGroup variant="contained" ref={anchorRef} sx={{mt: 2}}>
-          <Button sx={{color: 'black', backgroundColor: 'white', '&:hover': { backgroundColor: '#e8e8e8' }}} onClick={handleClickFilter}>
+        <ButtonGroup variant="contained" ref={anchorRef} sx={{ mt: 2 }}>
+          <Button
+            sx={{
+              color: 'black',
+              backgroundColor: 'white',
+              '&:hover': { backgroundColor: '#e8e8e8' },
+            }}
+            onClick={handleClickFilter}
+          >
             {options[selectedIndex]}
-            <ExpandMoreIcon/>
+            <ExpandMoreIcon />
           </Button>
         </ButtonGroup>
 
