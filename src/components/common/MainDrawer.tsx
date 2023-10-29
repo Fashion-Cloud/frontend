@@ -55,6 +55,10 @@ const MiniDrawer = styled(Drawer, {
 export default function MainDrawer() {
   const { pathname } = useRouter();
 
+  if (pathname === '/login' || pathname === '/register') {
+    return null;
+  }
+
   const Menus = [
     { title: 'Home', src: '/', icon: <HomeIcon style={{ fontSize: 30 }} /> },
     {
