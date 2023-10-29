@@ -1,11 +1,10 @@
-import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   Box, Button, ButtonGroup,
   Card,
   CardMedia, ClickAwayListener,
   Grid, Grow,
-  IconButton, MenuItem, MenuList,
+  MenuItem, MenuList,
   Modal, Paper, Popper,
   Toolbar,
   Typography,
@@ -20,9 +19,9 @@ import useRainfallTypeStore from '../../utils/zustand/weather/RainfallTypeStore'
 import useSkyStatusStore from '../../utils/zustand/weather/SkyStatusStore';
 import useWindChillSearchStore from "../../utils/zustand/weather/WindChillSearchStore";
 import AddFashionButton from './FashionListBox/AddFashionButton';
+import FashionModal from "./FashionListBox/FashionModal";
 import PaginationBox from './FashionListBox/PaginationBox';
 import SearchBox from './FashionListBox/SearchBox';
-import FashionModal from "./FashionListBox/FashionModal";
 
 const style = {
   position: 'absolute',

@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from "react";
-import {SinglePostType} from "../../../utils/types";
-import axios from "axios";
-import {token} from "../../../assets/data/token";
-import {Avatar, Box, Button, IconButton, Popover, Typography} from "@mui/material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import CloseIcon from "@mui/icons-material/Close";
+import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import weatherSky from "../../../assets/data/weatherSky";
 import WbCloudyIcon from "@mui/icons-material/WbCloudy";
+import {Avatar, Box, Button, IconButton, Popover, Typography} from "@mui/material";
+import axios from "axios";
+import React, {useEffect, useState} from "react";
+
 import rainfallType from "../../../assets/data/rainfallType";
+import {token} from "../../../assets/data/token";
+import weatherSky from "../../../assets/data/weatherSky";
+import {SinglePostType} from "../../../utils/types";
 import LookbookPopover from "./LookbookPopover";
 
 type FashionModalProps = {
