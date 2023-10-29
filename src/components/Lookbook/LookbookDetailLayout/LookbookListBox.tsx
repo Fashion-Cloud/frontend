@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useFindSomeBooks } from 'src/api/hook/LookbookHook';
 
-import { LookBookListType, SinglePostType } from '../../../utils/types';
+import { SinglePostType } from '../../../utils/types';
 
 export default function LookbookListBox() {
   const [open, setOpen] = useState(false);
