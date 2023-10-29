@@ -5,7 +5,7 @@ import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import WbCloudyIcon from "@mui/icons-material/WbCloudy";
 import {Avatar, Box, Button, IconButton, Popover, Typography} from "@mui/material";
-import axios from "axios";
+import axios, {AxiosError} from "axios";
 import React, {useEffect, useState} from "react";
 
 import rainfallType from "../../../assets/data/rainfallType";
@@ -76,8 +76,16 @@ export default function FashionModal({ singleId, setOpenDetail }: FashionModalPr
           console.log(response);
           setBookState(!bookState);
         });
-    } catch {
-      console.log('api 불러오기 실패');
+    } catch(err: unknown) {
+      if (axios.isAxiosError(err)) { // AxiosError 인지 확인
+        const axiosError = err as AxiosError;
+        console.log(axiosError.response?.data); // response 프로퍼티에 안전하게 접근
+        // alert(axiosError.response?.data?.message);
+      } else if (err instanceof Error) {
+        alert(err.message);
+      } else {
+        alert('An unknown error occurred');
+      }
     }
   };
 

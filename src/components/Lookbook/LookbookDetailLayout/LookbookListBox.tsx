@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from 'react';
 import { useFindSomeBooks } from 'src/api/hook/LookbookHook';
 
-import { LookBookListType } from '../../../utils/types';
+import { LookBookListType, SinglePostType } from '../../../utils/types';
 
 export default function LookbookListBox() {
   const [open, setOpen] = useState(false);
@@ -30,7 +30,7 @@ export default function LookbookListBox() {
     setOpen(false);
   };
 
-  const [lookbook, setLookbook] = useState<LookBookListType[]>([]);
+  const [lookbook, setLookbook] = useState<SinglePostType[]>([]);
 
   const { data: someLookBookData } = useFindSomeBooks();
 
@@ -136,7 +136,7 @@ export default function LookbookListBox() {
           <WbSunnyIcon />
           {lookbook?.length > 0 && (
             <Typography variant="h6" sx={{ marginLeft: 2 }}>
-              °C
+              {lookbook[currentImageIndex].windChill}°C
             </Typography>
           )}
         </Box>
@@ -151,7 +151,7 @@ export default function LookbookListBox() {
             <img
               src={lookbook[currentImageIndex].image}
               alt={lookbook[currentImageIndex].title}
-              style={{ width: 'auto', height: '600px' }}
+              style={{ width: '100%', height: '600px', objectFit: 'cover' }}
             />
           )}
         </Box>

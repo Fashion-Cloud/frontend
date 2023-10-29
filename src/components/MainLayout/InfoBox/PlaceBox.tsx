@@ -94,7 +94,7 @@ export default function PlaceBox() {
       <Typography
         display="flex"
         justifyContent="center"
-        fontSize="55pt"
+        fontSize="45pt"
         fontFamily="Stardos-Stencil"
         sx={{ marginLeft: '15px' }}
       >
