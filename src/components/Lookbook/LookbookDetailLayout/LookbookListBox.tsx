@@ -12,7 +12,6 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-// import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useFindSomeBooks } from 'src/api/hook/LookbookHook';
 
@@ -37,9 +36,10 @@ export default function LookbookListBox() {
 
   useEffect(() => {
     if (someLookBookData?.data) {
-      setLookbook(someLookBookData?.data.data);
+      setLookbook(someLookBookData?.data.data.posts);
     }
-  }, []);
+    console.log('someLookBookData?.data: ', someLookBookData?.data);
+  }, [someLookBookData]);
 
   const handlePrev = () => {
     if (currentImageIndex > 0) {
@@ -91,7 +91,7 @@ export default function LookbookListBox() {
                       left: 0,
                       width: '100%',
                       height: '100px',
-                      bgcolor: 'transparent',
+                      backgroundColor: 'transparent',
                       backgroundImage:
                         'linear-gradient(to top, rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0))', // Apply gradient
                       color: 'white',
@@ -134,7 +134,7 @@ export default function LookbookListBox() {
           }}
         >
           <WbSunnyIcon />
-          {lookbook.length > 0 && (
+          {lookbook?.length > 0 && (
             <Typography variant="h6" sx={{ marginLeft: 2 }}>
               °C
             </Typography>
@@ -147,7 +147,7 @@ export default function LookbookListBox() {
             alignItems: 'center',
           }}
         >
-          {lookbook.length > 0 && (
+          {lookbook?.length > 0 && (
             <img
               src={lookbook[currentImageIndex].image}
               alt={lookbook[currentImageIndex].title}
@@ -173,7 +173,7 @@ export default function LookbookListBox() {
           />
           <IconButton
             onClick={handleNext}
-            disabled={currentImageIndex === lookbook.length - 1}
+            disabled={currentImageIndex === lookbook?.length - 1}
           >
             <ArrowForwardIosIcon />
           </IconButton>
