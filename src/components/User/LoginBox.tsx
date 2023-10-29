@@ -1,11 +1,11 @@
-import { Box, Card } from '@mui/material';
+import { Card } from '@mui/material';
 import Image from 'next/image';
 import router from 'next/router';
 import { useState } from 'react';
 import useCheckAuth from 'src/api/hook/CheckAuthHook';
 import { useLogin } from 'src/api/hook/UserHook';
 
-import logo from '../../assets/images/bang.png';
+import logoUrl from '../../../public/title-logo.png';
 import InputBox from './InputBox';
 import QuestionLink from './QuestionLink';
 import SubmitButton from './SubmitButton';
@@ -48,19 +48,20 @@ export default function LoginBox() {
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
+        zIndex: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
       }}
     >
-      <Box sx={{ px: 1.5 }}>
-        <Image height={50} src={logo} alt="logo" />
-      </Box>
-      <div
+      <Image
+        src={logoUrl}
+        alt="logo"
         style={{
-          fontSize: '2rem',
-          marginBottom: '3.5rem',
+          width: '19rem',
+          height: '4rem',
+          marginBottom: '5rem',
+          marginTop: '1rem',
         }}
-      >
-        Fashion Cloud
-      </div>
+      />
       <UserLabel label="이메일*" />
       <InputBox
         value={email}
