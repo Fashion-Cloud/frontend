@@ -20,21 +20,17 @@ import useRainfallTypeStore from '../../utils/zustand/weather/RainfallTypeStore'
 import useSkyStatusStore from '../../utils/zustand/weather/SkyStatusStore';
 import useWindChillSearchStore from "../../utils/zustand/weather/WindChillSearchStore";
 import AddFashionButton from './FashionListBox/AddFashionButton';
-import FashioinDetailModal from './FashionListBox/FashionDetailModal';
 import PaginationBox from './FashionListBox/PaginationBox';
 import SearchBox from './FashionListBox/SearchBox';
+import FashionModal from "./FashionListBox/FashionModal";
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  height: 600,
-  width: 400,
-  bgcolor: '#FFF',
-  borderRadius: '25px',
-  boxShadow: 24,
-  p: 2,
+  height: 750,
+  width: 550,
 };
 
 const options = ['전체', '팔로우']
@@ -110,7 +106,7 @@ export default function FashionListBox() {
     try {
       await axios
         .get(
-          `/api/v1/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&minWindChill=${windChillSearch[0]}&maxWindChill=${windChillSearch[1]}&page=${page}&size=8`,
+          `${process.env.NEXT_PUBLIC_API}/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&minWindChill=${windChillSearch[0]}&maxWindChill=${windChillSearch[1]}&page=${page}&size=8`,
           {
             headers: {
               Accept: 'application/json',
@@ -149,7 +145,6 @@ export default function FashionListBox() {
 
           setPost(data.data.content);
           setPageCount(data.data.totalPages);
-          // setPage(1);
         });
     } catch {
       console.log('api 불러오기 실패');
@@ -281,16 +276,7 @@ export default function FashionListBox() {
 
       <Modal open={openDetail} onClose={handleCloseDetail} closeAfterTransition>
         <Box sx={style}>
-          <div style={{ textAlign: 'right' }}>
-            <IconButton
-              onClick={() => {
-                setOpenDetail(false);
-              }}
-            >
-              <CloseIcon style={{ color: '#000' }} fontWeight="300" />
-            </IconButton>
-          </div>
-          <FashioinDetailModal singleId={singleId} />
+          <FashionModal singleId={singleId} setOpenDetail={setOpenDetail}/>
         </Box>
       </Modal>
 
