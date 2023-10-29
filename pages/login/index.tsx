@@ -1,28 +1,25 @@
-import { Box, Grid } from '@mui/material';
+import Image from 'next/image';
+import cloudImage from 'src/assets/images/cloud.png';
 import LoginBox from 'src/components/User/LoginBox';
 
 export default function LoginPage() {
   return (
-    <Box
-      sx={{
-        width: '100%',
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         height: '100vh',
-        backgroundColor: '#F5F8FC',
-        paddingTop: '100px',
       }}
     >
-      <Grid container alignItems="center">
-        <Grid item xs={9}>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <LoginBox />
-          </div>
-        </Grid>
-      </Grid>
-    </Box>
+      <Image
+        src={cloudImage}
+        alt="background"
+        fill
+        objectFit="cover"
+        objectPosition="center"
+      />
+      <LoginBox />
+    </div>
   );
 }
