@@ -20,6 +20,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import useCheckAuth from 'src/api/hook/CheckAuthHook';
+import { useLogout } from 'src/api/hook/UserHook';
 import { token } from 'src/assets/data/token';
 
 import logoUrl from '../../../public/title-logo.png';
@@ -228,6 +229,8 @@ export default function FashionListBox() {
   }, [page]);
 
   useCheckAuth();
+
+  const { mutate: logout } = useLogout();
 
   return (
     <Box sx={{ height: '100vh', backgroundColor: '#F5F8FC' }}>
