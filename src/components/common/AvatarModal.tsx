@@ -32,10 +32,7 @@ function AvatarModal({ open, onClose }: AvatarModalProps) {
   };
 
   const modalStyle: React.CSSProperties = {
-<<<<<<< HEAD
-=======
     position: 'absolute',
->>>>>>> i39
     top: '50%',
     left: '50%',
     transform: 'translate(-130%, 25%)',
