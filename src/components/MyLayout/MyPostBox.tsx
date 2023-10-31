@@ -1,37 +1,34 @@
-import { Box, Card, CardMedia, Grid, Typography } from '@mui/material';
+import {Box, Card, CardMedia, Grid, Modal, Typography} from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { token } from 'src/assets/data/token';
 
 import { UserPostListType } from '../../utils/types';
 import useUserIdStore from '../../utils/zustand/user/UserIdStore';
+import FashionModal from "../MainLayout/FashionListBox/FashionModal";
 
-// const style = {
-//   position: 'absolute',
-//   top: '50%',
-//   left: '50%',
-//   transform: 'translate(-50%, -50%)',
-//   height: 600,
-//   width: 400,
-//   bgcolor: '#FFF',
-//   borderRadius: '25px',
-//   boxShadow: 24,
-//   p: 2,
-// };
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  height: 750,
+  width: 550,
+};
 
 export default function MyPostBox() {
   const { userId } = useUserIdStore();
   const [postList, setPostList] = useState<UserPostListType[]>([]);
-  // const [singleId, setSingleId] = useState<string>('');
-  // const [openDetail, setOpenDetail] = useState<boolean>(false);
+  const [singleId, setSingleId] = useState<string>('');
+  const [openDetail, setOpenDetail] = useState<boolean>(false);
 
-  // const handleOpenDetail = () => setOpenDetail(true);
-  // const handleCloseDetail = () => setOpenDetail(false);
+  const handleOpenDetail = () => setOpenDetail(true);
+  const handleCloseDetail = () => setOpenDetail(false);
 
   const userPostListAPI = async () => {
     try {
       await axios
-        .get(`/api/v1/posts/users/${userId}`, {
+        .get(`${process.env.NEXT_PUBLIC_API}/posts/users/${userId}`, {
           headers: {
             Accept: 'application/json',
             Authorization: `Bearer ${token}`,
@@ -60,9 +57,10 @@ export default function MyPostBox() {
             <Grid item key={index} xs={4}>
               <Card
                 sx={{ cursor: 'pointer' }}
-                // onClick={() => {
-                //     navigate(`/lookbookdetail/${lookbook.id}`)
-                // }}
+                onClick={() => {
+                  handleOpenDetail();
+                  setSingleId(postList.id);
+                }}
               >
                 <Box sx={{ position: 'relative' }}>
                   <CardMedia
@@ -104,6 +102,11 @@ export default function MyPostBox() {
           ))}
       </Grid>
       <Box width="50px" />
+      <Modal open={openDetail} onClose={handleCloseDetail} closeAfterTransition>
+        <Box sx={style}>
+          <FashionModal singleId={singleId} setOpenDetail={setOpenDetail}/>
+        </Box>
+      </Modal>
     </Box>
   );
 }

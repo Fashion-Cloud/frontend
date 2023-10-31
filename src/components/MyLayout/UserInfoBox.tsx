@@ -25,7 +25,6 @@ export default function UserInfoBox() {
           나만의 패션을 찾고 있는 난 미래의 패셔니스타.
         </Typography>
       </Box>
-
       <Box ml={-23} mt={2}>
         <Box display="flex" gap={5}>
           <Typography variant="h6">g.3un</Typography>
@@ -41,6 +40,7 @@ export default function UserInfoBox() {
             {follow ? 'Unfollow' : 'follow'}
           </Button>
         </Box>
+
 
         <Box display="flex" alignItems="center" gap={1} mt={1}>
           <Typography variant="body1">게시글</Typography>

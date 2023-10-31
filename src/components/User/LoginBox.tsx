@@ -1,13 +1,50 @@
-import { Box, Card } from '@mui/material';
+import { Card } from '@mui/material';
 import Image from 'next/image';
+import router from 'next/router';
+import { useState } from 'react';
+import useCheckAuth from 'src/api/hook/CheckAuthHook';
+import { useLogin } from 'src/api/hook/UserHook';
 
-import logo from '../../assets/images/bang.png';
+import logoUrl from '../../../public/title-logo.png';
 import InputBox from './InputBox';
 import QuestionLink from './QuestionLink';
 import SubmitButton from './SubmitButton';
 import UserLabel from './UserLabel';
 
 export default function LoginBox() {
+  const [email, setEmail] = useState<string>('');
+  const [pw, setPw] = useState<string>('');
+
+  useCheckAuth();
+
+  function setCookie(name: string, value: string, days: number) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = 'expires=' + date.toUTCString();
+    document.cookie = name + '=' + value + '; ' + expires + '; path=/';
+  }
+
+  const { mutate: login } = useLogin(email, pw, (response) => {
+    // document.cookie = `token = ${response.data.accessToken}`;
+    setCookie('token', response.data.accessToken, 1);
+    router.push('/');
+  });
+
+  const handleSubmit = async () => {
+    // @ts-ignore
+    event.preventDefault();
+    if (!email || !pw) {
+      alert('모든 필수 항목들을 입력해주세요.');
+      return;
+    }
+    login();
+  };
+  const handleOnKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+
   return (
     <Card
       sx={{
@@ -19,25 +56,40 @@ export default function LoginBox() {
         alignItems: 'center',
         display: 'flex',
         flexDirection: 'column',
+        zIndex: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
       }}
     >
-      <Box sx={{ px: 1.5 }}>
-        <Image height={50} src={logo} alt="logo" />
-      </Box>
-      <div
+      <Image
+        src={logoUrl}
+        alt="logo"
         style={{
-          fontSize: '2rem',
-          fontFamily: 'Dongle-Bold',
-          marginBottom: '3.5rem',
+          width: '19rem',
+          height: '4rem',
+          marginBottom: '5rem',
+          marginTop: '1rem',
         }}
-      >
-        Fashion Cloud
-      </div>
+      />
       <UserLabel label="이메일*" />
-      <InputBox type="text" />
+      <InputBox
+        value={email}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setEmail(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
+        type="text"
+      />
       <UserLabel label="비밀번호*" />
-      <InputBox type="password" />
-      <SubmitButton sign="Login" />
+      <InputBox
+        value={pw}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setPw(e.target.value)
+        }
+        onKeyPress={handleOnKeyPress}
+        type="password"
+      />
+      <SubmitButton onClick={handleSubmit} sign="Login" />
+
       <QuestionLink sign="가입하기" way="/register" />
     </Card>
   );

@@ -6,7 +6,7 @@ import InfoBox from '../MainLayout/InfoBox';
 
 export default function MainLayout() {
   return (
-    <Box sx={{ flexGrow: 1, ml: 7 }}>
+    <Box sx={{ flexGrow: 1, ml: 7, backgroundColor: '#F5F8FC' }}>
       <Grid container>
         <Grid item xs={9}>
           <FashionListBox />

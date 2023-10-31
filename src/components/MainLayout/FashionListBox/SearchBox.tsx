@@ -13,6 +13,7 @@ import {
   Popper,
   PopperPlacementType,
   Slider,
+  SliderThumb,
   ToggleButton,
   ToggleButtonGroup,
   Toolbar,
@@ -28,6 +29,7 @@ import { useFindAllWeathers } from 'src/api/hook/WeatherHook';
 import useRainfallTypeStore from '../../../utils/zustand/weather/RainfallTypeStore';
 import useSkyStatusStore from '../../../utils/zustand/weather/SkyStatusStore';
 import useWeatherDataStore from '../../../utils/zustand/weather/WeatherDataStore';
+import useWindChillSearchStore from '../../../utils/zustand/weather/WindChillSearchStore';
 import useWindChillStore from '../../../utils/zustand/weather/WindChillStore';
 
 const IconOptions = [
@@ -43,23 +45,28 @@ const IconOptions = [
 ];
 const options = ['Sunny', 'Cloudy', 'Rain', 'Rain & Snow', 'Snow'];
 
-const PrettoSlider = styled(Slider)({
-  color: '#7DAADB',
-  height: 8,
-  '& .MuiSlider-track': {
-    border: 'none',
-  },
+const AirbnbSlider = styled(Slider)(({ theme }) => ({
+  color: '#71B4DC',
+  height: 3,
+  padding: '13px 0',
   '& .MuiSlider-thumb': {
-    height: 24,
-    width: 24,
+    height: 27,
+    width: 27,
     backgroundColor: '#fff',
-    border: '2px solid currentColor',
+    border: '1px solid currentColor',
     '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
       boxShadow: 'inherit',
     },
-    '&:before': {
-      display: 'none',
+    '& .airbnb-bar': {
+      height: 9,
+      width: 1,
+      backgroundColor: 'currentColor',
+      marginLeft: 1,
+      marginRight: 1,
     },
+  },
+  '& .MuiSlider-track': {
+    height: 3,
   },
   '& .MuiSlider-valueLabel': {
     lineHeight: 1.2,
@@ -69,7 +76,7 @@ const PrettoSlider = styled(Slider)({
     width: 32,
     height: 32,
     borderRadius: '50% 50% 50% 0',
-    backgroundColor: '#7DAADB',
+    backgroundColor: '#71B4DC',
     transformOrigin: 'bottom left',
     transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
     '&:before': { display: 'none' },
@@ -80,7 +87,12 @@ const PrettoSlider = styled(Slider)({
       transform: 'rotate(45deg)',
     },
   },
-});
+  '& .MuiSlider-rail': {
+    color: theme.palette.mode === 'dark' ? '#bfbfbf' : '#d8d8d8',
+    opacity: theme.palette.mode === 'dark' ? undefined : 1,
+    height: 3,
+  },
+}));
 
 export default function SearchBox() {
   const [isLoading, setIsLoading] = useState(false);
@@ -104,13 +116,46 @@ export default function SearchBox() {
   const { rainfallType, setRainfallType } = useRainfallTypeStore();
   const { windChill, setWindChill } = useWindChillStore();
 
+  const { windChillSearch, setWindChillSearch } = useWindChillSearchStore();
+  // const [windChillSearch, setWindChillSearch] = useState<number[]>([20, 37]);
+
   const [snowState, setSnowState] = useState<boolean>(false);
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    if (typeof newValue === 'number') {
-      setWindChill(newValue);
-      console.log('[Recoil] windChill: ', newValue);
+  interface AirbnbThumbComponentProps extends React.HTMLAttributes<unknown> {}
+
+  function AirbnbThumbComponent(props: AirbnbThumbComponentProps) {
+    const { children, ...other } = props;
+    return (
+      <SliderThumb {...other}>
+        {children}
+        <span className="airbnb-bar" />
+        <span className="airbnb-bar" />
+        <span className="airbnb-bar" />
+      </SliderThumb>
+    );
+  }
+
+  const handleSliderChange = (
+    event: Event,
+    newValue: number | number[],
+    activeThumb: number
+  ) => {
+    if (!Array.isArray(newValue)) {
+      return;
     }
+
+    if (activeThumb === 0) {
+      setWindChillSearch([
+        Math.min(newValue[0], windChillSearch[1]),
+        windChillSearch[1],
+      ]);
+    } else {
+      setWindChillSearch([
+        windChillSearch[0],
+        Math.max(newValue[1], windChillSearch[0]),
+      ]);
+    }
+    console.log('windChill: ', windChill);
   };
 
   const SearchBar = () => {
@@ -131,7 +176,7 @@ export default function SearchBox() {
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="Search"
-          inputProps={{ 'aria-label': 'search google maps' }}
+          inputProps={{ 'aria-label': 'search fashion' }}
         />
       </Paper>
     );
@@ -141,8 +186,6 @@ export default function SearchBox() {
 
   function searchSky(skyStatus: string, rainfallType: string) {
     let index = 0;
-    // console.log('[searchSky] skyStatus: ', skyStatus);
-    // console.log('[searchSky] rainfallCode: ', rainfallCode);
 
     if (skyStatus === 'SUNNY' && rainfallType === 'NONE') {
       index = 0;
@@ -305,7 +348,7 @@ export default function SearchBox() {
             p: '2px 4px',
             display: 'flex',
             justifyContent: 'center',
-            width: '100px',
+            width: '150px',
             height: '45px',
             borderRadius: '10px',
           }}
@@ -316,7 +359,10 @@ export default function SearchBox() {
           >
             <ThermostatIcon sx={{ mr: 1 }} />
 
-            <Typography>{windChill} °C</Typography>
+            {/*<Typography>{windChill} °C</Typography>*/}
+            <Typography>
+              {windChillSearch[0]} °C ~ {windChillSearch[1]} °C
+            </Typography>
           </IconButton>
         </Paper>
       </Toolbar>
@@ -359,14 +405,17 @@ export default function SearchBox() {
           <Grow {...TransitionProps} timeout={350}>
             <Paper sx={{ width: 300 }}>
               <Box sx={{ width: 250, ml: 3 }}>
-                <PrettoSlider
+                <AirbnbSlider
                   valueLabelDisplay="auto"
-                  aria-label="pretto slider"
-                  value={windChill}
+                  slots={{ thumb: AirbnbThumbComponent }}
+                  getAriaLabel={(index) =>
+                    index === 0 ? 'Minimum price' : 'Maximum price'
+                  }
                   onChange={handleSliderChange}
-                  sx={{ mt: 1 }}
+                  defaultValue={[20, 40]}
+                  value={windChillSearch}
                   min={-30}
-                  max={50}
+                  max={60}
                   onClick={() => {
                     handleSliderMenuItemClick();
                   }}

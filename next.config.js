@@ -34,7 +34,7 @@ const nextConfig = {
     return [
       {
         source: '/:path*',
-        destination: 'http://localhost:8080/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API}/:path*`,
       },
     ];
   },

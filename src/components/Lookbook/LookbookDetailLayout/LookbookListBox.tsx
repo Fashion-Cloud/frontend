@@ -12,11 +12,10 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-// import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useFindSomeBooks } from 'src/api/hook/LookbookHook';
 
-import { LookBookListType } from '../../../utils/types';
+import { SinglePostType } from '../../../utils/types';
 
 export default function LookbookListBox() {
   const [open, setOpen] = useState(false);
@@ -31,15 +30,16 @@ export default function LookbookListBox() {
     setOpen(false);
   };
 
-  const [lookbook, setLookbook] = useState<LookBookListType[]>([]);
+  const [lookbook, setLookbook] = useState<SinglePostType[]>([]);
 
   const { data: someLookBookData } = useFindSomeBooks();
 
   useEffect(() => {
     if (someLookBookData?.data) {
-      setLookbook(someLookBookData?.data.data);
+      setLookbook(someLookBookData?.data.data.posts);
     }
-  }, []);
+    console.log('someLookBookData?.data: ', someLookBookData?.data);
+  }, [someLookBookData]);
 
   const handlePrev = () => {
     if (currentImageIndex > 0) {
@@ -91,7 +91,7 @@ export default function LookbookListBox() {
                       left: 0,
                       width: '100%',
                       height: '100px',
-                      bgcolor: 'transparent',
+                      backgroundColor: 'transparent',
                       backgroundImage:
                         'linear-gradient(to top, rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0))', // Apply gradient
                       color: 'white',
@@ -134,9 +134,9 @@ export default function LookbookListBox() {
           }}
         >
           <WbSunnyIcon />
-          {lookbook.length > 0 && (
+          {lookbook?.length > 0 && (
             <Typography variant="h6" sx={{ marginLeft: 2 }}>
-              °C
+              {lookbook[currentImageIndex].windChill}°C
             </Typography>
           )}
         </Box>
@@ -147,11 +147,11 @@ export default function LookbookListBox() {
             alignItems: 'center',
           }}
         >
-          {lookbook.length > 0 && (
+          {lookbook?.length > 0 && (
             <img
               src={lookbook[currentImageIndex].image}
               alt={lookbook[currentImageIndex].title}
-              style={{ width: 'auto', height: '600px' }}
+              style={{ width: '100%', height: '600px', objectFit: 'cover' }}
             />
           )}
         </Box>
@@ -173,7 +173,7 @@ export default function LookbookListBox() {
           />
           <IconButton
             onClick={handleNext}
-            disabled={currentImageIndex === lookbook.length - 1}
+            disabled={currentImageIndex === lookbook?.length - 1}
           >
             <ArrowForwardIosIcon />
           </IconButton>
