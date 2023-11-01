@@ -1,4 +1,5 @@
 @charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Stardos+Stencil&display=swap');
 
 /* font */
 @font-face {
@@ -18,4 +19,15 @@
 @font-face {
     font-family: "CookieRun-Regular";
     src: url("./CookieRun/CookieRun-Regular.ttf");
+}
+
+
+/* Stardos-Stencil */
+@font-face {
+    font-family: "Stardos-Stencil";
+    src: url("./StardosStencil/StardosStencil-Regular.ttf");
+}
+@font-face {
+    font-family: "Stardos-Stencil-Bold";
+    src: url("./StardosStencil/StardosStencil-Bold.ttf");
 }

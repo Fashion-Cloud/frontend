@@ -68,7 +68,7 @@ export default function AddImage({ getImageData }: ImageProps) {
 
       try {
         await axios
-          .post('/api/v1/images', formData, {
+          .post(`${process.env.NEXT_PUBLIC_API}/images`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
               Authorization: `Bearer ${token}`,

@@ -1,6 +1,6 @@
 export type SinglePostType = {
     id: string;
-    userId: string;
+    username: string;
     title: string;
     image: string;
     review: string;
@@ -32,7 +32,7 @@ export type LocationType = {
 export type WeatherPostType = {
     id: string;
     title: string;
-    imageUrl: string;
+    image: string;
 };
 
 export type LookBookListType = {

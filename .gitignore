@@ -3,6 +3,8 @@
 # WebStorm
 .idea
 
+.env
+
 # dependencies
 /node_modules
 /.pnp
@@ -13,6 +15,7 @@
 
 # production
 /build
+/out
 
 # misc
 .DS_Store

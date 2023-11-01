@@ -55,7 +55,7 @@ export default function AddLookbookButton() {
 
     try {
       await axios
-        .post('/api/v1/lookbooks', {
+        .post(`${process.env.NEXT_PUBLIC_API}/lookbooks`, {
           title: title,
           image: postImage,
         }, {

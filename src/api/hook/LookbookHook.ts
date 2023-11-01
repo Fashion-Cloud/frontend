@@ -1,8 +1,9 @@
+import {useRouter} from "next/router";
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
 
 import useUserIdStore from '../../utils/zustand/user/UserIdStore';
 import { BookService } from '../service/LookbookService';
+
 
 export const useFindAllBooks = () => {
   const { userId } = useUserIdStore();
@@ -16,10 +17,11 @@ export const useFindAllBooks = () => {
 };
 
 export const useFindSomeBooks = () => {
-  const { id } = useParams();
+  const router = useRouter();
+  const { id } = router.query;
 
   return useQuery({
-    queryFn: () => BookService.getSomeBooks({ id }),
+    queryFn: () => BookService.getSomeBooks({ id: Number(id) }),
     queryKey: ['books'],
     enabled: !!id,
     onError: () => alert('상세 룩북 정보를 불러오는데 실패했습니다.'),
