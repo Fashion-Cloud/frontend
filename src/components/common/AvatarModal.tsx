@@ -33,9 +33,8 @@ function AvatarModal({ open, onClose }: AvatarModalProps) {
 
   const modalStyle: React.CSSProperties = {
     position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-130%, 25%)',
+    top: '75%',
+    left: '-80%',
   };
 
   return (
@@ -91,12 +90,12 @@ function AvatarModal({ open, onClose }: AvatarModalProps) {
 
       {/* Logout Modal */}
       <Dialog open={logoutOpen} onClose={handleLogoutClose}>
-        우냐냐.
+        logout
       </Dialog>
 
       {/* Settings Modal */}
       <Dialog open={settingsOpen} onClose={handleSettingsClose}>
-        우땨땨.
+        settings
       </Dialog>
     </Dialog>
   );

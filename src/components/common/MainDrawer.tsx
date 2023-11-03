@@ -4,6 +4,7 @@ import {
   Avatar,
   Box,
   CssBaseline,
+  Divider,
   Drawer,
   List,
   ListItem,
@@ -14,7 +15,6 @@ import { CSSObject, styled, Theme } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
-import logo from '../../assets/images/bang.png';
 import AvatarModal from './AvatarModal';
 
 const drawerWidth = 240;
