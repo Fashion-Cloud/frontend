@@ -1,8 +1,10 @@
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import {
+  Avatar,
   Box,
   CssBaseline,
+  Divider,
   Drawer,
   List,
   ListItem,
@@ -11,6 +13,9 @@ import {
 } from '@mui/material';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+
+import AvatarModal from './AvatarModal';
 
 const drawerWidth = 240;
 
@@ -54,6 +59,7 @@ const MiniDrawer = styled(Drawer, {
 
 export default function MainDrawer() {
   const { pathname } = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
 
   if (pathname === '/login' || pathname === '/register') {
     return null;
@@ -67,6 +73,14 @@ export default function MainDrawer() {
       icon: <PersonIcon style={{ fontSize: 30 }} />,
     },
   ];
+
+  const handleAvatarClick = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -97,7 +111,26 @@ export default function MainDrawer() {
             ))}
           </ListItem>
         </List>
+        <Divider />
+        <List>
+          <ListItem disablePadding sx={{ display: 'block' }}>
+            <ListItemButton
+              sx={{ minHeight: 48, px: 2.5 }}
+              onClick={handleAvatarClick}
+            >
+              <ListItemIcon sx={{ minWidth: 0, justifyContent: 'flex-end' }}>
+                <Avatar
+                  style={{ top: '500px' }}
+                  src={'https://avatars.githubusercontent.com/u/83361012?v=4'}
+                  alt="User's avatar"
+                  sx={{ width: 32, height: 32, ml: -0.5 }}
+                />
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
+        </List>
       </MiniDrawer>
+      <AvatarModal open={modalOpen} onClose={handleCloseModal} />
     </Box>
   );
 }
