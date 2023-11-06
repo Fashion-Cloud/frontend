@@ -1,2 +1,3 @@
-export const token =
-  'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYW5nQGdtYWlsLmNvbSIsImF1dGgiOiJVU0VSIiwiaWF0IjoxNjk3NjM1OTIzLCJleHAiOjE2OTc2MzY1MjN9.ciSIhzjz4hv0MlVclVkIwvEs9ZzH7_RhcLpCr6fv1LK7EOEBDdN-Bs1nQKDMzNBVVhWkOG8ERCVzOR4aJDGqhA';
+import useUserTokenStore from 'src/utils/zustand/user/UserTokenStore';
+
+export const token = useUserTokenStore.getState().userToken;
