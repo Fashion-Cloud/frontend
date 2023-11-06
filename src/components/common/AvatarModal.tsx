@@ -1,5 +1,6 @@
 import { Button, Dialog, DialogContent, Divider } from '@mui/material';
 import React, { useState } from 'react';
+import { useLogout } from 'src/api/hook/UserHook';
 
 interface AvatarModalProps {
   open: boolean;
@@ -10,8 +11,10 @@ function AvatarModal({ open, onClose }: AvatarModalProps) {
   const [logoutOpen, setLogoutOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
 
+  const { mutate: logout } = useLogout();
+
   const handleLogoutOpen = () => {
-    setLogoutOpen(true);
+    logout();
   };
 
   const handleSettingsOpen = () => {
