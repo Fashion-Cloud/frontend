@@ -4,6 +4,7 @@ import router from 'next/router';
 import { useState } from 'react';
 import useCheckAuth from 'src/api/hook/CheckAuthHook';
 import { useLogin } from 'src/api/hook/UserHook';
+import useUserTokenStore from 'src/utils/zustand/user/UserTokenStore';
 
 import logoUrl from '../../../public/title-logo.png';
 import InputBox from './InputBox';
@@ -14,6 +15,7 @@ import UserLabel from './UserLabel';
 export default function LoginBox() {
   const [email, setEmail] = useState<string>('');
   const [pw, setPw] = useState<string>('');
+  const { setUserToken } = useUserTokenStore();
 
   useCheckAuth();
 
@@ -25,9 +27,9 @@ export default function LoginBox() {
   }
 
   const { mutate: login } = useLogin(email, pw, (response) => {
-    // document.cookie = `token = ${response.data.accessToken}`;
     setCookie('token', response.data.accessToken, 1);
     router.push('/');
+    setUserToken(response.data.accessToken);
   });
 
   const handleSubmit = async () => {
