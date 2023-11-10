@@ -1,10 +1,10 @@
 import { Card } from '@mui/material';
+import Cookies from 'js-cookie';
 import Image from 'next/image';
 import router from 'next/router';
 import { useState } from 'react';
 import useCheckAuth from 'src/api/hook/CheckAuthHook';
 import { useLogin } from 'src/api/hook/UserHook';
-import useUserTokenStore from 'src/utils/zustand/user/UserTokenStore';
 
 import logoUrl from '../../../public/title-logo.png';
 import InputBox from './InputBox';
@@ -15,21 +15,13 @@ import UserLabel from './UserLabel';
 export default function LoginBox() {
   const [email, setEmail] = useState<string>('');
   const [pw, setPw] = useState<string>('');
-  const { setUserToken } = useUserTokenStore();
 
   useCheckAuth();
 
-  function setCookie(name: string, value: string, days: number) {
-    const date = new Date();
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    const expires = 'expires=' + date.toUTCString();
-    document.cookie = name + '=' + value + '; ' + expires + '; path=/';
-  }
-
   const { mutate: login } = useLogin(email, pw, (response) => {
-    setCookie('token', response.data.accessToken, 1);
+    const accessToken = response.data.accessToken;
+    Cookies.set('accessToken', accessToken, { expires: 1 });
     router.push('/');
-    setUserToken(response.data.accessToken);
   });
 
   const handleSubmit = async () => {
