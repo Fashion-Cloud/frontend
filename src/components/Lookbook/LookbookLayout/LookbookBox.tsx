@@ -1,6 +1,5 @@
 import { Box, Card, CardMedia, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
-// import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useFindAllBooks } from 'src/api/hook/LookbookHook';
 

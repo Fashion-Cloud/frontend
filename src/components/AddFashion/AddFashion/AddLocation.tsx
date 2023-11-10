@@ -2,8 +2,8 @@ import '../../../../public/fonts/font.css';
 
 import NearMeIcon from '@mui/icons-material/NearMe';
 import { IconButton, Toolbar, Typography } from '@mui/material';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
+import apiV1Instance from 'src/api/api-instance';
 
 import useGeoLocation from '../../../assets/hooks/useGeoLocation';
 import { LocationType } from '../../../utils/types';
@@ -21,12 +21,8 @@ export default function AddLocation({ getLocationData }: LocationProps) {
   const locationAPI = async () => {
     if (locationData !== undefined) {
       try {
-        await axios
-          .get(`/api/v1/address?latitude=${latitude}&longitude=${longitude}`, {
-            headers: {
-              Accept: 'application/json',
-            },
-          })
+        await apiV1Instance
+          .get(`/api/v1/address?latitude=${latitude}&longitude=${longitude}`)
           .then((response) => {
             console.log('response: ', response);
             const data = response.data.data;

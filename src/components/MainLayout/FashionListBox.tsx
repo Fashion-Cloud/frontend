@@ -16,12 +16,10 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import axios from 'axios';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
+import apiV1Instance from 'src/api/api-instance';
 import useCheckAuth from 'src/api/hook/CheckAuthHook';
-import { useLogout } from 'src/api/hook/UserHook';
-import { token } from 'src/assets/data/token';
 
 import logoUrl from '../../../public/title-logo.png';
 import { WeatherPostType } from '../../utils/types';
@@ -29,7 +27,7 @@ import useRainfallTypeStore from '../../utils/zustand/weather/RainfallTypeStore'
 import useSkyStatusStore from '../../utils/zustand/weather/SkyStatusStore';
 import useWindChillSearchStore from '../../utils/zustand/weather/WindChillSearchStore';
 import AddFashionButton from './FashionListBox/AddFashionButton';
-import FashionModal from "./FashionListBox/FashionModal";
+import FashionModal from './FashionListBox/FashionModal';
 import PaginationBox from './FashionListBox/PaginationBox';
 import SearchBox from './FashionListBox/SearchBox';
 
@@ -113,15 +111,9 @@ export default function FashionListBox() {
     console.log('[Recoil] rainfallCode: ', rainfallType);
     console.log('[Recoil] windChillSearch: ', windChillSearch);
     try {
-      await axios
+      await apiV1Instance
         .get(
-          `${process.env.NEXT_PUBLIC_API}/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&minWindChill=${windChillSearch[0]}&maxWindChill=${windChillSearch[1]}&page=${page}&size=8`,
-          {
-            headers: {
-              Accept: 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          `${process.env.NEXT_PUBLIC_API}/posts/weather?skyStatus=${skyStatus}&rainfallType=${rainfallType}&minWindChill=${windChillSearch[0]}&maxWindChill=${windChillSearch[1]}&page=${page}&size=8`
         )
         .then((response) => {
           const data = response.data;
@@ -138,13 +130,8 @@ export default function FashionListBox() {
 
   const followTimelineAPI = async () => {
     try {
-      await axios
-        .get(`/api/v1/posts/follow/timeline?page=${page}&size=8`, {
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        })
+      await apiV1Instance
+        .get(`/api/v1/posts/follow/timeline?page=${page}&size=8`)
         .then((response) => {
           const data = response.data;
           console.log('data.data: ', data.data);
@@ -230,8 +217,6 @@ export default function FashionListBox() {
 
   useCheckAuth();
 
-  const { mutate: logout } = useLogout();
-
   return (
     <Box sx={{ height: '100vh', backgroundColor: '#F5F8FC' }}>
       <Box height="75px" />
@@ -291,7 +276,7 @@ export default function FashionListBox() {
 
       <Modal open={openDetail} onClose={handleCloseDetail} closeAfterTransition>
         <Box sx={style}>
-          <FashionModal singleId={singleId} setOpenDetail={setOpenDetail}/>
+          <FashionModal singleId={singleId} setOpenDetail={setOpenDetail} />
         </Box>
       </Modal>
 

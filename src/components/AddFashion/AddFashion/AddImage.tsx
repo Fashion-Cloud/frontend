@@ -2,12 +2,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Box, Button, Typography } from '@mui/material';
-import axios from 'axios';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import Resizer from 'react-image-file-resizer';
 import { toast, ToastContainer } from 'react-toastify';
-import { token } from 'src/assets/data/token';
+import apiV1Instance from 'src/api/api-instance';
 
 type ImageProps = {
   getImageData: (data: string) => void;
@@ -67,13 +66,8 @@ export default function AddImage({ getImageData }: ImageProps) {
       formData.append('image', imgURL);
 
       try {
-        await axios
-          .post(`${process.env.NEXT_PUBLIC_API}/images`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              Authorization: `Bearer ${token}`,
-            },
-          })
+        await apiV1Instance
+          .post(`${process.env.NEXT_PUBLIC_API}/images`, formData)
           .then((response) => {
             success();
             console.log('sendImage URL response: ', response.data);
