@@ -1,11 +1,10 @@
-import {Box, Card, CardMedia, Grid, Modal, Typography} from '@mui/material';
-import axios from 'axios';
+import { Box, Card, CardMedia, Grid, Modal, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { token } from 'src/assets/data/token';
+import apiV1Instance from 'src/api/api-instance';
 
 import { UserPostListType } from '../../utils/types';
 import useUserIdStore from '../../utils/zustand/user/UserIdStore';
-import FashionModal from "../MainLayout/FashionListBox/FashionModal";
+import FashionModal from '../MainLayout/FashionListBox/FashionModal';
 
 const style = {
   position: 'absolute',
@@ -27,13 +26,8 @@ export default function MyPostBox() {
 
   const userPostListAPI = async () => {
     try {
-      await axios
-        .get(`${process.env.NEXT_PUBLIC_API}/posts/users/${userId}`, {
-          headers: {
-            Accept: 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        })
+      await apiV1Instance
+        .get(`${process.env.NEXT_PUBLIC_API}/posts/users/${userId}`)
         .then((response) => {
           const data = response.data.data;
           console.log('data: ', data);
@@ -104,7 +98,7 @@ export default function MyPostBox() {
       <Box width="50px" />
       <Modal open={openDetail} onClose={handleCloseDetail} closeAfterTransition>
         <Box sx={style}>
-          <FashionModal singleId={singleId} setOpenDetail={setOpenDetail}/>
+          <FashionModal singleId={singleId} setOpenDetail={setOpenDetail} />
         </Box>
       </Modal>
     </Box>

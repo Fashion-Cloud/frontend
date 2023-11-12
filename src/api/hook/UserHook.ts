@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import router from 'next/router';
 import { useMutation } from 'react-query';
 
@@ -32,13 +33,9 @@ export const useLogout = () => {
   return useMutation({
     mutationFn: () => UserService.logout(),
     onSuccess: () => {
-      deleteCookie('token');
+      Cookies.remove('accessToken');
       router.replace('login');
     },
     onError: () => alert('다시 로그아웃 해주세요.'),
   });
 };
-
-function deleteCookie(name: string) {
-  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-}

@@ -10,9 +10,8 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import axios from 'axios';
 import { useState } from 'react';
-import { token } from 'src/assets/data/token';
+import apiV1Instance from 'src/api/api-instance';
 
 // import SearchIcon from '@mui/icons-material/Search';
 import AddImage from '../../../components/AddFashion/AddFashion/AddImage';
@@ -54,14 +53,10 @@ export default function AddLookbookButton() {
     }
 
     try {
-      await axios
+      await apiV1Instance
         .post(`${process.env.NEXT_PUBLIC_API}/lookbooks`, {
           title: title,
           image: postImage,
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
         })
         .then((response) => {
           console.log(response);
