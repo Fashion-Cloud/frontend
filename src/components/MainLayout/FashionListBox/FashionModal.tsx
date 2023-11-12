@@ -8,9 +8,7 @@ import {Avatar, Box, Button, IconButton, Popover, Typography} from "@mui/materia
 import axios, {AxiosError} from "axios";
 import React, {useEffect, useState} from "react";
 
-import rainfallType from "../../../assets/data/rainfallType";
 import {token} from "../../../assets/data/token";
-import weatherSky from "../../../assets/data/weatherSky";
 import {SinglePostType} from "../../../utils/types";
 import LookbookPopover from "./LookbookPopover";
 
@@ -240,7 +238,7 @@ export default function FashionModal({ singleId, setOpenDetail }: FashionModalPr
                   fontSize="10pt"
                   sx={{ color: '#fff', ml: 1, mr: 1, mt: 0.5 }}
                 >
-                  하늘상태 - {weatherSky(singleData.skyStatus)}
+                  하늘상태 - {singleData.skyStatus}
                 </Typography>
               </Button>
 
@@ -265,7 +263,7 @@ export default function FashionModal({ singleId, setOpenDetail }: FashionModalPr
                   fontSize="10pt"
                   sx={{ color: '#fff', ml: 1, mr: 1, mt: 0.5 }}
                 >
-                  강우유형 - {rainfallType(singleData.rainfallType)}
+                  강우유형 - {singleData.rainfallType}
                 </Typography>
               </Button>
             </Box>

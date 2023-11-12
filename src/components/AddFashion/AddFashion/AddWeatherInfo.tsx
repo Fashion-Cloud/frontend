@@ -1,7 +1,6 @@
 import { Box, InputBase, Paper, Toolbar, Typography } from '@mui/material';
 import { WeatherType } from 'src/utils/types';
 
-import weatherSky from '../../../assets/data/weatherSky';
 import useWeatherDataStore from '../../../utils/zustand/weather/WeatherDataStore';
 
 type WeatherProps = {
@@ -30,7 +29,7 @@ export default function AddWeatherInfo({ getWeatherData }: WeatherProps) {
           <InputBase
             disabled
             sx={{ mt: 0.3, ml: 1, flex: 1 }}
-            value={weatherSky(weatherData.sky) || ''}
+            value={weatherData.sky || ''}
           />
         </Paper>
       </Toolbar>

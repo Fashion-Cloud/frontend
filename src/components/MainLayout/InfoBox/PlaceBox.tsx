@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useFindAllLocations } from 'src/api/hook/LocationHook';
 import { LocationType, WeatherType } from 'src/utils/types';
 
-import weatherSky from '../../../assets/data/weatherSky';
 import useWeatherDataStore from '../../../utils/zustand/weather/WeatherDataStore';
 
 export default function PlaceBox() {
@@ -48,7 +47,7 @@ export default function PlaceBox() {
       };
     }, [weatherData]);
     return (
-      <Tooltip title={weatherSky(weatherData?.sky)} arrow>
+      <Tooltip title={weatherData?.sky} arrow>
         <Box ref={element} style={{ marginTop: 30, height: 220 }}></Box>
       </Tooltip>
     );
