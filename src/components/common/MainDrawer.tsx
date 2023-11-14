@@ -1,3 +1,4 @@
+import HistoryIcon from '@mui/icons-material/History';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import {
@@ -15,6 +16,7 @@ import { CSSObject, styled, Theme } from '@mui/material/styles';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
+import StoryModal from '../Story/Story';
 import AvatarModal from './AvatarModal';
 
 const drawerWidth = 240;
@@ -60,6 +62,14 @@ const MiniDrawer = styled(Drawer, {
 export default function MainDrawer() {
   const { pathname } = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
+  const [storyOpen, setStoryOpen] = useState<boolean>(false);
+
+  const handleClickOpen = () => {
+    setStoryOpen(true);
+  };
+  const handleClose = () => {
+    setStoryOpen(false);
+  };
 
   if (pathname === '/login' || pathname === '/register') {
     return null;
@@ -71,6 +81,11 @@ export default function MainDrawer() {
       title: 'MyPage',
       src: '/mypage',
       icon: <PersonIcon style={{ fontSize: 30 }} />,
+    },
+    {
+      title: '',
+      src: '',
+      icon: <HistoryIcon style={{ fontSize: 30 }} onClick={handleClickOpen} />,
     },
   ];
 
@@ -111,6 +126,9 @@ export default function MainDrawer() {
             ))}
           </ListItem>
         </List>
+
+        <StoryModal storyOpen={storyOpen} handleClose={handleClose} />
+
         <Divider />
         <List>
           <ListItem disablePadding sx={{ display: 'block' }}>
@@ -120,7 +138,7 @@ export default function MainDrawer() {
             >
               <ListItemIcon sx={{ minWidth: 0, justifyContent: 'flex-end' }}>
                 <Avatar
-                  style={{ top: '500px' }}
+                  style={{ top: '450px' }}
                   src={'https://avatars.githubusercontent.com/u/83361012?v=4'}
                   alt="User's avatar"
                   sx={{ width: 32, height: 32, ml: -0.5 }}
