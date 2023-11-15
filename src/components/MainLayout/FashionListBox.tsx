@@ -184,6 +184,44 @@ export default function FashionListBox() {
                     height="260px"
                     image={fashion[index].image}
                   />
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '5px',
+                      right: '5px',
+                      color: 'white',
+                      fontSize: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      backgroundColor: 'rgba(0, 0, 0, 0.54)',
+                      padding: '5px',
+                      borderRadius: '100px',
+                    }}
+                  >
+                    {/* 여기에 날씨 아이콘을 표시하도록 아이콘 컴포넌트 등을 추가 */}
+                    <span style={{ marginRight: '5px' }}>🌤️</span>
+                    {fashion[index].weather}
+                  </div>
+
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '40px',
+                      right: '5px',
+                      color: 'black',
+                      fontSize: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      backgroundColor: 'rgba(0, 0, 0, 0.54)',
+                      padding: '5px',
+                      borderRadius: '100px',
+                    }}
+                  >
+                    {/* 여기에 기온 아이콘을 표시하도록 아이콘 컴포넌트 등을 추가 */}
+                    <span style={{ marginRight: '5px' }}></span>
+                    {fashion[index].temperature}°C
+                  </div>
+
                   <Box
                     sx={{
                       position: 'absolute',
@@ -199,6 +237,28 @@ export default function FashionListBox() {
                     <Typography variant="h6" sx={{ ml: 1 }}>
                       {fashion[index].title}
                     </Typography>
+
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: 15,
+                        left: 150,
+                        width: '100%',
+                        height: '50%',
+                        backgroundColor: '#FF6767',
+                        color: 'white',
+                        padding: '5px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        borderRadius: '10px',
+                      }}
+                    >
+                      <Typography variant="body2" sx={{ ml: 1, color: '#fff' }}>
+                        {' '}
+                        따뜻함
+                        {/*{fashion[index].username}*/}
+                      </Typography>
+                    </Box>
                   </Box>
                 </Box>
               </Card>
