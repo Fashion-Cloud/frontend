@@ -144,6 +144,23 @@ export default function FashionListBox() {
     }
   };
 
+  const getSkyStatusIcon = (skyStatus: string) => {
+    switch (skyStatus) {
+      case 'SUNNY':
+        return '☀️';
+      case 'OVERCAST':
+        return '☁️';
+      case 'RAINY':
+        return '🌧️';
+      case 'rain&snow':
+        return '🌧️ & ❄️';
+      case 'snow':
+        return '❄️';
+      default:
+        return '';
+    }
+  };
+
   const FashionList = () => {
     let fashion: WeatherPostType[] = [];
     const array = [];
@@ -184,42 +201,52 @@ export default function FashionListBox() {
                     height="260px"
                     image={fashion[index].image}
                   />
+
+                  {/* 날씨 아이콘*/}
                   <div
                     style={{
                       position: 'absolute',
-                      top: '5px',
+                      top: '4px',
                       right: '5px',
                       color: 'white',
                       fontSize: '16px',
                       display: 'flex',
                       alignItems: 'center',
-                      backgroundColor: 'rgba(0, 0, 0, 0.54)',
-                      padding: '5px',
+                      backgroundColor: '#c4c4c4',
+                      padding: '1px',
                       borderRadius: '100px',
                     }}
                   >
-                    {/* 여기에 날씨 아이콘을 표시하도록 아이콘 컴포넌트 등을 추가 */}
-                    <span style={{ marginRight: '5px' }}>🌤️</span>
-                    {fashion[index].weather}
+                    <span style={{ marginRight: '3px', marginLeft: '3px' }}>
+                      {getSkyStatusIcon(fashion[index].skyStatus)}
+                    </span>
                   </div>
 
+                  {/* 온도 아이콘*/}
                   <div
                     style={{
                       position: 'absolute',
-                      top: '40px',
+                      top: '33px',
                       right: '5px',
                       color: 'black',
                       fontSize: '10px',
                       display: 'flex',
                       alignItems: 'center',
-                      backgroundColor: 'rgba(0, 0, 0, 0.54)',
-                      padding: '5px',
+                      backgroundColor: '#c4c4c4',
+                      padding: '3px',
                       borderRadius: '100px',
                     }}
                   >
-                    {/* 여기에 기온 아이콘을 표시하도록 아이콘 컴포넌트 등을 추가 */}
-                    <span style={{ marginRight: '5px' }}></span>
-                    {fashion[index].temperature}°C
+                    <span
+                      style={{
+                        marginRight: '3px',
+                        marginLeft: '3px',
+                        color: 'white',
+                      }}
+                    >
+                      {' '}
+                      {fashion[index].temperature}°C
+                    </span>
                   </div>
 
                   <Box
@@ -238,25 +265,28 @@ export default function FashionListBox() {
                       {fashion[index].title}
                     </Typography>
 
+                    {/* 리뷰 아이콘 */}
                     <Box
                       sx={{
                         position: 'absolute',
-                        top: 15,
-                        left: 150,
-                        width: '100%',
-                        height: '50%',
+                        top: 10,
+                        left: 170,
+                        width: 'max-content',
+                        height: '35%',
                         backgroundColor: '#FF6767',
                         color: 'white',
-                        padding: '5px',
+                        padding: '1px',
+                        paddingRight: '8px',
                         display: 'flex',
                         alignItems: 'center',
                         borderRadius: '10px',
                       }}
                     >
-                      <Typography variant="body2" sx={{ ml: 1, color: '#fff' }}>
-                        {' '}
-                        따뜻함
-                        {/*{fashion[index].username}*/}
+                      <Typography
+                        variant="body2"
+                        sx={{ ml: 1, color: '#fff', fontSize: '10px' }}
+                      >
+                        {fashion[index].review}
                       </Typography>
                     </Box>
                   </Box>

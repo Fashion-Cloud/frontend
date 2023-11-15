@@ -33,9 +33,10 @@ export type WeatherPostType = {
   id: string;
   title: string;
   image: string;
-  weather: string;
+  skyStatus: string;
   temperature: number;
   review: string;
+  rainfallType: string;
 };
 
 export type LookBookListType = {
