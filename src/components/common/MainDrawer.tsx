@@ -1,5 +1,6 @@
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import {
   Avatar,
   Box,
@@ -9,13 +10,14 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
+  ListItemIcon, Modal,
 } from '@mui/material';
 import { CSSObject, styled, Theme } from '@mui/material/styles';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
 import AvatarModal from './AvatarModal';
+import DisplayStory from "../Story/DisplayStory";
 
 const drawerWidth = 240;
 
@@ -60,18 +62,42 @@ const MiniDrawer = styled(Drawer, {
 export default function MainDrawer() {
   const { pathname } = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
+  const [showStory, setShowStory] = useState(false);
+
+  const [openDetail, setOpenDetail] = useState<boolean>(false);
+
+  const handleOpenDetail = () => setOpenDetail(true);
+  const handleCloseDetail = () => setOpenDetail(false);
+
+  const handleListClick = (src: string | undefined) => {
+    if (!src) {
+      setShowStory(!showStory);
+      handleOpenDetail();
+    }
+    if (src) {
+      router.push(src);
+    }
+  }
 
   if (pathname === '/login' || pathname === '/register') {
     return null;
   }
 
   const Menus = [
-    { title: 'Home', src: '/', icon: <HomeIcon style={{ fontSize: 30 }} /> },
+    {
+      title: 'Home',
+      src: '/',
+      icon: <HomeIcon style={{ fontSize: 30 }} />
+    },
     {
       title: 'MyPage',
       src: '/mypage',
       icon: <PersonIcon style={{ fontSize: 30 }} />,
     },
+    {
+      title: 'Story',
+      icon: <AutoStoriesIcon style={{ fontSize: 30 }}/>
+    }
   ];
 
   const handleAvatarClick = () => {
@@ -91,7 +117,7 @@ export default function MainDrawer() {
             {Menus.map((menu, index) => (
               <ListItemButton
                 key={index}
-                href={menu.src}
+                onClick={() => handleListClick(menu.src)}
                 style={{
                   width: '50px',
                   height: '50px',
@@ -131,6 +157,7 @@ export default function MainDrawer() {
         </List>
       </MiniDrawer>
       <AvatarModal open={modalOpen} onClose={handleCloseModal} />
+      <DisplayStory openDetail={openDetail} onClose={handleCloseDetail}/>
     </Box>
   );
 }

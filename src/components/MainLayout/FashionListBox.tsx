@@ -109,9 +109,6 @@ export default function FashionListBox() {
   };
 
   const fashionAPI = async () => {
-    console.log('[Recoil] skyCode: ', skyStatus);
-    console.log('[Recoil] rainfallCode: ', rainfallType);
-    console.log('[Recoil] windChillSearch: ', windChillSearch);
     try {
       await axios
         .get(
@@ -125,11 +122,9 @@ export default function FashionListBox() {
         )
         .then((response) => {
           const data = response.data;
-          console.log('data.data: ', data.data);
 
           setPost(data.data.content);
           setPageCount(data.data.totalPages);
-          // setPage(1);
         });
     } catch {
       console.log('api 불러오기 실패');
