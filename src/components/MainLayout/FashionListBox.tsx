@@ -144,20 +144,50 @@ export default function FashionListBox() {
     }
   };
 
-  const getSkyStatusIcon = (skyStatus: string) => {
-    switch (skyStatus) {
-      case 'SUNNY':
-        return '☀️';
-      case 'OVERCAST':
-        return '☁️';
-      case 'RAINY':
-        return '🌧️';
-      case 'rain&snow':
-        return '🌧️ & ❄️';
-      case 'snow':
-        return '❄️';
+  const getSkyStatusIcon = (skyStatus: string, rainfallType: string) => {
+    if (
+      (skyStatus === 'CLEAR' || skyStatus === 'SUNNY') &&
+      rainfallType === 'CLEAR'
+    ) {
+      return '☀️';
+    } else if (
+      (skyStatus === 'OVERCAST' || skyStatus === 'CLOUDY') &&
+      rainfallType === 'CLEAR'
+    ) {
+      return '☁️';
+    } else if (
+      rainfallType === 'RAINY' ||
+      rainfallType === 'RAIN_SNOW' ||
+      rainfallType === 'RAINDROP' ||
+      rainfallType === 'RAINDROP_FLUFFY'
+    ) {
+      return '🌧️';
+    } else if (
+      rainfallType === 'SNOWY' ||
+      rainfallType === 'RAIN_SNOW' ||
+      rainfallType === 'RAINDROP_FLUFFY' ||
+      rainfallType === 'FLUFFY'
+    ) {
+      return '❄️';
+    } else {
+      return '';
+    }
+  };
+
+  const getReviewColor = (review: string) => {
+    switch (review) {
+      case 'COLD':
+        return '#107DFD';
+      case 'CHILLY':
+        return '#8FC0FA';
+      case 'MILD':
+        return '#EED921';
+      case 'WARM':
+        return '#EE8181';
+      case 'HOT':
+        return '#CE4040';
       default:
-        return '';
+        return '#FF6767'; // Default color
     }
   };
 
@@ -218,7 +248,10 @@ export default function FashionListBox() {
                     }}
                   >
                     <span style={{ marginRight: '3px', marginLeft: '3px' }}>
-                      {getSkyStatusIcon(fashion[index].skyStatus)}
+                      {getSkyStatusIcon(
+                        fashion[index].skyStatus,
+                        fashion[index].rainfallType
+                      )}
                     </span>
                   </div>
 
@@ -241,7 +274,7 @@ export default function FashionListBox() {
                       style={{
                         marginRight: '3px',
                         marginLeft: '3px',
-                        color: 'white',
+                        color: 'rgba(0, 0, 0, 0.54)',
                       }}
                     >
                       {' '}
@@ -273,7 +306,7 @@ export default function FashionListBox() {
                         left: 170,
                         width: 'max-content',
                         height: '35%',
-                        backgroundColor: '#FF6767',
+                        backgroundColor: getReviewColor(fashion[index].review),
                         color: 'white',
                         padding: '1px',
                         paddingRight: '8px',
