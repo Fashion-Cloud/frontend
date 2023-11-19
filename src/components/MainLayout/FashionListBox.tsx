@@ -144,6 +144,53 @@ export default function FashionListBox() {
     }
   };
 
+  const getSkyStatusIcon = (skyStatus: string, rainfallType: string) => {
+    if (
+      (skyStatus === 'CLEAR' || skyStatus === 'SUNNY') &&
+      rainfallType === 'CLEAR'
+    ) {
+      return '☀️';
+    } else if (
+      (skyStatus === 'OVERCAST' || skyStatus === 'CLOUDY') &&
+      rainfallType === 'CLEAR'
+    ) {
+      return '☁️';
+    } else if (
+      rainfallType === 'RAINY' ||
+      rainfallType === 'RAIN_SNOW' ||
+      rainfallType === 'RAINDROP' ||
+      rainfallType === 'RAINDROP_FLUFFY'
+    ) {
+      return '🌧️';
+    } else if (
+      rainfallType === 'SNOWY' ||
+      rainfallType === 'RAIN_SNOW' ||
+      rainfallType === 'RAINDROP_FLUFFY' ||
+      rainfallType === 'FLUFFY'
+    ) {
+      return '❄️';
+    } else {
+      return '';
+    }
+  };
+
+  const getReviewColor = (review: string) => {
+    switch (review) {
+      case 'COLD':
+        return '#107DFD';
+      case 'CHILLY':
+        return '#8FC0FA';
+      case 'MILD':
+        return '#EED921';
+      case 'WARM':
+        return '#EE8181';
+      case 'HOT':
+        return '#CE4040';
+      default:
+        return '#FF6767'; // Default color
+    }
+  };
+
   const FashionList = () => {
     let fashion: WeatherPostType[] = [];
     const array = [];
@@ -184,6 +231,57 @@ export default function FashionListBox() {
                     height="260px"
                     image={fashion[index].image}
                   />
+
+                  {/* 날씨 아이콘*/}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '4px',
+                      right: '5px',
+                      color: 'white',
+                      fontSize: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      backgroundColor: '#c4c4c4',
+                      padding: '1px',
+                      borderRadius: '100px',
+                    }}
+                  >
+                    <span style={{ marginRight: '3px', marginLeft: '3px' }}>
+                      {getSkyStatusIcon(
+                        fashion[index].skyStatus,
+                        fashion[index].rainfallType
+                      )}
+                    </span>
+                  </div>
+
+                  {/* 온도 아이콘*/}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '33px',
+                      right: '5px',
+                      color: 'black',
+                      fontSize: '10px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      backgroundColor: '#c4c4c4',
+                      padding: '3px',
+                      borderRadius: '100px',
+                    }}
+                  >
+                    <span
+                      style={{
+                        marginRight: '3px',
+                        marginLeft: '3px',
+                        color: 'rgba(0, 0, 0, 0.54)',
+                      }}
+                    >
+                      {' '}
+                      {fashion[index].temperature}°C
+                    </span>
+                  </div>
+
                   <Box
                     sx={{
                       position: 'absolute',
@@ -199,6 +297,31 @@ export default function FashionListBox() {
                     <Typography variant="h6" sx={{ ml: 1 }}>
                       {fashion[index].title}
                     </Typography>
+
+                    {/* 리뷰 아이콘 */}
+                    <Box
+                      sx={{
+                        position: 'absolute',
+                        top: 10,
+                        left: 170,
+                        width: 'max-content',
+                        height: '35%',
+                        backgroundColor: getReviewColor(fashion[index].review),
+                        color: 'white',
+                        padding: '1px',
+                        paddingRight: '8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        borderRadius: '10px',
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{ ml: 1, color: '#fff', fontSize: '10px' }}
+                      >
+                        {fashion[index].review}
+                      </Typography>
+                    </Box>
                   </Box>
                 </Box>
               </Card>
